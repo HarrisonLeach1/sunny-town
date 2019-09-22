@@ -1,10 +1,22 @@
 # SOFTENG306 Project 2 Group 11
 
+## Team Members
+
+| Name           | GitHub Username  | UoA UPI |
+| -------------- | ---------------- | ------- |
+| Harrison Leach | HarrisonLeach1   | hlea849 |
+| Willian Li     | TwelveHertz      | zli667  |
+| Nidhinesh Nand | nidhineshnand    | nnan773 |
+| Allen Nian     | anian100         | ania716 |
+| William Shin   | william-shin-387 | wshi593 |
+| Casey Wong     | cwon880          | cwon880 |
+| James Zhang    | JamesUOA         | jzha414 |
+
 ## Setting up
 
 ### Setup Untiy file merging
 
-1. Add the following text to your `~\.gitconfig` file.
+1. Add the following text to your `~/.gitconfig` file.
 
 ```
 [merge] tool = unityyamlmerge
@@ -21,7 +33,7 @@ For Mac, use the following path instead:
 /Applications/Unity/Unity.app/Contents/Tools/UnityYAMLMerge
 ```
 
-### Setup Git LFS:
+### Setup Git LFS
 
 1. Download and install the Git LFS command line tool [here](https://git-lfs.github.com/)
 2. Run the following command in the repository:
