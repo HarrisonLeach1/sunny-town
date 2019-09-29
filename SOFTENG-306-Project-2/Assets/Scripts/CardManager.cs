@@ -7,26 +7,23 @@ public class CardManager : MonoBehaviour
     [SerializeField]
     private GameObject cardPrefab;
     private GameObject displayedCard;
+    private CardFactory cardFactory;
 
-    private StoryCard currentStoryCardData;
-    private Reader reader;
+    private Card currentCard;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        reader = new Reader();
-        currentStoryCardData = reader.RootState;
+        cardFactory = new CardFactory();
+        currentCard = cardFactory.GetNewCard("story");
         ChangeCard();
     }
 
     public void MakeTransition(int decisionIndex)
     {
-        Debug.Log(currentStoryCardData.Dialogue);
-        if (currentStoryCardData.Transitions.Count != 0)
-        {
-            currentStoryCardData = currentStoryCardData.Transitions[decisionIndex].NextState;
-        }
+        currentCard.HandleDecision(decisionIndex);
+        currentCard = cardFactory.GetNewCard("story");
         ChangeCard();
     }
 
@@ -44,11 +41,14 @@ public class CardManager : MonoBehaviour
         button1.onClick.AddListener(() => this.MakeTransition(0));
         button2.onClick.AddListener(() => this.MakeTransition(1));
 
-        decisionDialogue.text = currentStoryCardData.Dialogue;
-        if (currentStoryCardData.Transitions.Count != 0)
+        // TODO: Add transition dialogues to both Card types
+        StoryCard card = currentCard as StoryCard;
+
+        decisionDialogue.text = currentCard.Dialogue;
+        if (card.Transitions.Count != 0)
         {
-            text1.text = currentStoryCardData.Transitions[0].Dialogue;
-            text2.text = currentStoryCardData.Transitions[1].Dialogue;
+            text1.text = card.Transitions[0].Dialogue;
+            text2.text = card.Transitions[1].Dialogue;
         }
         else
         {
