@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DecisionController : MonoBehaviour
+public class CardManager : MonoBehaviour
 {
     private State currentState;
     private TextMeshProUGUI decisionDialogue;
