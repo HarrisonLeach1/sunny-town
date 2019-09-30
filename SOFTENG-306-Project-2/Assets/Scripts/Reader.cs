@@ -12,37 +12,37 @@ public class Reader
 
     public Reader()
     {
-        
-	    this.parseJson(Directory.GetCurrentDirectory() + "/Assets/json/plotStates.json");
-	    RootState = this.AllStates[0];
-	    Debug.Log("numStates: " + AllStates.Count);
-	    
+
+        this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/plotStates.json");
+        RootState = this.AllStates[0];
+        Debug.Log("numStates: " + AllStates.Count);
+
     }
 
     private void ParseJson(string filePath)
     {
-	    List<StoryCard> result = new List<StoryCard>();
+        List<StoryCard> result = new List<StoryCard>();
 
 
-	    using (StreamReader r = new StreamReader(filePath))
-	    {
-		    string json = r.ReadToEnd();
+        using (StreamReader r = new StreamReader(filePath))
+        {
+            string json = r.ReadToEnd();
 
-		    JSONArray stateArray = SimpleJSON.JSON.Parse(json).AsArray;
-		    foreach (JSONNode state in stateArray)
-		    {
-			    List<Transition> transitionList = new List<Transition>();
-			    foreach (JSONNode transition in state["transitions"].AsArray)
-			    {
-				    transitionList.Add(new Transition(transition["label"], transition["state"]));
-			    }
+            JSONArray stateArray = SimpleJSON.JSON.Parse(json).AsArray;
+            foreach (JSONNode state in stateArray)
+            {
+                List<Transition> transitionList = new List<Transition>();
+                foreach (JSONNode transition in state["transitions"].AsArray)
+                {
+                    transitionList.Add(new Transition(transition["label"], transition["state"]));
+                }
 
-			    result.Add(new StoryCard(state["id"], state["dialogue"], transitionList));
-		    }
+                result.Add(new StoryCard(state["id"], state["dialogue"], transitionList));
+            }
 
-	    }
+        }
 
-	    this.AllStates = result;
+        this.AllStates = result;
     }
 
 }

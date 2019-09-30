@@ -9,9 +9,9 @@ public class CardManager : MonoBehaviour
     [SerializeField]
     private GameObject cardPrefab;
     private GameObject displayedCard;
+    private CardFactory cardFactory;
 
-    private StoryCard currentStoryCardData;
-    private List<StoryCard> allStates;
+    private Card currentCard;
     private Reader reader;
 
 
@@ -19,27 +19,23 @@ public class CardManager : MonoBehaviour
     void Start()
     {
         reader = new Reader();
-        allStates = reader.allStates;
-        currentStoryCardData = reader.RootState;
+        currentCard = reader.RootState;
+        cardFactory = new CardFactory();
+        currentCard = cardFactory.GetNewCard("story");
         ChangeCard();
     }
 
     public void MakeTransition(int decisionIndex)
     {
-        Debug.Log(currentStoryCardData.Dialogue);
-        if (currentStoryCardData.Transitions.Count != 0)
-        {
-            string nextStateId = currentStoryCardData.Transitions[decisionIndex].NextStateId;
-            currentStoryCardData = allStates.Single(s => s.Id.Equals(nextStateId));
-            //currentStoryCardData = currentStoryCardData.Transitions[decisionIndex].NextState;
-        }
+        currentCard.HandleDecision(decisionIndex);
+        currentCard = cardFactory.GetNewCard("story");
         ChangeCard();
     }
 
     public void ChangeCard()
     {
         Destroy(displayedCard);
-        displayedCard = Instantiate(cardPrefab, new Vector3(0,0, 0), Quaternion.identity);
+        displayedCard = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity);
 
         var decisionDialogue = displayedCard.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         var button1 = displayedCard.transform.GetChild(1).GetComponent<Button>();
@@ -50,11 +46,14 @@ public class CardManager : MonoBehaviour
         button1.onClick.AddListener(() => this.MakeTransition(0));
         button2.onClick.AddListener(() => this.MakeTransition(1));
 
-        decisionDialogue.text = currentStoryCardData.Dialogue;
-        if (currentStoryCardData.Transitions.Count != 0)
+        // TODO: Add transition dialogues to both Card types
+        StoryCard card = currentCard as StoryCard;
+
+        decisionDialogue.text = currentCard.Dialogue;
+        if (card.Transitions.Count != 0)
         {
-            text1.text = currentStoryCardData.Transitions[0].Dialogue;
-            text2.text = currentStoryCardData.Transitions[1].Dialogue;
+            text1.text = card.Transitions[0].Dialogue;
+            text2.text = card.Transitions[1].Dialogue;
         }
         else
         {
