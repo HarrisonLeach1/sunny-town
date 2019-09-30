@@ -5,7 +5,6 @@ using UnityEngine;
 public class StoryCard : Card
 {
     public string Id { get; set; }
-    public string Dialogue { get; set; }
     public List<Transition> Transitions { get; set; }
     public string NextStateId { get; private set; }
 
@@ -24,6 +23,8 @@ public class StoryCard : Card
 
     public override void HandleDecision(int decisionIndex)
     {
-        NextStateId = Transitions[decisionIndex].NextStateId;
+        // TODO: improve error handling here. Right now just sets next 
+        // state to null if no transitions exist
+        NextStateId = Transitions[decisionIndex]?.NextStateId;
     }
 }
