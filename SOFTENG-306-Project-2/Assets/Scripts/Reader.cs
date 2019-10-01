@@ -8,18 +8,19 @@ public class Reader
 {
 
     public StoryCard RootState { get; private set; }
-    public List<StoryCard> AllStates { get; private set; }
+    public List<StoryCard> AllStoryStates { get; private set; }
+    public List<MinorCard> AllMinorStates { get; private set; }
 
     public Reader()
     {
 
-        this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/plotStates.json");
-        RootState = this.AllStates[0];
-        Debug.Log("numStates: " + AllStates.Count);
+        this.ParseStoryJson(Directory.GetCurrentDirectory() + "/Assets/json/plotStates.json");
+        this.ParseMinorCardJson(Directory.GetCurrentDirectory() + "/Assets/json/minorStates.json");
+        RootState = this.AllStoryStates[0];
 
     }
 
-    private void ParseJson(string filePath)
+    private void ParseStoryJson(string filePath)
     {
         List<StoryCard> result = new List<StoryCard>();
 
@@ -42,7 +43,33 @@ public class Reader
 
         }
 
-        this.AllStates = result;
+        this.AllStoryStates = result;
+    }
+
+    private void ParseMinorCardJson(string filePath)
+    {
+        List<MinorCard> result = new List<MinorCard>();
+
+
+        using (StreamReader r = new StreamReader(filePath))
+        {
+            string json = r.ReadToEnd();
+
+            JSONArray decisionArray = SimpleJSON.JSON.Parse(json).AsArray;
+            foreach (JSONNode decision in decisionArray)
+            {
+                List<Option> optionList = new List<Option>();
+                foreach (JSONNode option in decision["options"].AsArray)
+                {
+                    optionList.Add(new Option(option["label"]));
+                }
+
+                result.Add(new MinorCard(decision["dialogue"], optionList));
+            }
+
+        }
+
+        this.AllMinorStates = result;
     }
 
 }

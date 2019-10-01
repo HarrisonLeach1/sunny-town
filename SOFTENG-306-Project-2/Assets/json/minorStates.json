@@ -1,0 +1,57 @@
+﻿[
+  {
+    "dialogue": "Minor decision 1",
+    "options" : [
+      {
+        "label" :  "option 1"
+      },
+      {
+        "label" :  "option 2"
+      }
+    ]
+  },  
+  {
+    "dialogue": "Minor decision 2",
+    "options" : [
+      {
+        "label" :  "option 1 2"
+      },
+      {
+        "label" :  "option 2 2"
+      }
+    ]
+  },
+  {
+    "dialogue": "Minor decision 3",
+    "options" : [
+      {
+        "label" :  "option 1 3"
+      },
+      {
+        "label" :  "option 2 3"
+      }
+    ]
+  },
+  {
+    "dialogue": "Minor decision 4",
+    "options" : [
+      {
+        "label" :  "option 1 4"
+      },
+      {
+        "label" :  "option 2 4"
+      }
+    ]
+  },
+  {
+    "dialogue": "Minor decision 5",
+    "options" : [
+      {
+        "label" :  "option 1 5"
+      },
+      {
+        "label" :  "option 2 5"
+      }
+    ]
+  }
+]

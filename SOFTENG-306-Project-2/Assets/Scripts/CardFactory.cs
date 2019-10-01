@@ -1,16 +1,18 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CardFactory
 {
     private Reader reader;
     private StoryCard currentStoryCard;
-    private Card currentMinorCard;
+    private List<MinorCard> minorCards;
 
     public CardFactory()
     {
         reader = new Reader();
         currentStoryCard = reader.RootState;
+        minorCards = new List<MinorCard>(reader.AllMinorStates);
     }
 
     public Card GetNewCard(string cardDescriptor)
@@ -23,10 +25,18 @@ public class CardFactory
                 // also the users of this class are unaware that state should be changed on the current card
                 string nextStateId = currentStoryCard.NextStateId ?? currentStoryCard.Id;
                 Debug.Log("Next State: " + nextStateId);
-                currentStoryCard = reader.AllStates.Single(s => s.Id.Equals(nextStateId));
+                currentStoryCard = reader.AllStoryStates.Single(s => s.Id.Equals(nextStateId));
                 return currentStoryCard;
             case ("minor"):
-                return currentMinorCard;
+                if (minorCards.Count == 0)
+                {
+                    minorCards = new List<MinorCard>(reader.AllMinorStates);
+                }
+
+                // TODO: Add randomness to card selection
+                var minorCard = minorCards[0];
+                minorCards.Remove(minorCard);
+                return minorCard;
             default:
                 throw new System.ArgumentException("Argument invalid for CardFactory");
         }
