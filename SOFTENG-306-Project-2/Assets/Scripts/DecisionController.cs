@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
 
 public class DecisionController : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class DecisionController : MonoBehaviour
     private TextMeshProUGUI text1;
     private TextMeshProUGUI text2;
     private Reader reader;
+    private List<State> allStates;
 
 
     private void Awake()
@@ -23,6 +26,7 @@ public class DecisionController : MonoBehaviour
     void Start()
     {
         reader = new Reader();
+        allStates = reader.allStates;
         currentState = reader.RootState;
         PopulateDecisionDialogue();
     }
@@ -32,7 +36,16 @@ public class DecisionController : MonoBehaviour
         Debug.Log(currentState.Dialogue);
         if (currentState.Transitions.Count != 0)
         {
-            currentState = currentState.Transitions[decisionIndex].NextState;
+            //currentstate
+            string nextStateId = currentState.Transitions[decisionIndex].NextStateId;
+            Debug.Log("nextStateId: " + nextStateId);
+            currentState = allStates.Single(s => s.Id.Equals(nextStateId));
+            Debug.Log(currentState.Dialogue);
+            
+            //get id of state to go to next: currentState.transitions[decisionIndex].nextstateid
+            //find state with that id in allStates
+            //list.Find(x => x.GetId() == "xy");
+            //currentState = currentState.Transitions[decisionIndex].NextState;
         }
         PopulateDecisionDialogue();
     }

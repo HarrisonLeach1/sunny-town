@@ -20,6 +20,10 @@
       {
         "label" :  "end game",
         "state" :  "s3"
+      },
+      {
+        "label": "also end game",
+        "state" : "s3"
       }
     ]
   },
@@ -30,6 +34,10 @@
       {
         "label" :  "continue",
         "state" : "s4"
+      },
+      {
+        "label" : "back to beginning",
+        "state" : "s1"
       }
     ]
   },
