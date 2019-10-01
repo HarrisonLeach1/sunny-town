@@ -8,18 +8,18 @@ public class Reader
 {
 
     public StoryCard RootState { get; private set; }
-    public List<StoryCard> allStates { get; private set; }
+    public List<StoryCard> AllStates { get; private set; }
 
     public Reader()
     {
         
 	    this.parseJson(Directory.GetCurrentDirectory() + "/Assets/json/plotStates.json");
-	    RootState = this.allStates[0];
-	    Debug.Log("numStates: " + allStates.Count);
+	    RootState = this.AllStates[0];
+	    Debug.Log("numStates: " + AllStates.Count);
 	    
     }
 
-    private void parseJson(string filePath)
+    private void ParseJson(string filePath)
     {
 	    List<StoryCard> result = new List<StoryCard>();
 
@@ -42,7 +42,7 @@ public class Reader
 
 	    }
 
-	    this.allStates = result;
+	    this.AllStates = result;
     }
 
 }
