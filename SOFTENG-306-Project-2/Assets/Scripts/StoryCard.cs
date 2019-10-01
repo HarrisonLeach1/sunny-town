@@ -23,8 +23,13 @@ public class StoryCard : Card
 
     public override void HandleDecision(int decisionIndex)
     {
-        // TODO: improve error handling here. Right now just sets next 
-        // state to null if no transitions exist
-        NextStateId = Transitions[decisionIndex]?.NextStateId;
+        if (Transitions.Count >= decisionIndex + 1)
+        {
+            NextStateId = Transitions[decisionIndex].NextStateId;
+        } 
+        else
+        {
+            NextStateId = Id;
+        }
     }
 }
