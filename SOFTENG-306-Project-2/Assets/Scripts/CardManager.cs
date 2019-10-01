@@ -1,4 +1,6 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,11 +12,14 @@ public class CardManager : MonoBehaviour
     private CardFactory cardFactory;
 
     private Card currentCard;
+    private Reader reader;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        reader = new Reader();
+        currentCard = reader.RootState;
         cardFactory = new CardFactory();
         currentCard = cardFactory.GetNewCard("story");
         ChangeCard();
@@ -30,7 +35,7 @@ public class CardManager : MonoBehaviour
     public void ChangeCard()
     {
         Destroy(displayedCard);
-        displayedCard = Instantiate(cardPrefab, new Vector3(0,0, 0), Quaternion.identity);
+        displayedCard = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity);
 
         var decisionDialogue = displayedCard.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         var button1 = displayedCard.transform.GetChild(1).GetComponent<Button>();

@@ -1,0 +1,50 @@
+﻿[
+  {
+    "id": "s1",
+    "dialogue": "Hello I'm decision 1",
+    "transitions" : [
+      {
+        "label" :  "go to decision 2",
+        "state" : "s2"
+      },
+      {
+        "label" :  "go to decision 3",
+        "state" :  "s3"
+      }
+    ]
+  },
+  {
+    "id": "s2",
+    "dialogue": "Hi I'm decision 2",
+    "transitions" : [
+      {
+        "label" :  "end game",
+        "state" :  "s3"
+      },
+      {
+        "label": "also end game",
+        "state" : "s3"
+      }
+    ]
+  },
+  {
+    "id": "s3",
+    "dialogue": "You have lost",
+    "transitions" : [
+      {
+        "label" :  "continue",
+        "state" : "s4"
+      },
+      {
+        "label" : "back to beginning",
+        "state" : "s1"
+      }
+    ]
+  },
+  {
+    "id": "s4",
+    "dialogue": "Game over",
+    "transitions" : [
+    ]
+  }
+]
