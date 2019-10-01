@@ -6,8 +6,10 @@ using UnityEngine;
 
 public class Reader
 {
-    public State RootState { get; private set; }
-    public List<State> allStates { get; private set; }
+
+    public StoryCard RootState { get; private set; }
+    public List<StoryCard> allStates { get; private set; }
+
     public Reader()
     {
         
@@ -19,7 +21,8 @@ public class Reader
 
     private void parseJson(string filePath)
     {
-	    List<State> result = new List<State>();
+	    List<StoryCard> result = new List<StoryCard>();
+
 
 	    using (StreamReader r = new StreamReader(filePath))
 	    {
@@ -32,17 +35,14 @@ public class Reader
 			    foreach (JSONNode transition in state["transitions"].AsArray)
 			    {
 				    transitionList.Add(new Transition(transition["label"], transition["state"]));
-
 			    }
 
-			    result.Add(new State(state["id"], state["dialogue"], transitionList));
+			    result.Add(new StoryCard(state["id"], state["dialogue"], transitionList));
 		    }
-
 
 	    }
 
 	    this.allStates = result;
-	    //return result;
     }
 
 }

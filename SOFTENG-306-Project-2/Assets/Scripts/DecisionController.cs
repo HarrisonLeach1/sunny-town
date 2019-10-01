@@ -8,12 +8,12 @@ using UnityEngine.UI;
 
 public class DecisionController : MonoBehaviour
 {
-    private State currentState;
+    private StoryCard currentState;
     private TextMeshProUGUI decisionDialogue;
     private TextMeshProUGUI text1;
     private TextMeshProUGUI text2;
     private Reader reader;
-    private List<State> allStates;
+    private List<StoryCard> allStates;
 
 
     private void Awake()
@@ -38,7 +38,6 @@ public class DecisionController : MonoBehaviour
         {
             string nextStateId = currentState.Transitions[decisionIndex].NextStateId;
             currentState = allStates.Single(s => s.Id.Equals(nextStateId));
-            Debug.Log(currentState.Dialogue);
         }
         PopulateDecisionDialogue();
     }
