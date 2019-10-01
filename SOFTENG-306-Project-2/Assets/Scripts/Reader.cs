@@ -44,14 +44,31 @@ public class Reader
 
     public List<State> parseJson(string filePath)
     {
+		List<State> result = new List<State>();
+
         using (StreamReader r = new StreamReader(filePath))
         {
             string json = r.ReadToEnd();
             Debug.Log(json);
+
+			//JSONNode data = SimpleJSON.JSON.Parse(json);
+			JSONArray stateArray = SimpleJSON.JSON.Parse(json).AsArray;
+			foreach (JSONNode state in stateArray)
+			{
+				List<Transition> transitionList = new List<Transition>();
+				foreach (JSONNode transition in state["transitions"].AsArray)
+				{
+					transitionList.add(new Transition(transition["label"], transition["state"]));
+
+				}
+
+				result.add(new State(state["id"], state["dialogue"], transitionList));
+			}
+			
             
         }
 
-        return null;
+        return result;
     }
 
 }

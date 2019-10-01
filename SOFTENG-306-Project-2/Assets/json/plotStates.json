@@ -3,23 +3,34 @@
     "id": "s1",
     "dialogue": "Hello I'm decision 1",
     "transitions" : [
-      {"label 1" :  "s2"},
-      {"label 2" :  "s3"}
+      {
+        "label" :  "go to decision 2",
+        "state" : "s2"
+      },
+      {
+        "label" :  "go to decision 3",
+        "state" :  "s3"
+      }
     ]
   },
   {
     "id": "s2",
     "dialogue": "Hi I'm decision 2",
     "transitions" : [
-      {"label 1" :  "s1"},
-      {"label 2" :  "s3"}
+      {
+        "label" :  "end game",
+        "state" :  "s3"
+      }
     ]
   },
   {
     "id": "s3",
     "dialogue": "You have lost",
     "transitions" : [
-      {"label 1" :  "s4"}
+      {
+        "label" :  "continue",
+        "state" : "s4"
+      }
     ]
   },
   {
