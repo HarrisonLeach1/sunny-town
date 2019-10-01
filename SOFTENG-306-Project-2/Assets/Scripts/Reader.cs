@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System;
+using SimpleJSON;
 
 public class Reader
 {
@@ -45,8 +46,6 @@ public class Reader
         {
             string json = r.ReadToEnd();
             Console.WriteLine(json);
-            List<State> states = JsonConvert.DeserializeObject<List<State>>(json);
-            // Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
             
         }
 
