@@ -1,4 +1,6 @@
-﻿public class Transition
+﻿using UnityEngine;
+
+public class Transition
 {
     public string Dialogue { get; set; }
     public string NextStateId { get; set; }

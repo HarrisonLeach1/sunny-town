@@ -36,16 +36,9 @@ public class DecisionController : MonoBehaviour
         Debug.Log(currentState.Dialogue);
         if (currentState.Transitions.Count != 0)
         {
-            //currentstate
             string nextStateId = currentState.Transitions[decisionIndex].NextStateId;
-            Debug.Log("nextStateId: " + nextStateId);
             currentState = allStates.Single(s => s.Id.Equals(nextStateId));
             Debug.Log(currentState.Dialogue);
-            
-            //get id of state to go to next: currentState.transitions[decisionIndex].nextstateid
-            //find state with that id in allStates
-            //list.Find(x => x.GetId() == "xy");
-            //currentState = currentState.Transitions[decisionIndex].NextState;
         }
         PopulateDecisionDialogue();
     }
