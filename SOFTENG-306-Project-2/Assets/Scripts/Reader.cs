@@ -2,6 +2,7 @@
 using System.IO;
 using System;
 using SimpleJSON;
+using UnityEngine;
 
 public class Reader
 {
@@ -9,6 +10,7 @@ public class Reader
     public Reader()
     {
         // This represents a binary decision tree of depth 2
+		this.parseJson(Directory.GetCurrentDirectory() + "/Assets/json/plotStates.json");	
 
         State state4 = new State("Decision 4", new List<Transition>());
         State state5 = new State("Decision 5", new List<Transition>());
@@ -45,7 +47,7 @@ public class Reader
         using (StreamReader r = new StreamReader(filePath))
         {
             string json = r.ReadToEnd();
-            Console.WriteLine(json);
+            Debug.Log(json);
             
         }
 

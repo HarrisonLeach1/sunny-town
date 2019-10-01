@@ -1,0 +1,31 @@
+﻿[
+  {
+    "id": "s1",
+    "dialogue": "Hello I'm decision 1",
+    "transitions" : [
+      {"label 1" :  "s2"},
+      {"label 2" :  "s3"}
+    ]
+  },
+  {
+    "id": "s2",
+    "dialogue": "Hi I'm decision 2",
+    "transitions" : [
+      {"label 1" :  "s1"},
+      {"label 2" :  "s3"}
+    ]
+  },
+  {
+    "id": "s3",
+    "dialogue": "You have lost",
+    "transitions" : [
+      {"label 1" :  "s4"}
+    ]
+  },
+  {
+    "id": "s4",
+    "dialogue": "Game over",
+    "transitions" : [
+    ]
+  }
+]
