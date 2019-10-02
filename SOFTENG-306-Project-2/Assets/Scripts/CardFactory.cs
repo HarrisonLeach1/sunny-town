@@ -5,13 +5,13 @@ using UnityEngine;
 public class CardFactory
 {
     private Reader reader;
-    private StoryCard currentStoryCard;
+    private PlotCard _currentPlotCard;
     private List<MinorCard> minorCards;
 
     public CardFactory()
     {
         reader = new Reader();
-        currentStoryCard = reader.RootState;
+        _currentPlotCard = reader.RootState;
         minorCards = new List<MinorCard>(reader.AllMinorStates);
     }
 
@@ -23,10 +23,10 @@ public class CardFactory
             case ("story"):
                 // TODO: add some error handling here, because right now we are assuming NextState has been set
                 // also the users of this class are unaware that state should be changed on the current card
-                string nextStateId = currentStoryCard.NextStateId ?? currentStoryCard.Id;
+                string nextStateId = _currentPlotCard.NextStateId ?? _currentPlotCard.Id;
                 Debug.Log("Next State: " + nextStateId);
-                currentStoryCard = reader.AllStoryStates.Single(s => s.Id.Equals(nextStateId));
-                return currentStoryCard;
+                _currentPlotCard = reader.AllStoryStates.Single(s => s.Id.Equals(nextStateId));
+                return _currentPlotCard;
             case ("minor"):
                 if (minorCards.Count == 0)
                 {

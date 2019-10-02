@@ -2,51 +2,47 @@
   {
     "id": "s1",
     "label": "story",
-    "dialogue": "Hello I'm decision 1",
+    "dialogue": "Do you care about the environment",
     "transitions": [
       {
-        "label": "go to decision 2",
+        "label": "Yes",
         "state": "s2"
       },
       {
-        "label": "go to decision 3",
-        "state": "s3"
+        "label": "No",
+        "state": "s4"
       }
     ]
   },
   {
     "id": "s2",
     "label": "story",
-    "dialogue": "Hi I'm decision 2",
+    "dialogue": "Are you vegan?",
     "transitions": [
       {
-        "label": "end game",
+        "label": "Yes",
         "state": "s3"
       },
       {
-        "label": "also end game",
-        "state": "s3"
+        "label": "No",
+        "state": "s4"
       }
     ]
   },
   {
     "id": "s3",
-    "label": "story",
-    "dialogue": "You have lost",
+    "label": "feedback",
+    "dialogue": "Good boy!",
     "transitions": [
       {
         "label": "continue",
         "state": "s4"
-      },
-      {
-        "label": "back to beginning",
-        "state": "s1"
       }
     ]
   },
   {
     "id": "s4",
-    "label": "story",
+    "label": "feedback",
     "dialogue": "Game over",
     "transitions": [
     ]

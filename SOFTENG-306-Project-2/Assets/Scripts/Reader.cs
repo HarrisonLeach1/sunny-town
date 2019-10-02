@@ -7,14 +7,14 @@ using UnityEngine;
 public class Reader
 {
 
-    public StoryCard RootState { get; private set; }
-    public List<StoryCard> AllStoryStates { get; private set; }
+    public PlotCard RootState { get; private set; }
+    public List<PlotCard> AllStoryStates { get; private set; }
     public List<MinorCard> AllMinorStates { get; private set; }
 
     public Reader()
     {
 
-        this.ParseStoryJson(Directory.GetCurrentDirectory() + "/Assets/json/plotStates.json");
+        this.ParseStoryJson(Directory.GetCurrentDirectory() + "/Assets/json/plot.json");
         this.ParseMinorCardJson(Directory.GetCurrentDirectory() + "/Assets/json/minorStates.json");
         RootState = this.AllStoryStates[0];
 
@@ -22,7 +22,7 @@ public class Reader
 
     private void ParseStoryJson(string filePath)
     {
-        List<StoryCard> result = new List<StoryCard>();
+        List<PlotCard> result = new List<PlotCard>();
 
 
         using (StreamReader r = new StreamReader(filePath))
@@ -38,7 +38,7 @@ public class Reader
                     transitionList.Add(new Transition(transition["label"], transition["state"]));
                 }
 
-                result.Add(new StoryCard(state["id"], state["dialogue"], transitionList));
+                result.Add(new PlotCard(state["id"], state["label"], state["dialogue"], transitionList));
             }
 
         }

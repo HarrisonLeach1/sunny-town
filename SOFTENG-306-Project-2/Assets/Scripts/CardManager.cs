@@ -45,10 +45,19 @@ public class CardManager : MonoBehaviour
         }
 
         // TODO: Add randomness here
-        if (cardCount % 3 == 0)
+//        if (cardCount % 3 == 0)
+        if (true)
         {
             currentCard = cardFactory.GetNewCard("story");
-            RenderStoryCard();
+            var card = currentCard as PlotCard;
+            if (card.Label.Equals("story"))
+            {
+                RenderStoryCard();
+            }
+            else if (card.Label.Equals("feedback"))
+            {
+                RenderFeedbackCard();
+            }
         }
         else
         {
@@ -57,6 +66,37 @@ public class CardManager : MonoBehaviour
         }
     }
 
+    public void RenderFeedbackCard()
+    {
+        Destroy(displayedCard);
+        displayedCard = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+
+        var decisionDialogue = displayedCard.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        var button1 = displayedCard.transform.GetChild(1).GetComponent<Button>();
+        var button2 = displayedCard.transform.GetChild(2).GetComponent<Button>();
+        var text1 = button1.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        button2.gameObject.SetActive(false);
+
+        button1.onClick.AddListener(() => this.MakeStoryTransition(0));
+
+        decisionDialogue.text = currentCard.Dialogue;
+
+        var card = currentCard as PlotCard;
+        if (card.Transitions.Count != 0)
+        {
+            text1.text = card.Transitions[0].Dialogue;
+        }
+        else
+        {
+            text1.text = "Game Over";
+        }
+
+        var parentObject = GameObject.Find("CardPanel");
+
+        displayedCard.transform.SetParent(parentObject.transform, false);
+    }
+
+    
     // BIG TODO: refactor classes to remove this duplicate logic. Just keeping like this for now, to keep consistent for merging.
     public void RenderStoryCard()
     {
@@ -74,7 +114,7 @@ public class CardManager : MonoBehaviour
 
         decisionDialogue.text = currentCard.Dialogue;
 
-        var card = currentCard as StoryCard;
+        var card = currentCard as PlotCard;
         if (card.Transitions.Count != 0)
         {
             text1.text = card.Transitions[0].Dialogue;
@@ -100,6 +140,7 @@ public class CardManager : MonoBehaviour
         var button1 = displayedCard.transform.GetChild(1).GetComponent<Button>();
         var button2 = displayedCard.transform.GetChild(2).GetComponent<Button>();
         var text1 = button1.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        button2.gameObject.SetActive(false);
         var text2 = button2.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
         button1.onClick.AddListener(() => this.MakeTransition());
@@ -132,7 +173,7 @@ public class CardManager : MonoBehaviour
     private bool IsFinalCard(Card currentCard)
     {
         // Game is ended on story cards with no transitions
-        if (currentCard is StoryCard && (currentCard as StoryCard).Transitions.Count == 0)
+        if (currentCard is PlotCard && (currentCard as PlotCard).Transitions.Count == 0)
         {
             return true;
         }
