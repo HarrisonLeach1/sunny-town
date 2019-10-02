@@ -45,11 +45,22 @@ public class CardManager : MonoBehaviour
         ShowFeedback(decisionIndex);
         UpdateMetrics(decisionIndex);
     }
-    
+
     private void UpdateMetrics(int decisionIndex)
     {
-        var card = currentCard as PlotCard;
-        Dictionary<string, int> metricsEffects = card.Transitions[decisionIndex].Metrics;
+        Dictionary<string, int> metricsEffects;
+
+        if (currentCard is PlotCard)
+        {
+            var card = currentCard as PlotCard;
+            metricsEffects = card.Transitions[decisionIndex].Metrics;
+        }
+        else
+        {
+            var card = currentCard as MinorCard;
+            metricsEffects = card.Options[decisionIndex].Metrics;
+        }
+
         this.money += metricsEffects["money"];
         this.environment += metricsEffects["environment"];
         this.happiness += metricsEffects["happiness"];
@@ -82,8 +93,18 @@ public class CardManager : MonoBehaviour
         var button2 = displayedCard.transform.GetChild(2).GetComponent<Button>();
         button1.gameObject.SetActive(false);
         button2.gameObject.SetActive(false);
-        var card = currentCard as PlotCard;
-        decisionDialogue.text = card.Transitions[decisionIndex].Feedback;
+
+
+        if (currentCard is PlotCard)
+        {
+            var card = currentCard as PlotCard;
+            decisionDialogue.text = card.Transitions[decisionIndex].Feedback;
+        }
+        else
+        {
+            var card = currentCard as MinorCard;
+            decisionDialogue.text = card.Options[decisionIndex].Feedback;
+        }
 
         StartCoroutine(wait(2, button1));
 
@@ -102,8 +123,7 @@ public class CardManager : MonoBehaviour
         }
 
         // TODO: Add randomness here
-//        if (cardCount % 3 == 0)
-        if (true)
+        if (cardCount % 3 == 0)
         {
             currentCard = cardFactory.GetNewCard("story");
             RenderStoryCard();
@@ -113,6 +133,7 @@ public class CardManager : MonoBehaviour
         {
             currentCard = cardFactory.GetNewCard("minor");
             RenderMinorCard();
+            RenderMetrics();
         }
     }
 
@@ -122,8 +143,6 @@ public class CardManager : MonoBehaviour
         var text1 = button1.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         button1.gameObject.SetActive(true);
         button1.onClick.AddListener(() => this.MakeTransition());
-//        button1.onClick.AddListener(() => this.UpdateMetrics());
-//        RenderMetrics();
         var card = currentCard as PlotCard;
         text1.text = "continue";
     }
@@ -171,11 +190,10 @@ public class CardManager : MonoBehaviour
         var button1 = displayedCard.transform.GetChild(1).GetComponent<Button>();
         var button2 = displayedCard.transform.GetChild(2).GetComponent<Button>();
         var text1 = button1.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        button2.gameObject.SetActive(false);
         var text2 = button2.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
-        button1.onClick.AddListener(() => this.MakeTransition());
-        button2.onClick.AddListener(() => this.MakeTransition());
+        button1.onClick.AddListener(() => this.MakeStoryTransition(0));
+        button2.onClick.AddListener(() => this.MakeStoryTransition(1));
 
         decisionDialogue.text = currentCard.Dialogue;
 

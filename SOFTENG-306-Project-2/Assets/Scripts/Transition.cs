@@ -1,17 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Transition
+public class Transition : Option
 {
-    public string Dialogue { get; set; }
-    public string Feedback { get; set; }
     public string NextStateId { get; set; }
-    public Dictionary<string, int> Metrics { get; set; }
-    public Transition(string dialogue, string feedback, Dictionary<string, int> metrics, string nextStateId)
+    public Transition(string dialogue, string feedback, Dictionary<string, int> metrics, string nextStateId) : base(dialogue, feedback, metrics)
     {
-        Dialogue = dialogue;
-        Feedback = feedback;
         NextStateId = nextStateId;
-        Metrics = metrics;
     }
 }

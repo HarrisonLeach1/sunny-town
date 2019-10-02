@@ -67,7 +67,14 @@ public class Reader
                 List<Option> optionList = new List<Option>();
                 foreach (JSONNode option in decision["options"].AsArray)
                 {
-                    optionList.Add(new Option(option["label"]));
+                    Dictionary<string, int> metrics = new Dictionary<string, int>();
+                    foreach (JSONNode metricsArray in option["metrics"].AsArray)
+                    {
+                        metrics.Add("money", metricsArray["money"]);
+                        metrics.Add("happiness", metricsArray["happiness"]);
+                        metrics.Add("environment", metricsArray["environment"]);
+                    }
+                    optionList.Add(new Option(option["label"], option["feedback"], metrics));
                 }
 
                 result.Add(new MinorCard(decision["dialogue"], optionList));
