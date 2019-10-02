@@ -33,7 +33,7 @@ public class CardManager : MonoBehaviour
         cardFactory = new CardFactory();
         currentCard = cardFactory.GetNewCard("story");
         RenderStoryCard();
-//        RenderMetrics();
+        RenderMetrics();
     }
 
     public void MakeStoryTransition(int decisionIndex)
@@ -55,7 +55,7 @@ public class CardManager : MonoBehaviour
         happiness.text = "4";
         environment.text = "4";
         
-        var parentObject = GameObject.Find("MetricsPanel");
+        var parentObject = GameObject.Find("MetricPanel");
         metricPanel.transform.SetParent(parentObject.transform, false);
     }
 
@@ -94,7 +94,7 @@ public class CardManager : MonoBehaviour
         {
             currentCard = cardFactory.GetNewCard("story");
             RenderStoryCard();
-//            RenderMetrics();
+            RenderMetrics();
         }
         else
         {
@@ -110,7 +110,7 @@ public class CardManager : MonoBehaviour
         button1.gameObject.SetActive(true);
         button1.onClick.AddListener(() => this.MakeTransition());
 //        button1.onClick.AddListener(() => this.RenderMetrics());
-
+//        RenderMetrics();
         var card = currentCard as PlotCard;
         text1.text = "continue";
     }
