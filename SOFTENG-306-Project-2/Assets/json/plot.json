@@ -42,7 +42,7 @@
   },
   {
     "id": "s4",
-    "label": "feedback",
+    "label": "story",
     "dialogue": "Game over",
     "transitions": [
     ]

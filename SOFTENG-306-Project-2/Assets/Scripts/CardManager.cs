@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -66,20 +67,12 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    public void RenderFeedbackCard()
+    IEnumerator wait(int seconds, Button button1)
     {
-        Destroy(displayedCard);
-        displayedCard = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-
-        var decisionDialogue = displayedCard.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        var button1 = displayedCard.transform.GetChild(1).GetComponent<Button>();
-        var button2 = displayedCard.transform.GetChild(2).GetComponent<Button>();
+        yield return new WaitForSeconds(seconds);
         var text1 = button1.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        button2.gameObject.SetActive(false);
-
+        button1.gameObject.SetActive(true);
         button1.onClick.AddListener(() => this.MakeStoryTransition(0));
-
-        decisionDialogue.text = currentCard.Dialogue;
 
         var card = currentCard as PlotCard;
         if (card.Transitions.Count != 0)
@@ -90,6 +83,23 @@ public class CardManager : MonoBehaviour
         {
             text1.text = "Game Over";
         }
+    }
+
+    public void RenderFeedbackCard()
+    {
+        Destroy(displayedCard);
+        displayedCard = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+
+        var decisionDialogue = displayedCard.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        var button1 = displayedCard.transform.GetChild(1).GetComponent<Button>();
+        var button2 = displayedCard.transform.GetChild(2).GetComponent<Button>();
+        button1.gameObject.SetActive(false);
+        button2.gameObject.SetActive(false);
+
+        decisionDialogue.text = currentCard.Dialogue;
+
+        StartCoroutine(wait(1, button1));
+        
 
         var parentObject = GameObject.Find("CardPanel");
 
