@@ -1,7 +1,7 @@
+using UnityEngine;
+
 public class MetricsModifier
-{
-    private Metrics Metrics = Metrics.Instance;
-    private int EnvHealthModifier { get; set; }
+{    private int EnvHealthModifier { get; set; }
     private int PopHappinessModifier { get; set; }
     private int GoldModifier { get; set; }
     
@@ -9,11 +9,14 @@ public class MetricsModifier
         this.PopHappinessModifier = popHappinessModifier;
         this.GoldModifier = goldModifier;
         this.EnvHealthModifier = envHealthModifier;
+        Debug.Log("created" + EnvHealthModifier + PopHappinessModifier + GoldModifier);
+
     }
 
     public void Modify() {
-        this.Metrics.UpdatePopHappiness(PopHappinessModifier);
-        this.Metrics.UpdateGold(GoldModifier);
-        this.Metrics.UpdateEnvHealth(EnvHealthModifier);
+        Debug.Log("Modifying" + EnvHealthModifier + PopHappinessModifier + GoldModifier);
+        MetricManager.Instance.UpdatePopHappiness(PopHappinessModifier);
+        MetricManager.Instance.UpdateGold(GoldModifier);
+        MetricManager.Instance.UpdateEnvHealth(EnvHealthModifier);
     }
 }

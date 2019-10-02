@@ -38,19 +38,19 @@ public class Reader
                     int goldModifier = 0;
                     int envHealthModifier = 0;
                     
-                    if (transition["popHappiness"])
+                    if (transition["happiness"])
                     {
-                        popHappinessModifier = transition["popHappiness"];
+                        popHappinessModifier = transition["happiness"];
                     }
 
-                    if (transition["gold"])
+                    if (transition["money"])
                     {
-                        goldModifier = transition["gold"];
+                        goldModifier = transition["money"];
                     }
 
-                    if (transition["envHealth"])
+                    if (transition["environment"])
                     {
-                        envHealthModifier = transition["envHealth"];
+                        envHealthModifier = transition["environment"];
                     }
                     
                     MetricsModifier metricsModifier = new MetricsModifier(popHappinessModifier, goldModifier, envHealthModifier);
@@ -84,19 +84,19 @@ public class Reader
                     int goldModifier = 0;
                     int envHealthModifier = 0;
                     
-                    if (option["popHappiness"])
+                    if (option["happiness"])
                     {
-                        popHappinessModifier = option["popHappiness"];
+                        popHappinessModifier = option["happiness"];
                     }
 
-                    if (option["gold"])
+                    if (option["money"])
                     {
-                        goldModifier = option["gold"];
+                        goldModifier = option["money"];
                     }
 
-                    if (option["envHealth"])
+                    if (option["environment"])
                     {
-                        envHealthModifier = option["envHealth"];
+                        envHealthModifier = option["environment"];
                     }
                     
                     MetricsModifier metricsModifier = new MetricsModifier(popHappinessModifier, goldModifier, envHealthModifier);

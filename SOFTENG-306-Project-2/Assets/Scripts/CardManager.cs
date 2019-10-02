@@ -10,16 +10,10 @@ public class CardManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject cardPrefab;
-
-    [SerializeField] 
-    private GameObject metricPrefab;    
     
     private GameObject displayedCard;
-    private GameObject metricPanel;
     
     private CardFactory cardFactory;
-    private int nextStoryDecisionIndex;
-    private Metrics metrics;
     private int cardCount = 0;
 
     private Card currentCard;
@@ -29,13 +23,11 @@ public class CardManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        metrics = Metrics.Instance;
         reader = new Reader();
         currentCard = reader.RootState;
         cardFactory = new CardFactory();
         currentCard = cardFactory.GetNewCard("story");
         RenderStoryCard();
-        RenderMetrics();
     }
 
     public void MakeStoryTransition(int decisionIndex)
@@ -47,43 +39,17 @@ public class CardManager : MonoBehaviour
 
     private void UpdateMetrics(int decisionIndex)
     {
-        //Dictionary<string, int> metricsEffects;
-        MetricsModifier metricsModifier;
-
         if (currentCard is PlotCard)
         {
             var card = currentCard as PlotCard;
-            metricsModifier = card.Transitions[decisionIndex].MetricsModifier;
-            //metricsEffects = card.Transitions[decisionIndex].Metrics;
+            card.Transitions[decisionIndex].MetricsModifier.Modify(); ;
         }
         else
         {
             var card = currentCard as MinorCard;
-            metricsModifier = card.Options[decisionIndex].MetricsModifier;
-            //metricsEffects = card.Options[decisionIndex].Metrics;
+            card.Options[decisionIndex].MetricsModifier.Modify(); ;
         }
 
-        metricsModifier.Modify();
-//        this.money += metricsEffects["money"];
-//        this.environment += metricsEffects["environment"];
-//        this.happiness += metricsEffects["happiness"];
-    }
-
-    private void RenderMetrics()
-    {
-        Destroy(metricPanel);
-        metricPanel = Instantiate(metricPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-
-        var money = metricPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        var happiness = metricPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        var environment = metricPanel.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-        
-        money.text = this.metrics.Gold.ToString();
-        happiness.text = this.metrics.PopHappiness.ToString();
-        environment.text = this.metrics.EnvHealth.ToString();
-        
-        var parentObject = GameObject.Find("MetricPanel");
-        metricPanel.transform.SetParent(parentObject.transform, false);
     }
 
     private void ShowFeedback(int decisionIndex)
@@ -130,13 +96,13 @@ public class CardManager : MonoBehaviour
         {
             currentCard = cardFactory.GetNewCard("story");
             RenderStoryCard();
-            RenderMetrics();
+            MetricManager.Instance.RenderMetrics();
         }
         else
         {
             currentCard = cardFactory.GetNewCard("minor");
             RenderMinorCard();
-            RenderMetrics();
+            MetricManager.Instance.RenderMetrics();
         }
     }
 
@@ -146,7 +112,6 @@ public class CardManager : MonoBehaviour
         var text1 = button1.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         button1.gameObject.SetActive(true);
         button1.onClick.AddListener(() => this.MakeTransition());
-        var card = currentCard as PlotCard;
         text1.text = "continue";
     }
 
