@@ -10,7 +10,13 @@ public class CardManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject cardPrefab;
+
+    [SerializeField] 
+    private GameObject metricPrefab;    
+    
     private GameObject displayedCard;
+    private GameObject metricPanel;
+    
     private CardFactory cardFactory;
     private int nextStoryDecisionIndex;
     private int cardCount = 0;
@@ -27,23 +33,34 @@ public class CardManager : MonoBehaviour
         cardFactory = new CardFactory();
         currentCard = cardFactory.GetNewCard("story");
         RenderStoryCard();
+        RenderMetrics();
     }
 
     public void MakeStoryTransition(int decisionIndex)
     {
         currentCard.HandleDecision(decisionIndex);
-
         ShowFeedback(decisionIndex);
-//        var button1 = displayedCard.transform.GetChild(1).GetComponent<Button>();
-//        var button2 = displayedCard.transform.GetChild(2).GetComponent<Button>();
-//        button1.gameObject.SetActive(false);
-//        button2.gameObject.SetActive(false);
+    }
+
+    private void RenderMetrics()
+    {
+        Destroy(metricPanel);
+        metricPanel = Instantiate(metricPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+
+        var money = metricPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        var happiness = metricPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        var environment = metricPanel.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+        
+        money.text = "4";
+        happiness.text = "4";
+        environment.text = "4";
+        
+        var parentObject = GameObject.Find("MetricsPanel");
+        metricPanel.transform.SetParent(parentObject.transform, false);
     }
 
     private void ShowFeedback(int decisionIndex)
     {
-//        MakeTransition();
-//
         Destroy(displayedCard);
         displayedCard = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity);
 
@@ -52,16 +69,12 @@ public class CardManager : MonoBehaviour
         var button2 = displayedCard.transform.GetChild(2).GetComponent<Button>();
         button1.gameObject.SetActive(false);
         button2.gameObject.SetActive(false);
-
         var card = currentCard as PlotCard;
-        
         decisionDialogue.text = card.Transitions[decisionIndex].Feedback;
 
         StartCoroutine(wait(2, button1));
-        
 
         var parentObject = GameObject.Find("CardPanel");
-
         displayedCard.transform.SetParent(parentObject.transform, false);
     }
 
@@ -81,15 +94,7 @@ public class CardManager : MonoBehaviour
         {
             currentCard = cardFactory.GetNewCard("story");
             RenderStoryCard();
-//            var card = currentCard as PlotCard;
-//            if (card.Label.Equals("story"))
-//            {
-//                RenderStoryCard();
-//            }
-//            else if (card.Label.Equals("feedback"))
-//            {
-//                RenderFeedbackCard();
-//            }
+//            RenderMetrics();
         }
         else
         {
@@ -104,34 +109,12 @@ public class CardManager : MonoBehaviour
         var text1 = button1.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         button1.gameObject.SetActive(true);
         button1.onClick.AddListener(() => this.MakeTransition());
+//        button1.onClick.AddListener(() => this.RenderMetrics());
 
         var card = currentCard as PlotCard;
         text1.text = "continue";
-//        MakeTransition();
     }
 
-    public void RenderFeedbackCard()
-    {
-        Destroy(displayedCard);
-        displayedCard = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-
-        var decisionDialogue = displayedCard.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        var button1 = displayedCard.transform.GetChild(1).GetComponent<Button>();
-        var button2 = displayedCard.transform.GetChild(2).GetComponent<Button>();
-        button1.gameObject.SetActive(false);
-        button2.gameObject.SetActive(false);
-
-        decisionDialogue.text = currentCard.Dialogue;
-
-        StartCoroutine(wait(1, button1));
-        
-
-        var parentObject = GameObject.Find("CardPanel");
-
-        displayedCard.transform.SetParent(parentObject.transform, false);
-    }
-
-    
     // BIG TODO: refactor classes to remove this duplicate logic. Just keeping like this for now, to keep consistent for merging.
     public void RenderStoryCard()
     {
@@ -214,4 +197,5 @@ public class CardManager : MonoBehaviour
         }
         return false;
     }
+    
 }
