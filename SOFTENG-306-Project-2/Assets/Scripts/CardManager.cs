@@ -33,7 +33,7 @@ public class CardManager : MonoBehaviour
         cardFactory = new CardFactory();
         currentCard = cardFactory.GetNewCard("story");
         RenderStoryCard();
-        RenderMetrics();
+//        RenderMetrics();
     }
 
     public void MakeStoryTransition(int decisionIndex)
