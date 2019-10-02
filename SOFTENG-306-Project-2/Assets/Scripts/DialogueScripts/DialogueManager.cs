@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
+    public Animator animator;
     public TextMeshProUGUI npcNameText;
     public TextMeshProUGUI npcDialogueText;
     public static DialogueManager Instance { get; private set; }
@@ -12,6 +13,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        animator.SetBool("IsVisible", true);
         Debug.Log("Started: " + dialogue.name);
         statements.Clear();
 
@@ -36,7 +38,7 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue()
     {
-        throw new NotImplementedException();
+        animator.SetBool("IsVisible", false);
     }
 
     private void Awake()
