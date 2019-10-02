@@ -32,7 +32,37 @@ public class CardManager : MonoBehaviour
     public void MakeStoryTransition(int decisionIndex)
     {
         currentCard.HandleDecision(decisionIndex);
-        MakeTransition();
+
+        ShowFeedback(decisionIndex);
+//        var button1 = displayedCard.transform.GetChild(1).GetComponent<Button>();
+//        var button2 = displayedCard.transform.GetChild(2).GetComponent<Button>();
+//        button1.gameObject.SetActive(false);
+//        button2.gameObject.SetActive(false);
+    }
+
+    private void ShowFeedback(int decisionIndex)
+    {
+//        MakeTransition();
+//
+        Destroy(displayedCard);
+        displayedCard = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+
+        var decisionDialogue = displayedCard.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        var button1 = displayedCard.transform.GetChild(1).GetComponent<Button>();
+        var button2 = displayedCard.transform.GetChild(2).GetComponent<Button>();
+        button1.gameObject.SetActive(false);
+        button2.gameObject.SetActive(false);
+
+        var card = currentCard as PlotCard;
+        
+        decisionDialogue.text = card.Transitions[decisionIndex].Feedback;
+
+        StartCoroutine(wait(2, button1));
+        
+
+        var parentObject = GameObject.Find("CardPanel");
+
+        displayedCard.transform.SetParent(parentObject.transform, false);
     }
 
     private void MakeTransition()
@@ -50,15 +80,16 @@ public class CardManager : MonoBehaviour
         if (true)
         {
             currentCard = cardFactory.GetNewCard("story");
-            var card = currentCard as PlotCard;
-            if (card.Label.Equals("story"))
-            {
-                RenderStoryCard();
-            }
-            else if (card.Label.Equals("feedback"))
-            {
-                RenderFeedbackCard();
-            }
+            RenderStoryCard();
+//            var card = currentCard as PlotCard;
+//            if (card.Label.Equals("story"))
+//            {
+//                RenderStoryCard();
+//            }
+//            else if (card.Label.Equals("feedback"))
+//            {
+//                RenderFeedbackCard();
+//            }
         }
         else
         {
@@ -72,17 +103,11 @@ public class CardManager : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         var text1 = button1.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         button1.gameObject.SetActive(true);
-        button1.onClick.AddListener(() => this.MakeStoryTransition(0));
+        button1.onClick.AddListener(() => this.MakeTransition());
 
         var card = currentCard as PlotCard;
-        if (card.Transitions.Count != 0)
-        {
-            text1.text = card.Transitions[0].Dialogue;
-        }
-        else
-        {
-            text1.text = "Game Over";
-        }
+        text1.text = "continue";
+//        MakeTransition();
     }
 
     public void RenderFeedbackCard()

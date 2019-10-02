@@ -5,15 +5,12 @@ using UnityEngine;
 public class PlotCard : Card
 {
     public string Id { get; set; }
-    
-    public string Label { get; set; }
     public List<Transition> Transitions { get; set; }
     public string NextStateId { get; private set; }
 
-    public PlotCard(string id, string label, string dialogue, List<Transition> transitions)
+    public PlotCard(string id, string dialogue, List<Transition> transitions)
     {
         Id = id;
-        Label = label;
         Dialogue = dialogue;
         Transitions = transitions;
     }

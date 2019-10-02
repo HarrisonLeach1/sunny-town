@@ -14,10 +14,9 @@ public class Reader
     public Reader()
     {
 
-        this.ParseStoryJson(Directory.GetCurrentDirectory() + "/Assets/json/plot.json");
+        this.ParseStoryJson(Directory.GetCurrentDirectory() + "/Assets/json/plotStates.json");
         this.ParseMinorCardJson(Directory.GetCurrentDirectory() + "/Assets/json/minorStates.json");
         RootState = this.AllStoryStates[0];
-
     }
 
     private void ParseStoryJson(string filePath)
@@ -35,10 +34,10 @@ public class Reader
                 List<Transition> transitionList = new List<Transition>();
                 foreach (JSONNode transition in state["transitions"].AsArray)
                 {
-                    transitionList.Add(new Transition(transition["label"], transition["state"]));
+                    transitionList.Add(new Transition(transition["label"], transition["feedback"], transition["state"]));
                 }
 
-                result.Add(new PlotCard(state["id"], state["label"], state["dialogue"], transitionList));
+                result.Add(new PlotCard(state["id"], state["dialogue"], transitionList));
             }
 
         }
