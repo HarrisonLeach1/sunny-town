@@ -67,5 +67,6 @@ public class DialogueManager : MonoBehaviour
     private void EndDialogue()
     {
         animator.SetBool("IsVisible", false);
+        CardManager.Instance.StartDisplayingCards();
     }
 }
