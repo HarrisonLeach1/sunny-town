@@ -34,14 +34,27 @@ public class Reader
                 List<Transition> transitionList = new List<Transition>();
                 foreach (JSONNode transition in state["transitions"].AsArray)
                 {
-                    Dictionary<string, int> metrics = new Dictionary<string, int>();
-                    foreach (JSONNode metricsArray in transition["metrics"].AsArray)
+                    int popHappinessModifier = 0;
+                    int goldModifier = 0;
+                    int envHealthModifier = 0;
+                    
+                    if (transition["popHappiness"])
                     {
-                        metrics.Add("money", metricsArray["money"]);
-                        metrics.Add("happiness", metricsArray["happiness"]);
-                        metrics.Add("environment", metricsArray["environment"]);
+                        popHappinessModifier = transition["popHappiness"];
                     }
-                    transitionList.Add(new Transition(transition["label"], transition["feedback"], metrics, transition["state"]));
+
+                    if (transition["gold"])
+                    {
+                        goldModifier = transition["gold"];
+                    }
+
+                    if (transition["envHealth"])
+                    {
+                        envHealthModifier = transition["envHealth"];
+                    }
+                    
+                    MetricsModifier metricsModifier = new MetricsModifier(popHappinessModifier, goldModifier, envHealthModifier);
+                    transitionList.Add(new Transition(transition["label"], transition["feedback"], metricsModifier, transition["state"]));
                 }
 
                 result.Add(new PlotCard(state["id"], state["dialogue"], transitionList));
@@ -67,14 +80,27 @@ public class Reader
                 List<Option> optionList = new List<Option>();
                 foreach (JSONNode option in decision["options"].AsArray)
                 {
-                    Dictionary<string, int> metrics = new Dictionary<string, int>();
-                    foreach (JSONNode metricsArray in option["metrics"].AsArray)
+                    int popHappinessModifier = 0;
+                    int goldModifier = 0;
+                    int envHealthModifier = 0;
+                    
+                    if (option["popHappiness"])
                     {
-                        metrics.Add("money", metricsArray["money"]);
-                        metrics.Add("happiness", metricsArray["happiness"]);
-                        metrics.Add("environment", metricsArray["environment"]);
+                        popHappinessModifier = option["popHappiness"];
                     }
-                    optionList.Add(new Option(option["label"], option["feedback"], metrics));
+
+                    if (option["gold"])
+                    {
+                        goldModifier = option["gold"];
+                    }
+
+                    if (option["envHealth"])
+                    {
+                        envHealthModifier = option["envHealth"];
+                    }
+                    
+                    MetricsModifier metricsModifier = new MetricsModifier(popHappinessModifier, goldModifier, envHealthModifier);
+                    optionList.Add(new Option(option["label"], option["feedback"], metricsModifier));
                 }
 
                 result.Add(new MinorCard(decision["dialogue"], optionList));

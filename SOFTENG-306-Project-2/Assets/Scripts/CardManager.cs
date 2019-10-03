@@ -19,9 +19,7 @@ public class CardManager : MonoBehaviour
     
     private CardFactory cardFactory;
     private int nextStoryDecisionIndex;
-    private int money = 0;
-    private int happiness = 0;
-    private int environment = 0;
+    private Metrics metrics;
     private int cardCount = 0;
 
     private Card currentCard;
@@ -31,6 +29,7 @@ public class CardManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        metrics = Metrics.Instance;
         reader = new Reader();
         currentCard = reader.RootState;
         cardFactory = new CardFactory();
@@ -48,22 +47,26 @@ public class CardManager : MonoBehaviour
 
     private void UpdateMetrics(int decisionIndex)
     {
-        Dictionary<string, int> metricsEffects;
+        //Dictionary<string, int> metricsEffects;
+        MetricsModifier metricsModifier;
 
         if (currentCard is PlotCard)
         {
             var card = currentCard as PlotCard;
-            metricsEffects = card.Transitions[decisionIndex].Metrics;
+            metricsModifier = card.Transitions[decisionIndex].MetricsModifier;
+            //metricsEffects = card.Transitions[decisionIndex].Metrics;
         }
         else
         {
             var card = currentCard as MinorCard;
-            metricsEffects = card.Options[decisionIndex].Metrics;
+            metricsModifier = card.Options[decisionIndex].MetricsModifier;
+            //metricsEffects = card.Options[decisionIndex].Metrics;
         }
 
-        this.money += metricsEffects["money"];
-        this.environment += metricsEffects["environment"];
-        this.happiness += metricsEffects["happiness"];
+        metricsModifier.Modify();
+//        this.money += metricsEffects["money"];
+//        this.environment += metricsEffects["environment"];
+//        this.happiness += metricsEffects["happiness"];
     }
 
     private void RenderMetrics()
@@ -75,9 +78,9 @@ public class CardManager : MonoBehaviour
         var happiness = metricPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         var environment = metricPanel.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
         
-        money.text = this.money.ToString();
-        happiness.text = this.happiness.ToString();
-        environment.text = this.environment.ToString();
+        money.text = this.metrics.Gold.ToString();
+        happiness.text = this.metrics.PopHappiness.ToString();
+        environment.text = this.metrics.EnvHealth.ToString();
         
         var parentObject = GameObject.Find("MetricPanel");
         metricPanel.transform.SetParent(parentObject.transform, false);
