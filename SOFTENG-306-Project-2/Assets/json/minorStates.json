@@ -4,24 +4,16 @@
         "options": [
             {
                 "label": "option 1",
-                "metrics": [
-                    {
-                        "money": 3,
-                        "happiness": 4,
-                        "environment": 5
-                    }
-                ],
+                "money": 3,
+                "happiness": 4,
+                "environment": 5,
                 "feedback": "feedback 1a"
             },
             {
                 "label": "option 2",
-                "metrics": [
-                    {
-                        "money": 3,
-                        "happiness": 4,
-                        "environment": 5
-                    }
-                ],
+                "money": 3,
+                "happiness": 4,
+                "environment": 5,
                 "feedback": "feedback 1a"
             }
         ]
@@ -31,24 +23,16 @@
         "options": [
             {
                 "label": "option 1 2",
-                "metrics": [
-                    {
-                        "money": 3,
-                        "happiness": 4,
-                        "environment": 5
-                    }
-                ],
+                "money": 3,
+                "happiness": 4,
+                "environment": 5,
                 "feedback": "feedback 1a"
             },
             {
                 "label": "option 2 2",
-                "metrics": [
-                    {
-                        "money": 3,
-                        "happiness": 4,
-                        "environment": 5
-                    }
-                ],
+                "money": 3,
+                "happiness": 4,
+                "environment": 5,
                 "feedback": "feedback 1a"
             }
         ]
@@ -58,24 +42,16 @@
         "options": [
             {
                 "label": "option 1 3",
-                "metrics": [
-                    {
-                        "money": 3,
-                        "happiness": 4,
-                        "environment": 5
-                    }
-                ],
+                "money": 3,
+                "happiness": 4,
+                "environment": 5,
                 "feedback": "feedback 1a"
             },
             {
                 "label": "option 2 3",
-                "metrics": [
-                    {
-                        "money": 3,
-                        "happiness": 4,
-                        "environment": 5
-                    }
-                ],
+                "money": 3,
+                "happiness": 4,
+                "environment": 5,
                 "feedback": "feedback 1a"
             }
         ]
@@ -85,24 +61,16 @@
         "options": [
             {
                 "label": "option 1 4",
-                "metrics": [
-                    {
-                        "money": 3,
-                        "happiness": 4,
-                        "environment": 5
-                    }
-                ],
+                "money": 3,
+                "happiness": 4,
+                "environment": 5,
                 "feedback": "feedback 1a"
             },
             {
                 "label": "option 2 4",
-                "metrics": [
-                    {
-                        "money": 3,
-                        "happiness": 4,
-                        "environment": 5
-                    }
-                ],
+                "money": 3,
+                "happiness": 4,
+                "environment": 5,
                 "feedback": "feedback 1a"
             }
         ]
@@ -112,24 +80,16 @@
         "options": [
             {
                 "label": "option 1 5",
-                "metrics": [
-                    {
-                        "money": 3,
-                        "happiness": 4,
-                        "environment": 5
-                    }
-                ],
+                "money": 3,
+                "happiness": 4,
+                "environment": 5,
                 "feedback": "feedback 1a"
             },
             {
                 "label": "option 2 5",
-                "metrics": [
-                    {
-                        "money": 3,
-                        "happiness": 4,
-                        "environment": 5
-                    }
-                ],
+                "money": 3,
+                "happiness": 4,
+                "environment": 5,
                 "feedback": "feedback 1a"
             }
         ]

@@ -41,8 +41,8 @@ public class CardManager : MonoBehaviour
     public void MakeStoryTransition(int decisionIndex)
     {
         currentCard.HandleDecision(decisionIndex);
-        ShowFeedback(decisionIndex);
         UpdateMetrics(decisionIndex);
+        ShowFeedback(decisionIndex);
     }
 
     private void UpdateMetrics(int decisionIndex)
