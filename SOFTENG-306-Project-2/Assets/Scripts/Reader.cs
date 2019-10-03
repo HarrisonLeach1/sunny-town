@@ -34,7 +34,14 @@ public class Reader
                 List<Transition> transitionList = new List<Transition>();
                 foreach (JSONNode transition in state["transitions"].AsArray)
                 {
-                    transitionList.Add(new Transition(transition["label"], transition["feedback"], transition["state"]));
+                    Dictionary<string, int> metrics = new Dictionary<string, int>();
+                    foreach (JSONNode metricsArray in transition["metrics"].AsArray)
+                    {
+                        metrics.Add("money", metricsArray["money"]);
+                        metrics.Add("happiness", metricsArray["happiness"]);
+                        metrics.Add("environment", metricsArray["environment"]);
+                    }
+                    transitionList.Add(new Transition(transition["label"], transition["feedback"], metrics, transition["state"]));
                 }
 
                 result.Add(new PlotCard(state["id"], state["dialogue"], transitionList));

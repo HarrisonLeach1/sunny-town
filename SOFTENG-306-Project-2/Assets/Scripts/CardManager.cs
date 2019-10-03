@@ -19,6 +19,9 @@ public class CardManager : MonoBehaviour
     
     private CardFactory cardFactory;
     private int nextStoryDecisionIndex;
+    private int money = 0;
+    private int happiness = 0;
+    private int environment = 0;
     private int cardCount = 0;
 
     private Card currentCard;
@@ -40,6 +43,16 @@ public class CardManager : MonoBehaviour
     {
         currentCard.HandleDecision(decisionIndex);
         ShowFeedback(decisionIndex);
+        UpdateMetrics(decisionIndex);
+    }
+    
+    private void UpdateMetrics(int decisionIndex)
+    {
+        var card = currentCard as PlotCard;
+        Dictionary<string, int> metricsEffects = card.Transitions[decisionIndex].Metrics;
+        this.money += metricsEffects["money"];
+        this.environment += metricsEffects["environment"];
+        this.happiness += metricsEffects["happiness"];
     }
 
     private void RenderMetrics()
@@ -51,9 +64,9 @@ public class CardManager : MonoBehaviour
         var happiness = metricPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         var environment = metricPanel.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
         
-        money.text = "4";
-        happiness.text = "4";
-        environment.text = "4";
+        money.text = this.money.ToString();
+        happiness.text = this.happiness.ToString();
+        environment.text = this.environment.ToString();
         
         var parentObject = GameObject.Find("MetricPanel");
         metricPanel.transform.SetParent(parentObject.transform, false);
@@ -109,7 +122,7 @@ public class CardManager : MonoBehaviour
         var text1 = button1.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         button1.gameObject.SetActive(true);
         button1.onClick.AddListener(() => this.MakeTransition());
-//        button1.onClick.AddListener(() => this.RenderMetrics());
+//        button1.onClick.AddListener(() => this.UpdateMetrics());
 //        RenderMetrics();
         var card = currentCard as PlotCard;
         text1.text = "continue";
