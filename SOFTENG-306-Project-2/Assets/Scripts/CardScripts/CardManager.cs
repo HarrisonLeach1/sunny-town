@@ -59,12 +59,12 @@ public class CardManager : MonoBehaviour
         if (currentCard is PlotCard)
         {
             var card = currentCard as PlotCard;
-            card.Transitions[decisionIndex].MetricsModifier.Modify(); ;
+            card.Transitions[decisionIndex].MetricsModifier.Modify();
         }
         else
         {
             var card = currentCard as MinorCard;
-            card.Options[decisionIndex].MetricsModifier.Modify(); ;
+            card.Options[decisionIndex].MetricsModifier.Modify();
         }
 
     }
