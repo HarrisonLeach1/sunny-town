@@ -15,6 +15,7 @@ public class CardManager : MonoBehaviour
     private GameObject displayedCard;
     
     private CardFactory cardFactory;
+    private DialogueManager dialogueManager;
     private int cardCount = 0;
 
     private Card currentCard;
@@ -39,12 +40,15 @@ public class CardManager : MonoBehaviour
         reader = new Reader();
         currentCard = reader.RootState;
         cardFactory = new CardFactory();
+        dialogueManager = DialogueManager.Instance;
     }
 
     public void StartDisplayingCards()
     {
         currentCard = cardFactory.GetNewCard("story");
-        RenderStoryCard();
+        string[] statements = new string[2] { "yeet", "hi" };
+        var card = currentCard as PlotCard;
+        dialogueManager.StartBinaryOptionDialogue(new BinaryOptionDialogue(card.Dialogue, card.Transitions[0].Dialogue, card.Transitions[1].Dialogue, statements, "jeet"));
     }
 
     public void MakeStoryTransition(int decisionIndex)

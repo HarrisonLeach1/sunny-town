@@ -26,20 +26,24 @@ public class DialogueManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-        
-    public void StartDialogue(Dialogue dialogue)
+
+    public void StartSimpleDialogue(Dialogue dialogue)
     {
         animator.SetBool("IsVisible", true);
-        Debug.Log("Started: " + dialogue.name);
         statements.Clear();
 
-        npcNameText.text = dialogue.name;
-        foreach (string statement in dialogue.statements)
+        npcNameText.text = dialogue.Name;
+        foreach (string statement in dialogue.Statements)
         {
             statements.Enqueue(statement);
         }
 
         DisplayNextStatement();
+    }
+
+    public void StartBinaryOptionDialogue(BinaryOptionDialogue dialogue)
+    {
+        Debug.Log(dialogue.Option1 + dialogue.Option2);
     }
 
     public void DisplayNextStatement()
@@ -54,10 +58,10 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(TypeSentence(statement));
     }
 
-    IEnumerator TypeSentence (string statement)
+    IEnumerator TypeSentence(string statement)
     {
         npcDialogueText.text = "";
-        foreach(char letter in statement.ToCharArray())
+        foreach (char letter in statement.ToCharArray())
         {
             npcDialogueText.text += letter;
             yield return null;

@@ -10,6 +10,6 @@ public class DialogueNPC : MonoBehaviour
     }
     public void TriggerDialogue()
     {
-        DialogueManager.Instance.StartDialogue(dialogue);
+        DialogueManager.Instance.StartSimpleDialogue(dialogue);
     }
 }
