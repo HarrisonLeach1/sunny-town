@@ -2,49 +2,73 @@
   {
     "id": "s1",
     "dialogue": "Hello I'm decision 1",
-    "transitions" : [
+    "transitions": [
       {
-        "label" :  "go to decision 2",
-        "state" : "s2"
+        "label": "go to decision 2",
+        "money" : 3,
+        "happiness" : 4,
+        "environment" : 5,
+        "feedback" : "feedback 1a",
+        "state": "s2"
       },
       {
-        "label" :  "go to decision 3",
-        "state" :  "s3"
+        "label": "go to decision 3",
+        "money" : 2,
+        "happiness" : 6,
+        "environment" : 7,
+        "feedback" : "feedback 1b",
+        "state": "s3"
       }
     ]
   },
   {
     "id": "s2",
     "dialogue": "Hi I'm decision 2",
-    "transitions" : [
+    "transitions": [
       {
-        "label" :  "end game",
-        "state" :  "s3"
+        "label": "end game",
+        "gold" : -40,
+        "happiness" : -4,
+        "environment" : -5,
+        "feedback" : "feedback 2a",
+        "state": "s3"
       },
       {
         "label": "also end game",
-        "state" : "s3"
+        "money" : -3,
+        "happiness" : -4,
+        "environment" : -5,
+        "feedback" : "feedback 2b",
+        "state": "s3"
       }
     ]
   },
   {
     "id": "s3",
     "dialogue": "You have lost",
-    "transitions" : [
+    "transitions": [
       {
-        "label" :  "continue",
-        "state" : "s4"
+        "label": "continue",
+        "money" : -20,
+        "happiness" : -4,
+        "environment" : -50,
+        "feedback" : "feedback 3a",
+        "state": "s4"
       },
       {
-        "label" : "back to beginning",
-        "state" : "s1"
+        "label": "back to beginning",
+        "money" : 50,
+        "happiness" : 50,
+        "environment" : 50,
+        "feedback" : "feedback 3b",
+        "state": "s1"
       }
     ]
   },
   {
     "id": "s4",
     "dialogue": "Game over",
-    "transitions" : [
+    "transitions": [
     ]
   }
 ]

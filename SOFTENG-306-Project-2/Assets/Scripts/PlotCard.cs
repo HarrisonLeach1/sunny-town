@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoryCard : Card
+public class PlotCard : Card
 {
     public string Id { get; set; }
     public List<Transition> Transitions { get; set; }
     public string NextStateId { get; private set; }
 
-    public StoryCard(string id, string dialogue, List<Transition> transitions)
+    public PlotCard(string id, string dialogue, List<Transition> transitions)
     {
         Id = id;
         Dialogue = dialogue;
         Transitions = transitions;
     }
 
-    public StoryCard(string dialogue, List<Transition> transitions)
+    public PlotCard(string dialogue, List<Transition> transitions)
     {
         Dialogue = dialogue;
         Transitions = transitions;
