@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CardManager : MonoBehaviour
@@ -58,8 +59,11 @@ public class CardManager : MonoBehaviour
     {
         if (currentCard is PlotCard)
         {
-            var card = currentCard as PlotCard;
-            card.Transitions[decisionIndex].MetricsModifier.Modify();
+            if (!IsFinalCard(currentCard))
+            {
+                var card = currentCard as PlotCard;
+                card.Transitions[decisionIndex].MetricsModifier.Modify();
+            }
         }
         else
         {
@@ -83,8 +87,11 @@ public class CardManager : MonoBehaviour
 
         if (currentCard is PlotCard)
         {
-            var card = currentCard as PlotCard;
-            decisionDialogue.text = card.Transitions[decisionIndex].Feedback;
+            if (!IsFinalCard(currentCard))
+            {
+                var card = currentCard as PlotCard;
+                decisionDialogue.text = card.Transitions[decisionIndex].Feedback;
+            }
         }
         else
         {
@@ -202,6 +209,8 @@ public class CardManager : MonoBehaviour
     private void EndGame()
     {
         // TODO: Handle ending the game, should play a cutscene
+        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     private bool IsFinalCard(Card currentCard)
