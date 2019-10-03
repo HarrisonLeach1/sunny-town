@@ -8,9 +8,10 @@ using UnityEngine.UI;
 
 public class CardManager : MonoBehaviour
 {
+    public static CardManager Instance { get; private set; }
+
     [SerializeField]
     private GameObject cardPrefab;
-    
     private GameObject displayedCard;
     
     private CardFactory cardFactory;
@@ -19,6 +20,18 @@ public class CardManager : MonoBehaviour
     private Card currentCard;
     private Reader reader;
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +39,10 @@ public class CardManager : MonoBehaviour
         reader = new Reader();
         currentCard = reader.RootState;
         cardFactory = new CardFactory();
+    }
+
+    public void StartDisplayingCards()
+    {
         currentCard = cardFactory.GetNewCard("story");
         RenderStoryCard();
     }
