@@ -5,6 +5,10 @@ public static class Shuffle
 {
     private static System.Random random = new System.Random();  
 
+    /*
+     * A randomize method based on the Fisher-Yates shuffle.
+     * Reference: https://stackoverflow.com/questions/273313/randomize-a-listt
+     */
     public static void Randomize<T>(this IList<T> list)  
     {  
         int n = list.Count;  
