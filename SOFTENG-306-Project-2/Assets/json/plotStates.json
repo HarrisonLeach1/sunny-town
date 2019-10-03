@@ -13,9 +13,9 @@
       },
       {
         "label": "go to decision 3",
-        "gold" : 3,
-        "popHappiness" : 4,
-        "envHealth" : 5,
+        "money" : 2,
+        "happiness" : 6,
+        "environment" : 7,
         "feedback" : "feedback 1b",
         "state": "s3"
       }
@@ -27,17 +27,17 @@
     "transitions": [
       {
         "label": "end game",
-        "gold" : 3,
-        "happiness" : 4,
-        "environment" : 5,
+        "gold" : -40,
+        "happiness" : -4,
+        "environment" : -5,
         "feedback" : "feedback 2a",
         "state": "s3"
       },
       {
         "label": "also end game",
-        "money" : 3,
-        "happiness" : 4,
-        "environment" : 5,
+        "money" : -3,
+        "happiness" : -4,
+        "environment" : -5,
         "feedback" : "feedback 2b",
         "state": "s3"
       }
@@ -49,17 +49,17 @@
     "transitions": [
       {
         "label": "continue",
-        "money" : 3,
-        "happiness" : 4,
-        "environment" : 5,
+        "money" : -20,
+        "happiness" : -4,
+        "environment" : -50,
         "feedback" : "feedback 3a",
         "state": "s4"
       },
       {
         "label": "back to beginning",
-        "money" : 3,
-        "happiness" : 4,
-        "environment" : 5,
+        "money" : 50,
+        "happiness" : 50,
+        "environment" : 50,
         "feedback" : "feedback 3b",
         "state": "s1"
       }
