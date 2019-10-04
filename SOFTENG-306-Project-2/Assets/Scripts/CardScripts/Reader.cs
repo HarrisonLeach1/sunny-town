@@ -3,6 +3,7 @@ using System.IO;
 using System;
 using SimpleJSON;
 using UnityEngine;
+using System.Linq;
 
 public class Reader
 {
@@ -14,15 +15,14 @@ public class Reader
     public Reader()
     {
 
-        this.ParseStoryJson(Directory.GetCurrentDirectory() + "/Assets/json/plotStates.json");
-        this.ParseMinorCardJson(Directory.GetCurrentDirectory() + "/Assets/json/minorStates.json");
+        AllStoryStates = this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/plotStates.json", true).Cast<PlotCard>().ToList();
+        AllMinorStates = this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/minorStates.json", false).Cast<MinorCard>().ToList(); ;
         RootState = this.AllStoryStates[0];
     }
 
-    private void ParseStoryJson(string filePath)
+    private List<Card> ParseJson(string filePath, bool isPlotJson)
     {
-        List<PlotCard> result = new List<PlotCard>();
-
+        List<Card> result = new List<Card>();
 
         using (StreamReader r = new StreamReader(filePath))
         {
@@ -31,8 +31,11 @@ public class Reader
             JSONArray stateArray = SimpleJSON.JSON.Parse(json).AsArray;
             foreach (JSONNode state in stateArray)
             {
-                List<Transition> transitionList = new List<Transition>();
-                foreach (JSONNode transition in state["transitions"].AsArray)
+                List<Transition> optionList = new List<Transition>();
+
+                JSONNode transitions = isPlotJson ? state["transitions"].AsArray : state["options"];
+
+                foreach (JSONNode transition in transitions)
                 {
                     int popHappinessModifier = 0;
                     int goldModifier = 0;
@@ -54,61 +57,24 @@ public class Reader
                     }
                     
                     MetricsModifier metricsModifier = new MetricsModifier(popHappinessModifier, goldModifier, envHealthModifier);
-                    transitionList.Add(new Transition(transition["label"], transition["feedback"], metricsModifier, transition["state"]));
+                    optionList.Add(new Transition(transition["label"], transition["feedback"], metricsModifier, transition["state"]));
                 }
 
-                result.Add(new PlotCard(state["id"], state["dialogue"], transitionList));
-            }
-
-        }
-
-        this.AllStoryStates = result;
-    }
-
-    private void ParseMinorCardJson(string filePath)
-    {
-        List<MinorCard> result = new List<MinorCard>();
-
-
-        using (StreamReader r = new StreamReader(filePath))
-        {
-            string json = r.ReadToEnd();
-
-            JSONArray decisionArray = SimpleJSON.JSON.Parse(json).AsArray;
-            foreach (JSONNode decision in decisionArray)
-            {
-                List<Option> optionList = new List<Option>();
-                foreach (JSONNode option in decision["options"].AsArray)
+                if (isPlotJson)
                 {
-                    int popHappinessModifier = 0;
-                    int goldModifier = 0;
-                    int envHealthModifier = 0;
-                    
-                    if (option["happiness"])
-                    {
-                        popHappinessModifier = option["happiness"];
-                    }
+                    Debug.Log("Adding plot options: " + optionList.Count);
+                    result.Add(new PlotCard(state["id"], state["dialogue"], optionList));
 
-                    if (option["money"])
-                    {
-                        goldModifier = option["money"];
-                    }
-
-                    if (option["environment"])
-                    {
-                        envHealthModifier = option["environment"];
-                    }
-                    
-                    MetricsModifier metricsModifier = new MetricsModifier(popHappinessModifier, goldModifier, envHealthModifier);
-                    optionList.Add(new Option(option["label"], option["feedback"], metricsModifier));
                 }
-
-                result.Add(new MinorCard(decision["dialogue"], optionList));
+                else
+                {
+                    Debug.Log("Adding minor options: " + optionList.Count);
+                    result.Add(new MinorCard(state["dialogue"], optionList));
+                }
             }
 
         }
 
-        this.AllMinorStates = result;
+        return result;
     }
-
 }

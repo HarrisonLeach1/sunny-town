@@ -5,31 +5,27 @@ using UnityEngine;
 public class PlotCard : Card
 {
     public string Id { get; set; }
-    public List<Transition> Transitions { get; set; }
     public string NextStateId { get; private set; }
-
-    public PlotCard(string id, string dialogue, List<Transition> transitions)
+    public PlotCard(string id, string dialogue, List<Transition> options)
     {
         Id = id;
         Dialogue = dialogue;
-        Transitions = transitions;
+        Options = options;
     }
 
-    public PlotCard(string dialogue, List<Transition> transitions)
+    public PlotCard(string dialogue, List<Transition> options)
     {
         Dialogue = dialogue;
-        Transitions = transitions;
+        Options = options;
     }
 
     public override void HandleDecision(int decisionIndex)
     {
-        if (Transitions.Count >= decisionIndex + 1)
+        if (Options.Count >= decisionIndex + 1)
         {
-            NextStateId = Transitions[decisionIndex].NextStateId;
-        } 
-        else
-        {
-            NextStateId = Id;
+            Options[decisionIndex].MetricsModifier.Modify();
+            Feedback = Options[decisionIndex].Feedback;
+            NextStateId = Options[decisionIndex].NextStateId;
         }
     }
 }

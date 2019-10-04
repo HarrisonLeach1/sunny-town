@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -47,30 +44,14 @@ public class CardManager : MonoBehaviour
     {
         currentCard = cardFactory.GetNewCard("story");
         string[] statements = new string[2] { "yeet", "hi" };
-        var card = currentCard as PlotCard;
-        dialogueManager.StartBinaryOptionDialogue(new BinaryOptionDialogue(card.Dialogue, card.Transitions[0].Dialogue, card.Transitions[1].Dialogue, statements, "jeet"));
+        dialogueManager.StartBinaryOptionDialogue(new BinaryOptionDialogue(currentCard.Dialogue, currentCard.Options[0].Dialogue, currentCard.Options[1].Dialogue, statements, "jeet"));
+        RenderStoryCard();
     }
 
     public void MakeStoryTransition(int decisionIndex)
     {
         currentCard.HandleDecision(decisionIndex);
-        UpdateMetrics(decisionIndex);
         ShowFeedback(decisionIndex);
-    }
-
-    private void UpdateMetrics(int decisionIndex)
-    {
-        if (currentCard is PlotCard)
-        {
-            var card = currentCard as PlotCard;
-            card.Transitions[decisionIndex].MetricsModifier.Modify();
-        }
-        else
-        {
-            var card = currentCard as MinorCard;
-            card.Options[decisionIndex].MetricsModifier.Modify();
-        }
-
     }
 
     private void ShowFeedback(int decisionIndex)
@@ -84,17 +65,7 @@ public class CardManager : MonoBehaviour
         button1.gameObject.SetActive(false);
         button2.gameObject.SetActive(false);
 
-
-        if (currentCard is PlotCard)
-        {
-            var card = currentCard as PlotCard;
-            decisionDialogue.text = card.Transitions[decisionIndex].Feedback;
-        }
-        else
-        {
-            var card = currentCard as MinorCard;
-            decisionDialogue.text = card.Options[decisionIndex].Feedback;
-        }
+        decisionDialogue.text = currentCard.Feedback;
 
         StartCoroutine(wait(2, button1));
 
@@ -153,11 +124,10 @@ public class CardManager : MonoBehaviour
 
         decisionDialogue.text = currentCard.Dialogue;
 
-        var card = currentCard as PlotCard;
-        if (card.Transitions.Count != 0)
+        if (currentCard.Options.Count != 0)
         {
-            text1.text = card.Transitions[0].Dialogue;
-            text2.text = card.Transitions[1].Dialogue;
+            text1.text = currentCard.Options[0].Dialogue;
+            text2.text = currentCard.Options[1].Dialogue;
         }
         else
         {
@@ -184,13 +154,13 @@ public class CardManager : MonoBehaviour
         button1.onClick.AddListener(() => this.MakeStoryTransition(0));
         button2.onClick.AddListener(() => this.MakeStoryTransition(1));
 
-        decisionDialogue.text = currentCard.Dialogue;
+        decisionDialogue.text = this.currentCard.Dialogue;
+        Debug.Log("Found minor card options: " + currentCard.Options.Count);
 
-        var card = currentCard as MinorCard;
-        if (card.Options.Count != 0)
+        if (currentCard.Options.Count != 0)
         {
-            text1.text = card.Options[0].Dialogue;
-            text2.text = card.Options[1].Dialogue;
+            text1.text = currentCard.Options[0].Dialogue;
+            text2.text = currentCard.Options[1].Dialogue;
         }
         else
         {
@@ -211,7 +181,7 @@ public class CardManager : MonoBehaviour
     private bool IsFinalCard(Card currentCard)
     {
         // Game is ended on story cards with no transitions
-        if (currentCard is PlotCard && (currentCard as PlotCard).Transitions.Count == 0)
+        if (currentCard is PlotCard && currentCard.Options.Count == 0)
         {
             return true;
         }

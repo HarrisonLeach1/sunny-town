@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinorCard : Card {
-    public List<Option> Options { get; private set; }
+public class MinorCard : Card
+{
 
-    public MinorCard(string dialogue, List<Option> options)
+    public MinorCard(string dialogue, List<Transition> options)
     {
         Dialogue = dialogue;
         Options = options;
@@ -12,6 +12,10 @@ public class MinorCard : Card {
 
     public override void HandleDecision(int decisionIndex)
     {
-        Debug.Log("You made decision: " + decisionIndex);
+        if (Options.Count >= decisionIndex + 1)
+        {
+            Options[decisionIndex].MetricsModifier.Modify();
+            Feedback = Options[decisionIndex].Feedback;
+        }
     }
 }
