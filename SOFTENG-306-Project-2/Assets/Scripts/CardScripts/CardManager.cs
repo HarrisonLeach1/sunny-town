@@ -45,19 +45,20 @@ public class CardManager : MonoBehaviour
     public void StartDisplayingCards()
     {
         currentCard = cardFactory.GetNewCard("story");
-        StartCoroutine(initialWait());
+        StartCoroutine(QueueStoryCard());
     }
 
-    private IEnumerator initialWait()
+    private IEnumerator QueueStoryCard()
     { 
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
         dialogueManager.StartBinaryOptionDialogue(dialogueMapper.ToBinaryOptionDialogue(currentCard), HandleOptionPressed);
     }
 
     public void HandleOptionPressed(int decisionIndex)
     {
         currentCard.HandleDecision(decisionIndex);
-        ShowFeedback(decisionIndex);
+        MakeTransition();
+        StartCoroutine(QueueStoryCard());
     }
 
     private void ShowFeedback(int decisionIndex)
@@ -94,13 +95,11 @@ public class CardManager : MonoBehaviour
         {
             currentCard = cardFactory.GetNewCard("story");
             RenderStoryCard();
-            MetricManager.Instance.RenderMetrics();
         }
         else
         {
             currentCard = cardFactory.GetNewCard("minor");
             RenderMinorCard();
-            MetricManager.Instance.RenderMetrics();
         }
     }
 

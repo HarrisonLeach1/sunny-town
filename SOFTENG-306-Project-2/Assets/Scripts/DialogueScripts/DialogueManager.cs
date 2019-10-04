@@ -9,6 +9,7 @@ using UnityEngine;
 public class DialogueManager : MonoBehaviour
 { 
     public Animator simpleDialogueViewAnimator;
+    public Animator binaryOptionViewAnimator;
     public SimpleDialogueView simpleDialogueView;
     public BinaryOptionDialogueView binaryOptionDialogueView;
     public static DialogueManager Instance { get; private set; }
@@ -40,28 +41,25 @@ public class DialogueManager : MonoBehaviour
 
     public void StartBinaryOptionDialogue(BinaryOptionDialogue dialogue, Action<int> onOptionPressed)
     {
-        
+        Action<int> handleButtonPressed = num =>
+        {
+            onOptionPressed(num);
+            binaryOptionViewAnimator.SetBool("IsVisible", false);
+        };
+
         if (dialogue.LeadingDialogue.Statements.Length != 0)
         {
-            StartSimpleDialogue(dialogue.LeadingDialogue, () => DisplayBinaryOptionDialogue(dialogue, onOptionPressed));
+            StartSimpleDialogue(dialogue.LeadingDialogue, () => { 
+                simpleDialogueViewAnimator.SetBool("IsVisible", false);
+                binaryOptionViewAnimator.SetBool("IsVisible", true);
+                binaryOptionDialogueView.Display(dialogue, handleButtonPressed);
+            });
         }
         else
         {
-            DisplayBinaryOptionDialogue(dialogue, onOptionPressed);
+            binaryOptionDialogueView.Display(dialogue, handleButtonPressed);
+            binaryOptionViewAnimator.SetBool("IsVisible", true);
         }
-    }
-
-
-    private void DisplayBinaryOptionDialogue(BinaryOptionDialogue dialogue, Action<int> onOptionPressed)
-    {
-        binaryOptionDialogueView.npcNameText.text = dialogue.LeadingDialogue.Name;
-        binaryOptionDialogueView.npcDialogueText.text = dialogue.Question;
-        binaryOptionDialogueView.option1Text.text = dialogue.Option1;
-        binaryOptionDialogueView.option2Text.text = dialogue.Option2;
-        binaryOptionDialogueView.option1Button.onClick.AddListener(() => onOptionPressed(0));
-        binaryOptionDialogueView.option1Button.onClick.AddListener(() => onOptionPressed(1));
-        Destroy(simpleDialogueView.viewObject);
-        binaryOptionDialogueView.viewObject.transform.position = simpleDialogueView.viewObject.transform.position;
     }
 
     public void DisplayNextStatement()
@@ -73,7 +71,7 @@ public class DialogueManager : MonoBehaviour
         }
         var statement = statements.Dequeue();
         StopAllCoroutines();
-        StartCoroutine(TypeSentence(statement));
+        StartCoroutine(simpleDialogueView.TypeSentence(statement));
     }
 
     private void StartSimpleDialogue(SimpleDialogue dialogue, Action onEndOfStatements)
@@ -89,15 +87,5 @@ public class DialogueManager : MonoBehaviour
         }
 
         DisplayNextStatement();
-    }
-
-    private IEnumerator TypeSentence(string statement)
-    {
-        simpleDialogueView.npcDialogueText.text = "";
-        foreach (char letter in statement.ToCharArray())
-        {
-            simpleDialogueView.npcDialogueText.text += letter;
-            yield return null;
-        }
     }
 }
