@@ -1,74 +1,113 @@
 ﻿[
   {
     "id": "s1",
-    "dialogue": "Hello I'm decision 1",
+    "dialogue": "Hi, I am Arvio. I own an oil company and I would like to inspect your land to see if it is suitable for us to build an oil right. We'll pay you.",
     "transitions": [
       {
-        "label": "go to decision 2",
-        "money" : 3,
-        "happiness" : 4,
-        "environment" : 5,
-        "feedback" : "feedback 1a",
+        "label": "Accept",
+        "money" : 25,
+        "feedback" : "feedback 2a",
         "state": "s2"
       },
       {
-        "label": "go to decision 3",
-        "money" : 2,
-        "happiness" : 6,
-        "environment" : 7,
-        "feedback" : "feedback 1b",
-        "state": "s3"
+        "label": "Decline",
+        "feedback" : "feedback 2b",
+        "state": "s2"
       }
     ]
   },
   {
     "id": "s2",
-    "dialogue": "Hi I'm decision 2",
+    "dialogue": "Hi mum! We learnt about polar bears at school today. Do you think we'll be able to go see them one day?",
     "transitions": [
       {
-        "label": "end game",
-        "gold" : -40,
-        "happiness" : -4,
-        "environment" : -5,
-        "feedback" : "feedback 2a",
+        "label": "Yes",
+        "feedback" : "Hunter will remember this.",
         "state": "s3"
       },
       {
-        "label": "also end game",
-        "money" : -3,
-        "happiness" : -4,
-        "environment" : -5,
-        "feedback" : "feedback 2b",
-        "state": "s3"
+        "label" : "I'm busy",
+        "feedback" : "Hunter will remember this.",
+        "state" : "s3"
       }
     ]
   },
   {
     "id": "s3",
-    "dialogue": "You have lost",
+    "dialogue": "You're land is perfect for oil mining. Will you let us set up? We'll pay you.",
     "transitions": [
       {
-        "label": "continue",
-        "money" : -20,
-        "happiness" : -4,
-        "environment" : -50,
+        "label": "Yes",
+        "money" : 20,
+        "happiness" : -10,
+        "environment" : -20,
         "feedback" : "feedback 3a",
         "state": "s4"
       },
       {
-        "label": "back to beginning",
-        "money" : 50,
-        "happiness" : 50,
-        "environment" : 50,
+        "label": "No",
         "feedback" : "feedback 3b",
-        "state": "s1"
+        "state": "s5"
       }
     ]
   },
   {
     "id": "s4",
-    "dialogue": "Game over",
+    "dialogue": "A local group of farmers are struggling because of the drought. We need as much as water as possible. Will you respect the town's water usage?",
     "transitions": [
+      {
+        "label": "Yes",
+        "happiness" : -10,
+        "environment" : 10,
+        "feedback" : "feedback 3a",
+        "state": "s6"
+      },
+      {
+        "label": "No",
+        "happiness" : -15,
+        "feedback" : "feedback 3b",
+        "state": "s7"
+      }
+    ]
+  },
+  {
+    "id": "s6",
+    "dialogue" : "Mum, I want a treehouse. All my friends have one... Can we build one?",
+    "transitions": [
+      {
+        "label": "Yes",
+        "happiness" : 5,
+        "environment" : -5,
+        "money" : -5,
+        "feedback" : "feedback 3a",
+        "state": "s8"
+      },
+      {
+        "label": "No",
+        "happiness" : -10,
+        "feedback" : "feedback 3b",
+        "state": "s9,"
+      }
+    ]
+  },
+  {
+    "id": "s8",
+    "dialogue" : "Your town has grown!",
+    "transitions": [
+      {
+        "label": "Continue",
+        "feedback" : "You have passed level 1"
+      }
+    ]
+  },
+  {
+    "id": "s9",
+    "dialogue" : "Your town has grown!",
+    "transitions": [
+      {
+        "label": "Continue",
+        "feedback" : "You have passed level 1"
+      }
     ]
   }
 ]
