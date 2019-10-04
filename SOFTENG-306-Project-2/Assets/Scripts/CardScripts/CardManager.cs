@@ -13,6 +13,7 @@ public class CardManager : MonoBehaviour
     
     private CardFactory cardFactory;
     private DialogueManager dialogueManager;
+    private DialogueMapper dialogueMapper;
     private int cardCount = 0;
 
     private Card currentCard;
@@ -38,17 +39,22 @@ public class CardManager : MonoBehaviour
         currentCard = reader.RootState;
         cardFactory = new CardFactory();
         dialogueManager = DialogueManager.Instance;
+        dialogueMapper = new DialogueMapper();
     }
 
     public void StartDisplayingCards()
     {
         currentCard = cardFactory.GetNewCard("story");
-        string[] statements = new string[2] { "yeet", "hi" };
-        dialogueManager.StartBinaryOptionDialogue(new BinaryOptionDialogue(currentCard.Dialogue, currentCard.Options[0].Dialogue, currentCard.Options[1].Dialogue, statements, "jeet"));
-        RenderStoryCard();
+        StartCoroutine(initialWait());
     }
 
-    public void MakeStoryTransition(int decisionIndex)
+    private IEnumerator initialWait()
+    { 
+        yield return new WaitForSeconds(5);
+        dialogueManager.StartBinaryOptionDialogue(dialogueMapper.ToBinaryOptionDialogue(currentCard), HandleOptionPressed);
+    }
+
+    public void HandleOptionPressed(int decisionIndex)
     {
         currentCard.HandleDecision(decisionIndex);
         ShowFeedback(decisionIndex);
@@ -119,8 +125,8 @@ public class CardManager : MonoBehaviour
         var text1 = button1.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         var text2 = button2.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
-        button1.onClick.AddListener(() => this.MakeStoryTransition(0));
-        button2.onClick.AddListener(() => this.MakeStoryTransition(1));
+        button1.onClick.AddListener(() => this.HandleOptionPressed(0));
+        button2.onClick.AddListener(() => this.HandleOptionPressed(1));
 
         decisionDialogue.text = currentCard.Dialogue;
 
@@ -151,11 +157,10 @@ public class CardManager : MonoBehaviour
         var text1 = button1.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         var text2 = button2.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
-        button1.onClick.AddListener(() => this.MakeStoryTransition(0));
-        button2.onClick.AddListener(() => this.MakeStoryTransition(1));
+        button1.onClick.AddListener(() => this.HandleOptionPressed(0));
+        button2.onClick.AddListener(() => this.HandleOptionPressed(1));
 
         decisionDialogue.text = this.currentCard.Dialogue;
-        Debug.Log("Found minor card options: " + currentCard.Options.Count);
 
         if (currentCard.Options.Count != 0)
         {

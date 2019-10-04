@@ -62,13 +62,11 @@ public class Reader
 
                 if (isPlotJson)
                 {
-                    Debug.Log("Adding plot options: " + optionList.Count);
                     result.Add(new PlotCard(state["id"], state["dialogue"], optionList));
 
                 }
                 else
                 {
-                    Debug.Log("Adding minor options: " + optionList.Count);
                     result.Add(new MinorCard(state["dialogue"], optionList));
                 }
             }

@@ -7,12 +7,13 @@ using UnityEngine;
 // Initial Dialogue implementation based on code from: 
 // https://github.com/Brackeys/Dialogue-System
 public class DialogueManager : MonoBehaviour
-{
-    public Animator animator;
-    public TextMeshProUGUI npcNameText;
-    public TextMeshProUGUI npcDialogueText;
+{ 
+    public Animator simpleDialogueViewAnimator;
+    public SimpleDialogueView simpleDialogueView;
+    public BinaryOptionDialogueView binaryOptionDialogueView;
     public static DialogueManager Instance { get; private set; }
     private Queue<string> statements = new Queue<string>();
+    private Action onEndOfStatements;
 
     private void Awake()
     {
@@ -27,12 +28,61 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void StartSimpleDialogue(Dialogue dialogue)
+    public void StartTutorialDialogue(SimpleDialogue dialogue, Action onClosed)
     {
-        animator.SetBool("IsVisible", true);
+        Action onEndOfStatements = () =>
+        {
+            simpleDialogueViewAnimator.SetBool("IsVisible", false);
+            onClosed();
+        };
+        StartSimpleDialogue(dialogue, onEndOfStatements);
+    }
+
+    public void StartBinaryOptionDialogue(BinaryOptionDialogue dialogue, Action<int> onOptionPressed)
+    {
+        
+        if (dialogue.LeadingDialogue.Statements.Length != 0)
+        {
+            StartSimpleDialogue(dialogue.LeadingDialogue, () => DisplayBinaryOptionDialogue(dialogue, onOptionPressed));
+        }
+        else
+        {
+            DisplayBinaryOptionDialogue(dialogue, onOptionPressed);
+        }
+    }
+
+
+    private void DisplayBinaryOptionDialogue(BinaryOptionDialogue dialogue, Action<int> onOptionPressed)
+    {
+        binaryOptionDialogueView.npcNameText.text = dialogue.LeadingDialogue.Name;
+        binaryOptionDialogueView.npcDialogueText.text = dialogue.Question;
+        binaryOptionDialogueView.option1Text.text = dialogue.Option1;
+        binaryOptionDialogueView.option2Text.text = dialogue.Option2;
+        binaryOptionDialogueView.option1Button.onClick.AddListener(() => onOptionPressed(0));
+        binaryOptionDialogueView.option1Button.onClick.AddListener(() => onOptionPressed(1));
+        Destroy(simpleDialogueView.viewObject);
+        binaryOptionDialogueView.viewObject.transform.position = simpleDialogueView.viewObject.transform.position;
+    }
+
+    public void DisplayNextStatement()
+    {
+        if (statements.Count == 0)
+        {
+            onEndOfStatements();
+            return;
+        }
+        var statement = statements.Dequeue();
+        StopAllCoroutines();
+        StartCoroutine(TypeSentence(statement));
+    }
+
+    private void StartSimpleDialogue(SimpleDialogue dialogue, Action onEndOfStatements)
+    {
+        this.onEndOfStatements = onEndOfStatements;
+        simpleDialogueViewAnimator.SetBool("IsVisible", true);
         statements.Clear();
 
-        npcNameText.text = dialogue.Name;
+        simpleDialogueView.npcNameText.text = dialogue.Name;
         foreach (string statement in dialogue.Statements)
         {
             statements.Enqueue(statement);
@@ -41,36 +91,13 @@ public class DialogueManager : MonoBehaviour
         DisplayNextStatement();
     }
 
-    public void StartBinaryOptionDialogue(BinaryOptionDialogue dialogue)
+    private IEnumerator TypeSentence(string statement)
     {
-        Debug.Log(dialogue.Option1 + dialogue.Option2);
-    }
-
-    public void DisplayNextStatement()
-    {
-        if (statements.Count == 0)
-        {
-            EndDialogue();
-            return;
-        }
-        var statement = statements.Dequeue();
-        StopAllCoroutines();
-        StartCoroutine(TypeSentence(statement));
-    }
-
-    IEnumerator TypeSentence(string statement)
-    {
-        npcDialogueText.text = "";
+        simpleDialogueView.npcDialogueText.text = "";
         foreach (char letter in statement.ToCharArray())
         {
-            npcDialogueText.text += letter;
+            simpleDialogueView.npcDialogueText.text += letter;
             yield return null;
         }
-    }
-
-    private void EndDialogue()
-    {
-        animator.SetBool("IsVisible", false);
-        CardManager.Instance.StartDisplayingCards();
     }
 }

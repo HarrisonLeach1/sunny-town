@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class DialogueNPC : MonoBehaviour
 {
-    public Dialogue dialogue;
+    public SimpleDialogue dialogue;
 
     private void Start()
     {
@@ -10,6 +11,7 @@ public class DialogueNPC : MonoBehaviour
     }
     public void TriggerDialogue()
     {
-        DialogueManager.Instance.StartSimpleDialogue(dialogue);
+        Action handleDialogueClosed = () => CardManager.Instance.StartDisplayingCards();
+        DialogueManager.Instance.StartTutorialDialogue(dialogue, handleDialogueClosed);
     }
 }

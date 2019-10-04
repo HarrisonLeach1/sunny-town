@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class MinorCard : Card
 {
-
     public MinorCard(string dialogue, List<Transition> options)
     {
         Dialogue = dialogue;

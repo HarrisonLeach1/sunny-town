@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [System.Serializable]
-public class Dialogue
+public class SimpleDialogue
 {
     [SerializeField]
     private string name;
@@ -11,7 +11,7 @@ public class Dialogue
     public string Name => name;
     public string[] Statements => statements;
 
-    public Dialogue(string[] statements, string name)
+    public SimpleDialogue(string[] statements, string name)
     {
         this.statements = statements;
         this.name = name;
