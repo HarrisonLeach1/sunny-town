@@ -31,6 +31,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartTutorialDialogue(SimpleDialogue dialogue, Action onClosed)
     {
+        binaryOptionViewAnimator.SetBool("IsVisible", false);
         Action onEndOfStatements = () =>
         {
             simpleDialogueViewAnimator.SetBool("IsVisible", false);
@@ -49,7 +50,7 @@ public class DialogueManager : MonoBehaviour
 
         if (dialogue.LeadingDialogue.Statements.Length != 0)
         {
-            StartSimpleDialogue(dialogue.LeadingDialogue, () => { 
+            StartSimpleDialogue(dialogue.LeadingDialogue, () => {
                 simpleDialogueViewAnimator.SetBool("IsVisible", false);
                 binaryOptionViewAnimator.SetBool("IsVisible", true);
                 binaryOptionDialogueView.Display(dialogue, handleButtonPressed);

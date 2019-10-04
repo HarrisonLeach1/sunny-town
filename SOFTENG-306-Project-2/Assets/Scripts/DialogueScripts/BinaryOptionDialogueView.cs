@@ -21,6 +21,6 @@ public class BinaryOptionDialogueView
         option1Text.text = dialogue.Option1;
         option2Text.text = dialogue.Option2;
         option1Button.onClick.AddListener(() => onOptionPressed(0));
-        option1Button.onClick.AddListener(() => onOptionPressed(1));
+        option2Button.onClick.AddListener(() => onOptionPressed(1));
     }
 }
