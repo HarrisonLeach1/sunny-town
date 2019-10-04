@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CardManager : MonoBehaviour
@@ -10,13 +11,14 @@ public class CardManager : MonoBehaviour
     [SerializeField]
     private GameObject cardPrefab;
     private GameObject displayedCard;
-    
+
     private CardFactory cardFactory;
     private DialogueManager dialogueManager;
     private DialogueMapper dialogueMapper;
     private int cardCount = 0;
 
     private Card currentCard;
+    public bool isFinalCard = false;
     private Reader reader;
 
     private void Awake()
@@ -49,7 +51,7 @@ public class CardManager : MonoBehaviour
     }
 
     private IEnumerator QueueStoryCard()
-    { 
+    {
         yield return new WaitForSeconds(3);
         dialogueManager.StartBinaryOptionDialogue(dialogueMapper.ToBinaryOptionDialogue(currentCard), HandleOptionPressed);
     }
@@ -86,6 +88,7 @@ public class CardManager : MonoBehaviour
 
         if (IsFinalCard(currentCard))
         {
+            this.isFinalCard = true;
             EndGame();
             return;
         }
@@ -180,6 +183,8 @@ public class CardManager : MonoBehaviour
     private void EndGame()
     {
         // TODO: Handle ending the game, should play a cutscene
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     private bool IsFinalCard(Card currentCard)
@@ -191,5 +196,5 @@ public class CardManager : MonoBehaviour
         }
         return false;
     }
-    
+
 }
