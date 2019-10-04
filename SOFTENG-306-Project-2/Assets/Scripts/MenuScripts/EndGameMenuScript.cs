@@ -8,13 +8,12 @@ using UnityEngine.UI;
 
 public class EndGameMenuScript : MonoBehaviour
 {
-     GameObject screen;
+     TextMeshPro gameOutcome;
 
     void Start()
     {
-        var text = screen.transform.GetChild(0).GetComponent<TextMeshPro>();
-        text.SetText("asdfasdf");
-
+        gameOutcome = GameObject.Find("GameOutcome").GetComponent<TextMeshPro>();
+        Debug.Log(gameOutcome);
     }
     public void NavigateToMainMenu()
     {
