@@ -1,6 +1,7 @@
 ﻿[
   {
     "id": "s1",
+    "name" : "Arvio",
     "dialogue": "Hi, I am Arvio. I own an oil company and I would like to inspect your land to see if it is suitable for us to build an oil right. We'll pay you.",
     "transitions": [
       {
@@ -18,6 +19,7 @@
   },
   {
     "id": "s2",
+    "name" : "Hunter Gatberg",
     "dialogue": "Hi mum! We learnt about polar bears at school today. Do you think we'll be able to go see them one day?",
     "transitions": [
       {
@@ -34,6 +36,27 @@
   },
   {
     "id": "s3",
+    "name" : "Arvio",
+    "dialogue": "You're land is perfect for oil mining. Will you let us set up? We'll pay you.",
+    "transitions": [
+      {
+        "label": "Yes",
+        "money" : 20,
+        "happiness" : -10,
+        "environment" : -20,
+        "feedback" : "feedback 3a",
+        "state": "s4"
+      },
+      {
+        "label": "No",
+        "feedback" : "feedback 3b",
+        "state": "s5"
+      }
+    ]
+  },
+  {
+    "id": "s3",
+    "name" : "Arvio",
     "dialogue": "You're land is perfect for oil mining. Will you let us set up? We'll pay you.",
     "transitions": [
       {
@@ -53,6 +76,27 @@
   },
   {
     "id": "s4",
+    "name" : "Cowboy",
+    "dialogue": "A local group of farmers are struggling because of the drought. We need as much as water as possible. Will you respect the town's water usage?",
+    "transitions": [
+      {
+        "label": "Yes",
+        "happiness" : -10,
+        "environment" : 10,
+        "feedback" : "feedback 3a",
+        "state": "s6"
+      },
+      {
+        "label": "No",
+        "happiness" : -15,
+        "feedback" : "feedback 3b",
+        "state": "s7"
+      }
+    ]
+  },
+  {
+    "id": "s5",
+    "name" : "Cowboy",
     "dialogue": "A local group of farmers are struggling because of the drought. We need as much as water as possible. Will you respect the town's water usage?",
     "transitions": [
       {
@@ -72,6 +116,28 @@
   },
   {
     "id": "s6",
+    "name" : "Hunter Gatberg",
+    "dialogue" : "Mum, I want a treehouse. All my friends have one... Can we build one?",
+    "transitions": [
+      {
+        "label": "Yes",
+        "happiness" : 5,
+        "environment" : -5,
+        "money" : -5,
+        "feedback" : "feedback 3a",
+        "state": "s8"
+      },
+      {
+        "label": "No",
+        "happiness" : -10,
+        "feedback" : "feedback 3b",
+        "state": "s9,"
+      }
+    ]
+  },
+  {
+    "id": "s7",
+    "name" : "Hunter Gatberg",
     "dialogue" : "Mum, I want a treehouse. All my friends have one... Can we build one?",
     "transitions": [
       {

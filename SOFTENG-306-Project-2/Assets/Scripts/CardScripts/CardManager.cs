@@ -53,7 +53,14 @@ public class CardManager : MonoBehaviour
     private IEnumerator QueueStoryCard()
     {
         yield return new WaitForSeconds(3);
-        dialogueManager.StartBinaryOptionDialogue(dialogueMapper.ToBinaryOptionDialogue(currentCard), HandleOptionPressed);
+        if (currentCard is PlotCard)
+        {
+            dialogueManager.StartBinaryOptionDialogue(dialogueMapper.PlotCardToBinaryOptionDialogue((PlotCard) currentCard), HandleOptionPressed);
+        }
+        else
+        {
+            dialogueManager.StartBinaryOptionDialogue(dialogueMapper.MinorCardToBinaryOptionDialogue((MinorCard) currentCard), HandleOptionPressed);
+        }
     }
 
     public void HandleOptionPressed(int decisionIndex)

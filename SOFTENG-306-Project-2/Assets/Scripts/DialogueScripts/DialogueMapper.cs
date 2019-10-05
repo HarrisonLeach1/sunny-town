@@ -1,14 +1,28 @@
 ﻿public class DialogueMapper
 {
-    public BinaryOptionDialogue ToBinaryOptionDialogue(Card card)
+    public BinaryOptionDialogue PlotCardToBinaryOptionDialogue(PlotCard plotCard)
     {
-        string[] statements = new string[2] { "Hello Mayor lovely day isn't it?", "My farm hasn't been doing so well and I was wondering if you could help me out" };
-
-        return new BinaryOptionDialogue(card.Dialogue, 
-            card.Options[0].Dialogue, 
-            card.Options[1].Dialogue, 
+        //string[] statements = new string[2] { "Hello Mayor lovely day isn't it?", "My farm hasn't been doing so well and I was wondering if you could help me out" };
+        string[] statements = new string[0];
+            
+        return new BinaryOptionDialogue(plotCard.Dialogue, 
+            plotCard.Options[0].Dialogue, 
+            plotCard.Options[1].Dialogue, 
             new SimpleDialogue(
             statements, 
-            "Old Farmer John"));
+            plotCard.Name));
+    }
+    
+    public BinaryOptionDialogue MinorCardToBinaryOptionDialogue(MinorCard minorCard)
+    {
+        //string[] statements = new string[2] { "Hello Mayor lovely day isn't it?", "My farm hasn't been doing so well and I was wondering if you could help me out" };
+        string[] statements = new string[0];
+            
+        return new BinaryOptionDialogue(minorCard.Dialogue, 
+            minorCard.Options[0].Dialogue, 
+            minorCard.Options[1].Dialogue, 
+            new SimpleDialogue(
+                statements, 
+                ""));
     }
 }

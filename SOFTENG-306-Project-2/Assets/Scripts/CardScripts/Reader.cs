@@ -62,7 +62,12 @@ public class Reader
 
                 if (isPlotJson)
                 {
-                    result.Add(new PlotCard(state["id"], state["dialogue"], optionList));
+                    String name = "";
+                    if (state["name"])
+                    {
+                        name = state["name"];
+                    }
+                    result.Add(new PlotCard(state["id"], name, state["dialogue"], optionList));
 
                 }
                 else
