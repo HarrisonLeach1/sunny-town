@@ -6,8 +6,10 @@ using UnityEngine.UI;
 [System.Serializable]
 public class BinaryOptionDialogueView
 {
+    private NPCSpriteManager npcSpriteManager = NPCSpriteManager.Instance;
     public GameObject viewObject;
     public Image image;
+    public Image npcImage;
     public TextMeshProUGUI npcNameText;
     public TextMeshProUGUI npcDialogueText;
     public Button option1Button;
@@ -20,6 +22,10 @@ public class BinaryOptionDialogueView
         option1Button.onClick.RemoveAllListeners();
         option2Button.onClick.RemoveAllListeners();
 
+        npcImage = GameObject.Find("BinaryNPCImage").GetComponent<Image>();
+        Debug.Log("Binary NPC Name: " + dialogue.PrecedingDialogue.Name);
+        npcImage.sprite = this.npcSpriteManager.getSprite(dialogue.PrecedingDialogue.Name);
+        //npcImage.sprite = this.getSprite(dialogue.PrecedingDialogue.Name);
         npcNameText.text = dialogue.PrecedingDialogue.Name;
         npcDialogueText.text = dialogue.Question;
         option1Text.text = dialogue.Option1;
@@ -27,4 +33,5 @@ public class BinaryOptionDialogueView
         option1Button.onClick.AddListener(() => onOptionPressed(0));
         option2Button.onClick.AddListener(() => onOptionPressed(1));
     }
+
 }

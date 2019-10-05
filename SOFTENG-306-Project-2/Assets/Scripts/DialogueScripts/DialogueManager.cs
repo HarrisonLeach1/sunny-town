@@ -7,7 +7,7 @@ using UnityEngine;
 // Initial Dialogue implementation based on code from: 
 // https://github.com/Brackeys/Dialogue-System
 public class DialogueManager : MonoBehaviour
-{ 
+{
     public Animator simpleDialogueViewAnimator;
     public Animator binaryOptionViewAnimator;
     public Animator sliderOptionViewAnimator;
@@ -35,7 +35,7 @@ public class DialogueManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+
     public void ShowAnimationProgress(float seconds)
     {
         animationProgressAnimator.SetBool("IsVisible", false);
@@ -70,7 +70,8 @@ public class DialogueManager : MonoBehaviour
     {
         Action onEndOfStatement = () =>
         {
-            simpleDialogueViewAnimator.SetTrigger("ToggleVisibilitySmooth");
+            simpleDialogueViewAnimator.SetBool("InstantTransition", false);
+            simpleDialogueViewAnimator.SetBool("IsVisible", false);
             onClosed();
         };
         StartSimpleDialogue(dialogue, onEndOfStatement);
@@ -81,21 +82,27 @@ public class DialogueManager : MonoBehaviour
         Action<int> handleButtonPressed = num =>
         {
             onOptionPressed(num);
-            binaryOptionViewAnimator.SetTrigger("ToggleVisibilitySmooth");
+            binaryOptionViewAnimator.SetBool("InstantTransition", false);
+            binaryOptionViewAnimator.SetBool("IsVisible", false);
         };
 
+        //TODO handle if absent preceding dialogue
         if (dialogue.PrecedingDialogue.Statements.Length != 0)
         {
-            StartSimpleDialogue(dialogue.PrecedingDialogue, () => {
+            StartSimpleDialogue(dialogue.PrecedingDialogue, () =>
+            {
                 binaryOptionDialogueView.SetContent(dialogue, handleButtonPressed);
-                simpleDialogueViewAnimator.SetTrigger("ToggleVisibilityInstant");
-                binaryOptionViewAnimator.SetTrigger("ToggleVisibilityInstant");
+                simpleDialogueViewAnimator.SetBool("InstantTransition", true);
+                simpleDialogueViewAnimator.SetBool("IsVisible", false);
+                binaryOptionViewAnimator.SetBool("InstantTransition", true);
+                binaryOptionViewAnimator.SetBool("IsVisible", true);
             });
         }
         else
         {
             binaryOptionDialogueView.SetContent(dialogue, handleButtonPressed);
-            binaryOptionViewAnimator.SetTrigger("ToggleVisibilitySmooth");
+            binaryOptionViewAnimator.SetBool("InstantTransition", false);
+            binaryOptionViewAnimator.SetBool("IsVisible", false);
         }
     }
 
@@ -104,21 +111,26 @@ public class DialogueManager : MonoBehaviour
         Action<int> handleButtonPressed = value =>
         {
             onValueConfirmed(value);
-            sliderOptionViewAnimator.SetTrigger("ToggleVisibilitySmooth");
+            sliderOptionViewAnimator.SetBool("InstantTransition", false);
+            sliderOptionViewAnimator.SetBool("IsVisible", false);
         };
 
         if (dialogue.PrecedingDialogue.Statements.Length != 0)
         {
-            StartSimpleDialogue(dialogue.PrecedingDialogue, () => {
+            StartSimpleDialogue(dialogue.PrecedingDialogue, () =>
+            {
                 sliderOptionDialogueView.SetContent(dialogue, handleButtonPressed);
-                simpleDialogueViewAnimator.SetTrigger("ToggleVisibilityInstant");
-                sliderOptionViewAnimator.SetTrigger("ToggleVisibilityInstant");
+                simpleDialogueViewAnimator.SetBool("InstantTransition", true);
+                simpleDialogueViewAnimator.SetBool("IsVisible", false);
+                sliderOptionViewAnimator.SetBool("InstantTransition", true);
+                sliderOptionViewAnimator.SetBool("IsVisible", true);
             });
         }
         else
         {
             sliderOptionDialogueView.SetContent(dialogue, handleButtonPressed);
-            sliderOptionViewAnimator.SetTrigger("ToggleVisibilitySmooth");
+            sliderOptionViewAnimator.SetBool("InstantTransition", false);
+            sliderOptionViewAnimator.SetBool("IsVisible", false);
         }
     }
 
@@ -136,8 +148,10 @@ public class DialogueManager : MonoBehaviour
 
     private void StartSimpleDialogue(SimpleDialogue dialogue, Action onEndOfStatement)
     {
-        onEndOfStatements = onEndOfStatement;
-        simpleDialogueViewAnimator.SetTrigger("ToggleVisibilitySmooth");
+        simpleDialogueView.SetContent(dialogue);
+        this.onEndOfStatements = onEndOfStatement;
+        simpleDialogueViewAnimator.SetBool("InstantTransition", false);
+        simpleDialogueViewAnimator.SetBool("IsVisible", true);
         statements.Clear();
 
         simpleDialogueView.npcNameText.text = dialogue.Name;

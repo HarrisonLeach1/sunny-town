@@ -6,8 +6,10 @@ using UnityEngine.UI;
 [System.Serializable]
 public class SliderOptionDialogueView
 {
+    private NPCSpriteManager npcSpriteManager = NPCSpriteManager.Instance;
     public GameObject viewObject;
     public Slider slider;
+    public Image npcImage;
     public TextMeshProUGUI npcNameText;
     public TextMeshProUGUI npcDialogueText;
     public TextMeshProUGUI sliderValueText;
@@ -17,6 +19,10 @@ public class SliderOptionDialogueView
     {
         confirmButton.onClick.RemoveAllListeners();
 
+        npcImage = GameObject.Find("SliderNPCImage").GetComponent<Image>();
+        Debug.Log("Slider NPC Name: " + dialogue.PrecedingDialogue.Name);
+        npcImage.sprite = this.npcSpriteManager.getSprite(dialogue.PrecedingDialogue.Name);
+        //npcImage.sprite = this.getSprite(dialogue.PrecedingDialogue.Name);
         npcNameText.text = dialogue.PrecedingDialogue.Name;
         npcDialogueText.text = dialogue.Question;
         slider.maxValue = dialogue.MaxValue;
@@ -28,4 +34,5 @@ public class SliderOptionDialogueView
             handleButtonPressed((int)Math.Round(slider.value));
         });
     }
+
 }
