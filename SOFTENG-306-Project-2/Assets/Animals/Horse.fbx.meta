@@ -1,0 +1,186 @@
+fileFormatVersion: 2
+guid: aa570476dd26cd246a5be071b881a6ef
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Back
+    100004: BackFoot.L
+    100006: BackFoot.L_end
+    100008: BackFoot.R
+    100010: BackFoot.R_end
+    100012: BackLeg.L
+    100014: BackLeg.R
+    100016: BackLowLeg.L
+    100018: BackLowLeg.L_end
+    100020: BackLowLeg.R
+    100022: BackLowLeg.R_end
+    100024: BackUpLeg.L
+    100026: BackUpLeg.R
+    100028: Body
+    100030: FrontFoot.L
+    100032: FrontFoot.L_end
+    100034: FrontFoot.R
+    100036: FrontFoot.R_end
+    100038: FrontLeg.L
+    100040: FrontLeg.R
+    100042: FrontLowLeg.L
+    100044: FrontLowLeg.L_end
+    100046: FrontLowLeg.R
+    100048: FrontLowLeg.R_end
+    100050: FrontUpLeg.L
+    100052: FrontUpLeg.R
+    100054: Head
+    100056: Head_end
+    100058: Hips
+    100060: //RootNode
+    100062: Horse
+    100064: Neck
+    100066: root
+    100068: Shoulders
+    100070: Tail1
+    100072: Tail2
+    100074: Tail3
+    100076: Tail4
+    100078: Tail4_end
+    100080: Torso
+    100082: Torso_end
+    400000: Armature
+    400002: Back
+    400004: BackFoot.L
+    400006: BackFoot.L_end
+    400008: BackFoot.R
+    400010: BackFoot.R_end
+    400012: BackLeg.L
+    400014: BackLeg.R
+    400016: BackLowLeg.L
+    400018: BackLowLeg.L_end
+    400020: BackLowLeg.R
+    400022: BackLowLeg.R_end
+    400024: BackUpLeg.L
+    400026: BackUpLeg.R
+    400028: Body
+    400030: FrontFoot.L
+    400032: FrontFoot.L_end
+    400034: FrontFoot.R
+    400036: FrontFoot.R_end
+    400038: FrontLeg.L
+    400040: FrontLeg.R
+    400042: FrontLowLeg.L
+    400044: FrontLowLeg.L_end
+    400046: FrontLowLeg.R
+    400048: FrontLowLeg.R_end
+    400050: FrontUpLeg.L
+    400052: FrontUpLeg.R
+    400054: Head
+    400056: Head_end
+    400058: Hips
+    400060: Horse
+    400062: //RootNode
+    400064: Neck
+    400066: root
+    400068: Shoulders
+    400070: Tail1
+    400072: Tail2
+    400074: Tail3
+    400076: Tail4
+    400078: Tail4_end
+    400080: Torso
+    400082: Torso_end
+    2100000: Material.003
+    2100002: Material.006
+    4300000: Horse
+    7400000: Armature|Death
+    7400002: Armature|Idle
+    7400004: Armature|Jump
+    7400006: Armature|Run
+    7400008: Armature|Walk
+    7400010: Armature|WalkSlow
+    9500000: //RootNode
+    13700000: Horse
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
