@@ -89,6 +89,11 @@ public class CardManager : MonoBehaviour
         StartCoroutine(AnimateDecision());
     }
 
+    public void DisplayProgressAnimation()
+    {
+        dialogueManager.ShowAnimationProgress(2);
+    }
+    
     private IEnumerator AnimateDecision()
     {
         yield return new WaitForSeconds(3);
