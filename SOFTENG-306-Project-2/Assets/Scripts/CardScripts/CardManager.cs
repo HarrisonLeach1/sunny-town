@@ -141,7 +141,17 @@ public class CardManager : MonoBehaviour
         if (currentCard.Options.Count != 0)
         {
             text1.text = currentCard.Options[0].Dialogue;
-            text2.text = currentCard.Options[1].Dialogue;
+
+            //Currently hard coded unary/binary cards to have two options.
+            if (currentCard.Options.Count >= 2)
+            {
+                text2.text = currentCard.Options[1].Dialogue;
+            }
+            else
+            {
+                text2.text = "";
+            }
+            
         }
         else
         {
