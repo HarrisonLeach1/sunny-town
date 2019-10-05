@@ -67,6 +67,10 @@ public class MetricManager : MonoBehaviour
         StartCoroutine(AnimateMetric(happiness, PrevPopHappiness, PopHappiness));
         StartCoroutine(AnimateMetric(environment, PrevEnvHealth, EnvHealth));
 
+        PrevGold = Gold;
+        PrevEnvHealth = EnvHealth;
+        PrevPopHappiness = PopHappiness;
+        
         var parentObject = GameObject.Find("MetricPanel");
         metricsView.transform.SetParent(parentObject.transform, false);
     }
@@ -97,13 +101,15 @@ public class MetricManager : MonoBehaviour
             {
                 tempValue++;
             }
-            else
+            else if (tempValue > newValue)
             {
                 tempValue--;
             }
 
-            metricBar.value = (float) tempValue / 100;
+            metricBar.value = (float) tempValue / MAX_VALUE;
         }
+
+        metricBar.value = (float) newValue / MAX_VALUE;
     }
 
     public void UpdatePopHappiness(int value)
