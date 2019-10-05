@@ -1,4 +1,6 @@
-﻿public class DialogueMapper
+﻿using System;
+
+public class DialogueMapper
 {
     public BinaryOptionDialogue PlotCardToBinaryOptionDialogue(PlotCard plotCard)
     {
@@ -34,5 +36,16 @@
     public SimpleDialogue FeedbackToDialogue(string feedback)
     {
         return new SimpleDialogue(new string[] { feedback }, "Board of Advisors");
+    }
+
+    public SliderOptionDialogue SliderCardToSliderOptionDialogue(SliderCard currentCard)
+    {
+        return new SliderOptionDialogue(
+            currentCard.Question,
+            currentCard.MaxValue,
+            currentCard.MinValue,
+            new SimpleDialogue(
+                currentCard.PrecedingDialogue,
+                currentCard.Name));
     }
 }

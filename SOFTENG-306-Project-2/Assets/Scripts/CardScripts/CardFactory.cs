@@ -8,14 +8,17 @@ public class CardFactory
 {
     private Reader reader;
     private PlotCard currentPlotCard;
-    private List<MinorCard> minorCards;
+    private List<Card> minorCards;
 
     public CardFactory()
     {
         reader = new Reader();
         currentPlotCard = reader.RootState;
         minorCards = reader.AllMinorStates;
-        minorCards.Randomize();
+        // TODO : Remove this, it is just for testing
+        minorCards = new List<Card>(minorCards.Where(x => x is SliderCard).ToList<Card>());
+
+        //minorCards.Randomize();
     }
 
     public Card GetNewCard(string cardDescriptor)
@@ -33,7 +36,10 @@ public class CardFactory
                     minorCards = reader.AllMinorStates;
                     minorCards.Randomize();
                 }
-                
+
+                // TODO : Remove this, it is just for testing
+                minorCards = new List<Card>(minorCards.Where(x => x is SliderCard).ToList<Card>());
+
                 var minorCard = minorCards[0];
                 minorCards.Remove(minorCard);
                 return minorCard;

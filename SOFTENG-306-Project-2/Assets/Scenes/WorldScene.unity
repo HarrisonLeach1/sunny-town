@@ -19588,7 +19588,7 @@ MonoBehaviour:
     npcNameText: {fileID: 1481245225}
     npcDialogueText: {fileID: 1481245224}
     sliderValueText: {fileID: 1481245223}
-    confirmButton: {fileID: 0}
+    confirmButton: {fileID: 1770337670}
 --- !u!4 &1309353381
 Transform:
   m_ObjectHideFlags: 0
@@ -21941,7 +21941,7 @@ PrefabInstance:
     - target: {fileID: 4133667631727024156, guid: 708225c1148d3884e99abda984806505,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1330
+      value: -1303
       objectReference: {fileID: 0}
     - target: {fileID: 4133667631727024156, guid: 708225c1148d3884e99abda984806505,
         type: 3}
@@ -21982,6 +21982,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133667631727024153, guid: 708225c1148d3884e99abda984806505,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8506005682726905431, guid: 708225c1148d3884e99abda984806505,
         type: 3}
@@ -26269,6 +26274,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c69fd66ac98ac7e458b9b289bd91a74f, type: 3}
+--- !u!114 &1770337670 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4319824327071496498, guid: 708225c1148d3884e99abda984806505,
+    type: 3}
+  m_PrefabInstance: {fileID: 1481245221}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1773339336
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,13 +10,13 @@ public class Reader
 
     public PlotCard RootState { get; private set; }
     public List<PlotCard> AllStoryStates { get; private set; }
-    public List<MinorCard> AllMinorStates { get; private set; }
+    public List<Card> AllMinorStates { get; private set; }
 
     public Reader()
     {
 
         AllStoryStates = this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/plotStates.json", true).Cast<PlotCard>().ToList();
-        AllMinorStates = this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/minorStates.json", false).Cast<MinorCard>().ToList(); ;
+        AllMinorStates = this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/minorStates.json", false);
         RootState = this.AllStoryStates[0];
     }
 
@@ -68,7 +68,15 @@ public class Reader
                     }
                     
                     MetricsModifier metricsModifier = new MetricsModifier(popHappinessModifier, goldModifier, envHealthModifier);
-                    optionList.Add(new Transition(transition["label"], transition["feedback"], metricsModifier, transition["state"]));
+
+                    if (state["sliderType"])
+                    {
+                        optionList.Add(new SliderTransition(transition["feedback"], metricsModifier, state["threshold"]));
+                    } 
+                    else
+                    {
+                        optionList.Add(new Transition(transition["feedback"], metricsModifier, transition["label"], transition["state"]));
+                    }
                 }
 
                 if (isPlotJson)
@@ -80,6 +88,11 @@ public class Reader
                     }
                     result.Add(new PlotCard(state["id"], precedingDialogue.ToArray<string>(), name, state["question"], optionList));
 
+                }
+                else if (state["sliderType"])
+                {
+                    result.Add(new SliderCard(precedingDialogue.ToArray<string>(), state["name"], state["question"], optionList.Cast<SliderTransition>().ToList(), state["maxValue"], state["minValue"]));
+                    Debug.Log("made slider type" + precedingDialogue.ToArray<string>() + state["name"] + state["question"] + optionList.Cast<SliderTransition>().ToList() + state["maxValue"]+ state["minValue"]);
                 }
                 else
                 {

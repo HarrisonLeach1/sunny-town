@@ -52,7 +52,15 @@ public class CardManager : MonoBehaviour
             StopCoroutine(cardWaitingRoutine);
             currentlyProcessingCard = true;
             currentCard = cardFactory.GetNewCard("minor");
-            dialogueManager.StartBinaryOptionDialogue(dialogueMapper.MinorCardToBinaryOptionDialogue((MinorCard)currentCard), HandleOptionPressed);
+
+            if (currentCard is MinorCard)
+            {
+                dialogueManager.StartBinaryOptionDialogue(dialogueMapper.MinorCardToBinaryOptionDialogue((MinorCard)currentCard), HandleOptionPressed);
+            }
+            else
+            {
+                dialogueManager.StartSliderOptionDialogue(dialogueMapper.SliderCardToSliderOptionDialogue((SliderCard)currentCard), HandleOptionPressed);
+            }
         }
         else
         {
@@ -68,9 +76,9 @@ public class CardManager : MonoBehaviour
         cardWaitingRoutine = StartCoroutine(QueueCard());
     }
 
-    public void HandleOptionPressed(int decisionIndex)
+    public void HandleOptionPressed(int decisionValue)
     {
-        currentCard.HandleDecision(decisionIndex);
+        currentCard.HandleDecision(decisionValue);
         StartCoroutine(AnimateDecision());
     }
 
@@ -101,9 +109,13 @@ public class CardManager : MonoBehaviour
         {
             dialogueManager.StartBinaryOptionDialogue(dialogueMapper.PlotCardToBinaryOptionDialogue((PlotCard)currentCard), HandleOptionPressed);
         }
-        else
+        else if (currentCard is MinorCard)
         {
             dialogueManager.StartBinaryOptionDialogue(dialogueMapper.MinorCardToBinaryOptionDialogue((MinorCard)currentCard), HandleOptionPressed);
+        }
+        else
+        {
+            dialogueManager.StartSliderOptionDialogue(dialogueMapper.SliderCardToSliderOptionDialogue((SliderCard)currentCard), HandleOptionPressed);
         }
     }
 

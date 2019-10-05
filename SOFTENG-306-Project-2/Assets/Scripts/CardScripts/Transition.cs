@@ -4,12 +4,11 @@ using UnityEngine;
 public class Transition
 {
     private string nextStateId;
-
     public string Dialogue { get; set; }
     public string Feedback { get; set; }
     public string NextStateId { get => nextStateId; set => nextStateId = value; }
     public MetricsModifier MetricsModifier { get; set; }
-    public Transition(string dialogue, string feedback, MetricsModifier metricsmodifier, string nextStateId)
+    public Transition(string feedback, MetricsModifier metricsmodifier, string dialogue = "", string nextStateId = "")
     {
         this.Dialogue = dialogue;
         this.Feedback = feedback;

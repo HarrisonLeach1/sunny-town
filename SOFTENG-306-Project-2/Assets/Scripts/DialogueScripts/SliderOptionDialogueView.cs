@@ -17,8 +17,10 @@ public class SliderOptionDialogueView
     {
         npcNameText.text = dialogue.PrecedingDialogue.Name;
         npcDialogueText.text = dialogue.Question;
-        slider.maxValue = dialogue.MinValue;
-        slider.minValue = dialogue.MaxValue;
+        slider.maxValue = dialogue.MaxValue;
+        slider.minValue = dialogue.MinValue;
+        slider.value = ( dialogue.MaxValue - dialogue.MinValue ) / 2;
+        sliderValueText.text = ((int)slider.value).ToString();
         confirmButton.onClick.AddListener(() => handleButtonPressed((int) Math.Round(slider.value)));
     }
 }
