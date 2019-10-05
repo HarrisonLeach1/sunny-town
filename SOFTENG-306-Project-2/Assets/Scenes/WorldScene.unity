@@ -5176,7 +5176,7 @@ GameObject:
   - component: {fileID: 318230335}
   - component: {fileID: 318230334}
   m_Layer: 5
-  m_Name: NPCImage
+  m_Name: BinaryNPCImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11483,7 +11483,7 @@ GameObject:
   - component: {fileID: 758871061}
   - component: {fileID: 758871060}
   m_Layer: 5
-  m_Name: NPCImage
+  m_Name: SimpleNPCImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17779,7 +17779,7 @@ GameObject:
   - component: {fileID: 1174444661}
   - component: {fileID: 1174444660}
   m_Layer: 5
-  m_Name: NPCImage
+  m_Name: SliderNPCImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
