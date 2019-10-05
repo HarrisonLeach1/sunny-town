@@ -1,6 +1,8 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MetricManager : MonoBehaviour
 {
@@ -49,16 +51,39 @@ public class MetricManager : MonoBehaviour
         Destroy(metricsView);
         metricsView = Instantiate(metricPrefab, new Vector3(0, 0, 0), Quaternion.identity);
 
-        var money = metricsView.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        var happiness = metricsView.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        var environment = metricsView.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+        var money = metricsView.transform.GetChild(0).GetComponent<Slider>();
+        var happiness = metricsView.transform.GetChild(1).GetComponent<Slider>();
+        var environment = metricsView.transform.GetChild(2).GetComponent<Slider>();
 
-        money.text = Gold.ToString();
-        happiness.text = PopHappiness.ToString();
-        environment.text = EnvHealth.ToString();
+        //money.value = (float)Gold/100;
+        //happiness.value = (float)PopHappiness/100;
+        //environment.value = (float)EnvHealth/100;
+
+        StartCoroutine(AnimateMetric(money, 5, Gold));
+        StartCoroutine(AnimateMetric(happiness, 5, PopHappiness));
+        StartCoroutine(AnimateMetric(environment, 5, EnvHealth));
 
         var parentObject = GameObject.Find("MetricPanel");
         metricsView.transform.SetParent(parentObject.transform, false);
+    }
+    
+    IEnumerator AnimateMetric (Slider metricBar, int oldValue, int newValue)
+    {
+        int tempValue = oldValue;
+        while (tempValue != newValue)
+        {
+            yield return null;
+            if (tempValue < newValue)
+            {
+                tempValue++;
+            }
+            else
+            {
+                tempValue++;
+            }
+
+            metricBar.value = (float) tempValue / 100;
+        }
     }
 
     public void UpdatePopHappiness(int value)
