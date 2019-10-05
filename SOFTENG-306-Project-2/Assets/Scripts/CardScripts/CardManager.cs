@@ -75,7 +75,7 @@ public class CardManager : MonoBehaviour
         yield return new WaitForSeconds(3);
         ShowFeedback();
     }
-
+   
     private void ShowFeedback()
     {
         dialogueManager.StartExplanatoryDialogue(dialogueMapper.FeedbackToDialogue(currentCard.Feedback), HandleFeedbackContinued);

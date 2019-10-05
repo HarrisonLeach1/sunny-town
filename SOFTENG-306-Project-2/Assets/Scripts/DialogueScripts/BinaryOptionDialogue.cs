@@ -4,7 +4,7 @@
 public class BinaryOptionDialogue
 {
     [SerializeField]
-    private SimpleDialogue leadingDialogue;
+    private SimpleDialogue precedingDialogue;
     [SerializeField]
     private string question;
     [SerializeField]
@@ -14,11 +14,11 @@ public class BinaryOptionDialogue
     public string Question => question; 
     public string Option1 => option1;
     public string Option2 => option2;
-    public SimpleDialogue LeadingDialogue => leadingDialogue;
+    public SimpleDialogue PrecedingDialogue => precedingDialogue;
 
     public BinaryOptionDialogue(string question, string option1, string option2, SimpleDialogue dialogue)
     {
-        this.leadingDialogue = dialogue;
+        this.precedingDialogue = dialogue;
         this.question = question;
         this.option1 = option1;
         this.option2 = option2;

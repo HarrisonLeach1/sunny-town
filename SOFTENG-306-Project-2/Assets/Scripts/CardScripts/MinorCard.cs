@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class MinorCard : Card
 {
-    public MinorCard(string dialogue, List<Transition> options)
+    public MinorCard(string[] precedingDialogue, string dialogue, List<Transition> options)
     {
-        Dialogue = dialogue;
+        PrecedingDialogue = precedingDialogue;
+        Question = dialogue;
         Options = options;
     }
 

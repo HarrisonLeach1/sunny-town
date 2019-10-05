@@ -31,6 +31,17 @@ public class Reader
             JSONArray stateArray = SimpleJSON.JSON.Parse(json).AsArray;
             foreach (JSONNode state in stateArray)
             {
+                List<string> precedingDialogue = new List<string>();
+
+                var foundPrecedingDialogue = state["precedingDialogue"].AsArray;
+                if (foundPrecedingDialogue.Count != 0)
+                {
+                    foreach (JSONNode dialogue in state["precedingDialogue"])
+                    {
+                        precedingDialogue.Add(dialogue.ToString());
+                    }
+                }
+
                 List<Transition> optionList = new List<Transition>();
 
                 JSONNode transitions = isPlotJson ? state["transitions"].AsArray : state["options"];
@@ -67,12 +78,12 @@ public class Reader
                     {
                         name = state["name"];
                     }
-                    result.Add(new PlotCard(state["id"], name, state["dialogue"], optionList));
+                    result.Add(new PlotCard(state["id"], precedingDialogue.ToArray<string>(), name, state["question"], optionList));
 
                 }
                 else
                 {
-                    result.Add(new MinorCard(state["dialogue"], optionList));
+                    result.Add(new MinorCard(precedingDialogue.ToArray<string>(), state["question"], optionList));
                 }
             }
 

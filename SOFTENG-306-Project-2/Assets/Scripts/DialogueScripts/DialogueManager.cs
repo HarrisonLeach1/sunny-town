@@ -53,9 +53,9 @@ public class DialogueManager : MonoBehaviour
             binaryOptionViewAnimator.SetTrigger("ToggleVisibilitySmooth");
         };
 
-        if (dialogue.LeadingDialogue.Statements.Length != 0)
+        if (dialogue.PrecedingDialogue.Statements.Length != 0)
         {
-            StartSimpleDialogue(dialogue.LeadingDialogue, () => {
+            StartSimpleDialogue(dialogue.PrecedingDialogue, () => {
                 binaryOptionDialogueView.SetContent(dialogue, handleButtonPressed);
                 simpleDialogueViewAnimator.SetTrigger("ToggleVisibilityInstant");
                 binaryOptionViewAnimator.SetTrigger("ToggleVisibilityInstant");

@@ -7,17 +7,12 @@ public class PlotCard : Card
     public string Id { get; set; }
     public string Name { get; set; }
     public string NextStateId { get; private set; }
-    public PlotCard(string id, string name, string dialogue, List<Transition> options)
+    public PlotCard(string id, string[] precedingDialogue, string name, string question, List<Transition> options)
     {
+        PrecedingDialogue = precedingDialogue;
         Id = id;
         Name = name;
-        Dialogue = dialogue;
-        Options = options;
-    }
-
-    public PlotCard(string dialogue, List<Transition> options)
-    {
-        Dialogue = dialogue;
+        Question = question;
         Options = options;
     }
 
