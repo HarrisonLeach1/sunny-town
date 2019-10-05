@@ -162,7 +162,14 @@ public class CardManager : MonoBehaviour
         if (card.Transitions.Count != 0)
         {
             text1.text = card.Transitions[0].Dialogue;
-            text2.text = card.Transitions[1].Dialogue;
+            if (card.Transitions.Count == 2)
+            {
+                text2.text = card.Transitions[1].Dialogue;
+            }
+            else
+            {
+                text2.text = "";
+            }
         }
         else
         {
