@@ -9,12 +9,9 @@ public class CardManager : MonoBehaviour
 {
     public static CardManager Instance { get; private set; }
 
-    [SerializeField]
-    private GameObject cardPrefab;
-    private GameObject displayedCard;
-
     private CardFactory cardFactory;
     private DialogueManager dialogueManager;
+    private MetricManager metricManager;
     private DialogueMapper dialogueMapper;
     private int cardCount = 0;
 
@@ -42,6 +39,7 @@ public class CardManager : MonoBehaviour
         currentCard = reader.RootState;
         cardFactory = new CardFactory();
         dialogueManager = DialogueManager.Instance;
+        metricManager = MetricManager.Instance;
         dialogueMapper = new DialogueMapper();
     }
 
@@ -49,19 +47,6 @@ public class CardManager : MonoBehaviour
     {
         currentCard = cardFactory.GetNewCard("story");
         StartCoroutine(QueueCard());
-    }
-    
-    private IEnumerator QueueCard()
-    {
-        yield return new WaitForSeconds(3);
-        if (currentCard is PlotCard)
-        {
-            dialogueManager.StartBinaryOptionDialogue(dialogueMapper.PlotCardToBinaryOptionDialogue((PlotCard) currentCard), HandleOptionPressed);
-        }
-        else
-        {
-            dialogueManager.StartBinaryOptionDialogue(dialogueMapper.MinorCardToBinaryOptionDialogue((MinorCard) currentCard), HandleOptionPressed);
-        }
     }
 
     public void HandleOptionPressed(int decisionIndex)
@@ -73,6 +58,7 @@ public class CardManager : MonoBehaviour
     private IEnumerator AnimateDecision()
     {
         yield return new WaitForSeconds(3);
+        metricManager.RenderMetrics();
         ShowFeedback();
     }
    
@@ -85,6 +71,19 @@ public class CardManager : MonoBehaviour
     {
         UpdateCard();
         StartCoroutine(QueueCard());
+    }
+
+    private IEnumerator QueueCard()
+    {
+        yield return new WaitForSeconds(3);
+        if (currentCard is PlotCard)
+        {
+            dialogueManager.StartBinaryOptionDialogue(dialogueMapper.PlotCardToBinaryOptionDialogue((PlotCard)currentCard), HandleOptionPressed);
+        }
+        else
+        {
+            dialogueManager.StartBinaryOptionDialogue(dialogueMapper.MinorCardToBinaryOptionDialogue((MinorCard)currentCard), HandleOptionPressed);
+        }
     }
 
     private void UpdateCard()
@@ -106,15 +105,6 @@ public class CardManager : MonoBehaviour
         {
             currentCard = cardFactory.GetNewCard("minor");
         }
-    }
-
-    IEnumerator wait(int seconds, Button button1)
-    {
-        yield return new WaitForSeconds(seconds);
-        var text1 = button1.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        button1.gameObject.SetActive(true);
-        button1.onClick.AddListener(() => this.UpdateCard());
-        text1.text = "continue";
     }
 
     private void EndGame()
