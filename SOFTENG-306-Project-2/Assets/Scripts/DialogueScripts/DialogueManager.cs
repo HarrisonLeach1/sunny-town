@@ -10,8 +10,10 @@ public class DialogueManager : MonoBehaviour
 { 
     public Animator simpleDialogueViewAnimator;
     public Animator binaryOptionViewAnimator;
+    public Animator sliderOptionViewAnimator;
     public SimpleDialogueView simpleDialogueView;
     public BinaryOptionDialogueView binaryOptionDialogueView;
+    public SliderOptionDialogueView sliderOptionDialogueView;
     public static DialogueManager Instance { get; private set; }
     private Queue<string> statements = new Queue<string>();
     private Action onEndOfStatements;
@@ -64,6 +66,29 @@ public class DialogueManager : MonoBehaviour
         {
             binaryOptionDialogueView.SetContent(dialogue, handleButtonPressed);
             binaryOptionViewAnimator.SetTrigger("ToggleVisibilitySmooth");
+        }
+    }
+
+    public void StartSliderOptionDialogue(SliderOptionDialogue dialogue, Action<int> onValueConfirmed)
+    {
+        Action<int> handleButtonPressed = value =>
+        {
+            onValueConfirmed(value);
+            binaryOptionViewAnimator.SetTrigger("ToggleVisibilitySmooth");
+        };
+
+        if (dialogue.PrecedingDialogue.Statements.Length != 0)
+        {
+            StartSimpleDialogue(dialogue.PrecedingDialogue, () => {
+                sliderOptionDialogueView.SetContent(dialogue, handleButtonPressed);
+                simpleDialogueViewAnimator.SetTrigger("ToggleVisibilityInstant");
+                sliderOptionViewAnimator.SetTrigger("ToggleVisibilityInstant");
+            });
+        }
+        else
+        {
+            sliderOptionDialogueView.SetContent(dialogue, handleButtonPressed);
+            sliderOptionViewAnimator.SetTrigger("ToggleVisibilitySmooth");
         }
     }
 
