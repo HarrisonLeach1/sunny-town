@@ -5,7 +5,7 @@
     "transitions": [
       {
         "label": "Accept",
-        "gold" : 25,
+        "money" : 25,
         "feedback" : "feedback 2a",
         "state": "s2"
       },

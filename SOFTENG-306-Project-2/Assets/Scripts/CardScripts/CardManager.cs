@@ -123,6 +123,9 @@ public class CardManager : MonoBehaviour
             currentCard = cardFactory.GetNewCard("story");
             RenderStoryCard();
             MetricManager.Instance.RenderMetrics();
+            Debug.Log(MetricManager.Instance.PopHappiness);
+            Debug.Log(MetricManager.Instance.Gold);
+            Debug.Log(MetricManager.Instance.EnvHealth);
         }
         else
         {

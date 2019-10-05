@@ -180,7 +180,7 @@
                 "label": "Dig for more fossil fuels",
                 "money": -10,
                 "happiness": -5,
-                "environment": -10,
+                "environment": -10, 
                 "feedback": "feedback 1a"
             }
         ]
