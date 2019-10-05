@@ -93,7 +93,7 @@ public class CardManager : MonoBehaviour
 
         if (IsFinalCard(currentCard))
         {
-            this.isFinalCard = true;
+            isFinalCard = true;
             EndGame();
             return;
         }
@@ -115,81 +115,6 @@ public class CardManager : MonoBehaviour
         button1.gameObject.SetActive(true);
         button1.onClick.AddListener(() => this.UpdateCard());
         text1.text = "continue";
-    }
-
-    // BIG TODO: refactor classes to remove this duplicate logic. Just keeping like this for now, to keep consistent for merging.
-    public void RenderStoryCard()
-    {
-        Destroy(displayedCard);
-        displayedCard = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-
-        var decisionDialogue = displayedCard.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        var button1 = displayedCard.transform.GetChild(1).GetComponent<Button>();
-        var button2 = displayedCard.transform.GetChild(2).GetComponent<Button>();
-        var text1 = button1.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        var text2 = button2.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-
-        button1.onClick.AddListener(() => this.HandleOptionPressed(0));
-        button2.onClick.AddListener(() => this.HandleOptionPressed(1));
-
-        decisionDialogue.text = currentCard.Dialogue;
-
-        if (currentCard.Options.Count != 0)
-        {
-            text1.text = currentCard.Options[0].Dialogue;
-
-            //Currently hard coded unary/binary cards to have two options.
-            if (currentCard.Options.Count >= 2)
-            {
-                text2.text = currentCard.Options[1].Dialogue;
-            }
-            else
-            {
-                text2.text = "";
-            }
-            
-        }
-        else
-        {
-            text1.text = "Game Over";
-            text2.text = "";
-        }
-
-        var parentObject = GameObject.Find("CardPanel");
-
-        displayedCard.transform.SetParent(parentObject.transform, false);
-    }
-
-    public void RenderMinorCard()
-    {
-        Destroy(displayedCard);
-        displayedCard = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-
-        var decisionDialogue = displayedCard.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        var button1 = displayedCard.transform.GetChild(1).GetComponent<Button>();
-        var button2 = displayedCard.transform.GetChild(2).GetComponent<Button>();
-        var text1 = button1.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        var text2 = button2.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-
-        button1.onClick.AddListener(() => this.HandleOptionPressed(0));
-        button2.onClick.AddListener(() => this.HandleOptionPressed(1));
-
-        decisionDialogue.text = this.currentCard.Dialogue;
-
-        if (currentCard.Options.Count != 0)
-        {
-            text1.text = currentCard.Options[0].Dialogue;
-            text2.text = currentCard.Options[1].Dialogue;
-        }
-        else
-        {
-            text1.text = "Game Over";
-            text2.text = "";
-        }
-
-        var parentObject = GameObject.Find("CardPanel");
-
-        displayedCard.transform.SetParent(parentObject.transform, false);
     }
 
     private void EndGame()
