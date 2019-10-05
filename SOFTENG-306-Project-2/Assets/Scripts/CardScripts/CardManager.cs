@@ -19,6 +19,7 @@ public class CardManager : MonoBehaviour
     private int cardCount = 0;
 
     private Card currentCard;
+    public bool isFinalCard = false;
     private Reader reader;
 
     private void Awake()
@@ -111,6 +112,7 @@ public class CardManager : MonoBehaviour
 
         if (IsFinalCard(currentCard))
         {
+            this.isFinalCard = true;
             EndGame();
             return;
         }

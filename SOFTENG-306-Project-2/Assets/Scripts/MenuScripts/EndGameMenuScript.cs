@@ -8,12 +8,19 @@ using UnityEngine.UI;
 
 public class EndGameMenuScript : MonoBehaviour
 {
-     TextMeshPro gameOutcome;
 
-    void Start()
+    public GameObject winEndScreen;
+    public GameObject lossEndScreen;
+    
+    void Awake()
     {
-        gameOutcome = GameObject.Find("GameOutcome").GetComponent<TextMeshPro>();
-        Debug.Log(gameOutcome);
+        winEndScreen = GameObject.FindGameObjectWithTag("WinEndScreen");
+        lossEndScreen = GameObject.FindGameObjectWithTag("LossEndScreen");
+        var gameEnded = CardManager.Instance.isFinalCard;
+        Debug.Log("Game ended:" + gameEnded);
+        winEndScreen.SetActive(gameEnded);
+        lossEndScreen.SetActive(!gameEnded);
+        
     }
     public void NavigateToMainMenu()
     {
