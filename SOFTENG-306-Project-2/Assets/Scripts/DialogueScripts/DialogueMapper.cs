@@ -2,8 +2,7 @@
 {
     public BinaryOptionDialogue PlotCardToBinaryOptionDialogue(PlotCard plotCard)
     {
-        //string[] statements = new string[2] { "Hello Mayor lovely day isn't it?", "My farm hasn't been doing so well and I was wondering if you could help me out" };
-        string[] statements = new string[0];
+        string[] statements = new string[2] { "Hello Mayor lovely day isn't it?", "My farm hasn't been doing so well and I was wondering if you could help me out" };
 
         if (plotCard.Options.Count > 1)
         {

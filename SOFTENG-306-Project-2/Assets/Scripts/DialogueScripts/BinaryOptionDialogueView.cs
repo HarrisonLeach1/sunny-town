@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class BinaryOptionDialogueView
 {
     public GameObject viewObject;
+    public Image image;
     public TextMeshProUGUI npcNameText;
     public TextMeshProUGUI npcDialogueText;
     public Button option1Button;

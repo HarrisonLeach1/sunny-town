@@ -31,10 +31,9 @@ public class DialogueManager : MonoBehaviour
 
     public void StartTutorialDialogue(SimpleDialogue dialogue, Action onClosed)
     {
-        binaryOptionViewAnimator.SetBool("IsVisible", false);
         Action onEndOfStatements = () =>
         {
-            simpleDialogueViewAnimator.SetBool("IsVisible", false);
+            simpleDialogueViewAnimator.SetTrigger("ToggleVisibilitySmooth");
             onClosed();
         };
         StartSimpleDialogue(dialogue, onEndOfStatements);
@@ -45,21 +44,21 @@ public class DialogueManager : MonoBehaviour
         Action<int> handleButtonPressed = num =>
         {
             onOptionPressed(num);
-            binaryOptionViewAnimator.SetBool("IsVisible", false);
+            binaryOptionViewAnimator.SetTrigger("ToggleVisibilitySmooth");
         };
 
         if (dialogue.LeadingDialogue.Statements.Length != 0)
         {
             StartSimpleDialogue(dialogue.LeadingDialogue, () => {
-                simpleDialogueViewAnimator.SetBool("IsVisible", false);
-                binaryOptionViewAnimator.SetBool("IsVisible", true);
                 binaryOptionDialogueView.Display(dialogue, handleButtonPressed);
+                simpleDialogueViewAnimator.SetTrigger("ToggleVisibilityInstant");
+                binaryOptionViewAnimator.SetTrigger("ToggleVisibilityInstant");
             });
         }
         else
         {
             binaryOptionDialogueView.Display(dialogue, handleButtonPressed);
-            binaryOptionViewAnimator.SetBool("IsVisible", true);
+            binaryOptionViewAnimator.SetTrigger("ToggleVisibilitySmooth");
         }
     }
 
@@ -78,7 +77,7 @@ public class DialogueManager : MonoBehaviour
     private void StartSimpleDialogue(SimpleDialogue dialogue, Action onEndOfStatements)
     {
         this.onEndOfStatements = onEndOfStatements;
-        simpleDialogueViewAnimator.SetBool("IsVisible", true);
+        simpleDialogueViewAnimator.SetTrigger("ToggleVisibilitySmooth");
         statements.Clear();
 
         simpleDialogueView.npcNameText.text = dialogue.Name;
