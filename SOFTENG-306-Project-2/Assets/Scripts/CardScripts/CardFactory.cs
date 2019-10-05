@@ -8,14 +8,17 @@ public class CardFactory
 {
     private Reader reader;
     private PlotCard currentPlotCard;
-    private List<MinorCard> minorCards;
+    private List<Card> minorCards;
 
     public CardFactory()
     {
         reader = new Reader();
         currentPlotCard = reader.RootState;
         minorCards = reader.AllMinorStates;
-        minorCards.Randomize();
+        // TODO : Remove this, it is just for testing
+        minorCards = new List<Card>(minorCards.Where(x => x is SliderCard).ToList<Card>());
+
+        //minorCards.Randomize();
     }
 
     public Card GetNewCard(string cardDescriptor)
@@ -24,10 +27,7 @@ public class CardFactory
         switch (cardDescriptor)
         {
             case ("story"):
-                // TODO: add some error handling here, because right now we are assuming NextState has been set
-                // also the users of this class are unaware that state should be changed on the current card
-                string nextStateId = currentPlotCard.NextStateId ?? currentPlotCard.Id;
-                Debug.Log("Next State: " + nextStateId);
+                string nextStateId = string.IsNullOrEmpty(currentPlotCard.NextStateId) ? currentPlotCard.Id : currentPlotCard.NextStateId;
                 currentPlotCard = reader.AllStoryStates.Single(s => s.Id.Equals(nextStateId));
                 return currentPlotCard;
             case ("minor"):
@@ -36,7 +36,10 @@ public class CardFactory
                     minorCards = reader.AllMinorStates;
                     minorCards.Randomize();
                 }
-                
+
+                // TODO : Remove this, it is just for testing
+                minorCards = new List<Card>(minorCards.Where(x => x is SliderCard).ToList<Card>());
+
                 var minorCard = minorCards[0];
                 minorCards.Remove(minorCard);
                 return minorCard;

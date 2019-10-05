@@ -3,26 +3,26 @@ using System.IO;
 using System;
 using SimpleJSON;
 using UnityEngine;
+using System.Linq;
 
 public class Reader
 {
 
     public PlotCard RootState { get; private set; }
     public List<PlotCard> AllStoryStates { get; private set; }
-    public List<MinorCard> AllMinorStates { get; private set; }
+    public List<Card> AllMinorStates { get; private set; }
 
     public Reader()
     {
 
-        this.ParseStoryJson(Directory.GetCurrentDirectory() + "/Assets/json/plotStates.json");
-        this.ParseMinorCardJson(Directory.GetCurrentDirectory() + "/Assets/json/minorStates.json");
+        AllStoryStates = this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/plotStates.json", true).Cast<PlotCard>().ToList();
+        AllMinorStates = this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/minorStates.json", false);
         RootState = this.AllStoryStates[0];
     }
 
-    private void ParseStoryJson(string filePath)
+    private List<Card> ParseJson(string filePath, bool isPlotJson)
     {
-        List<PlotCard> result = new List<PlotCard>();
-
+        List<Card> result = new List<Card>();
 
         using (StreamReader r = new StreamReader(filePath))
         {
@@ -31,8 +31,22 @@ public class Reader
             JSONArray stateArray = SimpleJSON.JSON.Parse(json).AsArray;
             foreach (JSONNode state in stateArray)
             {
-                List<Transition> transitionList = new List<Transition>();
-                foreach (JSONNode transition in state["transitions"].AsArray)
+                List<string> precedingDialogue = new List<string>();
+
+                var foundPrecedingDialogue = state["precedingDialogue"].AsArray;
+                if (foundPrecedingDialogue.Count != 0)
+                {
+                    foreach (JSONNode dialogue in state["precedingDialogue"])
+                    {
+                        precedingDialogue.Add(dialogue);
+                    }
+                }
+
+                List<Transition> optionList = new List<Transition>();
+
+                JSONNode transitions = isPlotJson ? state["transitions"].AsArray : state["options"];
+
+                foreach (JSONNode transition in transitions)
                 {
                     int popHappinessModifier = 0;
                     int goldModifier = 0;
@@ -54,61 +68,40 @@ public class Reader
                     }
                     
                     MetricsModifier metricsModifier = new MetricsModifier(popHappinessModifier, goldModifier, envHealthModifier);
-                    transitionList.Add(new Transition(transition["label"], transition["feedback"], metricsModifier, transition["state"]));
+
+                    if (state["sliderType"])
+                    {
+                        optionList.Add(new SliderTransition(transition["feedback"], metricsModifier, state["threshold"]));
+                    } 
+                    else
+                    {
+                        optionList.Add(new Transition(transition["feedback"], metricsModifier, transition["label"], transition["state"]));
+                    }
                 }
 
-                result.Add(new PlotCard(state["id"], state["dialogue"], transitionList));
-            }
-
-        }
-
-        this.AllStoryStates = result;
-    }
-
-    private void ParseMinorCardJson(string filePath)
-    {
-        List<MinorCard> result = new List<MinorCard>();
-
-
-        using (StreamReader r = new StreamReader(filePath))
-        {
-            string json = r.ReadToEnd();
-
-            JSONArray decisionArray = SimpleJSON.JSON.Parse(json).AsArray;
-            foreach (JSONNode decision in decisionArray)
-            {
-                List<Option> optionList = new List<Option>();
-                foreach (JSONNode option in decision["options"].AsArray)
+                if (isPlotJson)
                 {
-                    int popHappinessModifier = 0;
-                    int goldModifier = 0;
-                    int envHealthModifier = 0;
-                    
-                    if (option["happiness"])
+                    String name = "";
+                    if (state["name"])
                     {
-                        popHappinessModifier = option["happiness"];
+                        name = state["name"];
                     }
+                    result.Add(new PlotCard(state["id"], precedingDialogue.ToArray<string>(), name, state["question"], optionList));
 
-                    if (option["money"])
-                    {
-                        goldModifier = option["money"];
-                    }
-
-                    if (option["environment"])
-                    {
-                        envHealthModifier = option["environment"];
-                    }
-                    
-                    MetricsModifier metricsModifier = new MetricsModifier(popHappinessModifier, goldModifier, envHealthModifier);
-                    optionList.Add(new Option(option["label"], option["feedback"], metricsModifier));
                 }
-
-                result.Add(new MinorCard(decision["dialogue"], optionList));
+                else if (state["sliderType"])
+                {
+                    result.Add(new SliderCard(precedingDialogue.ToArray<string>(), state["name"], state["question"], optionList.Cast<SliderTransition>().ToList(), state["maxValue"], state["minValue"]));
+                    Debug.Log("made slider type" + precedingDialogue.ToArray<string>() + state["name"] + state["question"] + optionList.Cast<SliderTransition>().ToList() + state["maxValue"]+ state["minValue"]);
+                }
+                else
+                {
+                    result.Add(new MinorCard(precedingDialogue.ToArray<string>(), state["question"], optionList));
+                }
             }
 
         }
 
-        this.AllMinorStates = result;
+        return result;
     }
-
 }

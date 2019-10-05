@@ -1,17 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinorCard : Card {
-    public List<Option> Options { get; private set; }
-
-    public MinorCard(string dialogue, List<Option> options)
+public class MinorCard : Card
+{
+    public MinorCard(string[] precedingDialogue, string dialogue, List<Transition> options)
     {
-        Dialogue = dialogue;
+        PrecedingDialogue = precedingDialogue;
+        Question = dialogue;
         Options = options;
     }
 
     public override void HandleDecision(int decisionIndex)
     {
-        Debug.Log("You made decision: " + decisionIndex);
+        if (Options.Count >= decisionIndex + 1)
+        {
+            Options[decisionIndex].MetricsModifier.Modify();
+            Feedback = Options[decisionIndex].Feedback;
+        }
     }
 }

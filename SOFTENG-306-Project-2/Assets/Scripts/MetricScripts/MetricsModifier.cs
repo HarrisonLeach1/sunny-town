@@ -9,12 +9,10 @@ public class MetricsModifier
         this.PopHappinessModifier = popHappinessModifier;
         this.GoldModifier = goldModifier;
         this.EnvHealthModifier = envHealthModifier;
-        Debug.Log("created" + EnvHealthModifier + PopHappinessModifier + GoldModifier);
 
     }
 
     public void Modify() {
-        Debug.Log("Modifying" + EnvHealthModifier + PopHappinessModifier + GoldModifier);
         MetricManager.Instance.UpdatePopHappiness(PopHappinessModifier);
         MetricManager.Instance.UpdateGold(GoldModifier);
         MetricManager.Instance.UpdateEnvHealth(EnvHealthModifier);

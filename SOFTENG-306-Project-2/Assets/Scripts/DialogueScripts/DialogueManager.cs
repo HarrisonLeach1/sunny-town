@@ -7,66 +7,115 @@ using UnityEngine;
 // Initial Dialogue implementation based on code from: 
 // https://github.com/Brackeys/Dialogue-System
 public class DialogueManager : MonoBehaviour
-{
-    public Animator animator;
-    public TextMeshProUGUI npcNameText;
-    public TextMeshProUGUI npcDialogueText;
+{ 
+    public Animator simpleDialogueViewAnimator;
+    public Animator binaryOptionViewAnimator;
+    public Animator sliderOptionViewAnimator;
+    public SimpleDialogueView simpleDialogueView;
+    public BinaryOptionDialogueView binaryOptionDialogueView;
+    public SliderOptionDialogueView sliderOptionDialogueView;
     public static DialogueManager Instance { get; private set; }
     private Queue<string> statements = new Queue<string>();
+    private Action onEndOfStatements;
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
     }
-        
-    public void StartDialogue(Dialogue dialogue)
+
+    /// <summary>
+    /// Displays purely explanatory dialogue. This means the only interactivity available is
+    /// pressing the "Continue" button. i.e. no decisions to be made.
+    /// </summary>
+    /// <param name="dialogue"></param>
+    /// <param name="onClosed"></param>
+    public void StartExplanatoryDialogue(SimpleDialogue dialogue, Action onClosed)
     {
-        animator.SetBool("IsVisible", true);
-        Debug.Log("Started: " + dialogue.name);
-        statements.Clear();
-
-        npcNameText.text = dialogue.name;
-        foreach (string statement in dialogue.statements)
+        Action onEndOfStatements = () =>
         {
-            statements.Enqueue(statement);
-        }
+            simpleDialogueViewAnimator.SetTrigger("ToggleVisibilitySmooth");
+            onClosed();
+        };
+        StartSimpleDialogue(dialogue, onEndOfStatements);
+    }
 
-        DisplayNextStatement();
+    public void StartBinaryOptionDialogue(BinaryOptionDialogue dialogue, Action<int> onOptionPressed)
+    {
+        Action<int> handleButtonPressed = num =>
+        {
+            onOptionPressed(num);
+            binaryOptionViewAnimator.SetTrigger("ToggleVisibilitySmooth");
+        };
+
+        if (dialogue.PrecedingDialogue.Statements.Length != 0)
+        {
+            StartSimpleDialogue(dialogue.PrecedingDialogue, () => {
+                binaryOptionDialogueView.SetContent(dialogue, handleButtonPressed);
+                simpleDialogueViewAnimator.SetTrigger("ToggleVisibilityInstant");
+                binaryOptionViewAnimator.SetTrigger("ToggleVisibilityInstant");
+            });
+        }
+        else
+        {
+            binaryOptionDialogueView.SetContent(dialogue, handleButtonPressed);
+            binaryOptionViewAnimator.SetTrigger("ToggleVisibilitySmooth");
+        }
+    }
+
+    public void StartSliderOptionDialogue(SliderOptionDialogue dialogue, Action<int> onValueConfirmed)
+    {
+        Action<int> handleButtonPressed = value =>
+        {
+            onValueConfirmed(value);
+            sliderOptionViewAnimator.SetTrigger("ToggleVisibilitySmooth");
+        };
+
+        if (dialogue.PrecedingDialogue.Statements.Length != 0)
+        {
+            StartSimpleDialogue(dialogue.PrecedingDialogue, () => {
+                sliderOptionDialogueView.SetContent(dialogue, handleButtonPressed);
+                simpleDialogueViewAnimator.SetTrigger("ToggleVisibilityInstant");
+                sliderOptionViewAnimator.SetTrigger("ToggleVisibilityInstant");
+            });
+        }
+        else
+        {
+            sliderOptionDialogueView.SetContent(dialogue, handleButtonPressed);
+            sliderOptionViewAnimator.SetTrigger("ToggleVisibilitySmooth");
+        }
     }
 
     public void DisplayNextStatement()
     {
         if (statements.Count == 0)
         {
-            EndDialogue();
+            onEndOfStatements();
             return;
         }
         var statement = statements.Dequeue();
         StopAllCoroutines();
-        StartCoroutine(TypeSentence(statement));
+        StartCoroutine(simpleDialogueView.TypeSentence(statement));
     }
 
-    IEnumerator TypeSentence (string statement)
+    private void StartSimpleDialogue(SimpleDialogue dialogue, Action onEndOfStatements)
     {
-        npcDialogueText.text = "";
-        foreach(char letter in statement.ToCharArray())
+        this.onEndOfStatements = onEndOfStatements;
+        simpleDialogueViewAnimator.SetTrigger("ToggleVisibilitySmooth");
+        statements.Clear();
+
+        simpleDialogueView.npcNameText.text = dialogue.Name;
+        foreach (string statement in dialogue.Statements)
         {
-            npcDialogueText.text += letter;
-            yield return null;
+            statements.Enqueue(statement);
         }
-    }
 
-    private void EndDialogue()
-    {
-        animator.SetBool("IsVisible", false);
-        CardManager.Instance.StartDisplayingCards();
+        DisplayNextStatement();
     }
 }
