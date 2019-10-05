@@ -123,6 +123,9 @@ public class CardManager : MonoBehaviour
             currentCard = cardFactory.GetNewCard("story");
             RenderStoryCard();
             MetricManager.Instance.RenderMetrics();
+            Debug.Log(MetricManager.Instance.PopHappiness);
+            Debug.Log(MetricManager.Instance.Gold);
+            Debug.Log(MetricManager.Instance.EnvHealth);
         }
         else
         {
@@ -162,7 +165,14 @@ public class CardManager : MonoBehaviour
         if (card.Transitions.Count != 0)
         {
             text1.text = card.Transitions[0].Dialogue;
-            text2.text = card.Transitions[1].Dialogue;
+            if (card.Transitions.Count == 2)
+            {
+                text2.text = card.Transitions[1].Dialogue;
+            }
+            else
+            {
+                text2.text = "";
+            }
         }
         else
         {

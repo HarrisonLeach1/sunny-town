@@ -1,16 +1,15 @@
 ﻿[
     {
-        "dialogue": "Minor decision 1",
+        "dialogue": "The council wants to ban all vehicles for 1 week. Do you allow this to happen?",
         "options": [
             {
-                "label": "option 1",
-                "money": 3,
-                "happiness": 4,
-                "environment": -100,
-                "feedback": "feedback 1a"
+                "label": "Yes",
+                "happiness": -15,
+                "environment": 10,
+                "feedback": "The town is not happy. On the flip side, the air has become cleaner."
             },
             {
-                "label": "option 2",
+                "label": "No",
                 "money": 3,
                 "happiness": 4,
                 "environment": 5,
@@ -19,17 +18,49 @@
         ]
     },
     {
-        "dialogue": "Minor decision 2",
+        "dialogue": "People want public transport to be free for the upcoming holiday. Do you allow this to happen?",
         "options": [
             {
-                "label": "option 1 2",
-                "money": 3,
-                "happiness": 4,
+                "label": "Yes",
+                "money": -15,
+                "happiness": 10,
+                "environment": 5,
+                "feedback": "The people are happy and there were less cars on the road too."
+            },
+            {
+                "label": "No",
+                "happiness": -5,
+                "feedback": "feedback 1a"
+            }
+        ]
+    },
+    {
+        "dialogue": "The council wants to train teachers to educate children about climate change. Do you allow this to happen?",
+        "options": [
+            {
+                "label": "Yes",
+                "money": -10,
                 "environment": 5,
                 "feedback": "feedback 1a"
             },
             {
-                "label": "option 2 2",
+                "label": "No",
+                "feedback": "feedback 1a"
+            }
+        ]
+    },
+    {
+        "dialogue": "Environmentalists want funding to plant trees. Do you approve?",
+        "options": [
+            {
+                "label": "Yes",
+                "money": -10,
+                "happiness": 5,
+                "environment": 5,
+                "feedback": "feedback 1a"
+            },
+            {
+                "label": "No",
                 "money": 3,
                 "happiness": 4,
                 "environment": 5,
@@ -38,58 +69,118 @@
         ]
     },
     {
-        "dialogue": "Minor decision 3",
+        "dialogue": "A rumour spreads around the town that climate change is fake. What do you do?",
         "options": [
             {
-                "label": "option 1 3",
-                "money": 3,
-                "happiness": 4,
-                "environment": 5,
+                "label": "Ignore",
+                "happiness": -10,
+                "environment": -15,
                 "feedback": "feedback 1a"
             },
             {
-                "label": "option 2 3",
-                "money": 3,
-                "happiness": 4,
+                "label": "Educate them",
+                "money": -15,
+                "happiness": -5,
                 "environment": 5,
                 "feedback": "feedback 1a"
             }
         ]
     },
     {
-        "dialogue": "Minor decision 4",
+        "dialogue": "The CEO of an oil rig wants to pay you to set up in your town. Do you approve?",
         "options": [
             {
-                "label": "option 1 4",
-                "money": 3,
-                "happiness": 4,
-                "environment": 5,
+                "label": "Yes",
+                "happiness": -20,
+                "environment": -20,
+                "money" : 25,
                 "feedback": "feedback 1a"
             },
             {
-                "label": "option 2 4",
-                "money": 3,
-                "happiness": 4,
-                "environment": 5,
+                "label": "No",
                 "feedback": "feedback 1a"
             }
         ]
     },
     {
-        "dialogue": "Minor decision 5",
+        "dialogue": "The neighbouring town has a shortage of timber. Do you want to sell your trees to them?",
         "options": [
             {
-                "label": "option 1 5",
-                "money": 3,
-                "happiness": 4,
+                "label": "Yes",
+                "happiness": -5,
+                "environment": -10,
+                "money" : 10,
+                "feedback": "feedback 1a"
+            },
+            {
+                "label": "No",
+                "feedback": "feedback 1a"
+            }
+        ]
+    },
+    {
+        "dialogue": "The townspeople want to have a bonfire for a festive occasion. Do you allow this?",
+        "options": [
+            {
+                "label": "Yes",
+                "happiness": 20,
+                "environment": -15,
+                "money" : -5,
+                "feedback": "feedback 1a"
+            },
+            {
+                "label": "No",
+                "happiness": -10,
+                "feedback": "feedback 1a"
+            }
+        ]
+    },
+    {
+        "dialogue": "We are spending more fossil fuels than we import. Do we restrict the number of cars on the road?",
+        "options": [
+            {
+                "label": "Yes",
+                "happiness": -10,
+                "feedback": "feedback 1a"
+            },
+            {
+                "label": "No",
+                "money": -15,
+                "feedback": "feedback 1a"
+            }
+        ]
+    },
+    {
+        "dialogue": "There are still too many cars on the road. Do you want to increase the petrol tax?",
+        "options": [
+            {
+                "label": "Yes",
+                "happiness": -10,
+                "environment": 5,
+                "money" : 10,
+                "feedback": "feedback 1a"
+            },
+            {
+                "label": "No",
+                "environment": -10,
+                "feedback": "feedback 1a"
+            }
+        ]
+    },
+    {
+        "dialogue": "The town is using more energy than we produce. What do you do?",
+        "options": [
+            {
+                "label": "Invest in solar panels",
+                "money" : -20,
                 "environment": 5,
                 "feedback": "feedback 1a"
             },
             {
-                "label": "option 2 5",
-                "money": 3,
-                "happiness": 4,
-                "environment": 5,
+                "label": "Dig for more fossil fuels",
+                "money": -10,
+                "happiness": -5,
+                "environment": -10, 
                 "feedback": "feedback 1a"
             }
         ]
