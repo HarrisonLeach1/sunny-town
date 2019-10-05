@@ -55,26 +55,6 @@
     ]
   },
   {
-    "id": "s3",
-    "name" : "Arvio",
-    "dialogue": "You're land is perfect for oil mining. Will you let us set up? We'll pay you.",
-    "transitions": [
-      {
-        "label": "Yes",
-        "money" : 20,
-        "happiness" : -10,
-        "environment" : -20,
-        "feedback" : "feedback 3a",
-        "state": "s4"
-      },
-      {
-        "label": "No",
-        "feedback" : "feedback 3b",
-        "state": "s5"
-      }
-    ]
-  },
-  {
     "id": "s4",
     "name" : "Cowboy",
     "dialogue": "A local group of farmers are struggling because of the drought. We need as much as water as possible. Will you respect the town's water usage?",

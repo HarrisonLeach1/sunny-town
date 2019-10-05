@@ -49,7 +49,7 @@ public class CardManager : MonoBehaviour
         currentCard = cardFactory.GetNewCard("story");
         StartCoroutine(QueueStoryCard());
     }
-
+    
     private IEnumerator QueueStoryCard()
     {
         yield return new WaitForSeconds(3);
@@ -99,8 +99,7 @@ public class CardManager : MonoBehaviour
             EndGame();
             return;
         }
-
-        // TODO: Add randomness here
+        
         if (cardCount % 3 == 0)
         {
             currentCard = cardFactory.GetNewCard("story");
