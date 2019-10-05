@@ -38,7 +38,7 @@ public class Reader
                 {
                     foreach (JSONNode dialogue in state["precedingDialogue"])
                     {
-                        precedingDialogue.Add(dialogue.ToString());
+                        precedingDialogue.Add(dialogue);
                     }
                 }
 
