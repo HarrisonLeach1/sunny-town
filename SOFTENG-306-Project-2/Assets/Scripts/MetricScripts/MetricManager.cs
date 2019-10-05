@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MetricManager : MonoBehaviour
 {
@@ -71,6 +72,9 @@ public class MetricManager : MonoBehaviour
         if (this.PopHappiness < MIN_VALUE)
         {
             this.PopHappiness = MIN_VALUE;
+            
+            //TODO: Probably will change later, this changes scenes to end game screen upon losing mats
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 
@@ -85,6 +89,9 @@ public class MetricManager : MonoBehaviour
         if (this.Gold < MIN_VALUE)
         {
             this.Gold = MIN_VALUE;
+            
+            //TODO: Probably will change later, this changes scenes to end game screen upon losing mats
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 
@@ -99,6 +106,9 @@ public class MetricManager : MonoBehaviour
         if (this.EnvHealth < MIN_VALUE)
         {
             this.EnvHealth = MIN_VALUE;
+            
+            //TODO: Probably will change later, this changes scenes to end game screen upon losing mats
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 }

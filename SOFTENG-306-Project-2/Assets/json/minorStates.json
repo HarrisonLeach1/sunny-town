@@ -6,7 +6,7 @@
                 "label": "option 1",
                 "money": 3,
                 "happiness": 4,
-                "environment": 5,
+                "environment": -100,
                 "feedback": "feedback 1a"
             },
             {
