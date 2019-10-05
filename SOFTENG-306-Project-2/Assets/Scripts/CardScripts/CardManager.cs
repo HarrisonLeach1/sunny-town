@@ -18,6 +18,8 @@ public class CardManager : MonoBehaviour
     private Card currentCard;
     public bool isFinalCard = false;
     private Reader reader;
+    private bool currentlyProcessingCard = true;
+    private Coroutine cardWaitingRoutine;
 
     private void Awake()
     {
@@ -43,10 +45,28 @@ public class CardManager : MonoBehaviour
         dialogueMapper = new DialogueMapper();
     }
 
+    public void DisplayMinorCard()
+    {
+        if (!currentlyProcessingCard)
+        {
+            Debug.Log("Successfully selected minor card from world!");
+            StopCoroutine(cardWaitingRoutine);
+            currentlyProcessingCard = true;
+            currentCard = cardFactory.GetNewCard("minor");
+            dialogueManager.StartBinaryOptionDialogue(dialogueMapper.MinorCardToBinaryOptionDialogue((MinorCard)currentCard), HandleOptionPressed);
+        }
+        else
+        {
+            Debug.Log("Cant select exclamation mark while processing card!");
+            // TODO: DisplayWarningDialogue();
+        }
+    }
+
     public void StartDisplayingCards()
     {
         currentCard = cardFactory.GetNewCard("story");
-        StartCoroutine(QueueCard());
+        currentlyProcessingCard = false;
+        cardWaitingRoutine = StartCoroutine(QueueCard());
     }
 
     public void HandleOptionPressed(int decisionIndex)
@@ -70,12 +90,14 @@ public class CardManager : MonoBehaviour
     private void HandleFeedbackContinued()
     {
         UpdateCard();
-        StartCoroutine(QueueCard());
+        currentlyProcessingCard = false;
+        cardWaitingRoutine = StartCoroutine(QueueCard());
     }
 
     private IEnumerator QueueCard()
     {
         yield return new WaitForSeconds(3);
+        currentlyProcessingCard = true;
         if (currentCard is PlotCard)
         {
             dialogueManager.StartBinaryOptionDialogue(dialogueMapper.PlotCardToBinaryOptionDialogue((PlotCard)currentCard), HandleOptionPressed);
