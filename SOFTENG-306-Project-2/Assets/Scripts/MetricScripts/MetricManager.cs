@@ -49,15 +49,12 @@ public class MetricManager : MonoBehaviour
 
     private void Start()
     {
+        metricsView = Instantiate(metricPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         RenderMetrics();
     }
 
     public void RenderMetrics()
     {
-        Debug.Log("Render metrics called: " + PopHappiness + Gold + EnvHealth);
-        Destroy(metricsView);
-        metricsView = Instantiate(metricPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-
         var money = metricsView.transform.GetChild(0).GetComponent<Slider>();
         var happiness = metricsView.transform.GetChild(1).GetComponent<Slider>();
         var environment = metricsView.transform.GetChild(2).GetComponent<Slider>();
@@ -76,33 +73,25 @@ public class MetricManager : MonoBehaviour
     
     IEnumerator AnimateMetric (Slider metricBar, int oldValue, int newValue)
     {
-        TextMeshProUGUI metricChangeText = metricBar.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        if (oldValue < newValue)
-        {
-            metricChangeText.SetText(("+" + (newValue - oldValue)));
-            metricChangeText.color = new Color(0, 255, 0, 255);
-        }
-        else if (newValue < oldValue)
-        {
-            metricChangeText.SetText(("-" + (oldValue - newValue)));
-            metricChangeText.color = new Color(255, 0, 0, 255);
-        }
-        else
-        {
-            metricChangeText.SetText("");
-            metricChangeText.color = new Color(255, 255, 255, 255);
-        }
+        Image metricBarFill = metricBar.transform.GetChild(1).GetChild(0).GetComponent<Image>();
+        
         int tempValue = oldValue;
+        if (tempValue == newValue)
+        {
+            metricBarFill.color = new Color32(75, 75, 75, 255);
+        }
         while (tempValue != newValue)
         {
             yield return null;
             if (tempValue < newValue)
             {
                 tempValue++;
+                metricBarFill.color = Color.green;
             }
             else if (tempValue > newValue)
             {
                 tempValue--;
+                metricBarFill.color = Color.red;
             }
 
             metricBar.value = (float) tempValue / MAX_VALUE;
@@ -124,12 +113,16 @@ public class MetricManager : MonoBehaviour
             this.PopHappiness = MIN_VALUE;
             
             //TODO: Probably will change later, this changes scenes to end game screen upon losing mats
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            
+            SimpleDialogue endGameDialogue = new SimpleDialogue(new string[1]{"Lost pop happiness"}, "");
+            CardManager.Instance.DisplayEndDialogue(endGameDialogue);
         }
     }
 
     public void UpdateGold(int value)
     {
+        Debug.Log("called update gold: " + value);
+
         this.Gold += value;
         if (this.Gold > MAX_VALUE)
         {
@@ -141,7 +134,8 @@ public class MetricManager : MonoBehaviour
             this.Gold = MIN_VALUE;
             
             //TODO: Probably will change later, this changes scenes to end game screen upon losing mats
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SimpleDialogue endGameDialogue = new SimpleDialogue(new string[1]{"Lost gold"}, "");
+            CardManager.Instance.DisplayEndDialogue(endGameDialogue);
         }
     }
 
@@ -158,7 +152,9 @@ public class MetricManager : MonoBehaviour
             this.EnvHealth = MIN_VALUE;
             
             //TODO: Probably will change later, this changes scenes to end game screen upon losing mats
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SimpleDialogue endGameDialogue = new SimpleDialogue(new string[1]{"Lost env health"}, "");
+
+            CardManager.Instance.DisplayEndDialogue(endGameDialogue);
         }
     }
 }

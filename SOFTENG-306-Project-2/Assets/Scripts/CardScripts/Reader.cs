@@ -9,12 +9,17 @@ public class Reader
 {
 
     public PlotCard RootState { get; private set; }
+    public List<SimpleDialogue> AllExpositionDialogues { get; private set; }
     public List<PlotCard> AllStoryStates { get; private set; }
     public List<Card> AllMinorStates { get; private set; }
 
     public Reader()
     {
-
+//        AllExpositionStates =
+//            this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/expositionStates.json", true)
+//                .Cast<PlotCard>().ToList();
+        AllExpositionDialogues =
+            this.ParseExpositionJson(Directory.GetCurrentDirectory() + "/Assets/json/expositionStates.json");
         AllStoryStates = this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/plotStates.json", true).Cast<PlotCard>().ToList();
         AllMinorStates = this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/minorStates.json", false);
         RootState = this.AllStoryStates[0];
@@ -100,6 +105,32 @@ public class Reader
                 }
             }
 
+        }
+
+        return result;
+    }
+
+    private List<SimpleDialogue> ParseExpositionJson(string filePath)
+    {
+        List<SimpleDialogue> result = new List<SimpleDialogue>();
+
+        using (StreamReader r = new StreamReader(filePath))
+        {
+            string json = r.ReadToEnd();
+            
+            JSONArray expositionArray = SimpleJSON.JSON.Parse(json).AsArray;
+            foreach (JSONNode exposition in expositionArray)
+            {
+                List<string> dialogueList = new List<string>();
+                
+                foreach (JSONNode dialogue in exposition["dialogue"])
+                {
+                    dialogueList.Add(dialogue);
+                }
+
+                SimpleDialogue sd = new SimpleDialogue(dialogueList.ToArray(), exposition["name"]);
+                result.Add(sd);
+            }
         }
 
         return result;

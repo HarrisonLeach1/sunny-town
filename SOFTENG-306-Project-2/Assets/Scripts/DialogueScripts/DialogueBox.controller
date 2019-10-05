@@ -9,14 +9,14 @@ AnimatorController:
   m_Name: DialogueBox
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: ToggleVisibilitySmooth
-    m_Type: 9
+  - m_Name: IsVisible
+    m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: ToggleVisibilityInstant
-    m_Type: 9
+  - m_Name: InstantTransition
+    m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -42,8 +42,11 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsVisible
+    m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: ToggleVisibilityInstant
+    m_ConditionEvent: InstantTransition
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102866003564487154}
@@ -67,8 +70,11 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: ToggleVisibilitySmooth
+  - m_ConditionMode: 2
+    m_ConditionEvent: InstantTransition
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsVisible
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102866003564487154}
@@ -93,7 +99,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: ToggleVisibilitySmooth
+    m_ConditionEvent: IsVisible
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: InstantTransition
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102224363227020056}
@@ -118,7 +127,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: ToggleVisibilityInstant
+    m_ConditionEvent: IsVisible
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: InstantTransition
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102224363227020056}

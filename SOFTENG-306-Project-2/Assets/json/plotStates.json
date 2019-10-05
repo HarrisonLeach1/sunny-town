@@ -12,19 +12,20 @@
             {
                 "label": "Oil could help the towns economy grow. It's a deal",
                 "money": 25,
-                "feedback": "feedback 2a",
+                "feedback": "Arvio brings his crew and begins inspecting your land",
                 "state": "s2"
             },
             {
                 "label": "No deal, my town is great as it is thank you",
-                "feedback": "feedback 2b",
-                "state": "s2"
+                "feedback": "Arvio leaves with a mischievous look on his face",
+                "state": "s2a"
             }
         ]
     },
     {
         "id": "s2",
         "name": "Hunter Gatberg",
+        "precedingDialogue" : ["[Ring Ring... Ring Ring...]"],
         "question": "Hi mum! We learnt about polar bears at school today. Do you think we'll be able to go see them one day?",
         "transitions": [
             {
@@ -33,68 +34,112 @@
                 "state": "s3"
             },
             {
-                "label": "I'm busy",
+                "label": "Maybe... I'm busy, Hunter",
                 "feedback": "Hunter will remember this.",
                 "state": "s3"
             }
         ]
     },
     {
+        "id": "s2a",
+        "name": "Hunter Gatberg",
+        "precedingDialogue" : ["[Ring Ring... Ring Ring...]"],
+        "question": "Hi mum! We learnt about polar bears at school today. Do you think we'll be able to go see them one day?",
+        "transitions": [
+            {
+                "label": "Yes",
+                "feedback": "Hunter will remember this.",
+                "state": "s3a"
+            },
+            {
+                "label": "Maybe... I'm busy, Hunter",
+                "feedback": "Hunter will remember this.",
+                "state": "s3a"
+            }
+        ]
+    },
+    {
         "id": "s3",
         "name": "Arvio",
-        "question": "You're land is perfect for oil mining. Will you let us set up? We'll pay you.",
+        "precedingDialogue" : ["Mrs. Gatberg, your land is perfect for oil mining."],
+        "question": "Will you let us set up an oil rig? We'll pay you.",
         "transitions": [
             {
                 "label": "Yes",
                 "money": 20,
                 "happiness": -10,
                 "environment": -20,
-                "feedback": "feedback 3a",
+                "feedback": "Arvio begins constructing an oil mine. The people of the town are upset at this news. However, we get paid a great amount of money.",
+                "state": "s4"
+            },
+            {
+                "label": "No, go away Arvio.",
+                "feedback": "Arvio leaves you alone",
+                "state": "s5"
+            }
+        ]
+    },
+    {
+        "id": "s3a",
+        "name": "Arvio",
+        "precedingDialogue" : ["Arvio has inspected the land without your consent"],
+        "question": "Your land is perfect for oil mining. Will you let us set up? We'll pay you.",
+        "transitions": [
+            {
+                "label": "Yes",
+                "money": 20,
+                "happiness": -10,
+                "environment": -20,
+                "feedback": "Arvio begins constructing an oil mine. The people of the town are upset at this news. However, we get paid a great amount of money.",
                 "state": "s4"
             },
             {
                 "label": "No",
-                "feedback": "feedback 3b",
+                "feedback": "Arvio leaves you alone",
                 "state": "s5"
             }
         ]
     },
     {
         "id": "s4",
-        "name": "Cowboy",
-        "question": "A local group of farmers are struggling because of the drought. We need as much as water as possible. Will you respect the town's water usage?",
+        "name": "Cowboy Willy",
+        "precedingDialogue" : ["A local group of farmers are struggling because of the drought. ",
+        "We need as much water as possible"],
+        "question": "Will you restrict the town's water usage?",
         "transitions": [
             {
                 "label": "Yes",
                 "happiness": -10,
                 "environment": 10,
-                "feedback": "feedback 3a",
+                "feedback": "Cowboy Willy is happy with your decision. The townspeople are slightly upset.",
                 "state": "s6"
             },
             {
                 "label": "No",
                 "happiness": -15,
-                "feedback": "feedback 3b",
+                "feedback": "Cowboy Willy is upset at your response",
                 "state": "s7"
             }
         ]
     },
     {
         "id": "s5",
-        "name": "Cowboy",
-        "question": "A local group of farmers are struggling because of the drought. We need as much as water as possible. Will you respect the town's water usage?",
+        "name": "Cowboy Willy",
+        "precedingDialogue" : ["A local group of farmers are struggling because of the drought. ",
+            "We need as much water as possible"],
+        "question": "Will you restrict the town's water usage?",
         "transitions": [
             {
                 "label": "Yes",
                 "happiness": -10,
                 "environment": 10,
-                "feedback": "feedback 3a",
+                "feedback": "Cowboy Willy is happy with your decision. The townspeople are slightly upset.",
                 "state": "s6"
             },
             {
                 "label": "No",
                 "happiness": -15,
-                "feedback": "feedback 3b",
+                "feedback": "Cowboy Willy is upset at your response",
                 "state": "s7"
             }
         ]
@@ -102,20 +147,21 @@
     {
         "id": "s6",
         "name": "Hunter Gatberg",
-        "question": "Mum, I want a treehouse. All my friends have one... Can we build one?",
+        "precedingDialogue" : ["Mum, I want a treehouse", "All my friends have one..."],
+        "question": "Can we build a treehouse?",
         "transitions": [
             {
                 "label": "Yes",
                 "happiness": 5,
                 "environment": -5,
                 "money": -5,
-                "feedback": "feedback 3a",
+                "feedback": "Hunter will remember this",
                 "state": "s8"
             },
             {
                 "label": "No",
                 "happiness": -10,
-                "feedback": "feedback 3b",
+                "feedback": "Hunter will remember this",
                 "state": "s9,"
             }
         ]
@@ -123,26 +169,28 @@
     {
         "id": "s7",
         "name": "Hunter Gatberg",
-        "question": "Mum, I want a treehouse. All my friends have one... Can we build one?",
+        "precedingDialogue" : ["Mum, I want a treehouse", "All my friends have one..."],
+        "question": "Can we build a treehouse?",
         "transitions": [
             {
                 "label": "Yes",
                 "happiness": 5,
                 "environment": -5,
                 "money": -5,
-                "feedback": "feedback 3a",
+                "feedback": "Hunter will remember this",
                 "state": "s8"
             },
             {
                 "label": "No",
                 "happiness": -10,
-                "feedback": "feedback 3b",
+                "feedback": "Hunter will remember this",
                 "state": "s9,"
             }
         ]
     },
     {
         "id": "s8",
+        "precedingDialogue" : [],
         "question": "Your town has grown!",
         "transitions": [
             {
@@ -153,6 +201,7 @@
     },
     {
         "id": "s9",
+        "precedingDialogue" : [],
         "question": "Your town has grown!",
         "transitions": [
             {
