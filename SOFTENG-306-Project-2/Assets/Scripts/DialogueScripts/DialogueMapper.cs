@@ -2,7 +2,8 @@
 {
     public BinaryOptionDialogue PlotCardToBinaryOptionDialogue(PlotCard plotCard)
     {
-        string[] statements = new string[2] { "Hello Mayor lovely day isn't it?", "My farm hasn't been doing so well and I was wondering if you could help me out" };
+        //string[] statements = new string[2] { "Hello Mayor lovely day isn't it?", "My farm hasn't been doing so well and I was wondering if you could help me out" };
+        string[] statements = new string[0];
 
         if (plotCard.Options.Count > 1)
         {
@@ -33,5 +34,10 @@
             new SimpleDialogue(
                 statements, 
                 ""));
+    }
+
+    public SimpleDialogue FeedbackToDialogue(string feedback)
+    {
+        return new SimpleDialogue(new string[] { feedback }, "Board of Advisors");
     }
 }

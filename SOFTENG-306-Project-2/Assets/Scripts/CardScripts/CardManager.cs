@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -47,10 +48,10 @@ public class CardManager : MonoBehaviour
     public void StartDisplayingCards()
     {
         currentCard = cardFactory.GetNewCard("story");
-        StartCoroutine(QueueStoryCard());
+        StartCoroutine(QueueCard());
     }
     
-    private IEnumerator QueueStoryCard()
+    private IEnumerator QueueCard()
     {
         yield return new WaitForSeconds(3);
         if (currentCard is PlotCard)
@@ -66,30 +67,27 @@ public class CardManager : MonoBehaviour
     public void HandleOptionPressed(int decisionIndex)
     {
         currentCard.HandleDecision(decisionIndex);
-        MakeTransition();
-        StartCoroutine(QueueStoryCard());
+        StartCoroutine(AnimateDecision());
     }
 
-    private void ShowFeedback(int decisionIndex)
+    private IEnumerator AnimateDecision()
     {
-        Destroy(displayedCard);
-        displayedCard = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-
-        var decisionDialogue = displayedCard.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        var button1 = displayedCard.transform.GetChild(1).GetComponent<Button>();
-        var button2 = displayedCard.transform.GetChild(2).GetComponent<Button>();
-        button1.gameObject.SetActive(false);
-        button2.gameObject.SetActive(false);
-
-        decisionDialogue.text = currentCard.Feedback;
-
-        StartCoroutine(wait(2, button1));
-
-        var parentObject = GameObject.Find("CardPanel");
-        displayedCard.transform.SetParent(parentObject.transform, false);
+        yield return new WaitForSeconds(3);
+        ShowFeedback();
     }
 
-    private void MakeTransition()
+    private void ShowFeedback()
+    {
+        dialogueManager.StartExplanatoryDialogue(dialogueMapper.FeedbackToDialogue(currentCard.Feedback), HandleFeedbackContinued);
+    }
+
+    private void HandleFeedbackContinued()
+    {
+        UpdateCard();
+        StartCoroutine(QueueCard());
+    }
+
+    private void UpdateCard()
     {
         cardCount++;
 
@@ -103,12 +101,10 @@ public class CardManager : MonoBehaviour
         if (cardCount % 3 == 0)
         {
             currentCard = cardFactory.GetNewCard("story");
-            RenderStoryCard();
         }
         else
         {
             currentCard = cardFactory.GetNewCard("minor");
-            RenderMinorCard();
         }
     }
 
@@ -117,7 +113,7 @@ public class CardManager : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         var text1 = button1.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         button1.gameObject.SetActive(true);
-        button1.onClick.AddListener(() => this.MakeTransition());
+        button1.onClick.AddListener(() => this.UpdateCard());
         text1.text = "continue";
     }
 

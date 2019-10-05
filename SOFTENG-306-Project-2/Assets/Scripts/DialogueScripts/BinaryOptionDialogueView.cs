@@ -15,7 +15,7 @@ public class BinaryOptionDialogueView
     public TextMeshProUGUI option1Text;
     public TextMeshProUGUI option2Text;
 
-    internal void Display(BinaryOptionDialogue dialogue, Action<int> onOptionPressed)
+    internal void SetContent(BinaryOptionDialogue dialogue, Action<int> onOptionPressed)
     {
         npcNameText.text = dialogue.LeadingDialogue.Name;
         npcDialogueText.text = dialogue.Question;

@@ -12,6 +12,6 @@ public class DialogueNPC : MonoBehaviour
     public void TriggerDialogue()
     {
         Action handleDialogueClosed = () => CardManager.Instance.StartDisplayingCards();
-        DialogueManager.Instance.StartTutorialDialogue(dialogue, handleDialogueClosed);
+        DialogueManager.Instance.StartExplanatoryDialogue(dialogue, handleDialogueClosed);
     }
 }

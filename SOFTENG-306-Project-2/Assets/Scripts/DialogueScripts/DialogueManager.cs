@@ -29,7 +29,13 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void StartTutorialDialogue(SimpleDialogue dialogue, Action onClosed)
+    /// <summary>
+    /// Displays purely explanatory dialogue. This means the only interactivity available is
+    /// pressing the "Continue" button. i.e. no decisions to be made.
+    /// </summary>
+    /// <param name="dialogue"></param>
+    /// <param name="onClosed"></param>
+    public void StartExplanatoryDialogue(SimpleDialogue dialogue, Action onClosed)
     {
         Action onEndOfStatements = () =>
         {
@@ -50,14 +56,14 @@ public class DialogueManager : MonoBehaviour
         if (dialogue.LeadingDialogue.Statements.Length != 0)
         {
             StartSimpleDialogue(dialogue.LeadingDialogue, () => {
-                binaryOptionDialogueView.Display(dialogue, handleButtonPressed);
+                binaryOptionDialogueView.SetContent(dialogue, handleButtonPressed);
                 simpleDialogueViewAnimator.SetTrigger("ToggleVisibilityInstant");
                 binaryOptionViewAnimator.SetTrigger("ToggleVisibilityInstant");
             });
         }
         else
         {
-            binaryOptionDialogueView.Display(dialogue, handleButtonPressed);
+            binaryOptionDialogueView.SetContent(dialogue, handleButtonPressed);
             binaryOptionViewAnimator.SetTrigger("ToggleVisibilitySmooth");
         }
     }
