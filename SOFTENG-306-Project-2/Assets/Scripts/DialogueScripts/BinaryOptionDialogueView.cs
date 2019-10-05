@@ -17,6 +17,9 @@ public class BinaryOptionDialogueView
 
     internal void SetContent(BinaryOptionDialogue dialogue, Action<int> onOptionPressed)
     {
+        option1Button.onClick.RemoveAllListeners();
+        option2Button.onClick.RemoveAllListeners();
+
         npcNameText.text = dialogue.PrecedingDialogue.Name;
         npcDialogueText.text = dialogue.Question;
         option1Text.text = dialogue.Option1;

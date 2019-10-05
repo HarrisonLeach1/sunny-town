@@ -15,12 +15,17 @@ public class SliderOptionDialogueView
 
     internal void SetContent(SliderOptionDialogue dialogue, Action<int> handleButtonPressed)
     {
+        confirmButton.onClick.RemoveAllListeners();
+
         npcNameText.text = dialogue.PrecedingDialogue.Name;
         npcDialogueText.text = dialogue.Question;
         slider.maxValue = dialogue.MaxValue;
         slider.minValue = dialogue.MinValue;
-        slider.value = ( dialogue.MaxValue - dialogue.MinValue ) / 2;
+        slider.value = (dialogue.MaxValue - dialogue.MinValue) / 2;
         sliderValueText.text = ((int)slider.value).ToString();
-        confirmButton.onClick.AddListener(() => handleButtonPressed((int) Math.Round(slider.value)));
+        confirmButton.onClick.AddListener(() =>
+        {
+            handleButtonPressed((int)Math.Round(slider.value));
+        });
     }
 }

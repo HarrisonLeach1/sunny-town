@@ -49,15 +49,12 @@ public class MetricManager : MonoBehaviour
 
     private void Start()
     {
+        metricsView = Instantiate(metricPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         RenderMetrics();
     }
 
     public void RenderMetrics()
     {
-        Debug.Log("Render metrics called: " + PopHappiness + Gold + EnvHealth);
-        Destroy(metricsView);
-        metricsView = Instantiate(metricPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-
         var money = metricsView.transform.GetChild(0).GetComponent<Slider>();
         var happiness = metricsView.transform.GetChild(1).GetComponent<Slider>();
         var environment = metricsView.transform.GetChild(2).GetComponent<Slider>();
@@ -124,6 +121,8 @@ public class MetricManager : MonoBehaviour
 
     public void UpdateGold(int value)
     {
+        Debug.Log("called update gold: " + value);
+
         this.Gold += value;
         if (this.Gold > MAX_VALUE)
         {
