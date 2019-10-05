@@ -5,8 +5,8 @@
             {
                 "label": "option 1",
                 "money": 3,
-                "happiness": 4,
-                "environment": -100,
+                "happiness": 0,
+                "environment": -20,
                 "feedback": "feedback 1a"
             },
             {
@@ -23,9 +23,9 @@
         "options": [
             {
                 "label": "option 1 2",
-                "money": 3,
-                "happiness": 4,
-                "environment": 5,
+                "money": 0,
+                "happiness": 0,
+                "environment": -20,
                 "feedback": "feedback 1a"
             },
             {
@@ -42,9 +42,9 @@
         "options": [
             {
                 "label": "option 1 3",
-                "money": 3,
-                "happiness": 4,
-                "environment": 5,
+                "money": 20,
+                "happiness": 0,
+                "environment": -20,
                 "feedback": "feedback 1a"
             },
             {
