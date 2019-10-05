@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CubeTester : MonoBehaviour
+public class ExclamationMarkDispatcher : MonoBehaviour
 {
       void Start()
     {

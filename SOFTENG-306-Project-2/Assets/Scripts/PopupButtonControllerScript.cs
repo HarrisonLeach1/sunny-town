@@ -16,14 +16,12 @@ public class PopupButtonControllerScript : MonoBehaviour
     {
         Debug.Log("create button");
         PopupButtonScript instance = Instantiate(popupButton);
-        if (instance == null){
-            Debug.Log("its null");
-        } else {
-            Debug.Log("not nul");
-        }
-        //Vector2 screenPosition = Camera.main.WorldToScreenPoint(location.position);
+        Vector2 screenPosition = Camera.main.WorldToScreenPoint(location.position);
         instance.transform.SetParent(canvas.transform, false);
-        //instance.transform.position = screenPosition;
+        instance.transform.position = screenPosition;
+
+        
+        Debug.Log(instance.transform.position);
     }
 
 }
