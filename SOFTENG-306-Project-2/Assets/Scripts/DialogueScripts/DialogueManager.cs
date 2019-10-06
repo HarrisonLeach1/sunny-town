@@ -50,11 +50,14 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator AnimationWait(float seconds)
     {
-        if (animationProgressDialgoueView.slider.value < seconds)
+        animationProgressDialgoueView.slider.value = 0;
+        float timeProgressed = 0;
+        while (timeProgressed < seconds)
         {
-            animationProgressDialgoueView.slider.value = Time.deltaTime;
+            timeProgressed += Time.deltaTime;
+            animationProgressDialgoueView.slider.value = timeProgressed / seconds;
+            yield return null;
         }
-        yield return new WaitForSeconds(seconds);
         animationProgressAnimator.SetBool("IsVisible", false);
     }
 

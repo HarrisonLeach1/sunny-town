@@ -86,6 +86,7 @@ public class CardManager : MonoBehaviour
     {
         dialogueManager.ShowAnimationProgress(2);
     }
+    
     private IEnumerator AnimateDecision()
     {
         yield return new WaitForSeconds(3);
