@@ -3,12 +3,13 @@ using UnityEngine;
 
 namespace SunnyTown
 {
-
     public class MinorCard : Card
     {
-        public MinorCard(string[] precedingDialogue, string dialogue, List<Transition> options)
+        public string Name { get; set; }
+        public MinorCard(string[] precedingDialogue, string name, string dialogue, List<Transition> options)
         {
             PrecedingDialogue = precedingDialogue;
+            Name = name;
             Question = dialogue;
             Options = options;
         }

@@ -18,9 +18,6 @@ namespace SunnyTown
 
         public Reader()
         {
-//        AllExpositionStates =
-//            this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/expositionStates.json", true)
-//                .Cast<PlotCard>().ToList();
             AllExpositionDialogues =
                 this.ParseExpositionJson(Directory.GetCurrentDirectory() + "/Assets/json/expositionStates.json");
             AllStoryStates = this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/plotStates.json", true)
@@ -100,27 +97,22 @@ namespace SunnyTown
                         {
                             name = state["name"];
                         }
-
-                        result.Add(new PlotCard(state["id"], precedingDialogue.ToArray<string>(), name,
-                            state["question"], optionList));
+                        result.Add(new PlotCard(state["id"], precedingDialogue.ToArray<string>(), name, state["question"], optionList));
 
                     }
                     else if (state["sliderType"])
                     {
-                        result.Add(new SliderCard(precedingDialogue.ToArray<string>(), state["name"], state["question"],
-                            optionList.Cast<SliderTransition>().ToList(), state["maxValue"], state["minValue"]));
+                        result.Add(new SliderCard(precedingDialogue.ToArray<string>(), state["name"], state["question"], optionList.Cast<SliderTransition>().ToList(), state["maxValue"], state["minValue"]));
                     }
                     else
                     {
-                        result.Add(new MinorCard(precedingDialogue.ToArray<string>(), state["question"], optionList));
+                        result.Add(new MinorCard(precedingDialogue.ToArray<string>(), state["name"], state["question"], optionList));
                     }
                 }
 
+                return result;
             }
-
-            return result;
         }
-
         private List<SimpleDialogue> ParseExpositionJson(string filePath)
         {
             List<SimpleDialogue> result = new List<SimpleDialogue>();
