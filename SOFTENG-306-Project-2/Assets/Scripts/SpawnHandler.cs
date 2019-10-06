@@ -7,23 +7,26 @@ using UnityEngine;
 
 public class SpawnHandler : MonoBehaviour
 {
-    private GameObject[] buildings; 
+    public GameObject[] buildings; 
     private Dictionary<GameObject,bool> visibilityMap = new Dictionary<GameObject,bool>();
-    private static Timer aTimer = new Timer();
+    private float InstantiationTimer = 3f;
     private GameObject buildingCloud;
     
     // Start is called before the first frame update
     void Start()
     {
-        foreach (var building in buildings)
+        
+        foreach (GameObject building in buildings)
         {
             visibilityMap.Add(building, false);
         }
+        build(Building.Farm);
     }
 
     // Update is called once per frame
     void Update()
     {
+        StopBuildingCloud();
     }
     
     // Method called to set building to appear
@@ -34,22 +37,33 @@ public class SpawnHandler : MonoBehaviour
             // Setting visibility for the building to true
             if (building.name.Contains(buildingName.ToString()))
             {
-                building.GetComponent<SpriteRenderer>().enabled = true;
-            }
-            // Getting the visibility of the cloud
-            if (building.name.Equals("Cloud" + buildingName.ToString().Substring(buildingName.ToString().Length - 1)))
-            {
-                building.GetComponent<SpriteRenderer>().enabled = true;
+                building.SetActive(true);
                 
-                // Setting timer to disable the cloud
-                aTimer.Interval = 3000;
-                aTimer.Elapsed += delegate { StopBuildingCloud(building); };
+                foreach (var b in visibilityMap.Keys)
+                { // Getting the visibility of the cloud
+                    print("Cloud" + building.name.ToString().Substring(building.name.ToString().Length - 1));
+                    if (b.name.Equals("Cloud" + building.name.ToString().Substring(building.name.ToString().Length - 1)))
+                    {
+                        print("Cloud" + building.name.Substring(building.name.Length - 1));
+                        b.SetActive(true);
+                
+                        // Setting building timer for it to be disabled
+                        buildingCloud = b;
+                    }
+                }
             }
+            
         }
     }
     
-    private void StopBuildingCloud(GameObject building)
+    private void StopBuildingCloud()
     {
-        building.GetComponent<SpriteRenderer>().enabled =  false;
+        InstantiationTimer -= Time.deltaTime;
+        if (InstantiationTimer <= 0 && buildingCloud != null)
+        {
+            buildingCloud.SetActive(false);
+            InstantiationTimer = 2f;
+        }
+            
     }
 }

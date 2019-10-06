@@ -2,10 +2,10 @@
 {
     public enum Building
     {
-        School,
+        //School,
         CoalMine,
+        PowerPlant,
         Farm,
-        Tree,
-        Cloud
+        //Tree,
     }
 }
