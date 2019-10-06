@@ -22,6 +22,7 @@ public class PlotCard : Card
         {
             Options[decisionIndex].MetricsModifier.Modify();
             Feedback = Options[decisionIndex].Feedback;
+            FeedbackNPCName = Options[decisionIndex].FeedbackNPCName;
             NextStateId = Options[decisionIndex].NextStateId;
             ShouldAnimate = Options[decisionIndex].HasAnimation;
             BuildingName = Options[decisionIndex].BuildingName;

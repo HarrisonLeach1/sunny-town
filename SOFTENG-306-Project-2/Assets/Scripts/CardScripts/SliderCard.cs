@@ -42,6 +42,7 @@ public class SliderCard : Card
 
             optionChosen.MetricsModifier.Modify();
             Feedback = optionChosen.Feedback;
+            FeedbackNPCName = optionChosen.FeedbackNPCName;
             ShouldAnimate = optionChosen.HasAnimation;
             BuildingName = optionChosen.BuildingName;
         }

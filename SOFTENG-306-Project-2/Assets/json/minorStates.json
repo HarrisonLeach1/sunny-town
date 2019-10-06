@@ -11,14 +11,16 @@
                 "threshold": 80,
                 "money": -20,
                 "environment": 25,
-                "feedback": "The environmentalists are very grateful for your support"
+                "feedback": "The environmentalists are very grateful for your support",
+                "npcName": "Angry Tree Person"
             },
             {
                 "threshold": 55,
                 "money": -10,
                 "happiness": 5,
                 "environment": 5,
-                "feedback": "The environmentalists are thankful for your funding, but thought they could have used more"
+                "feedback": "The environmentalists are thankful for your funding, but thought they could have used more",
+                "npcName": "Angry Tree Person"
             },
             {
                 "threshold": 0,
@@ -26,7 +28,8 @@
                 "money": 5,
                 "environment": -25,
                 "happiness": -10,
-                "feedback": "The environmentalists are very upset."
+                "feedback": "The environmentalists are very upset.",
+                "npcName": "Angry Tree Person"
             }
         ]
     },

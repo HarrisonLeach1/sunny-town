@@ -16,6 +16,7 @@ public class MinorCard : Card
         {
             Options[decisionIndex].MetricsModifier.Modify();
             Feedback = Options[decisionIndex].Feedback;
+            FeedbackNPCName = Options[decisionIndex].FeedbackNPCName;
             ShouldAnimate = Options[decisionIndex].HasAnimation;
             BuildingName = Options[decisionIndex].BuildingName;
         }

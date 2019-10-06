@@ -33,9 +33,13 @@ public class DialogueMapper
                 ""));
     }
 
-    public SimpleDialogue FeedbackToDialogue(string feedback)
+    public SimpleDialogue FeedbackToDialogue(string feedback, string name)
     {
-        return new SimpleDialogue(new string[] { feedback }, "Board of Advisors");
+        if (String.IsNullOrEmpty(name))
+        {
+            name = "Board of Advisors"; 
+        }
+        return new SimpleDialogue(new string[] { feedback }, name);
     }
 
     public SliderOptionDialogue SliderCardToSliderOptionDialogue(SliderCard currentCard)

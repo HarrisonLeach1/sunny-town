@@ -132,7 +132,7 @@ public class CardManager : MonoBehaviour
 
     private void ShowFeedback()
     {
-        dialogueManager.StartExplanatoryDialogue(dialogueMapper.FeedbackToDialogue(currentCard.Feedback), GoToNextCard);
+        dialogueManager.StartExplanatoryDialogue(dialogueMapper.FeedbackToDialogue(currentCard.Feedback, currentCard.FeedbackNPCName), GoToNextCard);
     }
 
     private IEnumerator QueueCard()
