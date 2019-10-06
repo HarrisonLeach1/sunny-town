@@ -54,7 +54,6 @@ public class DialogueManager : MonoBehaviour
         while (timeProgressed < seconds)
         {
             timeProgressed += Time.deltaTime;
-            Debug.Log(timeProgressed);
             animationProgressDialgoueView.slider.value = timeProgressed / seconds;
             yield return null;
         }
