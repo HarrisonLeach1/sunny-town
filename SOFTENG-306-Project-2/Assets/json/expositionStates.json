@@ -1,20 +1,31 @@
 [
   {
     "id": "e1",
-    "name" : "Jimmy Cash",
-    "dialogue": ["Congrats on getting elected mayor, Mrs Gatberg. I'm Jimmy and I'll be your financial advisor.", 
-        "I want you to grow this town and make us rich!"]
+    "name": "Jimmy Cash",
+    "dialogue": [
+      "Congrats Mrs Gatberg on winning the mayoral election!",
+      "My name is Jimmy, and I'll be your financial adviser",
+      "There's little you can build and execute without cash these days",
+      "It is my job to help you grow this town into a thriving economy!"
+    ]
   },
   {
     "id": "e2",
-    "name" : "Allena",
-    "dialogue" : ["We also want to make sure the environment is healthy.", 
-        "If this reaches number reaches 0, I'm sure our town will be destroyed by a natural disaster and we wouldn't want that."]
+    "name": "Allena",
+    "dialogue": [
+      "Hi Hi, I'm the people's representative at the Ministry for the Environment",
+      "If there is rampant development and the environment is harmed it could also cripple the town",
+      "I'm here to make sure our environment is protected and our town is safe from natural disasters."
+    ]
   },
   {
     "id": "e3",
-    "name" : "James the Dog",
-    "dialogue" : ["Woof! Woof! [When the town happiness number hits 0, you will be voted out of office]",
-        "Woof! [Good luck!]"]
+    "name": "James the Dog",
+    "dialogue": [
+      "Woof! [My name is James, miraculously you can understand me ¯\\_(ツ)_/¯]",
+      "Woof! Woof! [Decisions you make will also impact citizens' happiness]",
+      "Woof! Woof! [If they are very unhappy, you could be voted out of office]",
+      "Woof! [Good luck!]"
+    ]
   }
 ]
