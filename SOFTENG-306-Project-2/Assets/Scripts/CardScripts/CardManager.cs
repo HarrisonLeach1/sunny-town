@@ -136,7 +136,6 @@ namespace SunnyTown
         public void HandleOptionPressed(int decisionValue)
         {
             currentCard.HandleDecision(decisionValue);
-            Debug.Log("should animate in handle option pressed: " + currentCard.ShouldAnimate);
 
             if (string.IsNullOrEmpty(currentCard.Feedback))
             {
@@ -197,6 +196,11 @@ namespace SunnyTown
             yield return new WaitForSeconds(CardManager.time);
 
             currentlyProcessingCard = true;
+
+            cardCount++;
+
+            currentCard = cardFactory.GetNewCard("story");
+
             if (currentCard is PlotCard)
             {
                 dialogueManager.StartBinaryOptionDialogue(dialogueMapper.PlotCardToBinaryOptionDialogue((PlotCard)currentCard), HandleOptionPressed);
@@ -217,8 +221,6 @@ namespace SunnyTown
         /// </summary>
         private void GoToNextCard()
         {
-            cardCount++;
-
             if (IsFinalCard(currentCard))
             {
                 isFinalCard = true;
@@ -232,8 +234,6 @@ namespace SunnyTown
                     () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
                 return;
             }
-
-            currentCard = cardFactory.GetNewCard("story");
 
             currentlyProcessingCard = false;
             cardWaitingRoutine = StartCoroutine(QueueCard());

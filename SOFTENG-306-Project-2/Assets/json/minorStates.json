@@ -161,26 +161,6 @@
       }
     ]
   },
-  // 
-  //  {
-  //    "name": "Jimmy Cash",
-  //    "question": "The CEO of an oil rig wants to pay you to set up in your town. Do you approve?",
-  //    "options": [
-  //      {
-  //        "label": "Yes",
-  //        "happiness": -20,
-  //        "environment": -20,
-  //        "money": 25,
-  //        "npcName": "Jimmy Cash",
-  //        "feedback": "feedback 1a"
-  //      },
-  //      {
-  //        "label": "No",
-  //        "npcName": "Jimmy Cash",
-  //        "feedback": "feedback 1a"
-  //      }
-  //    ]
-  //  },
   {
     "name": "Advisory Board",
     "question": "The neighbouring town has a shortage of timber. Do you want to sell your trees to them?",
