@@ -20,7 +20,7 @@ public class SpawnHandler : MonoBehaviour
         {
             visibilityMap.Add(building, false);
         }
-        build(Building.Farm);
+
     }
 
     // Update is called once per frame
@@ -41,7 +41,6 @@ public class SpawnHandler : MonoBehaviour
                 
                 foreach (var b in visibilityMap.Keys)
                 { // Getting the visibility of the cloud
-                    print("Cloud" + building.name.ToString().Substring(building.name.ToString().Length - 1));
                     if (b.name.Equals("Cloud" + building.name.ToString().Substring(building.name.ToString().Length - 1)))
                     {
                         print("Cloud" + building.name.Substring(building.name.Length - 1));
