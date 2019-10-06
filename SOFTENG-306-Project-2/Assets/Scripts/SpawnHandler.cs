@@ -30,7 +30,7 @@ public class SpawnHandler : MonoBehaviour
     }
     
     // Method called to set building to appear
-    public void build(Building buildingName)
+    public void Build(Building buildingName)
     {
         foreach (var building in visibilityMap.Keys)
         {    
@@ -43,10 +43,9 @@ public class SpawnHandler : MonoBehaviour
                 { // Getting the visibility of the cloud
                     if (b.name.Equals("Cloud" + building.name.ToString().Substring(building.name.ToString().Length - 1)))
                     {
-                        print("Cloud" + building.name.Substring(building.name.Length - 1));
                         b.SetActive(true);
                 
-                        // Setting building timer for it to be disabled
+                        // Setting cloud for it to get disabled
                         buildingCloud = b;
                     }
                 }
