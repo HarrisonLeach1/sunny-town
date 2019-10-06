@@ -1,7 +1,8 @@
 using UnityEngine;
 
 public class MetricsModifier
-{    private int EnvHealthModifier { get; set; }
+{   
+    private int EnvHealthModifier { get; set; }
     private int PopHappinessModifier { get; set; }
     private int GoldModifier { get; set; }
     
@@ -13,6 +14,7 @@ public class MetricsModifier
     }
 
     public void Modify() {
+        Debug.Log("Modifying metrics: " + EnvHealthModifier + PopHappinessModifier + GoldModifier);
         MetricManager.Instance.UpdatePopHappiness(PopHappinessModifier);
         MetricManager.Instance.UpdateGold(GoldModifier);
         MetricManager.Instance.UpdateEnvHealth(EnvHealthModifier);

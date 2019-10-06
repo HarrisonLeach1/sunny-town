@@ -76,7 +76,7 @@ public class Reader
 
                     if (state["sliderType"])
                     {
-                        optionList.Add(new SliderTransition(transition["feedback"], metricsModifier, transition["hasAnimation"], transition["buildingName"], state["threshold"]));
+                        optionList.Add(new SliderTransition(transition["feedback"], metricsModifier, transition["hasAnimation"], transition["buildingName"], transition["threshold"]));
                     } 
                     else
                     {
@@ -97,7 +97,6 @@ public class Reader
                 else if (state["sliderType"])
                 {
                     result.Add(new SliderCard(precedingDialogue.ToArray<string>(), state["name"], state["question"], optionList.Cast<SliderTransition>().ToList(), state["maxValue"], state["minValue"]));
-                    Debug.Log("made slider type" + precedingDialogue.ToArray<string>() + state["name"] + state["question"] + optionList.Cast<SliderTransition>().ToList() + state["maxValue"]+ state["minValue"]);
                 }
                 else
                 {

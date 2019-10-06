@@ -1,5 +1,36 @@
 ﻿[
     {
+        "name": "square",
+        "sliderType": true,
+        "precedingDialogue": ["Environmentalists want funding to plant trees."],
+        "question": "How much money do you provide to the tree planting initiative?",
+        "maxValue": 120,
+        "minValue": 0,
+        "options": [
+            {
+                "threshold": 80,
+                "money": -20,
+                "environment": 25,
+                "feedback": "The environmentalists are very grateful for your support"
+            },
+            {
+                "threshold": 55,
+                "money": -10,
+                "happiness": 5,
+                "environment": 5,
+                "feedback": "The environmentalists are thankful for your funding, but thought they could have used more"
+            },
+            {
+                "threshold": 0,
+                "label": "No",
+                "money": 5,
+                "environment": -25,
+                "happiness": -10,
+                "feedback": "The environmentalists are very upset."
+            }
+        ]
+    },
+    {
         "name": "Jimmy Cash",
         "question": "The people demand cheaper electricity, do we invest in a new powerplant?",
         "options": [
@@ -34,37 +65,6 @@
             }
         ]
     },
-    {
-        "name": "square",
-        "sliderType": true,
-        "precedingDialogue": ["Environmentalists want funding to plant trees."],
-        "question": "How much money do you provide to the tree planting initiative?",
-        "maxValue": 120,
-        "minValue": 0,
-        "options": [
-            {
-                "threshold": 80,
-                "money": -20,
-                "environment": 25,
-                "feedback": "The environmentalists are very grateful for your support"
-            },
-            {
-                "threshold": 55,
-                "money": -10,
-                "happiness": 5,
-                "environment": 5,
-                "feedback": "The environmentalists are thankful for your funding, but thought they could have used more"
-            },
-            {
-                "threshold": 0,
-                "label": "No",
-                "money": 5,
-                "environment": -5,
-                "feedback": "The environmentalists are very upset."
-            }
-        ]
-    },
-    ,
     {
         "name": "square",
         "precedingDialogue": [
