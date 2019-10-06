@@ -11530,7 +11530,7 @@ GameObject:
   - component: {fileID: 758871061}
   - component: {fileID: 758871060}
   m_Layer: 5
-  m_Name: Image
+  m_Name: NPCImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21999,7 +21999,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 256.90002, y: -102.29999}
+  m_AnchoredPosition: {x: 256.9004, y: -102.29999}
   m_SizeDelta: {x: 275.8, y: 68.599976}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1462386664
@@ -29636,12 +29636,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f1d387bca3537948b918e2464f4521f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
-    name: Ms. Angelica Wazowski
-    statements:
-    - Hello Mr. Mayor this is your wonderful town, try not to destroy it
-    - Make sure to get your daily Vitamin C
-    - And dont forget to dab on them haters
 --- !u!4 &1916983494
 Transform:
   m_ObjectHideFlags: 0

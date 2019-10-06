@@ -37,12 +37,12 @@ public class DialogueNPC : MonoBehaviour
     
 //    public void TriggerDialogue()
 //    {
-//        Action handleDialogueClosed = null;
-//        //Action handleDialogueClosed = () => CardManager.Instance.StartDisplayingCards();
-////        foreach (SimpleDialogue dialogue in this.expositionDialogues)
-////        {
-////            DialogueManager.Instance.StartExplanatoryDialogue(dialogue, handleDialogueClosed);
-////        }
+////        Action handleDialogueClosed = null;
+//        Action handleDialogueClosed = () => CardManager.Instance.StartDisplayingCards();
+//        foreach (SimpleDialogue dialogue in this.expositionDialogues)
+//        {
+//            DialogueManager.Instance.StartExplanatoryDialogue(dialogue, handleDialogueClosed);
+//        }
 ////        for (int i = 0; i < this.expositionDialogues.Count; i++)
 ////        {
 ////            if (i == this.expositionDialogues.Count - 1)

@@ -40,10 +40,11 @@ public class DialogueManager : MonoBehaviour
     {
         Action onEndOfStatements = () =>
         {
-            simpleDialogueViewAnimator.SetTrigger("ToggleVisibilitySmooth");
+            simpleDialogueViewAnimator.SetBool("IsVisible", false);
             onClosed();
         };
         StartSimpleDialogue(dialogue, onEndOfStatements);
+//        StartSimpleDialogue(dialogue, onClosed);
     }
 
     public void StartBinaryOptionDialogue(BinaryOptionDialogue dialogue, Action<int> onOptionPressed)
@@ -108,7 +109,7 @@ public class DialogueManager : MonoBehaviour
     {
         simpleDialogueView.SetContent(dialogue);
         this.onEndOfStatements = onEndOfStatements;
-        simpleDialogueViewAnimator.SetTrigger("ToggleVisibilitySmooth");
+        simpleDialogueViewAnimator.SetBool("IsVisible", true);
         statements.Clear();
 
         simpleDialogueView.npcNameText.text = dialogue.Name;
