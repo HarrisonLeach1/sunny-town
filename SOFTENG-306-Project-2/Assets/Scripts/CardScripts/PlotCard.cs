@@ -24,6 +24,7 @@ public class PlotCard : Card
             Feedback = Options[decisionIndex].Feedback;
             NextStateId = Options[decisionIndex].NextStateId;
             ShouldAnimate = Options[decisionIndex].HasAnimation;
+            BuildingName = Options[decisionIndex].BuildingName;
         }
     }
 }

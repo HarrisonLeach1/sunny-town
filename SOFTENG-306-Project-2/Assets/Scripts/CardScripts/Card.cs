@@ -7,5 +7,6 @@ public abstract class Card
     public List<Transition> Options { get; protected set; }
     public string Feedback { get; protected set; }
     public bool ShouldAnimate { get; protected set; } = false;
+    public string BuildingName { get; protected set; } = "";
     public abstract void HandleDecision(int decisionIndex);
 }

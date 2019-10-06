@@ -8,11 +8,13 @@ using UnityEngine.UI;
 public class CardManager : MonoBehaviour
 {
     public static CardManager Instance { get; private set; }
+    public GameObject spawnHandlerObject;
 
     private CardFactory cardFactory;
     private DialogueManager dialogueManager;
     private MetricManager metricManager;
     private DialogueMapper dialogueMapper;
+    private SpawnHandler animationHandler;
     private int cardCount = 0;
 
     private Card currentCard;
@@ -44,6 +46,7 @@ public class CardManager : MonoBehaviour
         dialogueManager = DialogueManager.Instance;
         metricManager = MetricManager.Instance;
         dialogueMapper = new DialogueMapper();
+        animationHandler = spawnHandlerObject.GetComponent<SpawnHandler>();
     }
 
     public void QueueEndDialogue(SimpleDialogue endGameDialogue)
@@ -94,7 +97,7 @@ public class CardManager : MonoBehaviour
     public void HandleOptionPressed(int decisionValue)
     {
         currentCard.HandleDecision(decisionValue);
-
+        Debug.Log("should animate in handle option pressed: " + currentCard.ShouldAnimate);
         if (string.IsNullOrEmpty(currentCard.Feedback))
         {
             metricManager.RenderMetrics();
@@ -102,7 +105,10 @@ public class CardManager : MonoBehaviour
         }
         else if (currentCard.ShouldAnimate)
         {
-            StartCoroutine(AnimateDecision());
+            var time = 3f;
+            dialogueManager.ShowAnimationProgress(time);
+            StartCoroutine(WaitForAnimation(time));
+            animationHandler.PlayAnimation(currentCard.BuildingName, time);
         }
         else
         {
@@ -110,9 +116,9 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    private IEnumerator AnimateDecision()
+    private IEnumerator WaitForAnimation(float time)
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(time);
         metricManager.RenderMetrics();
         ShowFeedback();
     }
@@ -122,11 +128,6 @@ public class CardManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         metricManager.RenderMetrics();
         ShowFeedback();
-    }
-
-    private void DisplayProgressAnimation()
-    {
-        dialogueManager.ShowAnimationProgress(2);
     }
 
     private void ShowFeedback()

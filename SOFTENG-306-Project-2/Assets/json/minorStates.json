@@ -1,5 +1,26 @@
 ﻿[
     {
+        "name": "Jimmy Cash",
+        "question": "The people demand cheaper electricity, do we invest in a new powerplant?",
+        "options": [
+            {
+                "label": "Yes",
+                "hasAnimation": true,
+                "buildingName": "CoalMine",
+                "happiness": 20,
+                "environment": -20,
+                "money": -5,
+                "feedback": "The people are happy, but the environment suffers from increased consumerism"
+            },
+            {
+                "label": "No",
+                "happiness": -15,
+                "environment": -20,
+                "feedback": "The towns people are unhappy, but it is better for the environment"
+            }
+        ]
+    },
+    {
         "name": "square",
         "question": "We are spending more fossil fuels than we import. Do we restrict the number of cars on the road?",
         "options": [

@@ -76,11 +76,11 @@ public class Reader
 
                     if (state["sliderType"])
                     {
-                        optionList.Add(new SliderTransition(transition["feedback"], metricsModifier, state["hasAnimation"], state["threshold"]));
+                        optionList.Add(new SliderTransition(transition["feedback"], metricsModifier, transition["hasAnimation"], transition["buildingName"], state["threshold"]));
                     } 
                     else
                     {
-                        optionList.Add(new Transition(transition["feedback"], metricsModifier, state["hasAnimation"], transition["label"], transition["state"]));
+                        optionList.Add(new Transition(transition["feedback"], metricsModifier, transition["hasAnimation"], transition["buildingName"], transition["label"], transition["state"]));
                     }
                 }
 
@@ -88,7 +88,7 @@ public class Reader
                 {
                     String name = "";
                     if (state["name"])
-                    {
+                    {   
                         name = state["name"];
                     }
                     result.Add(new PlotCard(state["id"], precedingDialogue.ToArray<string>(), name, state["question"], optionList));
