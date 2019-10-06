@@ -7,10 +7,12 @@ using System.Linq;
 
 namespace SunnyTown
 {
-
+    /// <summary>
+    /// A Reader is repsonsible for reading json and converting it into 
+    /// Card objects at runtime
+    /// </summary>
     public class Reader
     {
-
         public PlotCard RootState { get; private set; }
         public List<SimpleDialogue> AllExpositionDialogues { get; private set; }
         public List<PlotCard> AllStoryStates { get; private set; }

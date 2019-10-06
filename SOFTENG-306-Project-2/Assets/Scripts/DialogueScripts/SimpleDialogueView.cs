@@ -20,7 +20,7 @@ public class SimpleDialogueView
     {
         npcImage = GameObject.Find("SimpleNPCImage").GetComponent<Image>();
         Debug.Log("Simple NPC Name: " + dialogue.Name);
-        npcImage.sprite = this.npcSpriteManager.getSprite(dialogue.Name);
+        npcImage.sprite = this.npcSpriteManager.GetSprite(dialogue.Name);
     }
     public IEnumerator TypeSentence(string statement)
     {

@@ -4,8 +4,10 @@ using UnityEngine;
 
 namespace SunnyTown
 {
-
-
+    /// <summary>
+    /// A PlotCard represents an interactable decision which impacts the story tree and 
+    /// thus future PlotCards presented to the user.
+    /// </summary>
     public class PlotCard : Card
     {
         public string Id { get; set; }

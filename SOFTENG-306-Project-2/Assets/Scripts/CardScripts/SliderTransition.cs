@@ -3,7 +3,10 @@ using UnityEditor;
 
 namespace SunnyTown
 {
-
+    /// <summary>
+    /// A SliderTransition represents a the outcome that a decision
+    /// in a range of values can have
+    /// </summary>
     public class SliderTransition : Transition
     {
         private int threshold;

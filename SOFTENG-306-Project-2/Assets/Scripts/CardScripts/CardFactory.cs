@@ -5,7 +5,9 @@ using UnityEngine;
 
 namespace SunnyTown
 {
-
+    /// <summary>
+    /// A CardFactory is responsible for creating specified Card types
+    /// </summary>
     public class CardFactory
     {
         private Reader reader;
@@ -18,10 +20,14 @@ namespace SunnyTown
             currentPlotCard = reader.RootState;
             minorCards = new List<Card>(reader.AllMinorStates);
 
-            // Preserve order now for showcase
             minorCards.Randomize();
         }
 
+        /// <summary>
+        /// Returns a Card Type based on its descriptor
+        /// </summary>
+        /// <param name="cardDescriptor">Describes the Card type to be returned</param>
+        /// <returns>The specified Card</returns>
         public Card GetNewCard(string cardDescriptor)
         {
 

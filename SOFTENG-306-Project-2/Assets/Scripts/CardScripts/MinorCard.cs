@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace SunnyTown
 {
+    /// <summary>
+    /// A MinorCard represents a card that does not have any impact on the plot state.
+    /// However they still impact the user.
+    /// </summary>
     public class MinorCard : Card
     {
         public string Name { get; set; }

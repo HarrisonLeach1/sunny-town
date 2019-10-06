@@ -26,7 +26,7 @@ namespace SunnyTown
 
             npcImage = GameObject.Find("BinaryNPCImage").GetComponent<Image>();
             Debug.Log("Binary NPC Name: " + dialogue.PrecedingDialogue.Name);
-            npcImage.sprite = this.npcSpriteManager.getSprite(dialogue.PrecedingDialogue.Name);
+            npcImage.sprite = this.npcSpriteManager.GetSprite(dialogue.PrecedingDialogue.Name);
             //npcImage.sprite = this.getSprite(dialogue.PrecedingDialogue.Name);
             npcNameText.text = dialogue.PrecedingDialogue.Name;
             npcDialogueText.text = dialogue.Question;

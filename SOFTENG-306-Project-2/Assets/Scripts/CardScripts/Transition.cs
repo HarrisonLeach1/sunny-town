@@ -3,7 +3,10 @@ using UnityEngine;
 
 namespace SunnyTown
 {
-
+    /// <summary>
+    /// A Transition represents the posible outcomes that a decision on a Card
+    /// can have, this includes the next state, and feedback
+    /// </summary>
     public class Transition
     {
         private string nextStateId;

@@ -6,7 +6,10 @@ using System.Collections.Generic;
 
 namespace SunnyTown
 {
-
+    /// <summary>
+    /// A SliderCard represents an interactable decision in which the user 
+    /// can selected from a range of numeric values.
+    /// </summary>
     public class SliderCard : Card
     {
         public string Name { get; set; }

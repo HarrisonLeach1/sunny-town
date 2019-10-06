@@ -23,7 +23,7 @@ public class SliderOptionDialogueView
 
         npcImage = GameObject.Find("SliderNPCImage").GetComponent<Image>();
         Debug.Log("Slider NPC Name: " + dialogue.PrecedingDialogue.Name);
-        npcImage.sprite = this.npcSpriteManager.getSprite(dialogue.PrecedingDialogue.Name);
+        npcImage.sprite = this.npcSpriteManager.GetSprite(dialogue.PrecedingDialogue.Name);
         //npcImage.sprite = this.getSprite(dialogue.PrecedingDialogue.Name);
         npcNameText.text = dialogue.PrecedingDialogue.Name;
         npcDialogueText.text = dialogue.Question;
