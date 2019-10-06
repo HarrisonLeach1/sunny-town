@@ -76,11 +76,11 @@ public class Reader
 
                     if (state["sliderType"])
                     {
-                        optionList.Add(new SliderTransition(transition["feedback"], metricsModifier, state["threshold"]));
+                        optionList.Add(new SliderTransition(transition["feedback"], metricsModifier, state["hasAnimation"], state["threshold"]));
                     } 
                     else
                     {
-                        optionList.Add(new Transition(transition["feedback"], metricsModifier, transition["label"], transition["state"]));
+                        optionList.Add(new Transition(transition["feedback"], metricsModifier, state["hasAnimation"], transition["label"], transition["state"]));
                     }
                 }
 
