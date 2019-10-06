@@ -9,12 +9,15 @@ public class Reader
 {
 
     public PlotCard RootState { get; private set; }
+    public List<PlotCard> AllExpositionStates { get; private set; }
     public List<PlotCard> AllStoryStates { get; private set; }
     public List<Card> AllMinorStates { get; private set; }
 
     public Reader()
     {
-
+        AllExpositionStates =
+            this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/expositionStates.json", true)
+                .Cast<PlotCard>().ToList();
         AllStoryStates = this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/plotStates.json", true).Cast<PlotCard>().ToList();
         AllMinorStates = this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/minorStates.json", false);
         RootState = this.AllStoryStates[0];

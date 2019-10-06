@@ -29,6 +29,11 @@ public class NPCSpriteManager
 
     public byte[] GetSpriteByteArray(string name)
     {
-        return spriteDictionary[name];
+        if (spriteDictionary.ContainsKey(name))
+        {
+            return spriteDictionary[name];
+        }
+
+        return null;
     }
 }

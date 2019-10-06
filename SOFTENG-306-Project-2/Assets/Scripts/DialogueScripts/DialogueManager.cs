@@ -106,6 +106,7 @@ public class DialogueManager : MonoBehaviour
 
     private void StartSimpleDialogue(SimpleDialogue dialogue, Action onEndOfStatements)
     {
+        simpleDialogueView.SetContent(dialogue);
         this.onEndOfStatements = onEndOfStatements;
         simpleDialogueViewAnimator.SetTrigger("ToggleVisibilitySmooth");
         statements.Clear();

@@ -1,0 +1,46 @@
+[
+  {
+    "id": "e1",
+    "name" : "Jimmy Cash",
+    "dialogue": "Congrats on getting elected mayor, Mrs Gatberg. I'm Jimmy and I'll be your financial advisor. I want you to grow this town and make us rich!",
+    "transitions": [
+      {
+        "label": "Continue",
+        "state": "e2"
+      }
+    ]
+  },
+  {
+    "id": "e2",
+    "name" : "Allena",
+    "dialogue" : "We also want to make sure the environment is healthy. If this reaches number reaches 0, I'm sure our town will be destroyed by a natural disaster and we wouldn't want that.",
+    "transitions": [
+      {
+        "label": "Continue",
+        "state": "e3"
+      }
+    ]
+  },
+  {
+    "id": "e3",
+    "name" : "James the Dog",
+    "dialogue" : "Woof! Woof! [When the town happiness number hits 0, you will be voted out of office]",
+    "transitions": [
+      {
+        "label": "Continue",
+        "state": "e4"
+      }
+    ]
+  },
+  {
+    "id": "e4",
+    "name" : "James the Dog",
+    "dialogue" : "Woof! [Good luck]",
+    "transitions": [
+      {
+        "label": "Continue",
+        "state": "s1"
+      }
+    ]
+  }
+]
