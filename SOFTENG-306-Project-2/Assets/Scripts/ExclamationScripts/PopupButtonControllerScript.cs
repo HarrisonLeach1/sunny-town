@@ -10,6 +10,7 @@ public class PopupButtonControllerScript : MonoBehaviour
     private static PopupButtonScript popupButton; 
     private static GameObject canvas;
 
+
     public static bool popupShowing;
     public static void Initialise()
     {   
@@ -22,8 +23,9 @@ public class PopupButtonControllerScript : MonoBehaviour
         Debug.Log("create button");
         PopupButtonScript instance = Instantiate(popupButton);
         Vector2 screenPosition = Camera.main.WorldToScreenPoint(location.position);
-        Vector2 finalPosition = new Vector2(screenPosition.x/3, screenPosition.y/3);
-        instance.transform.SetParent(canvas.transform, false);
+        //adjust positioning of exclamation mark so its not directly over centre of city hall
+        Vector2 finalPosition = new Vector2(screenPosition.x+70, screenPosition.y+120);
+        instance.transform.SetParent(canvas.transform, true);
         instance.transform.position = finalPosition;
         Debug.Log(instance.transform.position);
     }

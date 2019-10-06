@@ -143,7 +143,7 @@ public class CardManager : MonoBehaviour
             EndGame();
             return;
         }
-        else if (gameLost) 
+        else if (gameLost)
         {
             dialogueManager.StartExplanatoryDialogue(
                 this.endGameDialogue,

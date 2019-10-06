@@ -22,7 +22,6 @@ public class ExclamationMarkDispatcher : MonoBehaviour
         float randomTime = (float)Random.Range(0.5f, 1.5f);
         //dont show exclamation mark while card showing 
         while (manager.GetCardStatus() || PopupButtonControllerScript.popupShowing){
-            Debug.Log("stuck here " +manager.GetCardStatus() +" "+PopupButtonControllerScript.popupShowing);
             yield return new WaitForSeconds(1);
         }
         Debug.Log("creating card");
