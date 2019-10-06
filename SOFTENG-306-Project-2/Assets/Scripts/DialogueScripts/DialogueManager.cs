@@ -43,7 +43,6 @@ public class DialogueManager : MonoBehaviour
         {
             StopCoroutine(progressAnimationCoroutine);
         }
-        animationProgressDialgoueView.SetupProgressbar(seconds);
         animationProgressAnimator.SetBool("IsVisible", true);
         progressAnimationCoroutine = StartCoroutine(AnimationWait(seconds));
     }
@@ -55,6 +54,7 @@ public class DialogueManager : MonoBehaviour
         while (timeProgressed < seconds)
         {
             timeProgressed += Time.deltaTime;
+            Debug.Log(timeProgressed);
             animationProgressDialgoueView.slider.value = timeProgressed / seconds;
             yield return null;
         }
