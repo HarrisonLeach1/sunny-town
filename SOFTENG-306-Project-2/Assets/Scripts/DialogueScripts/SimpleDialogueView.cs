@@ -18,7 +18,7 @@ public class SimpleDialogueView
     {
         npcImage = GameObject.Find("SimpleNPCImage").GetComponent<Image>();
         Debug.Log("Simple NPC Name: " + dialogue.Name);
-        //npcImage.sprite = this.getSprite(dialogue.Name);
+        npcImage.sprite = this.npcSpriteManager.getSprite(dialogue.Name);
     }
     public IEnumerator TypeSentence(string statement)
     {
@@ -29,30 +29,5 @@ public class SimpleDialogueView
             yield return null;
         }
 
-    }
-    
-    private Sprite getSprite(string name)
-    {
-        if (name == null)
-        {
-            return null;
-        }
-        
-        int width = 250;
-        int height = 250;
-        Debug.Log("Getting sprite for: " + name);
-        byte[] bytes = this.npcSpriteManager.GetSpriteByteArray(name);
-        if (bytes == null)
-        {
-            Debug.Log("bytes[] is null");
-            return null;
-        }
-        Texture2D texture = new Texture2D(width, height);
-        //Texture2D texture = new Texture2D(width, height, TextureFormat.RGB24, false);
-        texture.filterMode = FilterMode.Trilinear;
-        texture.LoadImage(bytes);
-        Sprite sprite = Sprite.Create(texture, new Rect(0,0,width, height), new Vector2(0.5f,0.0f), 1.0f);
-        //Sprite sprite = Sprite.Create(texture, new Rect(0,0,width, height), new Vector2(0.0f,0.0f), 1.0f);
-        return sprite;
     }
 }
