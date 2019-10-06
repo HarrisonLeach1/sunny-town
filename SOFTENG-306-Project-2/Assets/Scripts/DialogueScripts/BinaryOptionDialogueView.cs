@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 namespace SunnyTown
 {
+    /// <summary>
+    /// A BinaryOptionDialogueView represents the view on which a binary
+    /// decision is displayed to the user
+    /// </summary>
     [System.Serializable]
     public class BinaryOptionDialogueView
     {
@@ -19,6 +23,12 @@ namespace SunnyTown
         public TextMeshProUGUI option1Text;
         public TextMeshProUGUI option2Text;
 
+        /// <summary>
+        /// Sets the content to be displayed on the view
+        /// </summary>
+        /// <param name="dialogue">The dialogue to be displayed to the user</param>
+        /// <param name="onOptionPressed">A callback which should be used to execute instructions
+        /// after a user has chosen an option</param>
         internal void SetContent(BinaryOptionDialogue dialogue, Action<int> onOptionPressed)
         {
             option1Button.onClick.RemoveAllListeners();

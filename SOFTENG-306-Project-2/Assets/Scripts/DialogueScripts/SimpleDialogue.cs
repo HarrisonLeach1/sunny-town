@@ -2,6 +2,10 @@
 
 namespace SunnyTown
 {
+    /// <summary>
+    /// A SimpleDialogue represents a dto to be interpreted by the DialogueManager 
+    /// to interpret and display views from.
+    /// </summary>
     [System.Serializable]
     public class SimpleDialogue
     {
