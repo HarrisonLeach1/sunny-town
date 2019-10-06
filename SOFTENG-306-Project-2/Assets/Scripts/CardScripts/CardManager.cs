@@ -10,7 +10,7 @@ namespace SunnyTown {
 
 public class CardManager : MonoBehaviour
 {
-    public const float time = 9f;
+    public const float time = 5f;
     public static CardManager Instance { get; private set; }
     public GameObject spawnHandlerObject;
 
@@ -108,6 +108,7 @@ public class CardManager : MonoBehaviour
     {
         currentCard.HandleDecision(decisionValue);
         Debug.Log("should animate in handle option pressed: " + currentCard.ShouldAnimate);
+
         if (string.IsNullOrEmpty(currentCard.Feedback))
         {
             metricManager.RenderMetrics();
