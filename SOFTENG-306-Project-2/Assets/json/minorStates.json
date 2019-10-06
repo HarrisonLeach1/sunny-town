@@ -1,6 +1,20 @@
 ﻿[
     {
-        "name" : "square",
+        "name": "square",
+        "question": "We are spending more fossil fuels than we import. Do we restrict the number of cars on the road?",
+        "options": [
+            {
+                "label": "Yes",
+                "happiness": -10
+            },
+            {
+                "label": "No",
+                "money": -15
+            }
+        ]
+    },
+    {
+        "name": "square",
         "precedingDialogue": [
             "Many world leaders are demanding more radical climate change initiatives",
             "In response, the council wants to ban all vehicles for 1 week."
@@ -23,7 +37,7 @@
         ]
     },
     {
-        "name" : "square",
+        "name": "square",
         "sliderType": true,
         "precedingDialogue": ["Environmentalists want funding to plant trees."],
         "question": "How much money do you provide to the tree planting initiative?",
@@ -53,7 +67,7 @@
         ]
     },
     {
-        "name" : "square",
+        "name": "square",
         "question": "People want public transport to be free for the upcoming holiday. Do you allow this to happen?",
         "options": [
             {
@@ -71,7 +85,7 @@
         ]
     },
     {
-        "name" : "square",
+        "name": "square",
         "question": "The council wants to train teachers to educate children about climate change. Do you allow this to happen?",
         "options": [
             {
@@ -87,7 +101,7 @@
         ]
     },
     {
-        "name" : "square",
+        "name": "square",
         "question": "A rumour spreads around the town that climate change is fake. What do you do?",
         "options": [
             {
@@ -106,7 +120,7 @@
         ]
     },
     {
-        "name" : "square",
+        "name": "square",
         "question": "The CEO of an oil rig wants to pay you to set up in your town. Do you approve?",
         "options": [
             {
@@ -123,7 +137,7 @@
         ]
     },
     {
-        "name" : "square",
+        "name": "square",
         "question": "The neighbouring town has a shortage of timber. Do you want to sell your trees to them?",
         "options": [
             {
@@ -140,7 +154,7 @@
         ]
     },
     {
-        "name" : "square",
+        "name": "square",
         "question": "The townspeople want to have a bonfire for a festive occasion. Do you allow this?",
         "options": [
             {
@@ -158,23 +172,7 @@
         ]
     },
     {
-        "name" : "square",
-        "question": "We are spending more fossil fuels than we import. Do we restrict the number of cars on the road?",
-        "options": [
-            {
-                "label": "Yes",
-                "happiness": -10,
-                "feedback": "feedback 1a"
-            },
-            {
-                "label": "No",
-                "money": -15,
-                "feedback": "feedback 1a"
-            }
-        ]
-    },
-    {
-        "name" : "square",
+        "name": "square",
         "question": "There are still too many cars on the road. Do you want to increase the petrol tax?",
         "options": [
             {
@@ -192,7 +190,7 @@
         ]
     },
     {
-        "name" : "square",
+        "name": "square",
         "question": "The town is using more energy than we produce. What do you do?",
         "options": [
             {

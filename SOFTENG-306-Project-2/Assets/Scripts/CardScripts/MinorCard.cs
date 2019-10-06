@@ -16,6 +16,7 @@ public class MinorCard : Card
         {
             Options[decisionIndex].MetricsModifier.Modify();
             Feedback = Options[decisionIndex].Feedback;
+            ShouldAnimate = Options[decisionIndex].HasAnimation;
         }
     }
 }

@@ -7,6 +7,7 @@ public class Transition
     public string Dialogue { get; set; }
     public string Feedback { get; set; }
     public string NextStateId { get => nextStateId; set => nextStateId = value; }
+    public bool HasAnimation { get; protected set; } = false;
     public MetricsModifier MetricsModifier { get; set; }
     public Transition(string feedback, MetricsModifier metricsmodifier, string dialogue = "", string nextStateId = "")
     {

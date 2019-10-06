@@ -94,12 +94,20 @@ public class CardManager : MonoBehaviour
     public void HandleOptionPressed(int decisionValue)
     {
         currentCard.HandleDecision(decisionValue);
-        StartCoroutine(AnimateDecision());
-    }
 
-    public void DisplayProgressAnimation()
-    {
-        dialogueManager.ShowAnimationProgress(2);
+        if (string.IsNullOrEmpty(currentCard.Feedback))
+        {
+            metricManager.RenderMetrics();
+            GoToNextCard();
+        }
+        else if (currentCard.ShouldAnimate)
+        {
+            StartCoroutine(AnimateDecision());
+        }
+        else
+        {
+            StartCoroutine(WaitForFeedback());
+        }
     }
 
     private IEnumerator AnimateDecision()
@@ -107,6 +115,18 @@ public class CardManager : MonoBehaviour
         yield return new WaitForSeconds(3);
         metricManager.RenderMetrics();
         ShowFeedback();
+    }
+
+    private IEnumerator WaitForFeedback()
+    {
+        yield return new WaitForSeconds(0.5f);
+        metricManager.RenderMetrics();
+        ShowFeedback();
+    }
+
+    private void DisplayProgressAnimation()
+    {
+        dialogueManager.ShowAnimationProgress(2);
     }
 
     private void ShowFeedback()
@@ -125,6 +145,7 @@ public class CardManager : MonoBehaviour
         }
         else if (currentCard is MinorCard)
         {
+            Debug.Log("Queueing card: " + currentCard.PrecedingDialogue + currentCard.Question);
             dialogueManager.StartBinaryOptionDialogue(dialogueMapper.MinorCardToBinaryOptionDialogue((MinorCard)currentCard), HandleOptionPressed);
         }
         else

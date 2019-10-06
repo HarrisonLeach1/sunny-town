@@ -15,8 +15,9 @@ public class CardFactory
         reader = new Reader();
         currentPlotCard = reader.RootState;
         minorCards = reader.AllMinorStates;
-        // TODO : Remove this, it is just for testing
-        minorCards = new List<Card>(minorCards.Where(x => x is SliderCard).ToList<Card>());
+        Card sliderCard = minorCards.Where(x => x is SliderCard).ToList<Card>().First();
+        // To showcase the different cards we want a slider to show early
+        minorCards.Insert(1, sliderCard);
 
         //minorCards.Randomize();
     }
@@ -37,10 +38,7 @@ public class CardFactory
                     minorCards.Randomize();
                 }
 
-                // TODO : Remove this, it is just for testing
-                minorCards = new List<Card>(minorCards.Where(x => x is SliderCard).ToList<Card>());
-
-                var minorCard = minorCards[0];
+                var minorCard = minorCards.First();
                 minorCards.Remove(minorCard);
                 return minorCard;
             default:

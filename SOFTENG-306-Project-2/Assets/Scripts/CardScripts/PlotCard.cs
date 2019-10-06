@@ -23,6 +23,7 @@ public class PlotCard : Card
             Options[decisionIndex].MetricsModifier.Modify();
             Feedback = Options[decisionIndex].Feedback;
             NextStateId = Options[decisionIndex].NextStateId;
+            ShouldAnimate = Options[decisionIndex].HasAnimation;
         }
     }
 }

@@ -79,6 +79,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartBinaryOptionDialogue(BinaryOptionDialogue dialogue, Action<int> onOptionPressed)
     {
+        Debug.Log("Got dialogue: " + dialogue.Question + dialogue.PrecedingDialogue);
         Action<int> handleButtonPressed = num =>
         {
             onOptionPressed(num);
@@ -102,7 +103,7 @@ public class DialogueManager : MonoBehaviour
         {
             binaryOptionDialogueView.SetContent(dialogue, handleButtonPressed);
             binaryOptionViewAnimator.SetBool("InstantTransition", false);
-            binaryOptionViewAnimator.SetBool("IsVisible", false);
+            binaryOptionViewAnimator.SetBool("IsVisible", true);
         }
     }
 
@@ -130,7 +131,7 @@ public class DialogueManager : MonoBehaviour
         {
             sliderOptionDialogueView.SetContent(dialogue, handleButtonPressed);
             sliderOptionViewAnimator.SetBool("InstantTransition", false);
-            sliderOptionViewAnimator.SetBool("IsVisible", false);
+            sliderOptionViewAnimator.SetBool("IsVisible", true);
         }
     }
 
