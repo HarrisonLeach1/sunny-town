@@ -38,13 +38,13 @@ public class DialogueManager : MonoBehaviour
     /// <param name="onClosed"></param>
     public void StartExplanatoryDialogue(SimpleDialogue dialogue, Action onClosed)
     {
-        Action onEndOfStatements = () =>
+        Action onEndOfStatement = () =>
         {
             simpleDialogueViewAnimator.SetBool("InstantTransition", false);
             simpleDialogueViewAnimator.SetBool("IsVisible", false);
             onClosed();
         };
-        StartSimpleDialogue(dialogue, onEndOfStatements);
+        StartSimpleDialogue(dialogue, onEndOfStatement);
 //        StartSimpleDialogue(dialogue, onClosed);
     }
 
@@ -113,10 +113,10 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(simpleDialogueView.TypeSentence(statement));
     }
 
-    private void StartSimpleDialogue(SimpleDialogue dialogue, Action onEndOfStatements)
+    private void StartSimpleDialogue(SimpleDialogue dialogue, Action onEndOfStatement)
     {
         simpleDialogueView.SetContent(dialogue);
-        this.onEndOfStatements = onEndOfStatements;
+        this.onEndOfStatements = onEndOfStatement;
         simpleDialogueViewAnimator.SetBool("InstantTransition", false);
         simpleDialogueViewAnimator.SetBool("IsVisible", true);
         statements.Clear();

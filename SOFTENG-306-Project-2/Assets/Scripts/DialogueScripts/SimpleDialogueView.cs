@@ -8,16 +8,17 @@ public class SimpleDialogueView
 {
     private NPCSpriteManager npcSpriteManager = NPCSpriteManager.Instance;
     public Image image;
-    public Image npcImage;
+    private Image npcImage;
     public GameObject viewObject;
     public TextMeshProUGUI npcNameText;
     public TextMeshProUGUI npcDialogueText;
     public TextMeshProUGUI buttonText;
 
-    internal void SetContent(SimpleDialogue dialogue)
+    public void SetContent(SimpleDialogue dialogue)
     {
-        npcImage = GameObject.Find("NPCImage").GetComponent<Image>();
-        npcImage.sprite = this.getSprite(dialogue.Name);
+        npcImage = GameObject.Find("SimpleNPCImage").GetComponent<Image>();
+        Debug.Log("Simple NPC Name: " + dialogue.Name);
+        //npcImage.sprite = this.getSprite(dialogue.Name);
     }
     public IEnumerator TypeSentence(string statement)
     {
@@ -39,13 +40,19 @@ public class SimpleDialogueView
         
         int width = 250;
         int height = 250;
+        Debug.Log("Getting sprite for: " + name);
         byte[] bytes = this.npcSpriteManager.GetSpriteByteArray(name);
-        //Texture2D texture = new Texture2D(width, height);
-        Texture2D texture = new Texture2D(width, height, TextureFormat.RGB24, false);
+        if (bytes == null)
+        {
+            Debug.Log("bytes[] is null");
+            return null;
+        }
+        Texture2D texture = new Texture2D(width, height);
+        //Texture2D texture = new Texture2D(width, height, TextureFormat.RGB24, false);
         texture.filterMode = FilterMode.Trilinear;
         texture.LoadImage(bytes);
         Sprite sprite = Sprite.Create(texture, new Rect(0,0,width, height), new Vector2(0.5f,0.0f), 1.0f);
-        //Texture2D texture = new Texture2D(900, 900, TextureFormat.RGB24, false);
+        //Sprite sprite = Sprite.Create(texture, new Rect(0,0,width, height), new Vector2(0.0f,0.0f), 1.0f);
         return sprite;
     }
 }

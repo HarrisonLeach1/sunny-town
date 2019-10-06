@@ -1,5 +1,6 @@
 using System.IO;
-//using UnityEngine;
+using System;
+using UnityEngine;
 //using UnityEngine.UI;
 using System.Collections.Generic;
 
@@ -15,6 +16,9 @@ public class NPCSpriteManager
         spriteDictionary.Add("James the Dog", File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/JamesTheDog.png"));
         spriteDictionary.Add("Allena", File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/Allena.png"));
         spriteDictionary.Add("Jimmy Cash", File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/JimmyCash.png"));
+        spriteDictionary.Add("square", File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/Square.png"));
+        spriteDictionary.Add("", File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/Square.png"));
+        spriteDictionary.Add("Board of Advisors", File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/Square.png"));
     }
 
     public static NPCSpriteManager Instance
@@ -37,6 +41,7 @@ public class NPCSpriteManager
             return spriteDictionary[name];
         }
 
+        Debug.Log("sprite not found in spriteDictionary");
         return null;
     }
 }

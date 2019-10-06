@@ -19,7 +19,8 @@ public class BinaryOptionDialogueView
 
     internal void SetContent(BinaryOptionDialogue dialogue, Action<int> onOptionPressed)
     {
-        npcImage = GameObject.Find("NPCImage").GetComponent<Image>();
+        npcImage = GameObject.Find("BinaryNPCImage").GetComponent<Image>();
+        Debug.Log("Binary NPC Name: " + dialogue.PrecedingDialogue.Name);
         npcImage.sprite = this.getSprite(dialogue.PrecedingDialogue.Name);
         npcNameText.text = dialogue.PrecedingDialogue.Name;
         npcDialogueText.text = dialogue.Question;
