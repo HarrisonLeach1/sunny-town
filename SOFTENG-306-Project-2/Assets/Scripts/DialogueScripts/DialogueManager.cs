@@ -11,12 +11,18 @@ public class DialogueManager : MonoBehaviour
     public Animator simpleDialogueViewAnimator;
     public Animator binaryOptionViewAnimator;
     public Animator sliderOptionViewAnimator;
+    public Animator animationProgressAnimator;
+
     public SimpleDialogueView simpleDialogueView;
     public BinaryOptionDialogueView binaryOptionDialogueView;
     public SliderOptionDialogueView sliderOptionDialogueView;
-    public static DialogueManager Instance { get; private set; }
+    public AnimationProgressDialgoueView animationProgressDialgoueView;
+
     private Queue<string> statements = new Queue<string>();
     private Action onEndOfStatements;
+    private Coroutine progressAnimationCoroutine;
+
+    public static DialogueManager Instance { get; private set; }
 
     private void Awake()
     {
@@ -28,6 +34,30 @@ public class DialogueManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    
+    public void ShowAnimationProgress(float seconds)
+    {
+        animationProgressAnimator.SetBool("IsVisible", false);
+        if (progressAnimationCoroutine != null)
+        {
+            StopCoroutine(progressAnimationCoroutine);
+        }
+        animationProgressAnimator.SetBool("IsVisible", true);
+        progressAnimationCoroutine = StartCoroutine(AnimationWait(seconds));
+    }
+
+    private IEnumerator AnimationWait(float seconds)
+    {
+        animationProgressDialgoueView.slider.value = 0;
+        float timeProgressed = 0;
+        while (timeProgressed < seconds)
+        {
+            timeProgressed += Time.deltaTime;
+            animationProgressDialgoueView.slider.value = timeProgressed / seconds;
+            yield return null;
+        }
+        animationProgressAnimator.SetBool("IsVisible", false);
     }
 
     /// <summary>
