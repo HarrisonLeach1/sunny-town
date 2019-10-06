@@ -44,7 +44,7 @@ public class CardManager : MonoBehaviour
         dialogueMapper = new DialogueMapper();
     }
 
-    public void DisplayMinorCard()
+    public void DisplayMinorCard(Button button)
     {
         if (!currentlyProcessingCard)
         {
@@ -52,6 +52,9 @@ public class CardManager : MonoBehaviour
             StopCoroutine(cardWaitingRoutine);
             currentlyProcessingCard = true;
             currentCard = cardFactory.GetNewCard("minor");
+            //destroy the exclamation mark
+            PopupButtonControllerScript.popupShowing = false;
+            Destroy(button.gameObject);
 
             if (currentCard is MinorCard)
             {
@@ -69,6 +72,10 @@ public class CardManager : MonoBehaviour
         }
     }
 
+    public bool GetCardStatus()
+    {
+        return this.currentlyProcessingCard;
+    }
     public void StartDisplayingCards()
     {
         currentCard = cardFactory.GetNewCard("story");

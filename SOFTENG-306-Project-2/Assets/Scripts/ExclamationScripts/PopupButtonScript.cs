@@ -9,21 +9,25 @@ public class PopupButtonScript : MonoBehaviour
     public GameObject popup;
     private Animator animator;
 
+    public GameObject managerPopup;
+    private CardManager manager;
+
     private Button button; 
+
+    private AnimationEvent animatorEvent;
 
     // Start is called before the first frame update
     void OnEnable()
-    {   popup = GameObject.Find("Popup");
+    {   
+        popup = GameObject.Find("Popup");
+        managerPopup = GameObject.Find("CardManager");
+        manager = managerPopup.GetComponent<CardManager>();
         animator = popup.GetComponent<Animator>();
+        animatorEvent = new AnimationEvent();
         AnimatorClipInfo[] clipInfo =  animator.GetCurrentAnimatorClipInfo(0);
         Destroy(gameObject, clipInfo[0].clip.length);
         button = animator.GetComponent<Button>();
-        button.onClick.AddListener(TaskOnClick);
-
+        button.onClick.AddListener(()=> manager.DisplayMinorCard(button));
     }
 
-    void TaskOnClick()
-    {
-        Debug.Log("something");
-    }
 }

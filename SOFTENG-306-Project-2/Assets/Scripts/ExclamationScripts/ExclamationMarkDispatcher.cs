@@ -4,13 +4,31 @@ using UnityEngine;
 
 public class ExclamationMarkDispatcher : MonoBehaviour
 {
+
+    public GameObject popupManager;
+    private CardManager manager;
       void Start()
     {
         PopupButtonControllerScript.Initialise();
+        popupManager = GameObject.Find("CardManager");
+        manager = popupManager.GetComponent<CardManager>();
+        StartCoroutine("CreateMinorCard");
     }
-    void OnMouseDown()
-    {
+
+
+ 
+    IEnumerator CreateMinorCard()
+    {   
+        float randomTime = (float)Random.Range(0.5f, 1.5f);
+        //dont show exclamation mark while card showing 
+        while (manager.GetCardStatus() || PopupButtonControllerScript.popupShowing){
+            Debug.Log("stuck here " +manager.GetCardStatus() +" "+PopupButtonControllerScript.popupShowing);
+            yield return new WaitForSeconds(1);
+        }
+        Debug.Log("creating card");
         PopupButtonControllerScript.CreatePopupButton(transform);
-        Debug.Log("pos is " + transform.position);
+        StartCoroutine("CreateMinorCard", randomTime);
+ 
     }
+    
 }

@@ -9,6 +9,8 @@ public class PopupButtonControllerScript : MonoBehaviour
 {
     private static PopupButtonScript popupButton; 
     private static GameObject canvas;
+
+    public static bool popupShowing;
     public static void Initialise()
     {   
         canvas = GameObject.Find("UI");
@@ -16,6 +18,7 @@ public class PopupButtonControllerScript : MonoBehaviour
     }
     public static void CreatePopupButton( Transform location)
     {
+        popupShowing = true;
         Debug.Log("create button");
         PopupButtonScript instance = Instantiate(popupButton);
         Vector2 screenPosition = Camera.main.WorldToScreenPoint(location.position);
@@ -23,6 +26,13 @@ public class PopupButtonControllerScript : MonoBehaviour
         instance.transform.SetParent(canvas.transform, false);
         instance.transform.position = finalPosition;
         Debug.Log(instance.transform.position);
+    }
+
+    
+    void DisableExclamationState()
+    {
+        popupShowing = false;
+        Debug.Log("status is "+popupShowing);
     }
 
 }
