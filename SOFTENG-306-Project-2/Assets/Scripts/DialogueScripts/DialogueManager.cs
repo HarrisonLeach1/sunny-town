@@ -57,6 +57,7 @@ public class DialogueManager : MonoBehaviour
             binaryOptionViewAnimator.SetBool("IsVisible", false);
         };
 
+        //TODO handle if absent preceding dialogue
         if (dialogue.PrecedingDialogue.Statements.Length != 0)
         {
             StartSimpleDialogue(dialogue.PrecedingDialogue, () => {

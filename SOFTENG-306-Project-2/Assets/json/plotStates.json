@@ -25,7 +25,7 @@
     {
         "id": "s2",
         "name": "Hunter Gatberg",
-        "precedingDialogue" : ["Ring Ring... Ring Ring..."],
+        "precedingDialogue" : ["[Ring Ring... Ring Ring...]"],
         "question": "Hi mum! We learnt about polar bears at school today. Do you think we'll be able to go see them one day?",
         "transitions": [
             {
@@ -43,7 +43,7 @@
     {
         "id": "s2a",
         "name": "Hunter Gatberg",
-        "precedingDialogue" : ["Ring Ring... Ring Ring..."],
+        "precedingDialogue" : ["[Ring Ring... Ring Ring...]"],
         "question": "Hi mum! We learnt about polar bears at school today. Do you think we'll be able to go see them one day?",
         "transitions": [
             {
@@ -61,14 +61,15 @@
     {
         "id": "s3",
         "name": "Arvio",
-        "question": "Your land is perfect for oil mining. Will you let us set up? We'll pay you.",
+        "precedingDialogue" : ["Mrs. Gatberg, your land is perfect for oil mining."],
+        "question": "Will you let us set up an oil rig? We'll pay you.",
         "transitions": [
             {
                 "label": "Yes",
                 "money": 20,
                 "happiness": -10,
                 "environment": -20,
-                "feedback": "Arvio begins constructing an oil mine. The people of the town are upset at this news. We get paid a great amount of money.",
+                "feedback": "Arvio begins constructing an oil mine. The people of the town are upset at this news. However, we get paid a great amount of money.",
                 "state": "s4"
             },
             {
@@ -81,7 +82,7 @@
     {
         "id": "s3a",
         "name": "Arvio",
-        "precedingDialogue" : ["[Arvio has inspected the land without your consent"],
+        "precedingDialogue" : ["Arvio has inspected the land without your consent"],
         "question": "Your land is perfect for oil mining. Will you let us set up? We'll pay you.",
         "transitions": [
             {
@@ -89,20 +90,22 @@
                 "money": 20,
                 "happiness": -10,
                 "environment": -20,
-                "feedback": "feedback 3a",
+                "feedback": "Arvio begins constructing an oil mine. The people of the town are upset at this news. However, we get paid a great amount of money.",
                 "state": "s4"
             },
             {
                 "label": "No",
-                "feedback": "feedback 3b",
+                "feedback": "Arvio leaves you alone",
                 "state": "s5"
             }
         ]
     },
     {
         "id": "s4",
-        "name": "Cowboy",
-        "question": "A local group of farmers are struggling because of the drought. We need as much as water as possible. Will you restrict the town's water usage?",
+        "name": "Cowboy Willy",
+        "precedingDialogue" : ["A local group of farmers are struggling because of the drought. ",
+        "We need as much water as possible"],
+        "question": "Will you restrict the town's water usage?",
         "transitions": [
             {
                 "label": "Yes",
@@ -121,8 +124,10 @@
     },
     {
         "id": "s5",
-        "name": "Cowboy",
-        "question": "A local group of farmers are struggling because of the drought. We need as much as water as possible. Will you restrict the town's water usage?",
+        "name": "Cowboy Willy",
+        "precedingDialogue" : ["A local group of farmers are struggling because of the drought. ",
+            "We need as much water as possible"],
+        "question": "Will you restrict the town's water usage?",
         "transitions": [
             {
                 "label": "Yes",
@@ -142,7 +147,8 @@
     {
         "id": "s6",
         "name": "Hunter Gatberg",
-        "question": "Mum, I want a treehouse. All my friends have one... Can we build one?",
+        "precedingDialogue" : ["Mum, I want a treehouse", "All my friends have one..."],
+        "question": "Can we build a treehouse?",
         "transitions": [
             {
                 "label": "Yes",
@@ -163,7 +169,8 @@
     {
         "id": "s7",
         "name": "Hunter Gatberg",
-        "question": "Mum, I want a treehouse. All my friends have one... Can we build one?",
+        "precedingDialogue" : ["Mum, I want a treehouse", "All my friends have one..."],
+        "question": "Can we build a treehouse?",
         "transitions": [
             {
                 "label": "Yes",
@@ -183,6 +190,7 @@
     },
     {
         "id": "s8",
+        "precedingDialogue" : [],
         "question": "Your town has grown!",
         "transitions": [
             {
@@ -193,6 +201,7 @@
     },
     {
         "id": "s9",
+        "precedingDialogue" : [],
         "question": "Your town has grown!",
         "transitions": [
             {
