@@ -6,7 +6,7 @@
             {
                 "label": "Yes",
                 "hasAnimation": true,
-                "buildingName": "CoalMine",
+                "buildingName": "PowerPlant",
                 "happiness": 20,
                 "environment": -20,
                 "money": -5,
