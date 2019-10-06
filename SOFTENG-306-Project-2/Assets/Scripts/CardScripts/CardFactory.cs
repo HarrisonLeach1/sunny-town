@@ -15,10 +15,8 @@ public class CardFactory
         reader = new Reader();
         currentPlotCard = reader.RootState;
         minorCards = reader.AllMinorStates;
-        Card sliderCard = minorCards.Where(x => x is SliderCard).ToList<Card>().First();
-        // To showcase the different cards we want a slider to show early
-        minorCards.Insert(1, sliderCard);
 
+        // Preserve order now for showcase
         //minorCards.Randomize();
     }
 
