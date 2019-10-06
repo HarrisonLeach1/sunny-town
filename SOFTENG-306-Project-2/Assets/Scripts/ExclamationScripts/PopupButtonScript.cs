@@ -25,8 +25,5 @@ public class PopupButtonScript : MonoBehaviour
     void TaskOnClick()
     {
         Debug.Log("something");
-
-
-
     }
 }
