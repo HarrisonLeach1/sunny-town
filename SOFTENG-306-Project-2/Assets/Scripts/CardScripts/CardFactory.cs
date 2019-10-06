@@ -14,7 +14,7 @@ public class CardFactory
     {
         reader = new Reader();
         currentPlotCard = reader.RootState;
-        minorCards = reader.AllMinorStates;
+        minorCards = new List<Card>(reader.AllMinorStates);
 
         // Preserve order now for showcase
         //minorCards.Randomize();
@@ -32,7 +32,7 @@ public class CardFactory
             case ("minor"):
                 if (minorCards.Count == 0)
                 {
-                    minorCards = reader.AllMinorStates;
+                    minorCards = new List<Card>(reader.AllMinorStates);
                     minorCards.Randomize();
                 }
 

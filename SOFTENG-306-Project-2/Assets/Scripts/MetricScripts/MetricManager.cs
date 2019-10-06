@@ -126,8 +126,6 @@ public class MetricManager : MonoBehaviour
 
     public void UpdateGold(int value)
     {
-        Debug.Log("called update gold: " + value);
-
         this.Gold += value;
         if (this.Gold > MAX_VALUE)
         {
