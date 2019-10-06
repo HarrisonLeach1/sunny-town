@@ -17,6 +17,7 @@ public class NPCSpriteManager
         spriteDictionary.Add("Allena", File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/Allena.png"));
         spriteDictionary.Add("Jimmy Cash", File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/JimmyCash.png"));
         spriteDictionary.Add("Hunter Gatberg", File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/HunterGatberg.png"));
+        spriteDictionary.Add("Cowboy Willy", File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/CowboyWilly.png"));
     }
 
     public static NPCSpriteManager Instance
