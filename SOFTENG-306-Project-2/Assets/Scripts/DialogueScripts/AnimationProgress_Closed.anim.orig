@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DialogueBox_Close
+  m_Name: AnimationProgress_Closed
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -22,7 +22,11 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -3229
+<<<<<<< HEAD
+        value: 95.92
+=======
+        value: -1163
+>>>>>>> feature/ui-changes
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -78,7 +82,11 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -3229
+<<<<<<< HEAD
+        value: 95.92
+=======
+        value: -1163
+>>>>>>> feature/ui-changes
         inSlope: 0
         outSlope: 0
         tangentMode: 136
