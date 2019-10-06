@@ -115,7 +115,7 @@ public class MetricManager : MonoBehaviour
             //TODO: Probably will change later, this changes scenes to end game screen upon losing mats
             
             SimpleDialogue endGameDialogue = new SimpleDialogue(new string[1]{"Lost pop happiness"}, "");
-            CardManager.Instance.DisplayEndDialogue(endGameDialogue);
+            CardManager.Instance.QueueEndDialogue(endGameDialogue);
         }
     }
 
@@ -135,7 +135,7 @@ public class MetricManager : MonoBehaviour
             
             //TODO: Probably will change later, this changes scenes to end game screen upon losing mats
             SimpleDialogue endGameDialogue = new SimpleDialogue(new string[1]{"Lost gold"}, "");
-            CardManager.Instance.DisplayEndDialogue(endGameDialogue);
+            CardManager.Instance.QueueEndDialogue(endGameDialogue);
         }
     }
 
@@ -154,7 +154,7 @@ public class MetricManager : MonoBehaviour
             //TODO: Probably will change later, this changes scenes to end game screen upon losing mats
             SimpleDialogue endGameDialogue = new SimpleDialogue(new string[1]{"Lost env health"}, "");
 
-            CardManager.Instance.DisplayEndDialogue(endGameDialogue);
+            CardManager.Instance.QueueEndDialogue(endGameDialogue);
         }
     }
 }

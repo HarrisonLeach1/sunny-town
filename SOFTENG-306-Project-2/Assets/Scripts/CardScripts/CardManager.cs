@@ -20,6 +20,8 @@ public class CardManager : MonoBehaviour
     private Reader reader;
     private bool currentlyProcessingCard = true;
     private Coroutine cardWaitingRoutine;
+    private bool gameLost = false;
+    private SimpleDialogue endGameDialogue;
 
     private void Awake()
     {
@@ -44,11 +46,10 @@ public class CardManager : MonoBehaviour
         dialogueMapper = new DialogueMapper();
     }
 
-    public void DisplayEndDialogue(SimpleDialogue endGameDialogue)
+    public void QueueEndDialogue(SimpleDialogue endGameDialogue)
     {
-        dialogueManager.StartExplanatoryDialogue(
-            endGameDialogue,
-            () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
+        gameLost = true;
+        this.endGameDialogue = endGameDialogue;
     }
 
     public void DisplayMinorCard(Button button)
@@ -110,19 +111,13 @@ public class CardManager : MonoBehaviour
 
     private void ShowFeedback()
     {
-        dialogueManager.StartExplanatoryDialogue(dialogueMapper.FeedbackToDialogue(currentCard.Feedback), HandleFeedbackContinued);
-    }
-
-    private void HandleFeedbackContinued()
-    {
-        UpdateCard();
-        currentlyProcessingCard = false;
-        cardWaitingRoutine = StartCoroutine(QueueCard());
+        dialogueManager.StartExplanatoryDialogue(dialogueMapper.FeedbackToDialogue(currentCard.Feedback), GoToNextCard);
     }
 
     private IEnumerator QueueCard()
     {
         yield return new WaitForSeconds(3);
+
         currentlyProcessingCard = true;
         if (currentCard is PlotCard)
         {
@@ -138,7 +133,7 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    private void UpdateCard()
+    private void GoToNextCard()
     {
         cardCount++;
 
@@ -146,6 +141,13 @@ public class CardManager : MonoBehaviour
         {
             isFinalCard = true;
             EndGame();
+            return;
+        }
+        else if (gameLost) 
+        {
+            dialogueManager.StartExplanatoryDialogue(
+                this.endGameDialogue,
+                () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
             return;
         }
 
@@ -157,6 +159,9 @@ public class CardManager : MonoBehaviour
         {
             currentCard = cardFactory.GetNewCard("minor");
         }
+
+        currentlyProcessingCard = false;
+        cardWaitingRoutine = StartCoroutine(QueueCard());
     }
 
     private void EndGame()
