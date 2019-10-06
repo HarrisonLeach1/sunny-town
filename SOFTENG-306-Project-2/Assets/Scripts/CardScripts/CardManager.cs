@@ -196,9 +196,13 @@ public class CardManager : MonoBehaviour
     private bool IsFinalCard(Card currentCard)
     {
         // Game is ended on story cards with no transitions
-        if (currentCard is PlotCard && currentCard.Options.Count == 0)
+        
+        if (currentCard is PlotCard)
         {
-            return true;
+            if (((PlotCard) currentCard).NextStateId == null)
+            {
+                return true;
+            }
         }
         return false;
     }
