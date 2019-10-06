@@ -119,7 +119,8 @@ public class MetricManager : MonoBehaviour
 
             //TODO: Probably will change later, this changes scenes to end game screen upon losing mats
 
-            SimpleDialogue endGameDialogue = new SimpleDialogue(new string[1] { "Lost pop happiness" }, "");
+            SimpleDialogue endGameDialogue = new SimpleDialogue(new string[2] { "Oh no, the people in our town became " +
+                                                                                "very upset with your decisions. They have voted you out of power.", " Try keeping them happier next time. " }, "");
             CardManager.Instance.QueueEndDialogue(endGameDialogue);
         }
     }
@@ -137,7 +138,7 @@ public class MetricManager : MonoBehaviour
             this.Gold = MIN_VALUE;
 
             //TODO: Probably will change later, this changes scenes to end game screen upon losing mats
-            SimpleDialogue endGameDialogue = new SimpleDialogue(new string[1] { "Lost gold" }, "");
+            SimpleDialogue endGameDialogue = new SimpleDialogue(new string[2] { "You have lost all your town's money. Now you cannot build the town.", "Be careful when making decisions that involve spending money next time." }, "");
             CardManager.Instance.QueueEndDialogue(endGameDialogue);
         }
     }
@@ -155,7 +156,9 @@ public class MetricManager : MonoBehaviour
             this.EnvHealth = MIN_VALUE;
 
             //TODO: Probably will change later, this changes scenes to end game screen upon losing mats
-            SimpleDialogue endGameDialogue = new SimpleDialogue(new string[1] { "Lost env health" }, "");
+            SimpleDialogue endGameDialogue = new SimpleDialogue(new string[2] { "Your decisions have led to a lot of damage to the environment." +
+                                                                                "Natural disasters have ravaged the city.", " Take better care of your environment next time" }, "");
+
 
             CardManager.Instance.QueueEndDialogue(endGameDialogue);
         }
