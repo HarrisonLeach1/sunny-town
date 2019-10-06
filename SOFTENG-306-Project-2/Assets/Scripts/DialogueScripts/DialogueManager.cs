@@ -38,12 +38,12 @@ public class DialogueManager : MonoBehaviour
     /// <param name="onClosed"></param>
     public void StartExplanatoryDialogue(SimpleDialogue dialogue, Action onClosed)
     {
-        Action onEndOfStatements = () =>
+        Action onEndOfStatement = () =>
         {
             simpleDialogueViewAnimator.SetTrigger("ToggleVisibilitySmooth");
             onClosed();
         };
-        StartSimpleDialogue(dialogue, onEndOfStatements);
+        StartSimpleDialogue(dialogue, onEndOfStatement);
     }
 
     public void StartBinaryOptionDialogue(BinaryOptionDialogue dialogue, Action<int> onOptionPressed)
@@ -104,9 +104,9 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(simpleDialogueView.TypeSentence(statement));
     }
 
-    private void StartSimpleDialogue(SimpleDialogue dialogue, Action onEndOfStatements)
+    private void StartSimpleDialogue(SimpleDialogue dialogue, Action onEndOfStatement)
     {
-        this.onEndOfStatements = onEndOfStatements;
+        onEndOfStatements = onEndOfStatement;
         simpleDialogueViewAnimator.SetTrigger("ToggleVisibilitySmooth");
         statements.Clear();
 

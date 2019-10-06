@@ -124,7 +124,9 @@ public class MetricManager : MonoBehaviour
             this.PopHappiness = MIN_VALUE;
             
             //TODO: Probably will change later, this changes scenes to end game screen upon losing mats
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            
+            SimpleDialogue endGameDialogue = new SimpleDialogue(new string[1]{"Lost pop happiness"}, "");
+            CardManager.Instance.DisplayEndDialogue(endGameDialogue);
         }
     }
 
@@ -141,7 +143,8 @@ public class MetricManager : MonoBehaviour
             this.Gold = MIN_VALUE;
             
             //TODO: Probably will change later, this changes scenes to end game screen upon losing mats
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SimpleDialogue endGameDialogue = new SimpleDialogue(new string[1]{"Lost gold"}, "");
+            CardManager.Instance.DisplayEndDialogue(endGameDialogue);
         }
     }
 
@@ -158,7 +161,9 @@ public class MetricManager : MonoBehaviour
             this.EnvHealth = MIN_VALUE;
             
             //TODO: Probably will change later, this changes scenes to end game screen upon losing mats
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SimpleDialogue endGameDialogue = new SimpleDialogue(new string[1]{"Lost env health"}, "");
+
+            CardManager.Instance.DisplayEndDialogue(endGameDialogue);
         }
     }
 }

@@ -44,6 +44,13 @@ public class CardManager : MonoBehaviour
         dialogueMapper = new DialogueMapper();
     }
 
+    public void DisplayEndDialogue(SimpleDialogue endGameDialogue)
+    {
+        dialogueManager.StartExplanatoryDialogue(
+            endGameDialogue,
+            () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
+    }
+
     public void DisplayMinorCard()
     {
         if (!currentlyProcessingCard)
@@ -93,7 +100,7 @@ public class CardManager : MonoBehaviour
     {
         dialogueManager.StartExplanatoryDialogue(dialogueMapper.FeedbackToDialogue(currentCard.Feedback), HandleFeedbackContinued);
     }
-
+    
     private void HandleFeedbackContinued()
     {
         UpdateCard();
