@@ -80,7 +80,8 @@ public class DialogueManager : MonoBehaviour
         Action<int> handleButtonPressed = value =>
         {
             onValueConfirmed(value);
-            sliderOptionViewAnimator.SetTrigger("ToggleVisibilitySmooth");
+            sliderOptionViewAnimator.SetBool("InstantTransition", false);
+            sliderOptionViewAnimator.SetBool("IsVisible", false);
         };
 
         if (dialogue.PrecedingDialogue.Statements.Length != 0)
