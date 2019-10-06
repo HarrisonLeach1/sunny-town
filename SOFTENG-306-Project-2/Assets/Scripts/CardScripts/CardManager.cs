@@ -184,14 +184,7 @@ public class CardManager : MonoBehaviour
             return;
         }
 
-        if (cardCount % 3 == 0)
-        {
-            currentCard = cardFactory.GetNewCard("story");
-        }
-        else
-        {
-            currentCard = cardFactory.GetNewCard("minor");
-        }
+        currentCard = cardFactory.GetNewCard("story");
 
         currentlyProcessingCard = false;
         cardWaitingRoutine = StartCoroutine(QueueCard());
