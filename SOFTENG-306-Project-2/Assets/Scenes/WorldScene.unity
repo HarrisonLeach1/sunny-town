@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3556889, g: 0.35026392, b: 0.3740371, a: 1}
+  m_IndirectSpecularColor: {r: 0.3556888, g: 0.3502638, b: 0.3740369, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -17535,7 +17535,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1151125402}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: -127.19, y: -6.49, z: 151.13}
+  m_LocalPosition: {x: 290, y: 124, z: 117}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -22156,6 +22156,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4133667631727024153, guid: 708225c1148d3884e99abda984806505,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4133667631727024156, guid: 708225c1148d3884e99abda984806505,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -22261,21 +22266,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4133667631727024153, guid: 708225c1148d3884e99abda984806505,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8506005682726905431, guid: 708225c1148d3884e99abda984806505,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8506005682726905431, guid: 708225c1148d3884e99abda984806505,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5226830898771567994, guid: 708225c1148d3884e99abda984806505,
         type: 3}
       propertyPath: m_AnchorMin.x
@@ -22287,6 +22277,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5226830898771567994, guid: 708225c1148d3884e99abda984806505,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8506005682726905431, guid: 708225c1148d3884e99abda984806505,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8506005682726905431, guid: 708225c1148d3884e99abda984806505,
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
