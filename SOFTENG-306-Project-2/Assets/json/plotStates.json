@@ -52,7 +52,7 @@
             "[Ring Ring... Ring Ring...]",
             "Hey Mum! We learnt about polar bears today, they look so cute. I would love to be able to see them one day."
         ],
-        "question": "Hi mum! We learnt about polar bears at school today. Do you think we'll be able to go see them one day?",
+        "question": "Could you take me on a trip someday?",
         "transitions": [
             {
                 "label": "Of course, my dear",
@@ -68,7 +68,7 @@
         "id": "s3",
         "name": "Arvio",
         "precedingDialogue": [
-            "Mrs. Gatberg, our prediction was right, your land is rich with coal."
+            "Mrs. Gatberg, our prediction was right. Your land is rich with coal."
         ],
         "question": "Will you let us set up an coal mine? We'll pay you.",
         "transitions": [
@@ -123,7 +123,7 @@
         "name": "Cowboy Willy",
         "precedingDialogue": [
             "A drought is affecting the farmlands of your town, this is affecting all of our local farmers",
-            "If this continues they might not be able to grow enough crops for the town",
+            "If this continues we might not be able to grow enough crops for the town",
             "We need as much water as possible, you could pass a temporary law to restrict citizens' water usage to help. "
         ],
         "question": "Will you restrict the town's water usage?",
@@ -151,7 +151,7 @@
         "name": "Cowboy Willy",
         "precedingDialogue": [
             "A drought is affecting the farmlands of your town, this is affecting all of our local farmers",
-            "If this continues they might not be able to grow enough crops for the town",
+            "If this continues we might not be able to grow enough crops for the town",
             "We need as much water as possible, you could pass a temporary law to restrict citizens' water usage to help. "
         ],
         "question": "Will you restrict the town's water usage?",

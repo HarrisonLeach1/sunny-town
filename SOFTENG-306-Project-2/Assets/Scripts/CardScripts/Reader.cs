@@ -8,8 +8,8 @@ using System.Linq;
 namespace SunnyTown
 {
     /// <summary>
-    /// A Reader is repsonsible for reading json and converting it into 
-    /// Card objects at runtime
+    /// A Reader is repsonsible for reading json files and converting it into 
+    /// Card and SimpleDialogue objects at runtime
     /// </summary>
     public class Reader
     {

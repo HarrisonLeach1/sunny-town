@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 namespace SunnyTown
 {
+    /// <summary>
+    /// The MetricManager is a singleton class that represents the 3 main metrics used in the game:
+    /// PopulationHappiness, Gold and EnvironmentHealth. It is also responsible for rendering metrics
+    /// bars and calculating the final score.
+    /// </summary>
     public class MetricManager : MonoBehaviour
     {
         public static MetricManager Instance { get; private set; }
