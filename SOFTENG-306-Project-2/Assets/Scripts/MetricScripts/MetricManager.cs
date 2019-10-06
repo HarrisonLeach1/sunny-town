@@ -76,33 +76,25 @@ public class MetricManager : MonoBehaviour
     
     IEnumerator AnimateMetric (Slider metricBar, int oldValue, int newValue)
     {
-        TextMeshProUGUI metricChangeText = metricBar.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        if (oldValue < newValue)
-        {
-            metricChangeText.SetText(("+" + (newValue - oldValue)));
-            metricChangeText.color = new Color(0, 255, 0, 255);
-        }
-        else if (newValue < oldValue)
-        {
-            metricChangeText.SetText(("-" + (oldValue - newValue)));
-            metricChangeText.color = new Color(255, 0, 0, 255);
-        }
-        else
-        {
-            metricChangeText.SetText("");
-            metricChangeText.color = new Color(255, 255, 255, 255);
-        }
+        Image metricBarFill = metricBar.transform.GetChild(1).GetChild(0).GetComponent<Image>();
+        
         int tempValue = oldValue;
+        if (tempValue == newValue)
+        {
+            metricBarFill.color = new Color32(75, 75, 75, 255);
+        }
         while (tempValue != newValue)
         {
             yield return null;
             if (tempValue < newValue)
             {
                 tempValue++;
+                metricBarFill.color = Color.green;
             }
             else if (tempValue > newValue)
             {
                 tempValue--;
+                metricBarFill.color = Color.red;
             }
 
             metricBar.value = (float) tempValue / MAX_VALUE;
