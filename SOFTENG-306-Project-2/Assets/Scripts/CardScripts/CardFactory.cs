@@ -19,7 +19,7 @@ namespace SunnyTown
             minorCards = new List<Card>(reader.AllMinorStates);
 
             // Preserve order now for showcase
-            //minorCards.Randomize();
+            minorCards.Randomize();
         }
 
         public Card GetNewCard(string cardDescriptor)
