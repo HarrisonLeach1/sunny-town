@@ -2,34 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExclamationMarkDispatcher : MonoBehaviour
+namespace SunnyTown
 {
-
-    public GameObject popupManager;
-    private CardManager manager;
-      void Start()
+    public class ExclamationMarkDispatcher : MonoBehaviour
     {
-        PopupButtonControllerScript.Initialise();
-        popupManager = GameObject.Find("CardManager");
-        manager = popupManager.GetComponent<CardManager>();
-        StartCoroutine("CreateMinorCard");
-    }
 
+        public GameObject popupManager;
+        private CardManager manager;
 
- 
-    IEnumerator CreateMinorCard()
-    {   
-        while (manager.GetCardStatus() || PopupButtonControllerScript.popupShowing){
-            yield return new WaitForSeconds(1);
+        void Start()
+        {
+            PopupButtonControllerScript.Initialise();
+            popupManager = GameObject.Find("CardManager");
+            manager = popupManager.GetComponent<CardManager>();
+            StartCoroutine("CreateMinorCard");
         }
-        Debug.Log("in here");
-        float randomTime = (float)Random.Range(2f, 4f);
-        //dont show exclamation mark while card showing 
-        Debug.Log("creating card "+randomTime);
-        yield return new WaitForSeconds(randomTime);
-        PopupButtonControllerScript.CreatePopupButton(transform);
-        StartCoroutine("CreateMinorCard", randomTime);
- 
+
+
+
+        IEnumerator CreateMinorCard()
+        {
+            while (manager.GetCardStatus() || PopupButtonControllerScript.popupShowing)
+            {
+                yield return new WaitForSeconds(1);
+            }
+
+            Debug.Log("in here");
+            float randomTime = (float) Random.Range(2f, 4f);
+            //dont show exclamation mark while card showing 
+            Debug.Log("creating card " + randomTime);
+            yield return new WaitForSeconds(randomTime);
+            PopupButtonControllerScript.CreatePopupButton(transform);
+            StartCoroutine("CreateMinorCard", randomTime);
+
+        }
+
     }
-    
 }

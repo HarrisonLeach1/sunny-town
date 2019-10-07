@@ -1,12 +1,19 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-public class SliderTransition : Transition
+namespace SunnyTown
 {
-    private int threshold;
-    public int Threshold => threshold;
-    public SliderTransition(string feedback, string feedbackNPCName, MetricsModifier metricsmodifier, bool hasAnimation, string buildingName, int threshold) : base(feedback, feedbackNPCName, metricsmodifier, hasAnimation, buildingName)
+
+    public class SliderTransition : Transition
     {
-        this.threshold = threshold;
+        private int threshold;
+        public int Threshold => threshold;
+
+        public SliderTransition(string feedback, string feedbackNPCName, MetricsModifier metricsmodifier,
+            bool hasAnimation, string buildingName, int threshold) : base(feedback, feedbackNPCName, metricsmodifier,
+            hasAnimation, buildingName)
+        {
+            this.threshold = threshold;
+        }
     }
 }

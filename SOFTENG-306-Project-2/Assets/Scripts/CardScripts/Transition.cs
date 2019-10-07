@@ -1,24 +1,36 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Transition
+namespace SunnyTown
 {
-    private string nextStateId;
-    public string Dialogue { get; set; }
-    public string Feedback { get; set; }
-    public string FeedbackNPCName { get; set; }
-    public string NextStateId { get => nextStateId; set => nextStateId = value; }
-    public bool HasAnimation { get; protected set; } = false;
-    public string BuildingName { get; set; } = "";
-    public MetricsModifier MetricsModifier { get; set; }
-    public Transition(string feedback, string feedbackNpcName, MetricsModifier metricsmodifier, bool hasAnimation, string buildingName, string dialogue = "", string nextStateId = "")
+
+    public class Transition
     {
-        this.Dialogue = dialogue;
-        this.Feedback = feedback;
-        this.FeedbackNPCName = feedbackNpcName;
-        this.HasAnimation = hasAnimation;
-        this.BuildingName = buildingName;
-        this.MetricsModifier = metricsmodifier;
-        this.NextStateId = nextStateId;
+        private string nextStateId;
+        public string Dialogue { get; set; }
+        public string Feedback { get; set; }
+        public string FeedbackNPCName { get; set; }
+
+        public string NextStateId
+        {
+            get => nextStateId;
+            set => nextStateId = value;
+        }
+
+        public bool HasAnimation { get; protected set; } = false;
+        public string BuildingName { get; set; } = "";
+        public MetricsModifier MetricsModifier { get; set; }
+
+        public Transition(string feedback, string feedbackNpcName, MetricsModifier metricsmodifier, bool hasAnimation,
+            string buildingName, string dialogue = "", string nextStateId = "")
+        {
+            this.Dialogue = dialogue;
+            this.Feedback = feedback;
+            this.FeedbackNPCName = feedbackNpcName;
+            this.HasAnimation = hasAnimation;
+            this.BuildingName = buildingName;
+            this.MetricsModifier = metricsmodifier;
+            this.NextStateId = nextStateId;
+        }
     }
 }

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+namespace SunnyTown
+{
 // Initial Dialogue implementation based on code from: 
 // https://github.com/Brackeys/Dialogue-System
 public class DialogueManager : MonoBehaviour
@@ -163,4 +165,5 @@ public class DialogueManager : MonoBehaviour
 
         DisplayNextStatement();
     }
+}
 }

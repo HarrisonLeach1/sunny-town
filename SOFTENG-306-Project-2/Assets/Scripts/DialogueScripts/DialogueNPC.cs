@@ -3,38 +3,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueNPC : MonoBehaviour
+namespace SunnyTown
 {
-    //public SimpleDialogue dialogue;
-    private Reader reader;
-    private List<SimpleDialogue> expositionDialogues;
-    private SimpleDialogue currentExpositionDialogue;
-
-    private void Start()
+    public class DialogueNPC : MonoBehaviour
     {
-        this.reader = new Reader();
-        this.expositionDialogues = reader.AllExpositionDialogues;
+        //public SimpleDialogue dialogue;
+        private Reader reader;
+        private List<SimpleDialogue> expositionDialogues;
+        private SimpleDialogue currentExpositionDialogue;
+
+        private void Start()
+        {
+            this.reader = new Reader();
+            this.expositionDialogues = reader.AllExpositionDialogues;
 //        this.currentExpositionDialogue = this.expositionDialogues[0];
 //        this.expositionDialogues.RemoveAt(0);
-        Debug.Log("Number of exposition states: " +this.expositionDialogues.Count);
-        TriggerDialogue();
-    }
-
-    public void TriggerDialogue()
-    {
-        Action handleDialogueClosed = () => this.TriggerDialogue();
-        if (this.expositionDialogues.Count == 1)
-        {
-            handleDialogueClosed = () => CardManager.Instance.StartDisplayingCards();
+            Debug.Log("Number of exposition states: " + this.expositionDialogues.Count);
+            TriggerDialogue();
         }
-        
-        this.currentExpositionDialogue = this.expositionDialogues[0];
-        this.expositionDialogues.RemoveAt(0);
-        
-        DialogueManager.Instance.StartExplanatoryDialogue(this.currentExpositionDialogue, handleDialogueClosed);
-    }
-    
-    
+
+        public void TriggerDialogue()
+        {
+            Action handleDialogueClosed = () => this.TriggerDialogue();
+            if (this.expositionDialogues.Count == 1)
+            {
+                handleDialogueClosed = () => CardManager.Instance.StartDisplayingCards();
+            }
+
+            this.currentExpositionDialogue = this.expositionDialogues[0];
+            this.expositionDialogues.RemoveAt(0);
+
+            DialogueManager.Instance.StartExplanatoryDialogue(this.currentExpositionDialogue, handleDialogueClosed);
+        }
+
+
 //    public void TriggerDialogue()
 //    {
 ////        Action handleDialogueClosed = null;
@@ -53,5 +55,6 @@ public class DialogueNPC : MonoBehaviour
 ////            DialogueManager.Instance.StartExplanatoryDialogue(this.expositionDialogues[i], handleDialogueClosed);
 ////        }
 //    }
-    
+
+    }
 }

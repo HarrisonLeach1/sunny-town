@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
+namespace SunnyTown {
+
 public class NPCSpriteManager
 {
     public static NPCSpriteManager instance = null;
@@ -68,4 +70,5 @@ public class NPCSpriteManager
         //Sprite sprite = Sprite.Create(texture, new Rect(0,0,width, height), new Vector2(0.0f,0.0f), 1.0f);
         return sprite;
     }
+}
 }

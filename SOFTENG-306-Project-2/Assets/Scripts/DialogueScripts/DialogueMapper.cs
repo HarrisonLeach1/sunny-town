@@ -1,5 +1,7 @@
 ﻿using System;
 
+namespace SunnyTown
+{
 public class DialogueMapper
 {
     public BinaryOptionDialogue PlotCardToBinaryOptionDialogue(PlotCard plotCard)
@@ -52,4 +54,5 @@ public class DialogueMapper
                 currentCard.PrecedingDialogue,
                 currentCard.Name));
     }
+}
 }

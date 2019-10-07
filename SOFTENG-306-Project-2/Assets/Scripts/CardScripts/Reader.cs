@@ -5,133 +5,146 @@ using SimpleJSON;
 using UnityEngine;
 using System.Linq;
 
-public class Reader
+namespace SunnyTown
 {
 
-    public PlotCard RootState { get; private set; }
-    public List<SimpleDialogue> AllExpositionDialogues { get; private set; }
-    public List<PlotCard> AllStoryStates { get; private set; }
-    public List<Card> AllMinorStates { get; private set; }
-
-    public Reader()
+    public class Reader
     {
+
+        public PlotCard RootState { get; private set; }
+        public List<SimpleDialogue> AllExpositionDialogues { get; private set; }
+        public List<PlotCard> AllStoryStates { get; private set; }
+        public List<Card> AllMinorStates { get; private set; }
+
+        public Reader()
+        {
 //        AllExpositionStates =
 //            this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/expositionStates.json", true)
 //                .Cast<PlotCard>().ToList();
-        AllExpositionDialogues =
-            this.ParseExpositionJson(Directory.GetCurrentDirectory() + "/Assets/json/expositionStates.json");
-        AllStoryStates = this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/plotStates.json", true).Cast<PlotCard>().ToList();
-        AllMinorStates = this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/minorStates.json", false);
-        RootState = this.AllStoryStates[0];
-    }
+            AllExpositionDialogues =
+                this.ParseExpositionJson(Directory.GetCurrentDirectory() + "/Assets/json/expositionStates.json");
+            AllStoryStates = this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/plotStates.json", true)
+                .Cast<PlotCard>().ToList();
+            AllMinorStates = this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/minorStates.json", false);
+            RootState = this.AllStoryStates[0];
+        }
 
-    private List<Card> ParseJson(string filePath, bool isPlotJson)
-    {
-        List<Card> result = new List<Card>();
-
-        using (StreamReader r = new StreamReader(filePath))
+        private List<Card> ParseJson(string filePath, bool isPlotJson)
         {
-            string json = r.ReadToEnd();
+            List<Card> result = new List<Card>();
 
-            JSONArray stateArray = SimpleJSON.JSON.Parse(json).AsArray;
-            foreach (JSONNode state in stateArray)
+            using (StreamReader r = new StreamReader(filePath))
             {
-                List<string> precedingDialogue = new List<string>();
+                string json = r.ReadToEnd();
 
-                var foundPrecedingDialogue = state["precedingDialogue"].AsArray;
-                if (foundPrecedingDialogue.Count != 0)
+                JSONArray stateArray = SimpleJSON.JSON.Parse(json).AsArray;
+                foreach (JSONNode state in stateArray)
                 {
-                    foreach (JSONNode dialogue in state["precedingDialogue"])
+                    List<string> precedingDialogue = new List<string>();
+
+                    var foundPrecedingDialogue = state["precedingDialogue"].AsArray;
+                    if (foundPrecedingDialogue.Count != 0)
                     {
-                        precedingDialogue.Add(dialogue);
-                    }
-                }
-
-                List<Transition> optionList = new List<Transition>();
-
-                JSONNode transitions = isPlotJson ? state["transitions"].AsArray : state["options"];
-
-                foreach (JSONNode transition in transitions)
-                {
-                    int popHappinessModifier = 0;
-                    int goldModifier = 0;
-                    int envHealthModifier = 0;
-                    
-                    if (transition["happiness"])
-                    {
-                        popHappinessModifier = transition["happiness"];
+                        foreach (JSONNode dialogue in state["precedingDialogue"])
+                        {
+                            precedingDialogue.Add(dialogue);
+                        }
                     }
 
-                    if (transition["money"])
+                    List<Transition> optionList = new List<Transition>();
+
+                    JSONNode transitions = isPlotJson ? state["transitions"].AsArray : state["options"];
+
+                    foreach (JSONNode transition in transitions)
                     {
-                        goldModifier = transition["money"];
+                        int popHappinessModifier = 0;
+                        int goldModifier = 0;
+                        int envHealthModifier = 0;
+
+                        if (transition["happiness"])
+                        {
+                            popHappinessModifier = transition["happiness"];
+                        }
+
+                        if (transition["money"])
+                        {
+                            goldModifier = transition["money"];
+                        }
+
+                        if (transition["environment"])
+                        {
+                            envHealthModifier = transition["environment"];
+                        }
+
+                        MetricsModifier metricsModifier =
+                            new MetricsModifier(popHappinessModifier, goldModifier, envHealthModifier);
+
+                        if (state["sliderType"])
+                        {
+                            optionList.Add(new SliderTransition(transition["feedback"], transition["npcName"],
+                                metricsModifier, transition["hasAnimation"], transition["buildingName"],
+                                transition["threshold"]));
+                        }
+                        else
+                        {
+                            optionList.Add(new Transition(transition["feedback"], transition["npcName"],
+                                metricsModifier, transition["hasAnimation"], transition["buildingName"],
+                                transition["label"], transition["state"]));
+                        }
                     }
 
-                    if (transition["environment"])
+                    if (isPlotJson)
                     {
-                        envHealthModifier = transition["environment"];
-                    }
-                    
-                    MetricsModifier metricsModifier = new MetricsModifier(popHappinessModifier, goldModifier, envHealthModifier);
+                        String name = "";
+                        if (state["name"])
+                        {
+                            name = state["name"];
+                        }
 
-                    if (state["sliderType"])
+                        result.Add(new PlotCard(state["id"], precedingDialogue.ToArray<string>(), name,
+                            state["question"], optionList));
+
+                    }
+                    else if (state["sliderType"])
                     {
-                        optionList.Add(new SliderTransition(transition["feedback"], transition["npcName"], metricsModifier, transition["hasAnimation"], transition["buildingName"], transition["threshold"]));
-                    } 
+                        result.Add(new SliderCard(precedingDialogue.ToArray<string>(), state["name"], state["question"],
+                            optionList.Cast<SliderTransition>().ToList(), state["maxValue"], state["minValue"]));
+                    }
                     else
                     {
-                        optionList.Add(new Transition(transition["feedback"], transition["npcName"], metricsModifier, transition["hasAnimation"], transition["buildingName"], transition["label"], transition["state"]));
+                        result.Add(new MinorCard(precedingDialogue.ToArray<string>(), state["question"], optionList));
                     }
                 }
 
-                if (isPlotJson)
-                {
-                    String name = "";
-                    if (state["name"])
-                    {   
-                        name = state["name"];
-                    }
-                    result.Add(new PlotCard(state["id"], precedingDialogue.ToArray<string>(), name, state["question"], optionList));
-
-                }
-                else if (state["sliderType"])
-                {
-                    result.Add(new SliderCard(precedingDialogue.ToArray<string>(), state["name"], state["question"], optionList.Cast<SliderTransition>().ToList(), state["maxValue"], state["minValue"]));
-                }
-                else
-                {
-                    result.Add(new MinorCard(precedingDialogue.ToArray<string>(), state["question"], optionList));
-                }
             }
 
+            return result;
         }
 
-        return result;
-    }
-
-    private List<SimpleDialogue> ParseExpositionJson(string filePath)
-    {
-        List<SimpleDialogue> result = new List<SimpleDialogue>();
-
-        using (StreamReader r = new StreamReader(filePath))
+        private List<SimpleDialogue> ParseExpositionJson(string filePath)
         {
-            string json = r.ReadToEnd();
-            
-            JSONArray expositionArray = SimpleJSON.JSON.Parse(json).AsArray;
-            foreach (JSONNode exposition in expositionArray)
+            List<SimpleDialogue> result = new List<SimpleDialogue>();
+
+            using (StreamReader r = new StreamReader(filePath))
             {
-                List<string> dialogueList = new List<string>();
-                
-                foreach (JSONNode dialogue in exposition["dialogue"])
+                string json = r.ReadToEnd();
+
+                JSONArray expositionArray = SimpleJSON.JSON.Parse(json).AsArray;
+                foreach (JSONNode exposition in expositionArray)
                 {
-                    dialogueList.Add(dialogue);
+                    List<string> dialogueList = new List<string>();
+
+                    foreach (JSONNode dialogue in exposition["dialogue"])
+                    {
+                        dialogueList.Add(dialogue);
+                    }
+
+                    SimpleDialogue sd = new SimpleDialogue(dialogueList.ToArray(), exposition["name"]);
+                    result.Add(sd);
                 }
-
-                SimpleDialogue sd = new SimpleDialogue(dialogueList.ToArray(), exposition["name"]);
-                result.Add(sd);
             }
-        }
 
-        return result;
+            return result;
+        }
     }
 }

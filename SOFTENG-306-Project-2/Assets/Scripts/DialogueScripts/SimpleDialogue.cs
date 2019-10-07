@@ -1,19 +1,20 @@
 ﻿using UnityEngine;
 
-[System.Serializable]
-public class SimpleDialogue
+namespace SunnyTown
 {
-    [SerializeField]
-    private string name;
-    [SerializeField, TextArea(3, 10)]
-    private string[] statements;
-
-    public string Name => name;
-    public string[] Statements => statements;
-
-    public SimpleDialogue(string[] statements, string name)
+    [System.Serializable]
+    public class SimpleDialogue
     {
-        this.statements = statements;
-        this.name = name;
+        [SerializeField] private string name;
+        [SerializeField, TextArea(3, 10)] private string[] statements;
+
+        public string Name => name;
+        public string[] Statements => statements;
+
+        public SimpleDialogue(string[] statements, string name)
+        {
+            this.statements = statements;
+            this.name = name;
+        }
     }
 }

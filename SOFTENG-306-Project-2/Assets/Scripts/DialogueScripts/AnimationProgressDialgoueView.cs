@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable]
-public class AnimationProgressDialgoueView
+namespace SunnyTown
 {
-    public GameObject viewObject;
-    public Slider slider;
-
-    public void SetupProgressbar(float waitSeconds)
+    [System.Serializable]
+    public class AnimationProgressDialgoueView
     {
-        slider.minValue = 0;
-        slider.maxValue = waitSeconds;
+        public GameObject viewObject;
+        public Slider slider;
+
+        public void SetupProgressbar(float waitSeconds)
+        {
+            slider.minValue = 0;
+            slider.maxValue = waitSeconds;
+        }
     }
 }

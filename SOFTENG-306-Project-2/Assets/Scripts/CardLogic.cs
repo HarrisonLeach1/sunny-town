@@ -2,24 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardLogic : MonoBehaviour
+namespace SunnyTown
 {
-    public GameObject card;
-
-    private SpriteRenderer sr;
-    // Start is called before the first frame update
-    void Start()
+    public class CardLogic : MonoBehaviour
     {
-        sr = card.GetComponent<SpriteRenderer>();
-    }
+        public GameObject card;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetMouseButton(0))
+        private SpriteRenderer sr;
+
+        // Start is called before the first frame update
+        void Start()
         {
-            Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            card.transform.position = pos;
+            sr = card.GetComponent<SpriteRenderer>();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (Input.GetMouseButton(0))
+            {
+                Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                card.transform.position = pos;
+            }
         }
     }
 }

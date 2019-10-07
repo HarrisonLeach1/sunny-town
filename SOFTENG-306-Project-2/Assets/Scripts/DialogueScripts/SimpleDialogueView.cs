@@ -3,6 +3,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+namespace SunnyTown
+{
 [System.Serializable]
 public class SimpleDialogueView
 {
@@ -30,4 +32,5 @@ public class SimpleDialogueView
         }
 
     }
+}
 }

@@ -1,4 +1,4 @@
-﻿namespace DefaultNamespace
+﻿namespace SunnyTown
 {
     public enum Building
     {

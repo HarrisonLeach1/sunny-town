@@ -5,13 +5,16 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SliderValueScript : MonoBehaviour
+namespace SunnyTown
 {
-    public TextMeshProUGUI displayText;
-    public Slider slider;
-
-    public void UpdateText()
+    public class SliderValueScript : MonoBehaviour
     {
-        displayText.text = ((int)Math.Round(slider.value)).ToString();
+        public TextMeshProUGUI displayText;
+        public Slider slider;
+
+        public void UpdateText()
+        {
+            displayText.text = ((int) Math.Round(slider.value)).ToString();
+        }
     }
 }

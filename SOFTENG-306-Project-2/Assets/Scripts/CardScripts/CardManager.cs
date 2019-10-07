@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+namespace SunnyTown {
+
+
 public class CardManager : MonoBehaviour
 {
     public const float time = 9f;
@@ -215,4 +218,5 @@ public class CardManager : MonoBehaviour
         return false;
     }
 
+}
 }
