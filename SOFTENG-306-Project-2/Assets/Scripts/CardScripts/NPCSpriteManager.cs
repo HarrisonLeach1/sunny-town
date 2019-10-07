@@ -7,14 +7,14 @@ using System.Collections.Generic;
 public class NPCSpriteManager
 {
     public static NPCSpriteManager instance = null;
-    public const string NAME_FOR_DEFAULT_SPRITE = "citisen";
+    public const string NAME_FOR_DEFAULT_SPRITE = "citizen";
     private Dictionary<string, byte[]> spriteDictionary { get; set; }
     private Sprite defaultSprite;
 
     private NPCSpriteManager()
     {
         spriteDictionary = new Dictionary<string, byte[]>();
-        spriteDictionary.Add("citisen", File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/Harry.png"));
+        spriteDictionary.Add(NAME_FOR_DEFAULT_SPRITE, File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/Harry.png"));
         spriteDictionary.Add("Arvio", File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/Arvio.png"));
         spriteDictionary.Add("James the Dog", File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/JamesTheDog.png"));
         spriteDictionary.Add("Allena", File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/Allena.png"));
