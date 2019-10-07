@@ -14,11 +14,13 @@
         "label": "There's a lot of money in coal. It's a deal!",
         "money": 25,
         "environment": -20,
+        "npcName": "Advisory Board",
         "feedback": "Arvio brings his crew and begins inspecting your land",
         "state": "s2"
       },
       {
         "label": "No deal, mining for coal will ruin the natural landscape!",
+        "npcName": "Advisory Board",
         "feedback": "Arvio leaves with a mischievous look on his face",
         "state": "s2a"
       }
@@ -29,18 +31,16 @@
     "name": "Hunter Gatberg",
     "precedingDialogue": [
       "[Ring Ring... Ring Ring...]",
-      "Hey Mum! We learnt about polar bears today, they look so cute. I would love to be able to see them one day."
+      "Hey Mum! We learnt about polar bears today, they look so cool. I would love to be able to see them one day."
     ],
     "question": "Could you take me on a trip someday?",
     "transitions": [
       {
         "label": "Of course, my dear",
-        "feedback": "Hunter will remember this.",
         "state": "s3"
       },
       {
         "label": "Maybe... I'm busy, Hunter",
-        "feedback": "Hunter will remember this.",
         "state": "s3"
       }
     ]
@@ -55,13 +55,11 @@
     "question": "Hi mum! We learnt about polar bears at school today. Do you think we'll be able to go see them one day?",
     "transitions": [
       {
-        "label": "Yes",
-        "feedback": "Hunter will remember this.",
+        "label": "Of course, my dear",
         "state": "s3a"
       },
       {
         "label": "Maybe... I'm busy, Hunter",
-        "feedback": "Hunter will remember this.",
         "state": "s3a"
       }
     ]
@@ -70,7 +68,7 @@
     "id": "s3",
     "name": "Arvio",
     "precedingDialogue": [
-      "Mrs. Gatberg, your land is perfect for coal mining."
+      "Mrs. Gatberg, our prediction was right, your land is rich with coal."
     ],
     "question": "Will you let us set up an coal mine? We'll pay you.",
     "transitions": [
@@ -79,13 +77,14 @@
         "hasAnimation": true,
         "buildingName": "CoalMine",
         "money": 20,
-        "happiness": -10,
         "environment": -20,
-        "feedback": "Arvio begins constructing an coal mine. The people of the town are upset at this news. However, we get paid a great amount of money.",
+        "npcName": "Advisory Board",
+        "feedback": "Arvio begins constructing an coal mine. We're getting paid a great amount of money, but this is releasing a lot of CO2.",
         "state": "s4"
       },
       {
         "label": "No, go away Arvio.",
+        "npcName": "Advisory Board",
         "feedback": "Arvio leaves you alone",
         "state": "s5"
       }
@@ -95,9 +94,10 @@
     "id": "s3a",
     "name": "Arvio",
     "precedingDialogue": [
-      "Arvio has inspected the land without your consent"
+      "Arvio is sneaky and he has inspected the land without your consent",
+      "but he has found that your land is rich with coal, and wishes for your permission to setup a coal mine"
     ],
-    "question": "Your land is perfect for coal mining. Will you let us set up? We'll pay you.",
+    "question": "Will you let us set up? We'll pay you.",
     "transitions": [
       {
         "label": "Yes",
@@ -106,11 +106,13 @@
         "money": 20,
         "happiness": -10,
         "environment": -20,
-        "feedback": "Arvio begins constructing an coal mine. The people of the town are upset at this news. However, we get paid a great amount of money.",
+        "npcName": "Advisory Board",
+        "feedback": "Arvio begins constructing an coal mine. We're getting paid a great amount of money, but this is releasing a lot of CO2.",
         "state": "s4"
       },
       {
         "label": "No",
+        "npcName": "Advisory Board",
         "feedback": "Arvio leaves you alone",
         "state": "s5"
       }
@@ -120,8 +122,9 @@
     "id": "s4",
     "name": "Cowboy Willy",
     "precedingDialogue": [
-      "A local group of farmers are struggling because of the drought. ",
-      "We need as much water as possible"
+      "A drought is affecting the farmlands of your town, this is affecting all of our local farmers",
+      "If this continues they might not be able to grow enough crops for the town",
+      "We need as much water as possible, you could pass a temporary law to restrict citizens' water usage to help. "
     ],
     "question": "Will you restrict the town's water usage?",
     "transitions": [
@@ -129,13 +132,16 @@
         "label": "Yes",
         "happiness": -10,
         "environment": 10,
+        "npcName": "Advisory Board",
         "feedback": "Cowboy Willy is happy with your decision. The townspeople are slightly upset.",
         "state": "s6"
       },
       {
         "label": "No",
-        "happiness": -15,
-        "feedback": "Cowboy Willy is upset at your response",
+        "money": -15,
+        "happiness": 5,
+        "npcName": "Advisory Board",
+        "feedback": "The townspeople did not have to restrict water usage, but you had to import some crops from nearby towns",
         "state": "s7"
       }
     ]
@@ -144,8 +150,9 @@
     "id": "s5",
     "name": "Cowboy Willy",
     "precedingDialogue": [
-      "A local group of farmers are struggling because of the drought. ",
-      "We need as much water as possible"
+      "A drought is affecting the farmlands of your town, this is affecting all of our local farmers",
+      "If this continues they might not be able to grow enough crops for the town",
+      "We need as much water as possible, you could pass a temporary law to restrict citizens' water usage to help. "
     ],
     "question": "Will you restrict the town's water usage?",
     "transitions": [
@@ -153,13 +160,16 @@
         "label": "Yes",
         "happiness": -10,
         "environment": 10,
+        "npcName": "Advisory Board",
         "feedback": "Cowboy Willy is happy with your decision. The townspeople are slightly upset.",
         "state": "s6"
       },
       {
         "label": "No",
-        "happiness": -15,
-        "feedback": "Cowboy Willy is upset at your response",
+        "money": -15,
+        "happiness": 5,
+        "npcName": "Advisory Board",
+        "feedback": "The townspeople did not have to restrict water usage, but you had to import some crops from nearby towns",
         "state": "s7"
       }
     ]
@@ -175,16 +185,10 @@
     "transitions": [
       {
         "label": "Yes",
-        "happiness": 5,
-        "environment": -5,
-        "money": -5,
-        "feedback": "Hunter will remember this",
         "state": "s8"
       },
       {
         "label": "No",
-        "happiness": -10,
-        "feedback": "Hunter will remember this",
         "state": "s9,"
       }
     ]
@@ -200,16 +204,10 @@
     "transitions": [
       {
         "label": "Yes",
-        "happiness": 5,
-        "environment": -5,
-        "money": -5,
-        "feedback": "Hunter will remember this",
         "state": "s8"
       },
       {
         "label": "No",
-        "happiness": -10,
-        "feedback": "Hunter will remember this",
         "state": "s9,"
       }
     ]
