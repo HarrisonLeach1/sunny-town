@@ -39,7 +39,7 @@
     "name": "Jimmy Cash",
     "precedingDialogue": [
       "The town's population has grown more than our power station could handle",
-      "power bills have reached record high, the people are demanding cheaper electricity"
+      "Power bills have reached record high, the people are demanding cheaper electricity"
     ],
     "question": "Would you like to invest in a bigger, more powerful power plant?",
     "options": [
@@ -244,7 +244,7 @@
     "question": "The town is using more energy than we produce. What do you do?",
     "options": [
       {
-        "label": "Invest in solar panels",
+        "label": "Invest in wind turbines",
         "money": -20,
         "environment": 5,
         "npcName": "Advisory Board",
