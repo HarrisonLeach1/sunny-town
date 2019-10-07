@@ -5,13 +5,20 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SliderValueScript : MonoBehaviour
+namespace SunnyTown
 {
-    public TextMeshProUGUI displayText;
-    public Slider slider;
-
-    public void UpdateText()
+    /// <summary>
+    /// A SliderValueScript is a very simeple script used to change the text of a
+    /// TextMeshProUGUI object
+    /// </summary>
+    public class SliderValueScript : MonoBehaviour
     {
-        displayText.text = ((int)Math.Round(slider.value)).ToString();
+        public TextMeshProUGUI displayText;
+        public Slider slider;
+
+        public void UpdateText()
+        {
+            displayText.text = ((int) Math.Round(slider.value)).ToString();
+        }
     }
 }

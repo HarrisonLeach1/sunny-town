@@ -3,55 +3,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueNPC : MonoBehaviour
+namespace SunnyTown
 {
-    //public SimpleDialogue dialogue;
-    private Reader reader;
-    private List<SimpleDialogue> expositionDialogues;
-    private SimpleDialogue currentExpositionDialogue;
-
-    private void Start()
+    /// <summary>
+    /// A DialogueNPC represents the dialogue displayed to the user
+    /// used for exposition dialogue. The user only has 1 option that typically
+    /// is to 'continue' to the next dialogue
+    /// </summary>
+    public class DialogueNPC : MonoBehaviour
     {
-        this.reader = new Reader();
-        this.expositionDialogues = reader.AllExpositionDialogues;
-//        this.currentExpositionDialogue = this.expositionDialogues[0];
-//        this.expositionDialogues.RemoveAt(0);
-        Debug.Log("Number of exposition states: " +this.expositionDialogues.Count);
-        TriggerDialogue();
-    }
+        private Reader reader;
+        private List<SimpleDialogue> expositionDialogues;
+        private SimpleDialogue currentExpositionDialogue;
 
-    public void TriggerDialogue()
-    {
-        Action handleDialogueClosed = () => this.TriggerDialogue();
-        if (this.expositionDialogues.Count == 1)
+        private void Start()
         {
-            handleDialogueClosed = () => CardManager.Instance.StartDisplayingCards();
+            this.reader = new Reader();
+            this.expositionDialogues = reader.AllExpositionDialogues;
+            Debug.Log("Number of exposition states: " + this.expositionDialogues.Count);
+            TriggerDialogue();
         }
-        
-        this.currentExpositionDialogue = this.expositionDialogues[0];
-        this.expositionDialogues.RemoveAt(0);
-        
-        DialogueManager.Instance.StartExplanatoryDialogue(this.currentExpositionDialogue, handleDialogueClosed);
+
+        public void TriggerDialogue()
+        {
+            Action handleDialogueClosed = () => this.TriggerDialogue();
+            if (this.expositionDialogues.Count == 1)
+            {
+                handleDialogueClosed = () => CardManager.Instance.StartDisplayingCards();
+            }
+
+            this.currentExpositionDialogue = this.expositionDialogues[0];
+            this.expositionDialogues.RemoveAt(0);
+
+            DialogueManager.Instance.StartExplanatoryDialogue(this.currentExpositionDialogue, handleDialogueClosed);
+        }
     }
-    
-    
-//    public void TriggerDialogue()
-//    {
-////        Action handleDialogueClosed = null;
-//        Action handleDialogueClosed = () => CardManager.Instance.StartDisplayingCards();
-//        foreach (SimpleDialogue dialogue in this.expositionDialogues)
-//        {
-//            DialogueManager.Instance.StartExplanatoryDialogue(dialogue, handleDialogueClosed);
-//        }
-////        for (int i = 0; i < this.expositionDialogues.Count; i++)
-////        {
-////            if (i == this.expositionDialogues.Count - 1)
-////            {
-////                handleDialogueClosed = () => CardManager.Instance.StartDisplayingCards();
-////            }
-////
-////            DialogueManager.Instance.StartExplanatoryDialogue(this.expositionDialogues[i], handleDialogueClosed);
-////        }
-//    }
-    
 }

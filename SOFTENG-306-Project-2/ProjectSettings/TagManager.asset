@@ -6,6 +6,9 @@ TagManager:
   tags:
   - WinEndScreen
   - LossEndScreen
+  - AirPlane
+  - WinEndPanel
+  - GameScore
   layers:
   - Default
   - TransparentFX

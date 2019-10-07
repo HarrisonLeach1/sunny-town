@@ -2,66 +2,92 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Timers;
-using DefaultNamespace;
 using UnityEngine;
 
-public class SpawnHandler : MonoBehaviour
+namespace SunnyTown
 {
-    public GameObject[] buildings; 
-    private Dictionary<GameObject,bool> visibilityMap = new Dictionary<GameObject,bool>();
-    private float InstantiationTimer = 3f;
-    private GameObject buildingCloud;
-    
-    // Start is called before the first frame update
-    void Start()
+    public class SpawnHandler : MonoBehaviour
     {
-        
-        foreach (GameObject building in buildings)
+        public GameObject[] buildings;
+        private Dictionary<GameObject, bool> visibilityMap = new Dictionary<GameObject, bool>();
+        private GameObject buildingCloud;
+        private float instantiationTimer = 3f;
+
+        // Start is called before the first frame update
+        void Start()
         {
-            visibilityMap.Add(building, false);
+
+            foreach (GameObject building in buildings)
+            {
+                visibilityMap.Add(building, false);
+            }
+
         }
 
-    }
+        // Update is called once per frame
+        void Update()
+        {
+            StopBuildingCloud();
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        StopBuildingCloud();
-    }
-    
-    // Method called to set building to appear
-    public void Build(Building buildingName)
-    {
-        foreach (var building in visibilityMap.Keys)
-        {    
-            // Setting visibility for the building to true
-            if (building.name.Contains(buildingName.ToString()))
+        public void PlayAnimation(string buildingName, float animationTime)
+        {
+            instantiationTimer = animationTime;
+            if (buildingName.Equals(Building.CoalMine.ToString()))
             {
-                building.SetActive(true);
-                
-                foreach (var b in visibilityMap.Keys)
-                { // Getting the visibility of the cloud
-                    if (b.name.Equals("Cloud" + building.name.ToString().Substring(building.name.ToString().Length - 1)))
+                Debug.Log("Building coal mine");
+                Build(Building.CoalMine);
+            }
+            else if (buildingName.Equals(Building.PowerPlant.ToString()))
+            {
+                Debug.Log("Building powerplant");
+                Build(Building.PowerPlant);
+            }
+            else if (buildingName.Equals(Building.Farm.ToString()))
+            {
+                Debug.Log("Building farm");
+                Build(Building.Farm);
+            }
+
+            // if no building name is found it will simply play the progress bar only
+        }
+
+        // Method called to set building to appear
+        private void Build(Building buildingName)
+        {
+            foreach (var building in visibilityMap.Keys)
+            {
+                // Setting visibility for the building to true
+                if (building.name.Contains(buildingName.ToString()))
+                {
+                    building.SetActive(true);
+
+                    foreach (var b in visibilityMap.Keys)
                     {
-                        b.SetActive(true);
-                
-                        // Setting cloud for it to get disabled
-                        buildingCloud = b;
+                        // Getting the visibility of the cloud
+                        if (b.name.Equals("Cloud" + building.name.ToString()
+                                              .Substring(building.name.ToString().Length - 1)))
+                        {
+                            b.SetActive(true);
+
+                            // Setting cloud for it to get disabled
+                            buildingCloud = b;
+                        }
                     }
                 }
+
             }
-            
         }
-    }
-    
-    private void StopBuildingCloud()
-    {
-        InstantiationTimer -= Time.deltaTime;
-        if (InstantiationTimer <= 0 && buildingCloud != null)
+
+        private void StopBuildingCloud()
         {
-            buildingCloud.SetActive(false);
-            InstantiationTimer = 2f;
+            instantiationTimer -= Time.deltaTime;
+            if (instantiationTimer <= 0 && buildingCloud != null)
+            {
+                buildingCloud.SetActive(false);
+                instantiationTimer = 2f;
+            }
+
         }
-            
     }
 }

@@ -12,6 +12,27 @@
 | Casey Wong     | cwon880          | cwon880 |
 | James Zhang    | JamesUOA         | jzha414 |
 
+## Gameplay
+
+-   As the mayor your role is to make decisions for the town.
+-   Different people will approach after short periods of time.
+-   The decisions you make will alter the story's path and influence future decisions.
+-   The decisions you make will affect your towns metrics (population happiness, money, environmental health).
+-   Periodically an exclamation mark will appear above the towns buildings, interacting with it
+    allows you to make 'minor' decisions for the town.
+
+-   The objective of the game is to make appropriate tradeoffs to ensure no metric in the town drops too low.
+    This should teach the player the tradeoffs that are necessary in maintaining the environments health.
+
+## Execution Instructions
+
+### Through Unity
+
+1. Checkout the "PROTOTYPE" branch from the repository.
+2. Navigate to `Assets/Scenes/MenuScene.unity` and open the file with Unity.
+3. Press the play button in Unity.
+4. You will begin on the start screen where you will be able to select "Play" to begin.
+
 ## Setting up
 
 ### Setup Untiy file merging

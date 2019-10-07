@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenuScript : MonoBehaviour
+namespace SunnyTown
 {
-    public void PlayGame()
+    /// <summary>
+    /// The MainMenuScript is a simple script used to load the Main Menu of the game
+    /// </summary>
+    public class MainMenuScript : MonoBehaviour
     {
-        Debug.Log("Start game");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
+        public void PlayGame()
+        {
+            Debug.Log("Start game");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
 
-    public void QuitGame()
-    {
-        Debug.Log("Application has quit");
-        Application.Quit();
+        public void QuitGame()
+        {
+            Debug.Log("Application has quit");
+            Application.Quit();
+        }
     }
 }

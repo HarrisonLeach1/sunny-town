@@ -6,34 +6,52 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class EndGameMenuScript : MonoBehaviour
+namespace SunnyTown
 {
+    /// <summary>
+    /// The EndGameMenuScript is a simple script used for the End Game scene. The user has the
+    /// option to replay the game, return to the main menu, and quit the game.
+    /// </summary>
+    public class EndGameMenuScript : MonoBehaviour
+    {
 
-    public GameObject winEndScreen;
-    public GameObject lossEndScreen;
-    
-    void Awake()
-    {
-        winEndScreen = GameObject.FindGameObjectWithTag("WinEndScreen");
-        lossEndScreen = GameObject.FindGameObjectWithTag("LossEndScreen");
-        var gameEnded = CardManager.Instance.isFinalCard;
-        Debug.Log("Game ended:" + gameEnded);
-        winEndScreen.SetActive(gameEnded);
-        lossEndScreen.SetActive(!gameEnded);
-        
-    }
-    public void NavigateToMainMenu()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
-    }
+        public GameObject endGameView;
+        public GameObject endGamePrefab;
 
-    public void QuitApplication()
-    {
-        Application.Quit();
-    }
+        void Awake()
+        {
+            endGameView = Instantiate(endGamePrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            var gameScore = endGameView.transform.GetChild(0).GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>();
+            var gameOutcome = endGameView.transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
+            var gameBackground = endGameView.transform.GetChild(0).GetChild(0).GetComponent<Image>();
+            gameOutcome.SetText(CardManager.Instance.isFinalCard ? "Game Won" : "Game lost");
+            if (CardManager.Instance.isFinalCard)
+            {
+                gameOutcome.SetText("Game Won");
+                gameBackground.color = new Color32(0, 255, 0, 130);
+            }
+            else
+            {
+                gameOutcome.SetText("Game Lost");
+                gameBackground.color = new Color32(255, 0, 0, 130);
+            }
 
-    public void ReplayGame()
-    {
-        SceneManager.LoadScene("WorldScene");
+            gameScore.SetText("Final Score: " + MetricManager.Instance.GetScore());
+        }
+
+        public void NavigateToMainMenu()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
+        }
+
+        public void QuitApplication()
+        {
+            Application.Quit();
+        }
+
+        public void ReplayGame()
+        {
+            SceneManager.LoadScene("WorldScene");
+        }
     }
 }
