@@ -7,6 +7,10 @@ using UnityEngine.UI;
 
 namespace SunnyTown
 {
+    /// <summary>
+    /// A SliderValueScript is a very simeple script used to change the text of a
+    /// TextMeshProUGUI object
+    /// </summary>
     public class SliderValueScript : MonoBehaviour
     {
         public TextMeshProUGUI displayText;

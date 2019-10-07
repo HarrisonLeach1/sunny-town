@@ -2,6 +2,10 @@ using UnityEngine;
 
 namespace SunnyTown
 {
+    /// <summary>
+    /// A MetricsModifier object is used in a Transition object and is responsible for changing
+    /// the Metrics of the MetricsManager singleton when .Modify() is called.
+    /// </summary>
     public class MetricsModifier
     {
         private int EnvHealthModifier { get; set; }

@@ -2,6 +2,13 @@
 
 namespace SunnyTown
 {
+ 
+    /// <summary>
+    /// A SliderOptionDialogue represents the dialogue that allows the user to
+    /// choose a quantity. The quantity can be used to change the metrics depending on
+    /// the threshold. The user only has 1 option that typically
+    /// is to 'continue' to the next dialogue
+    /// </summary>
     [System.Serializable]
     public class SliderOptionDialogue
     {

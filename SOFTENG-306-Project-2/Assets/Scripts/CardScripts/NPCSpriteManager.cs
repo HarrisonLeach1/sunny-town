@@ -8,7 +8,7 @@ namespace SunnyTown
 {
     /// <summary>
     /// An NPC sprite manager handles the resolution of character names 
-    /// into their appropriate sprites
+    /// into their appropriate sprites on dialogue box views
     /// </summary>
     public class NPCSpriteManager
     {

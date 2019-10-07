@@ -8,6 +8,10 @@ using UnityEngine.UI;
 
 namespace SunnyTown
 {
+    /// <summary>
+    /// The EndGameMenuScript is a simple script used for the End Game scene. The user has the
+    /// option to replay the game, return to the main menu, and quit the game.
+    /// </summary>
     public class EndGameMenuScript : MonoBehaviour
     {
 

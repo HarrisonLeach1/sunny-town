@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 namespace SunnyTown
 {
+    /// <summary>
+    /// The MainMenuScript is a simple script used to load the Main Menu of the game
+    /// </summary>
     public class MainMenuScript : MonoBehaviour
     {
         public void PlayGame()

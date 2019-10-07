@@ -5,6 +5,11 @@ using UnityEngine;
 
 namespace SunnyTown
 {
+    /// <summary>
+    /// A DialogueNPC represents the dialogue displayed to the user
+    /// used for exposition dialogue. The user only has 1 option that typically
+    /// is to 'continue' to the next dialogue
+    /// </summary>
     public class DialogueNPC : MonoBehaviour
     {
         private Reader reader;
