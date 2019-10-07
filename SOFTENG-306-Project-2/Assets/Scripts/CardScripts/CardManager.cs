@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class CardManager : MonoBehaviour
 {
+    public const float time = 9f;
     public static CardManager Instance { get; private set; }
     public GameObject spawnHandlerObject;
 
@@ -62,11 +63,23 @@ public class CardManager : MonoBehaviour
             Debug.Log("Successfully selected minor card from world!");
             StopCoroutine(cardWaitingRoutine);
             currentlyProcessingCard = true;
-            currentCard = cardFactory.GetNewCard("minor");
-            //destroy the exclamation mark
             PopupButtonControllerScript.popupShowing = false;
             Destroy(button.gameObject);
+            //show exposition dialouge 
+            string[] statements = {"A new message has been addressed to you at the town hall !"};
+            dialogueManager.StartExplanatoryDialogue( new SimpleDialogue(statements, "You have mail"),DisplayMinorDecisionCard);
+        }
+        else
+        {
+            Debug.Log("Cant select exclamation mark while processing card!");
+            // TODO: DisplayWarningDialogue();
+        }
+    }
 
+    public void DisplayMinorDecisionCard()
+    {
+            currentCard = cardFactory.GetNewCard("minor");
+            //destroy the exclamation mark
             if (currentCard is MinorCard)
             {
                 dialogueManager.StartBinaryOptionDialogue(dialogueMapper.MinorCardToBinaryOptionDialogue((MinorCard)currentCard), HandleOptionPressed);
@@ -75,12 +88,6 @@ public class CardManager : MonoBehaviour
             {
                 dialogueManager.StartSliderOptionDialogue(dialogueMapper.SliderCardToSliderOptionDialogue((SliderCard)currentCard), HandleOptionPressed);
             }
-        }
-        else
-        {
-            Debug.Log("Cant select exclamation mark while processing card!");
-            // TODO: DisplayWarningDialogue();
-        }
     }
 
     public bool GetCardStatus()
@@ -106,6 +113,7 @@ public class CardManager : MonoBehaviour
         else if (currentCard.ShouldAnimate)
         {
             var time = 3f;
+            Debug.Log(time);
             dialogueManager.ShowAnimationProgress(time);
             StartCoroutine(WaitForAnimation(time));
             animationHandler.PlayAnimation(currentCard.BuildingName, time);
@@ -137,7 +145,7 @@ public class CardManager : MonoBehaviour
 
     private IEnumerator QueueCard()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(CardManager.time);
 
         currentlyProcessingCard = true;
         if (currentCard is PlotCard)

@@ -19,12 +19,14 @@ public class ExclamationMarkDispatcher : MonoBehaviour
  
     IEnumerator CreateMinorCard()
     {   
-        float randomTime = (float)Random.Range(0.5f, 1.5f);
-        //dont show exclamation mark while card showing 
         while (manager.GetCardStatus() || PopupButtonControllerScript.popupShowing){
             yield return new WaitForSeconds(1);
         }
-        Debug.Log("creating card");
+        Debug.Log("in here");
+        float randomTime = (float)Random.Range(2f, 4f);
+        //dont show exclamation mark while card showing 
+        Debug.Log("creating card "+randomTime);
+        yield return new WaitForSeconds(randomTime);
         PopupButtonControllerScript.CreatePopupButton(transform);
         StartCoroutine("CreateMinorCard", randomTime);
  
