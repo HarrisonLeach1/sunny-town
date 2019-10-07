@@ -19842,10 +19842,10 @@ RectTransform:
   m_Father: {fileID: 1676926557}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 27.82, y: -1041}
-  m_SizeDelta: {x: 494.92, y: 47.7}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 27.82, y: 39}
+  m_SizeDelta: {x: 494.92, y: 47.69995}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1264185083
 Animator:
@@ -20362,6 +20362,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogueBoxBinaryOption
       objectReference: {fileID: 0}
+    - target: {fileID: 985755857371566237, guid: 1c6f042c1ead2d045bd59e12b49d99e8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 985755857371566236, guid: 1c6f042c1ead2d045bd59e12b49d99e8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -20400,7 +20405,7 @@ PrefabInstance:
     - target: {fileID: 985755857371566236, guid: 1c6f042c1ead2d045bd59e12b49d99e8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 985755857371566236, guid: 1c6f042c1ead2d045bd59e12b49d99e8,
         type: 3}
@@ -22223,6 +22228,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogueBoxSlider
       objectReference: {fileID: 0}
+    - target: {fileID: 4133667631727024157, guid: 708225c1148d3884e99abda984806505,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4133667631727024156, guid: 708225c1148d3884e99abda984806505,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -22261,7 +22271,7 @@ PrefabInstance:
     - target: {fileID: 4133667631727024156, guid: 708225c1148d3884e99abda984806505,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4133667631727024156, guid: 708225c1148d3884e99abda984806505,
         type: 3}
