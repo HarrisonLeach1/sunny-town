@@ -78,7 +78,7 @@ public class MetricManager : MonoBehaviour
 
     IEnumerator AnimateMetric(Slider metricBar, int oldValue, int newValue)
     {
-        Image metricBarFill = metricBar.transform.GetChild(1).GetChild(0).GetComponent<Image>();
+        Image metricBarFill = metricBar.transform.GetChild(2).GetChild(0).GetComponent<Image>();
 
         int tempValue = oldValue;
         if (tempValue == newValue)
