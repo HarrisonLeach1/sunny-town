@@ -95,9 +95,9 @@
         "label": "No, this would be terrible for the economy",
         "money": 3,
         "happiness": 4,
-        "environment": 5,
+        "environment": -5,
         "npcName": "Allena",
-        "feedback": "feedback 1a"
+        "feedback": "The townspeople's daily routines were not disrupted, but emissions kept going up. "
       }
     ]
   },
