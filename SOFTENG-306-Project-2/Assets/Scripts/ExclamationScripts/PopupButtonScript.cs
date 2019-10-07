@@ -5,10 +5,9 @@ using UnityEngine.UI;
 
 namespace SunnyTown
 {
-    /** Class is attached to the popup button UI element, it handles destroying the button UI after its animation has completed
-     */
     public class PopupButtonScript : MonoBehaviour
     {
+        //have reference to popup button on start
         public GameObject popup;
         private Animator animator;
 
@@ -19,8 +18,7 @@ namespace SunnyTown
 
         private AnimationEvent animatorEvent;
 
-        /** Function adds a listener to the button click action which initiates the creation of a dialogue box 
-         */
+        // Start is called before the first frame update
         void OnEnable()
         {
             popup = GameObject.Find("Popup");

@@ -10,9 +10,6 @@ namespace SunnyTown
         public GameObject popupManager;
         private CardManager manager;
 
-        /** On start up the class needs to find the singleton instance of CardManager and start the coroutine that 
-         ** periodically spawns an exclamation mark event  
-         */
         void Start()
         {
             PopupButtonControllerScript.Initialise();
@@ -22,8 +19,7 @@ namespace SunnyTown
         }
 
 
-        /** Coroutine that calls the CreatePopupButton() function after a random set time whenever a card is not display or an exclamation mark is not showing
-         */
+
         IEnumerator CreateMinorCard()
         {
             while (manager.GetCardStatus() || PopupButtonControllerScript.popupShowing)
