@@ -100,7 +100,7 @@ public class Reader
                 }
                 else
                 {
-                    result.Add(new MinorCard(precedingDialogue.ToArray<string>(), state["question"], optionList));
+                    result.Add(new MinorCard(precedingDialogue.ToArray<string>(), state["name"], state["question"], optionList));
                 }
             }
 

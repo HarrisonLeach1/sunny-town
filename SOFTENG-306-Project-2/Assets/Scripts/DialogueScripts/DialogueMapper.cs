@@ -30,7 +30,7 @@ public class DialogueMapper
             minorCard.Options[1].Dialogue, 
             new SimpleDialogue(
                 minorCard.PrecedingDialogue, 
-                ""));
+                minorCard.Name));
     }
 
     public SimpleDialogue FeedbackToDialogue(string feedback, string name)
