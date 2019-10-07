@@ -13,6 +13,7 @@
                 "label": "Oil could help the towns economy grow. It's a deal",
                 "money": 25,
                 "feedback": "Arvio brings his crew and begins inspecting your land",
+                "state": "s2"
             },
             {
                 "label": "No deal, my town is great as it is thank you",
