@@ -663,7 +663,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8269378157786085152}
+      - m_Target: {fileID: 2837093012210025386}
         m_MethodName: QuitApplication
         m_Mode: 1
         m_Arguments:
@@ -1115,7 +1115,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8269378157786085152}
+      - m_Target: {fileID: 2837093012210025386}
         m_MethodName: NavigateToMainMenu
         m_Mode: 1
         m_Arguments:
