@@ -40,7 +40,6 @@ namespace SunnyTown
             float randomTime = (float) Random.Range(2f, 4f);
             //dont show exclamation mark while card showing 
             Debug.Log("creating mark " + randomTime);
-            yield return new WaitForSeconds(randomTime);
             //spawn card exclamation mark half the time
             if (randomTime >= 3f){
                 foreach (Renderer r in GetComponentsInChildren<Renderer>())
@@ -48,6 +47,9 @@ namespace SunnyTown
                 isShowing = true;
                 animator.SetBool("isShow",true);
                 Debug.Log(randomTime);
+            } else {
+                Debug.Log("waiting");
+                yield return new WaitForSeconds(randomTime);
             }
             StartCoroutine("CreateExclamationMark", randomTime);
 
