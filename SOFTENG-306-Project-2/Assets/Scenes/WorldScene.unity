@@ -5498,13 +5498,13 @@ MonoBehaviour:
   lookAtOffset: 2
   inOutSpeed: 5
   lateralSpeed: 5
-  rotateSpeed: 45
-  minBounds: {x: -2, y: -15}
+  rotateSpeed: 10
+  minBounds: {x: -200, y: -200}
   maxBounds: {x: 33, y: 29}
   zoomSpeed: 10
   nearZoomLimit: 2
-  farZoomLimit: 16
-  startingZoom: 5
+  farZoomLimit: 40
+  startingZoom: 30
   cam: {fileID: 0}
 --- !u!4 &324671449
 Transform:
@@ -5514,7 +5514,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 324671447}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.329102, y: 0, z: -136.85284}
+  m_LocalPosition: {x: -12, y: 0, z: -136}
   m_LocalScale: {x: 0.8324846, y: 0.8324844, z: 0.85021687}
   m_Children:
   - {fileID: 1202130522}
