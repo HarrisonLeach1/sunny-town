@@ -29,8 +29,14 @@ namespace SunnyTown
             AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
             Destroy(gameObject, clipInfo[0].clip.length);
             button = animator.GetComponent<Button>();
-            button.onClick.AddListener(() => manager.DisplayMinorCard(button));
+            //button.onClick.AddListener(() => manager.DisplayMinorCard(button));
+
+
+
         }
+
+
+        
 
     }
 }

@@ -26,8 +26,6 @@ namespace SunnyTown
             {
                 yield return new WaitForSeconds(1);
             }
-
-            Debug.Log("in here");
             float randomTime = (float) Random.Range(2f, 4f);
             //dont show exclamation mark while card showing 
             Debug.Log("creating card " + randomTime);

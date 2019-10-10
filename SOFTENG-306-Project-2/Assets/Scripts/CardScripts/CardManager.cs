@@ -72,8 +72,7 @@ namespace SunnyTown
         /// Displays a minor card to the user, ensuring not to interrupt any already being
         /// viewed
         /// </summary>
-        /// <param name="button">To be destroyed</param>
-        public void DisplayMinorCard(Button button)
+        public void DisplayMinorCard()
         {
             if (!currentlyProcessingCard)
             {
@@ -81,7 +80,6 @@ namespace SunnyTown
                 StopCoroutine(cardWaitingRoutine);
                 currentlyProcessingCard = true;
                 PopupButtonControllerScript.popupShowing = false;
-                Destroy(button.gameObject);
                 //show exposition dialouge 
                 string[] statements = { "A new message has been addressed to you at the town hall !" };
                 dialogueManager.StartExplanatoryDialogue(new SimpleDialogue(statements, "You have mail"), DisplayMinorDecisionCard);
@@ -108,6 +106,7 @@ namespace SunnyTown
             {
                 dialogueManager.StartSliderOptionDialogue(dialogueMapper.SliderCardToSliderOptionDialogue((SliderCard)currentCard), HandleOptionPressed);
             }
+
         }
 
         /// <summary>
