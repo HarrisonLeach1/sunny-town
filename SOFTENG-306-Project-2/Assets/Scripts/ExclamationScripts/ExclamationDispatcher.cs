@@ -15,25 +15,26 @@ namespace SunnyTown
         public Animator animator;
         void Start()
         {
-            // GetComponent<MeshRenderer>().enabled = false;
             manager = GameObject.Find("CardManager");
-
+            // dont render the individual shapes that make up the exclamation mark 
             foreach (Renderer r in GetComponentsInChildren<Renderer>())
                 r.enabled = false;
 
             animator = GetComponent<Animator>();
+            // set animator to default state 
             animator.SetBool("isShow",false);
             isShowing = false;
             cardManager = manager.GetComponent<CardManager>();  
-            Debug.Log(GetComponent<MeshRenderer>().enabled);
             StartCoroutine("CreateExclamationMark");
         }
- 
+    
+        /** Method starts the exclamation mark spawning animation, and reschedules itself at a random time in the future
+         */
         IEnumerator CreateExclamationMark()
         {
+            // wait while a card or an exclamation mark is already showing 
             while (cardManager.GetCardStatus() || isShowing)
             {
-                Debug.Log("still runnign");
                 yield return new WaitForSeconds(1);
             }
             float randomTime = (float) Random.Range(2f, 4f);
@@ -50,7 +51,11 @@ namespace SunnyTown
             }
             StartCoroutine("CreateExclamationMark", randomTime);
 
-        }
+        } 
+
+        /** Transition to default state (invisible) when it has been clicked  
+         ** and create the minor cards to be displayed 
+         */
         void OnMouseDown()
         {
             if (isShowing && !cardManager.GetCardStatus()){
@@ -65,6 +70,8 @@ namespace SunnyTown
            
         }
 
+        /** At the end of the animation, set the animator to default invisible state
+         */
         void changeShowState()
         {
             foreach (Renderer r in GetComponentsInChildren<Renderer>())
