@@ -79,7 +79,6 @@ namespace SunnyTown
                 Debug.Log("Successfully selected minor card from world!");
                 StopCoroutine(cardWaitingRoutine);
                 currentlyProcessingCard = true;
-                PopupButtonControllerScript.popupShowing = false;
                 //show exposition dialouge 
                 string[] statements = { "A new message has been addressed to you at the town hall !" };
                 dialogueManager.StartExplanatoryDialogue(new SimpleDialogue(statements, "You have mail"), DisplayMinorDecisionCard);

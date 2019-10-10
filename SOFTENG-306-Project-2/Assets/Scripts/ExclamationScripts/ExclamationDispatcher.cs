@@ -17,6 +17,10 @@ namespace SunnyTown
         {
             // GetComponent<MeshRenderer>().enabled = false;
             manager = GameObject.Find("CardManager");
+
+            foreach (Renderer r in GetComponentsInChildren<Renderer>())
+                r.enabled = false;
+
             animator = GetComponent<Animator>();
             animator.SetBool("isShow",false);
             isShowing = false;
@@ -36,8 +40,14 @@ namespace SunnyTown
             //dont show exclamation mark while card showing 
             Debug.Log("creating mark " + randomTime);
             yield return new WaitForSeconds(randomTime);
-            isShowing = true;
-            animator.SetBool("isShow",true);
+            //spawn card exclamation mark half the time
+            if (randomTime >= 3f){
+                foreach (Renderer r in GetComponentsInChildren<Renderer>())
+                    r.enabled = true;
+                isShowing = true;
+                animator.SetBool("isShow",true);
+                Debug.Log(randomTime);
+            }
             StartCoroutine("CreateExclamationMark", randomTime);
 
         }
@@ -47,22 +57,18 @@ namespace SunnyTown
                 animator.SetBool("isShow",false);
                 isShowing = false;
                 cardManager.DisplayMinorCard();
+                foreach (Renderer r in GetComponentsInChildren<Renderer>())
+                    r.enabled = false;
             } else {
                 return;
             }
            
         }
 
-        // void OnEnable()
-        // {
-        //     Debug.Log("starting routine");
-        //     isShowing = false;
-        //     animator.SetBool("isShow",false);
-        //     StartCoroutine("CreateExclamationMark");
-        // }
-
         void changeShowState()
         {
+            foreach (Renderer r in GetComponentsInChildren<Renderer>())
+                r.enabled = false;
             animator.SetBool("isShow",false);
             isShowing = false;
         }
