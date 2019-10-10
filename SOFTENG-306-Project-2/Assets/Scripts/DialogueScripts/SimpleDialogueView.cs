@@ -12,7 +12,6 @@ namespace SunnyTown
     [System.Serializable]
     public class SimpleDialogueView
     {
-        private NPCSpriteManager npcSpriteManager = NPCSpriteManager.Instance;
         public Image image;
         private Image npcImage;
         public GameObject viewObject;
@@ -28,7 +27,7 @@ namespace SunnyTown
         {
             npcImage = GameObject.Find("SimpleNPCImage").GetComponent<Image>();
             Debug.Log("Simple NPC Name: " + dialogue.Name);
-            npcImage.sprite = this.npcSpriteManager.GetSprite(dialogue.Name);
+            npcImage.sprite = NPCSpriteManager.Instance.GetSprite(dialogue.Name);
         }
         public IEnumerator TypeSentence(string statement)
         {
