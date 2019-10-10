@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-      [Header("Camera Positioning")] public Vector2 cameraOffset = new Vector2(10f, 14f);
+      [Header("Camera Positioning")] public Vector2 cameraOffset = new Vector2(0f, -111f);
 
       public float lookAtOffset = 2f;
 
@@ -31,7 +31,7 @@ public class CameraMovement : MonoBehaviour
             cam = GetComponentInChildren<Camera>();
             cam.transform.localPosition = new Vector3(0f, Mathf.Abs(cameraOffset.y), -Mathf.Abs(cameraOffset.x));
             zoomStrategy = new OrthographicZoomStrategy(cam, startingZoom);
-            cam.transform.LookAt(transform.position + Vector3.up * lookAtOffset);
+            //cam.transform.LookAt(transform.position + Vector3.up * lookAtOffset);
       }
 
       private void OnEnable()
@@ -84,14 +84,12 @@ public class CameraMovement : MonoBehaviour
             if (frameZoom < 0f)
             {
                   zoomStrategy.ZoomIn(cam, Time.deltaTime * Mathf.Abs(frameZoom) * zoomSpeed, nearZoomLimit);
-                  print("Zooms In " + cam.orthographicSize);
                   frameZoom = 0f;
                   
             } 
             else if (frameZoom > 0f)
             {
                   zoomStrategy.ZoomOut(cam, Time.deltaTime * frameZoom  * zoomSpeed, farZoomLimit);
-                  print("Zooms out " + cam.orthographicSize);
                   frameZoom = 0f;
             }
       }
