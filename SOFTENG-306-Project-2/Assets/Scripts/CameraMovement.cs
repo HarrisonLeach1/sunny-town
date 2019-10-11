@@ -15,7 +15,7 @@ public class CameraMovement : MonoBehaviour
       public Vector2 minBounds, maxBounds;
 
       [Header("Zoom Controls")] 
-      public float zoomSpeed = 1000000000000f;
+      public float zoomSpeed = 10f;
       public float nearZoomLimit = 2f;
       public float farZoomLimit = 16f;
       public float startingZoom = 5f;
@@ -26,14 +26,19 @@ public class CameraMovement : MonoBehaviour
        float frameZoom;
        public Camera cam;
 
+       /// <summary>
+       /// Initial setup of the camera, this defines the scene the game starts on
+       /// </summary>
       private void Awake()
       {
             cam = GetComponentInChildren<Camera>();
             cam.transform.localPosition = new Vector3(0f, Mathf.Abs(cameraOffset.y), -Mathf.Abs(cameraOffset.x));
             zoomStrategy = new OrthographicZoomStrategy(cam, startingZoom);
-            //cam.transform.LookAt(transform.position + Vector3.up * lookAtOffset);
       }
 
+       /// <summary>
+       /// This defines the method that changes the movement of the camera depending on the key input
+       /// </summary>
       private void OnEnable()
       {
             KeyboardInputManager.OnMoveInput += UpdateFrameMove;
@@ -41,6 +46,9 @@ public class CameraMovement : MonoBehaviour
             KeyboardInputManager.OnZoomInput += UpdateFrameZoom;
       }
 
+       /// <summary>
+       /// This method disables the methods assigned to each input movement 
+       /// </summary>
       private void OnDisable()
       {
             KeyboardInputManager.OnMoveInput -= UpdateFrameMove;
@@ -48,22 +56,34 @@ public class CameraMovement : MonoBehaviour
             KeyboardInputManager.OnZoomInput -= UpdateFrameZoom;
       }
 
-      private void UpdateFrameMove(Vector3 movevector)
+       /// <summary>
+       /// Method called when moving the camera
+       /// </summary>
+       private void UpdateFrameMove(Vector3 movevector)
       {
             frameMove += movevector;
       }
 
-      private void UpdateFrameRotate(float rotateamount)
+       /// <summary>
+       /// Method called to rotate the camera
+       /// </summary>
+       private void UpdateFrameRotate(float rotateamount)
       {
             frameRotate += rotateamount;
       }
 
-
+       /// <summary>
+       /// Method called to rotate the camera
+       /// </summary>
+       /// <param name="zoomamount"></param>
       private void UpdateFrameZoom(float zoomamount)
       {
             frameZoom += zoomamount;
       }
 
+       /// <summary>
+       /// Updater method that runs every frame to check for keyboard input and call the right methods for camera movement
+       /// </summary>
       private void LateUpdate()
       {
             // Moving
@@ -94,6 +114,9 @@ public class CameraMovement : MonoBehaviour
             }
       }
 
+       /// <summary>
+       /// Ensures that the camera does not move out of the bounds as defined by parameters within unity
+       /// </summary>
       private void LockPositionInBounds()
       {
             transform.position = new Vector3(
