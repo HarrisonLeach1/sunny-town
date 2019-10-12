@@ -757,7 +757,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 238147037}
-  clip: {fileID: 8300000, guid: 746dd27481430404fbebdf514b398678, type: 3}
+  buttonClip: {fileID: 8300000, guid: 746dd27481430404fbebdf514b398678, type: 3}
+  constructionClip: {fileID: 0}
+  notificationClip: {fileID: 0}
 --- !u!82 &238147037
 AudioSource:
   m_ObjectHideFlags: 0
