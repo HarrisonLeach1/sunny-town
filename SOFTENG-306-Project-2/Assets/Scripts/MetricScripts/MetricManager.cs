@@ -79,7 +79,14 @@ namespace SunnyTown
 
         public int GetScore()
         {
-            return (int) (0.5 * EnvHealth + 0.25 * Gold + 0.25 * PopHappiness);
+            if (CardManager.Instance.isFinalCard)
+            {
+                return (int) (0.5 * EnvHealth + 0.25 * Gold + 0.25 * PopHappiness) + 100;
+            }
+            else
+            {
+                return (int) (0.5 * EnvHealth + 0.25 * Gold + 0.25 * PopHappiness);
+            }
         }
 
         IEnumerator AnimateMetric(Slider metricBar, int oldValue, int newValue)

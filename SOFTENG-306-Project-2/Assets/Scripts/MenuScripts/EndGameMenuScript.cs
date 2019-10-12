@@ -36,7 +36,9 @@ namespace SunnyTown
                 gameBackground.color = new Color32(255, 0, 0, 130);
             }
 
-            gameScore.SetText("Final Score: " + MetricManager.Instance.GetScore());
+            int finalScore = MetricManager.Instance.GetScore();
+            gameScore.SetText("Final Score: " + finalScore);
+            AchievementsManager.Instance.UpdateHighScores(finalScore);
         }
 
         public void NavigateToMainMenu()
