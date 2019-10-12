@@ -5241,7 +5241,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -16439,7 +16439,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 1255602958}
-  clip: {fileID: 8300000, guid: 746dd27481430404fbebdf514b398678, type: 3}
+  buttonClip: {fileID: 0}
+  constructionClip: {fileID: 0}
+  notificationClip: {fileID: 0}
 --- !u!1001 &1049630223
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16932,6 +16934,7 @@ MonoBehaviour:
   levelOneTownClip: {fileID: 8300000, guid: ebc0a29ca4d808a49a6740e1ebcf4d05, type: 3}
   levelTwoTownClip: {fileID: 8300000, guid: 3e962ac327273e04dbcbd2757c541df2, type: 3}
   levelThreeTownClip: {fileID: 8300000, guid: 6c21f2ab26f938e47a73f22a1361af07, type: 3}
+  loseScreenClip: {fileID: 0}
 --- !u!1001 &1109353328
 PrefabInstance:
   m_ObjectHideFlags: 0
