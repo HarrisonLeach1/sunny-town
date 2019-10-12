@@ -54,7 +54,9 @@ namespace SunnyTown
                 StopCoroutine(progressAnimationCoroutine);
             }
             animationProgressAnimator.SetBool("IsVisible", true);
-            progressAnimationCoroutine = StartCoroutine(AnimationWait(seconds));
+            // need offset here otherwise the progress bar will stay visible
+            float offset = 0.1f;
+            progressAnimationCoroutine = StartCoroutine(AnimationWait(seconds - offset));
         }
 
         /// <summary>

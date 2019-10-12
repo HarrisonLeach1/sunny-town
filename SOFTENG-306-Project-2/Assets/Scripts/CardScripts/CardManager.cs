@@ -233,6 +233,8 @@ namespace SunnyTown
         private void HandleOptionPressed(int decisionValue)
         {
             currentCard.HandleDecision(decisionValue);
+            LevelWon = IsFinalCard(currentCard);
+
             if (IsFinalCard(currentCard)){
                 LevelWon = true;
                 waitingForEventsDuration = 0f;
@@ -266,7 +268,6 @@ namespace SunnyTown
         private void DisplayPlotCard()
         {
             currentCard = cardFactory.GetNewCard("story");
-            LevelWon = IsFinalCard(currentCard);
             dialogueManager.StartBinaryOptionDialogue(dialogueMapper.PlotCardToBinaryOptionDialogue((PlotCard)currentCard), HandleOptionPressed);
         }
 
