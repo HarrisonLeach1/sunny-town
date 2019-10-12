@@ -267,7 +267,7 @@ MonoBehaviour:
   m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.6
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -737,6 +737,7 @@ GameObject:
   - component: {fileID: 238147038}
   - component: {fileID: 238147037}
   - component: {fileID: 238147036}
+  - component: {fileID: 238147039}
   m_Layer: 0
   m_Name: SFX Audio
   m_TagString: Untagged
@@ -871,6 +872,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &238147039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238147035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11f450e28237e0d4f945af2e11650db3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: 4f4fc8a440547734ba532132ed397117, type: 2}
+  slider: {fileID: 1693669669}
 --- !u!1 &274495941
 GameObject:
   m_ObjectHideFlags: 0
@@ -3231,6 +3246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1692981489}
   - component: {fileID: 1692981488}
+  - component: {fileID: 1692981490}
   m_Layer: 0
   m_Name: Music
   m_TagString: Untagged
@@ -3349,6 +3365,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1692981490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692981487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11f450e28237e0d4f945af2e11650db3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: 15a19a3807f65fb47a55f6504e8c6e22, type: 2}
+  slider: {fileID: 60449461}
 --- !u!1 &1693669666
 GameObject:
   m_ObjectHideFlags: 0
@@ -3446,7 +3476,7 @@ MonoBehaviour:
   m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.6
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
