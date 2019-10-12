@@ -6,6 +6,10 @@ using UnityEngine.Audio;
 
 namespace SunnyTown
 {
+   /// <summary>
+   /// The VolumeController script is responsible for mapping the value of the volume slider that can be set in the Settings page
+   /// to the volume of AudioSources it is added to
+   /// </summary>
     public class VolumeController : MonoBehaviour
     {
        //public static VolumeController Instance { get; private set; }

@@ -3,6 +3,10 @@ using System.IO;
 
 namespace SunnyTown
 {
+    /// <summary>
+    /// The SFXAudioManager is a singleton class that is used to play different AudioClips for
+    /// button presses, construction animations, and in-game notifications.
+    /// </summary>
     public class SFXAudioManager : MonoBehaviour
     {
         public static SFXAudioManager Instance { get; private set; }
