@@ -22,7 +22,7 @@ namespace SunnyTown
 
         IEnumerator CreateMinorCard()
         {
-            while (manager.GetCardStatus() || PopupButtonControllerScript.popupShowing)
+            while (manager.CurrentGameState != CardManager.GameState.WaitingForEvents || PopupButtonControllerScript.popupShowing)
             {
                 yield return new WaitForSeconds(1);
             }

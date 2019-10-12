@@ -24,8 +24,8 @@ namespace SunnyTown
             var gameScore = endGameView.transform.GetChild(0).GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>();
             var gameOutcome = endGameView.transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
             var gameBackground = endGameView.transform.GetChild(0).GetChild(0).GetComponent<Image>();
-            gameOutcome.SetText(CardManager.Instance.isFinalCard ? "Game Won" : "Game lost");
-            if (CardManager.Instance.isFinalCard)
+            gameOutcome.SetText(CardManager.Instance.LevelWon ? "Game Won" : "Game lost");
+            if (CardManager.Instance.LevelWon)
             {
                 gameOutcome.SetText("Game Won");
                 gameBackground.color = new Color32(0, 255, 0, 130);
