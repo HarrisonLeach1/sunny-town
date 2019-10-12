@@ -16444,7 +16444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 1255602958}
   buttonClip: {fileID: 8300000, guid: 746dd27481430404fbebdf514b398678, type: 3}
-  constructionClip: {fileID: 0}
+  constructionClip: {fileID: 8300000, guid: 38beff175ce27864f8cdbbe0b63fdbc4, type: 3}
   notificationClip: {fileID: 8300000, guid: afe060032e9ffe7448f98d766379de6c, type: 3}
 --- !u!1001 &1049630223
 PrefabInstance:
