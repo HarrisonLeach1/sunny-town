@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -32,6 +33,7 @@ namespace SunnyTown
         private Coroutine cardWaitingRoutine;
         private bool gameLost = false;
         private SimpleDialogue endGameDialogue;
+        public Dictionary<string, string> PastTokens = new Dictionary<string, string>();
 
         private void Awake()
         {
@@ -135,8 +137,24 @@ namespace SunnyTown
         /// <param name="decisionValue">The value chosen by the user</param>
         public void HandleOptionPressed(int decisionValue)
         {
-            currentCard.HandleDecision(decisionValue);
+            if (PastTokens.ContainsKey(currentCard.Options[decisionValue].AdditionalState))
+            {
+                Debug.Log("addition states = " + PastTokens[currentCard.Options[decisionValue].AdditionalState]);
+                currentCard.HandleDecision(decisionValue, PastTokens[currentCard.Options[decisionValue].AdditionalState]);
+            }
+            else
+            {
+                currentCard.HandleDecision(decisionValue);
+            }
 
+            string key = currentCard.Options[decisionValue].TokenKey;
+            string value = currentCard.Options[decisionValue].TokenValue;
+            Debug.Log(key + ", " + value);
+            if (!key.Equals(""))
+            {
+                PastTokens.Add(key, value);
+            }
+            
             if (string.IsNullOrEmpty(currentCard.Feedback))
             {
                 metricManager.RenderMetrics();
