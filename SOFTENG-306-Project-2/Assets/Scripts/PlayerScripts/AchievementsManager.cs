@@ -32,6 +32,7 @@ public class AchievementsManager : MonoBehaviour
         achievementsView = Instantiate(AchievementsPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         var parentObject = GameObject.Find("AchievementsMenu");
         achievementsView.transform.SetParent(parentObject.transform, false);
+        PlayerPrefs.DeleteAll();
         for (int i = 0; i < 7; i++)
         {
             UpdateHighScores(i);
