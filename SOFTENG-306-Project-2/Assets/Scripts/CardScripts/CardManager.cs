@@ -1,8 +1,7 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace SunnyTown
 {
@@ -13,7 +12,11 @@ namespace SunnyTown
     /// </summary>
     public class CardManager : MonoBehaviour
     {
-        public const float time = 1f;
+        [SerializeField]
+        private float waitingForEventsDuration = 5f;
+        [SerializeField]
+        private float waitingForFeedbackDuration = 0.5f;
+
         public static CardManager Instance { get; private set; }
         public GameObject spawnHandlerObject;
 
@@ -22,28 +25,16 @@ namespace SunnyTown
         private MetricManager metricManager;
         private DialogueMapper dialogueMapper;
         private SpawnHandler animationHandler;
-        private int cardCount = 0;
-
-        private Card currentCard;
-        public bool isFinalCard = false;
         private Reader reader;
-        private bool currentlyProcessingCard = true;
-        private Coroutine cardWaitingRoutine;
-        private bool gameLost = false;
         private SimpleDialogue endGameDialogue;
         public Dictionary<string, string> PastTokens = new Dictionary<string, string>();
 
-        private void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
+        public bool LevelWon { get; private set; } = false;
+        public bool GameLost { get; private set; } = false;
+
+        public GameState CurrentGameState { get; private set; } = GameState.GameStarting;
+        private Card currentCard;
+        private float timeRemainingInCurrentState = float.PositiveInfinity;
 
         // Start is called before the first frame update
         void Start()
@@ -57,14 +48,151 @@ namespace SunnyTown
             animationHandler = spawnHandlerObject.GetComponent<SpawnHandler>();
         }
 
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        public enum GameState
+        {
+            GameStarting,
+            WaitingForEvents,
+            SelectingPlotDecision,
+            SelectingMinorDecision,
+            WaitingForFeedback,
+            ViewingFeedback,
+            GameEnding
+        }
+
+        /// <summary>
+        /// Sets the current state of the game, this method also updates the view with the new state.
+        /// </summary>
+        /// <param name="state">The state to set the game to</param>
+        private void SetState(GameState state)
+        {
+            Debug.Log("Setting State: " + state);
+            CurrentGameState = state;
+            switch (CurrentGameState)
+            {
+                case GameState.SelectingPlotDecision:
+                    timeRemainingInCurrentState = float.PositiveInfinity;
+                    DisplayPlotCard();
+                    break;
+                case GameState.SelectingMinorDecision:
+                    timeRemainingInCurrentState = float.PositiveInfinity;
+                    DisplayMinorDecisionCard();
+                    break;
+                case GameState.ViewingFeedback:
+                    timeRemainingInCurrentState = float.PositiveInfinity;
+                    ShowFeedback();
+                    break;
+                case GameState.WaitingForFeedback:
+                    timeRemainingInCurrentState = waitingForFeedbackDuration;
+                    break;
+                case GameState.WaitingForEvents:
+                    timeRemainingInCurrentState = waitingForEventsDuration;
+                    break;
+                case GameState.GameEnding:
+                    timeRemainingInCurrentState = float.PositiveInfinity;
+                    EndGame();
+                    break;
+            }
+        }
+
+        private void Update()
+        {
+            timeRemainingInCurrentState -= Time.deltaTime;
+            if (timeRemainingInCurrentState <= 0)
+                MoveToNextState();
+        }
+
+        /// <summary>
+        /// Moves the Game state to a new state depending on the current state and 
+        /// other values, this should not contain any logic updating the view. That 
+        /// should be in the SetState method instead.
+        /// </summary>
+        private void MoveToNextState()
+        {
+            switch (CurrentGameState)
+            {
+                case GameState.GameStarting:
+                    SetState(GameState.WaitingForEvents);
+                    break;
+                case GameState.WaitingForEvents:
+                    TransitionFromWaitingForEvents();
+                    break;
+                case GameState.SelectingMinorDecision:
+                case GameState.SelectingPlotDecision:
+                    TransitionFromSelectingDecision();
+                    break;
+                case GameState.WaitingForFeedback:
+                    SetState(GameState.ViewingFeedback);
+                    break;
+                case GameState.ViewingFeedback:
+                    SetState(GameState.WaitingForEvents);
+                    break;
+            }
+        }
+
+        private void TransitionFromWaitingForEvents()
+        {
+            if (LevelWon || GameLost)
+            {
+                SetState(GameState.GameEnding);
+            }
+            else
+            {
+                SetState(GameState.SelectingPlotDecision);
+            }
+        }
+
+        private void TransitionFromSelectingDecision()
+        {
+            if (string.IsNullOrEmpty(currentCard.Feedback))
+            {
+                metricManager.RenderMetrics();
+                SetState(GameState.WaitingForEvents);
+            }
+            else
+            {
+                SetState(GameState.WaitingForFeedback);
+            }
+
+        }
+
+        /// <summary>
+        /// Ends the game by displaying dialogue and switching scenes
+        /// </summary>
+        private void EndGame()
+        {
+            if (LevelWon)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+            else if (GameLost)
+            {
+                dialogueManager.StartExplanatoryDialogue(
+                    this.endGameDialogue,
+                    () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
+            }
+        }
+
         /// <summary>
         /// Queues the dialogue to be played to the user when the current card 
         /// dissappears
         /// </summary>
         /// <param name="endGameDialogue">The dialogue to be played to the user</param>
-        public void QueueEndDialogue(SimpleDialogue endGameDialogue)
+        public void QueueGameLost(SimpleDialogue endGameDialogue)
         {
-            gameLost = true;
+            GameLost = true;
+            waitingForEventsDuration = 0f;
             this.endGameDialogue = endGameDialogue;
         }
 
@@ -72,49 +200,21 @@ namespace SunnyTown
         /// Displays a minor card to the user, ensuring not to interrupt any already being
         /// viewed
         /// </summary>
-        public void DisplayMinorCard()
+        /// <param name="button">To be destroyed</param>
+        public void QueueMinorCard()
         {
-            if (!currentlyProcessingCard)
+            if (CurrentGameState.Equals(GameState.WaitingForEvents))
             {
                 Debug.Log("Successfully selected minor card from world!");
-                StopCoroutine(cardWaitingRoutine);
-                currentlyProcessingCard = true;
+                SetState(GameState.SelectingMinorDecision);
                 //show exposition dialouge 
-                string[] statements = { "A new message has been addressed to you at the town hall !" };
-                dialogueManager.StartExplanatoryDialogue(new SimpleDialogue(statements, "You have mail"), DisplayMinorDecisionCard);
             }
             else
             {
-                Debug.Log("Cant select exclamation mark while processing card!");
+                Debug.Log("Not in approriate game state to display minor card");
                 // TODO: DisplayWarningDialogue();
             }
-        }
-
-        /// <summary>
-        /// Displays a minor decision card to the user instantly
-        /// </summary>
-        public void DisplayMinorDecisionCard()
-        {
-            currentCard = cardFactory.GetNewCard("minor");
-            //destroy the exclamation mark
-            if (currentCard is MinorCard)
-            {
-                dialogueManager.StartBinaryOptionDialogue(dialogueMapper.MinorCardToBinaryOptionDialogue((MinorCard)currentCard), HandleOptionPressed);
-            }
-            else
-            {
-                dialogueManager.StartSliderOptionDialogue(dialogueMapper.SliderCardToSliderOptionDialogue((SliderCard)currentCard), HandleOptionPressed);
-            }
-
-        }
-
-        /// <summary>
-        /// Returns whether or not the  user is currently interacting with a card
-        /// </summary>
-        /// <returns>true if a user is currently viewing a card, otherwise false</returns>
-        public bool GetCardStatus()
-        {
-            return this.currentlyProcessingCard;
+            AchievementsManager.Instance.IsAchievementMade();
         }
 
         /// <summary>
@@ -122,77 +222,33 @@ namespace SunnyTown
         /// </summary>
         public void StartDisplayingCards()
         {
-            currentCard = cardFactory.GetNewCard("story");
-            currentlyProcessingCard = false;
-            cardWaitingRoutine = StartCoroutine(QueueCard());
+            MoveToNextState();
         }
 
         /// <summary>
         /// Handles when a user makes a decision for a card
         /// </summary>
         /// <param name="decisionValue">The value chosen by the user</param>
-        public void HandleOptionPressed(int decisionValue)
+        private void HandleOptionPressed(int decisionValue)
         {
-            
-            if (PastTokens.ContainsKey(currentCard.Options[decisionValue].AdditionalState))
+            currentCard.HandleDecision(decisionValue);
+            if (IsFinalCard(currentCard))
             {
-                Debug.Log("addition state added: " + PastTokens[currentCard.Options[decisionValue].AdditionalState]);
-                currentCard.HandleDecision(decisionValue, PastTokens[currentCard.Options[decisionValue].AdditionalState]);
+                LevelWon = true;
+                waitingForEventsDuration = 0f;
+            }
+
+            if (currentCard.ShouldAnimate)
+            {
+                waitingForFeedbackDuration = 3f;
+                dialogueManager.ShowAnimationProgress(waitingForFeedbackDuration);
+                animationHandler.PlayAnimation(currentCard.BuildingName, waitingForFeedbackDuration);
             }
             else
             {
-                currentCard.HandleDecision(decisionValue);
+                waitingForFeedbackDuration = 0.5f;
             }
-
-            string key = currentCard.Options[decisionValue].TokenKey;
-            string value = currentCard.Options[decisionValue].TokenValue;
-            if (!key.Equals(""))
-            {
-                PastTokens.Add(key, value);
-            }
-            
-            if (string.IsNullOrEmpty(currentCard.Feedback))
-            {
-                metricManager.RenderMetrics();
-                GoToNextCard();
-            }
-            else if (currentCard.ShouldAnimate)
-            {
-                var time = 3f;
-                Debug.Log(time);
-                dialogueManager.ShowAnimationProgress(time);
-                StartCoroutine(WaitForAnimation(time));
-                animationHandler.PlayAnimation(currentCard.BuildingName, time);
-                SFXAudioManager.Instance.PlayConstructionSound();
-            }
-            else
-            {
-                StartCoroutine(WaitForFeedback());
-            }
-            AchievementsManager.Instance.IsAchievementMade();
-        }
-
-        /// <summary>
-        /// A Coroutine which waits for the animation to be played to the user
-        /// </summary>
-        /// <param name="time">The time to wait</param>
-        /// <returns>The coroutine IEnumerator</returns>
-        private IEnumerator WaitForAnimation(float time)
-        {
-            yield return new WaitForSeconds(time);
-            metricManager.RenderMetrics();
-            ShowFeedback();
-        }
-
-        /// <summary>
-        /// A Coroutine which waits for feedback to display to the user
-        /// </summary>
-        /// <returns>The coroutine IEnumerator</returns>
-        private IEnumerator WaitForFeedback()
-        {
-            yield return new WaitForSeconds(0.5f);
-            metricManager.RenderMetrics();
-            ShowFeedback();
+            MoveToNextState();
         }
 
         /// <summary>
@@ -200,66 +256,40 @@ namespace SunnyTown
         /// </summary>
         private void ShowFeedback()
         {
-            dialogueManager.StartExplanatoryDialogue(dialogueMapper.FeedbackToDialogue(currentCard.Feedback, currentCard.FeedbackNPCName), GoToNextCard);
+            metricManager.RenderMetrics();
+            dialogueManager.StartExplanatoryDialogue(dialogueMapper.FeedbackToDialogue(currentCard.Feedback, currentCard.FeedbackNPCName), MoveToNextState);
         }
 
         /// <summary>
-        /// A Coroutine which queues the current card to be interacted with
+        /// Displays a Plot Card if there is one
         /// </summary>
-        /// <returns>The coroutine IEnumerator</returns>
-        private IEnumerator QueueCard()
+        private void DisplayPlotCard()
         {
-            yield return new WaitForSeconds(CardManager.time);
-
-            currentlyProcessingCard = true;
-
-            cardCount++; 
-
             currentCard = cardFactory.GetNewCard("story");
-
-            if (currentCard is PlotCard)
-            {
-                dialogueManager.StartBinaryOptionDialogue(dialogueMapper.PlotCardToBinaryOptionDialogue((PlotCard)currentCard), HandleOptionPressed);
-            }
-            else if (currentCard is MinorCard)
-            {
-                dialogueManager.StartBinaryOptionDialogue(dialogueMapper.MinorCardToBinaryOptionDialogue((MinorCard)currentCard), HandleOptionPressed);
-            }
-            else
-            {
-                dialogueManager.StartSliderOptionDialogue(dialogueMapper.SliderCardToSliderOptionDialogue((SliderCard)currentCard), HandleOptionPressed);
-            }
+            dialogueManager.StartBinaryOptionDialogue(dialogueMapper.PlotCardToBinaryOptionDialogue((PlotCard)currentCard), HandleOptionPressed);
         }
 
         /// <summary>
-        /// Transitions the user to their next card based on their decisions and the game state
+        /// Displays a minor decision card to the user with a mail message appearing before
         /// </summary>
-        private void GoToNextCard()
+        private void DisplayMinorDecisionCard()
         {
-            if (IsFinalCard(currentCard))
+            string[] statements = { "A new message has been addressed to you at the town hall !" };
+            Action displayMinorCard = () =>
             {
-                isFinalCard = true;
-                EndGame();
-                return;
-            }
-            else if (gameLost)
-            {
-                dialogueManager.StartExplanatoryDialogue(
-                    this.endGameDialogue,
-                    () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
-                return;
-            }
+                currentCard = cardFactory.GetNewCard("minor");
+                if (currentCard is MinorCard)
+                {
+                    dialogueManager.StartBinaryOptionDialogue(dialogueMapper.MinorCardToBinaryOptionDialogue((MinorCard)currentCard), HandleOptionPressed);
+                }
+                else
+                {
+                    dialogueManager.StartSliderOptionDialogue(dialogueMapper.SliderCardToSliderOptionDialogue((SliderCard)currentCard), HandleOptionPressed);
+                }
+            };
 
-            currentlyProcessingCard = false;
-            cardWaitingRoutine = StartCoroutine(QueueCard());
-        }
-
-        /// <summary>
-        /// Ends the game, which loads in the end game screen
-        /// </summary>
-        private void EndGame()
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            // minor card should be displayed upon the callback to the mail message
+            dialogueManager.StartExplanatoryDialogue(new SimpleDialogue(statements, "You have mail"), displayMinorCard);
         }
 
         /// <summary>

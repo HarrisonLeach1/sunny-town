@@ -67,11 +67,9 @@ namespace SunnyTown
             int width = 250;
             int height = 250;
 
-            Debug.Log("Getting sprite for: " + name);
             Texture2D texture = this.GetSpriteTexture(name);
             texture.filterMode = FilterMode.Trilinear;
             Sprite sprite = Sprite.Create(texture, new Rect(0, 0, width, height), new Vector2(0.5f, 0.0f), 1.0f);
-            Debug.Log("Sprite is: " + sprite);
             return sprite;
         }
     }

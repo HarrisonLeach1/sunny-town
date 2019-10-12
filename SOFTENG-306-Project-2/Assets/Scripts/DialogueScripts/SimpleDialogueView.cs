@@ -26,7 +26,6 @@ namespace SunnyTown
         public void SetContent(SimpleDialogue dialogue)
         {
             npcImage = GameObject.Find("SimpleNPCImage").GetComponent<Image>();
-            Debug.Log("Simple NPC Name: " + dialogue.Name);
             npcImage.sprite = NPCSpriteManager.Instance.GetSprite(dialogue.Name);
         }
         public IEnumerator TypeSentence(string statement)
