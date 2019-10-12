@@ -37,7 +37,7 @@ namespace SunnyTown
             }
 
             int finalScore = MetricManager.Instance.GetScore();
-            int highScoreRank = AchievementsManager.Instance.UpdateHighScores(finalScore);
+            int highScoreRank = AchievementsManager.UpdateHighScores(finalScore);
             if (highScoreRank != -1)
             {
                 gameScore.SetText("High Score Rank: " + highScoreRank + " with " + finalScore);

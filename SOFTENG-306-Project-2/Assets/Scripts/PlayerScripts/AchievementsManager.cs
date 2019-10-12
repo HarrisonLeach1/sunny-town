@@ -8,7 +8,6 @@ using UnityEngine;
 
 public class AchievementsManager : MonoBehaviour
 {
-    public static AchievementsManager Instance { get; private set; }
 
     public GameObject AchievementsPrefab;
     private Transform highScoreContainer;
@@ -19,7 +18,7 @@ public class AchievementsManager : MonoBehaviour
     private const String HIGH_SCORE = "HighScore";
     private const String PLAYER_NAME = "PlayerName";
     private const int HIGH_SCORE_SIZE = 5;
-
+    
     public void IsAchievementMade()
     {
         
@@ -31,7 +30,6 @@ public class AchievementsManager : MonoBehaviour
         achievementsView = Instantiate(AchievementsPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         var parentObject = GameObject.Find("AchievementsMenu");
         achievementsView.transform.SetParent(parentObject.transform, false);
-        PlayerPrefs.DeleteAll();
         for (int i = 0; i < 7; i++)
         {
             UpdateHighScores(i);
@@ -39,7 +37,7 @@ public class AchievementsManager : MonoBehaviour
         DisplayHighScores();
     }
     
-    public int UpdateHighScores(int newScore)
+    public static int UpdateHighScores(int newScore)
     {
         var numberOfScores = PlayerPrefs.GetInt(NUMBER_OF_SCORES);
         if (numberOfScores < HIGH_SCORE_SIZE)
