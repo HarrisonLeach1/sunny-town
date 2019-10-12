@@ -5,7 +5,7 @@ namespace SunnyTown
 {
     public class SFXAudioManager : MonoBehaviour
     {
-        public static MetricManager Instance { get; private set; }
+        public static SFXAudioManager Instance { get; private set; }
 
         public AudioSource source;
         public AudioClip buttonClip;
@@ -15,6 +15,18 @@ namespace SunnyTown
         private SFXAudioManager()
         {
             
+        }
+        
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         public void PlayClickSound()
@@ -27,7 +39,7 @@ namespace SunnyTown
             source.PlayOneShot(constructionClip);
         }
 
-        public void PlayNotifcationSound()
+        public void PlayNotificationSound()
         {
             source.PlayOneShot(notificationClip);
         }
