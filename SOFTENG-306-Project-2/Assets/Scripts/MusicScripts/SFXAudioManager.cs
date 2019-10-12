@@ -8,7 +8,9 @@ namespace SunnyTown
         public static MetricManager Instance { get; private set; }
 
         public AudioSource source;
-        public AudioClip clip;
+        public AudioClip buttonClip;
+        public AudioClip constructionClip;
+        public AudioClip notificationClip;
 
         private SFXAudioManager()
         {
@@ -17,7 +19,19 @@ namespace SunnyTown
 
         public void PlayClickSound()
         {
-            source.PlayOneShot(clip);
+            source.PlayOneShot(buttonClip);
         }
+
+        public void PlayConstructionSound()
+        {
+            source.PlayOneShot(constructionClip);
+        }
+
+        public void PlayNotifcationSound()
+        {
+            source.PlayOneShot(notificationClip);
+        }
+        
+        
     }
 }
