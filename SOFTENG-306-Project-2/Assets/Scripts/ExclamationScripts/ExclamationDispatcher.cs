@@ -7,7 +7,7 @@ namespace SunnyTown
     public class ExclamationDispatcher : MonoBehaviour
     {
         public GameObject manager;
-        private bool isShowing;
+        private bool markSpawned;
         private CardManager cardManager;
 
         public MeshRenderer render;
@@ -23,7 +23,7 @@ namespace SunnyTown
             animator = GetComponent<Animator>();
             // set animator to default state 
             animator.SetBool("isShow",false);
-            isShowing = false;
+            markSpawned = false;
             cardManager = manager.GetComponent<CardManager>();  
             StartCoroutine("CreateExclamationMark");
         }
@@ -33,7 +33,7 @@ namespace SunnyTown
         IEnumerator CreateExclamationMark()
         {
             // wait while a card or an exclamation mark is already showing 
-            while (cardManager.GetCardStatus() || isShowing)
+            while (cardManager.GetCardStatus() || markSpawned)
             {
                 yield return new WaitForSeconds(1);
             }
@@ -44,7 +44,7 @@ namespace SunnyTown
             if (randomTime >= 3f){
                 foreach (Renderer r in GetComponentsInChildren<Renderer>())
                     r.enabled = true;
-                isShowing = true;
+                markSpawned = true;
                 animator.SetBool("isShow",true);
                 Debug.Log(randomTime);
             } else {
@@ -60,9 +60,9 @@ namespace SunnyTown
          */
         void OnMouseDown()
         {
-            if (isShowing && !cardManager.GetCardStatus()){
+            if (markSpawned && !cardManager.GetCardStatus()){
                 animator.SetBool("isShow",false);
-                isShowing = false;
+                markSpawned = false;
                 cardManager.DisplayMinorCard();
                 foreach (Renderer r in GetComponentsInChildren<Renderer>())
                     r.enabled = false;
@@ -74,12 +74,12 @@ namespace SunnyTown
 
         /** At the end of the animation, set the animator to default invisible state
          */
-        void changeShowState()
+        void OnEndOfAnimation()
         {
             foreach (Renderer r in GetComponentsInChildren<Renderer>())
                 r.enabled = false;
             animator.SetBool("isShow",false);
-            isShowing = false;
+            markSpawned = false;
         }
     }
 }
