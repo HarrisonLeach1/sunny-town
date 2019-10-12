@@ -16,6 +16,7 @@ public class AcidRain : MonoBehaviour
     void Start()
     {
         button.onClick.AddListener(OnClick); 
+        rain.Stop();
     }
 
     /** Right now rain is triggered on button click by the test button, will need to implement a weather controller that fires weather event
