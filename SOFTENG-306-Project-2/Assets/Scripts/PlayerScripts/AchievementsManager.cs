@@ -18,7 +18,6 @@ public class AchievementsManager : MonoBehaviour
     private const String NUMBER_OF_SCORES = "NumberOfScores";
     private const String HIGH_SCORE = "HighScore";
     private const String PLAYER_NAME = "PlayerName";
-    private const String HIGH_SCORE_DATE = "HighScoreDate";
     private const int HIGH_SCORE_SIZE = 5;
 
     public void IsAchievementMade()
@@ -40,15 +39,15 @@ public class AchievementsManager : MonoBehaviour
         DisplayHighScores();
     }
     
-    public void UpdateHighScores(int newScore)
+    public int UpdateHighScores(int newScore)
     {
         var numberOfScores = PlayerPrefs.GetInt(NUMBER_OF_SCORES);
         if (numberOfScores < HIGH_SCORE_SIZE)
         {
             PlayerPrefs.SetInt(HIGH_SCORE + numberOfScores, newScore);
-            PlayerPrefs.SetString(HIGH_SCORE_DATE + numberOfScores, DateTime.Today.Date.ToString(CultureInfo.CurrentCulture));
             PlayerPrefs.SetString(PLAYER_NAME + numberOfScores, "BOB");
             PlayerPrefs.SetInt(NUMBER_OF_SCORES, numberOfScores + 1);
+            return numberOfScores;
         }
         else
         {
@@ -56,14 +55,14 @@ public class AchievementsManager : MonoBehaviour
             {
                 if (newScore > PlayerPrefs.GetInt(HIGH_SCORE + i))
                 {
-                    PlayerPrefs.SetInt(HIGH_SCORE + i, newScore);
-                    PlayerPrefs.SetString(HIGH_SCORE_DATE + i, DateTime.Today.Date.ToString(CultureInfo.CurrentCulture));
-                    PlayerPrefs.SetString(PLAYER_NAME + i, "Bob");
-                    return;
+                    PlayerPrefs.SetInt(HIGH_SCORE + (i + 1), newScore);
+                    PlayerPrefs.SetString(PLAYER_NAME + (i + 1), "Bob");
+                    return i + 1;
                 }
             }
         }
 
+        return -1;
     }
 
     public List<HighScoreEntry> GetHighScores()
@@ -74,7 +73,7 @@ public class AchievementsManager : MonoBehaviour
             var hse = new HighScoreEntry(
                 PlayerPrefs.GetInt(HIGH_SCORE + i), 
                 PlayerPrefs.GetString(PLAYER_NAME + i),
-                PlayerPrefs.GetString(HIGH_SCORE_DATE + i));
+                i + 1);
             highScores.Add(hse);
         }
 
@@ -95,11 +94,11 @@ public class AchievementsManager : MonoBehaviour
             var entryRectTransform = entryTransform.GetComponent<RectTransform>();
             var highScore = entryRectTransform.GetChild(1).GetComponent<TextMeshProUGUI>();
             var playerName = entryRectTransform.GetChild(0).GetComponent<TextMeshProUGUI>();
-            var dateAchieved = entryRectTransform.GetChild(2).GetComponent<TextMeshProUGUI>();
+            var hsrank = entryRectTransform.GetChild(2).GetComponent<TextMeshProUGUI>();
             var hse = highScoreList.ElementAt(i);
             highScore.SetText(hse.getHighScore().ToString());
             playerName.SetText(hse.getPlayerName());
-            dateAchieved.SetText(hse.getDate());
+            hsrank.SetText(hse.getRank().ToString());
             entryRectTransform.anchoredPosition = new Vector2(0, -templateHeight * i);
             entryTransform.gameObject.SetActive(true);
         }
@@ -107,16 +106,16 @@ public class AchievementsManager : MonoBehaviour
 
     public class HighScoreEntry
     {
-        internal HighScoreEntry(int highScore, string playername, string date)
+        internal HighScoreEntry(int highScore, string playername, int rank)
         {
             this.highScore = highScore;
             this.playername = playername;
-            this.date = date;
+            this.rank = rank;
         }
         
         private int highScore;
         private string playername;
-        private string date;
+        private int rank;
 
         internal int getHighScore()
         {
@@ -128,9 +127,9 @@ public class AchievementsManager : MonoBehaviour
             return this.playername;
         }
 
-        internal string getDate()
+        internal int getRank()
         {
-            return this.date;
+            return this.rank;
         }
     }
 }
