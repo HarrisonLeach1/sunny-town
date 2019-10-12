@@ -12,20 +12,14 @@ namespace SunnyTown
    /// </summary>
     public class VolumeController : MonoBehaviour
     {
-       //public static VolumeController Instance { get; private set; }
-       
+
        public AudioMixer mixer;
        public Slider slider;
-
-//       private VolumeController()
-//       {
-//          
-//       }
+       
 
        void Start()
        {
           SetLevel();
-          //slider.value = PlayerPrefs.GetFloat("MusicVolume", 0.60f);
        }
 
        public void SetLevel()
