@@ -3,27 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Button))]
-public class ClickSound : MonoBehaviour
+namespace SunnyTown
 {
-    public AudioClip sound;
-    
-    private Button button { get { return GetComponent<Button>(); } }
-    private AudioSource source { get { return GetComponent<AudioSource>(); } }
-    
-    
-    // Start is called before the first frame update
-    void Start()
+    [RequireComponent(typeof(Button))]
+    public class ClickSound : MonoBehaviour
     {
-        gameObject.AddComponent<AudioSource>();
-        source.clip = sound;
-        source.playOnAwake = false;
+        public AudioClip sound;
+    
+        private Button button { get { return GetComponent<Button>(); } }
+        private AudioSource source { get { return GetComponent<AudioSource>(); } }
+    
+    
+        // Start is called before the first frame update
+        void Start()
+        {
+            gameObject.AddComponent<AudioSource>();
+            source.clip = sound;
+            source.playOnAwake = false;
 
-        button.onClick.AddListener(() => PlaySound());
-    }
+            button.onClick.AddListener(() => PlaySound());
+        }
 
-    void PlaySound()
-    {
-        source.PlayOneShot(sound);
+        void PlaySound()
+        {
+            source.PlayOneShot(sound);
+        }
     }
 }
