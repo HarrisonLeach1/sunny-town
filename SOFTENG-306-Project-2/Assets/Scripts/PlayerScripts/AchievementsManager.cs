@@ -26,14 +26,9 @@ public class AchievementsManager : MonoBehaviour
 
     public void Awake()
     {
-        Debug.Log("awoken");
         achievementsView = Instantiate(AchievementsPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         var parentObject = GameObject.Find("AchievementsMenu");
         achievementsView.transform.SetParent(parentObject.transform, false);
-        for (int i = 0; i < 7; i++)
-        {
-            UpdateHighScores(i);
-        }
         DisplayHighScores();
     }
     
@@ -45,7 +40,7 @@ public class AchievementsManager : MonoBehaviour
             PlayerPrefs.SetInt(HIGH_SCORE + numberOfScores, newScore);
             PlayerPrefs.SetString(PLAYER_NAME + numberOfScores, "BOB");
             PlayerPrefs.SetInt(NUMBER_OF_SCORES, numberOfScores + 1);
-            return numberOfScores;
+            return numberOfScores + 1;
         }
         else
         {
