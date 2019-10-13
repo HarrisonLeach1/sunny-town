@@ -135,6 +135,7 @@ namespace SunnyTown
         /// <param name="decisionValue">The value chosen by the user</param>
         public void HandleOptionPressed(int decisionValue)
         {
+            
             if (PastTokens.ContainsKey(currentCard.Options[decisionValue].AdditionalState))
             {
                 Debug.Log("addition state added: " + PastTokens[currentCard.Options[decisionValue].AdditionalState]);
