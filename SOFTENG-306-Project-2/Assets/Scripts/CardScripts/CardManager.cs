@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -139,7 +137,7 @@ namespace SunnyTown
         {
             if (PastTokens.ContainsKey(currentCard.Options[decisionValue].AdditionalState))
             {
-                Debug.Log("addition states = " + PastTokens[currentCard.Options[decisionValue].AdditionalState]);
+                Debug.Log("addition state added: " + PastTokens[currentCard.Options[decisionValue].AdditionalState]);
                 currentCard.HandleDecision(decisionValue, PastTokens[currentCard.Options[decisionValue].AdditionalState]);
             }
             else
@@ -149,7 +147,6 @@ namespace SunnyTown
 
             string key = currentCard.Options[decisionValue].TokenKey;
             string value = currentCard.Options[decisionValue].TokenValue;
-            Debug.Log(key + ", " + value);
             if (!key.Equals(""))
             {
                 PastTokens.Add(key, value);
