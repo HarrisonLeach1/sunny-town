@@ -5,12 +5,15 @@ using System.Globalization;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AchievementsManager : MonoBehaviour
 {
 
     public GameObject AchievementsPrefab;
     private Transform highScoreContainer;
+    private Transform achievementsContainer;
+    private Transform achievementsTemplate;
     private Transform highScoreTemplate;
     private GameObject achievementsView;
 
@@ -30,8 +33,10 @@ public class AchievementsManager : MonoBehaviour
         var parentObject = GameObject.Find("AchievementsMenu");
         achievementsView.transform.SetParent(parentObject.transform, false);
         DisplayHighScores();
+        DisplayAchievementsMenu();
     }
     
+
     public static int UpdateHighScores(int newScore)
     {
         var numberOfScores = PlayerPrefs.GetInt(NUMBER_OF_SCORES);
@@ -75,7 +80,7 @@ public class AchievementsManager : MonoBehaviour
 
     private void DisplayHighScores()
     {
-        highScoreContainer = achievementsView.transform.GetChild(0).GetChild(4).GetComponent<Transform>();
+        highScoreContainer = achievementsView.transform.GetChild(1).GetChild(4).GetComponent<Transform>();
         highScoreTemplate = highScoreContainer.Find("HighScoreTemplate");
         highScoreTemplate.gameObject.SetActive(false);
 
@@ -95,6 +100,32 @@ public class AchievementsManager : MonoBehaviour
             entryRectTransform.anchoredPosition = new Vector2(0, -templateHeight * i);
             entryTransform.gameObject.SetActive(true);
         }
+    }
+
+    private void DisplayAchievementsMenu()
+    {
+        achievementsContainer = achievementsView.transform.GetChild(2).GetChild(2).GetChild(0).GetChild(0).GetComponent<Transform>();
+        achievementsTemplate = achievementsContainer.Find("AchievementsTemplate");
+        achievementsTemplate.gameObject.SetActive(false);
+        float templateHeight = 34f;
+        for (int i = 0; i < 20; i++)
+        {
+            var entryTransform = Instantiate(achievementsTemplate, achievementsContainer);
+            var entryRectTransform = entryTransform.GetComponent<RectTransform>();
+            var badge = entryRectTransform.GetChild(0).GetComponent<Image>();
+            var description = entryRectTransform.GetChild(1).GetComponent<TextMeshProUGUI>();
+            var date = entryRectTransform.GetChild(2).GetComponent<TextMeshProUGUI>();
+            description.SetText("asdfasdf");
+            date.SetText("fdsafdsa");
+            entryRectTransform.anchoredPosition = new Vector2(0, -templateHeight * i);
+            entryTransform.gameObject.SetActive(true);
+        }
+
+    }
+
+    private void DisplayAchievementsEndGame()
+    {
+        
     }
 
     public class HighScoreEntry
