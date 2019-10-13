@@ -15,8 +15,7 @@ namespace SunnyTown
     {
         public static MetricManager Instance { get; private set; }
 
-        [SerializeField] private GameObject metricPrefab;
-        private GameObject metricsView;
+        [SerializeField] private GameObject metricsView;
 
         public int PopHappiness { get; private set; }
         public int Gold { get; private set; }
@@ -55,12 +54,12 @@ namespace SunnyTown
 
         private void Start()
         {
-            metricsView = Instantiate(metricPrefab, new Vector3(0, 0, 1), Quaternion.identity);
             RenderMetrics();
         }
 
         public void RenderMetrics()
         {
+            Debug.Log("rendering metrics");
             var money = metricsView.transform.GetChild(0).GetComponent<Slider>();
             var happiness = metricsView.transform.GetChild(1).GetComponent<Slider>();
             var environment = metricsView.transform.GetChild(2).GetComponent<Slider>();
@@ -72,9 +71,6 @@ namespace SunnyTown
             PrevGold = Gold;
             PrevEnvHealth = EnvHealth;
             PrevPopHappiness = PopHappiness;
-
-            var parentObject = GameObject.Find("MetricPanel");
-            metricsView.transform.SetParent(parentObject.transform, false);
         }
 
         public int GetScore()
