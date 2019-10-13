@@ -55,7 +55,7 @@ namespace SunnyTown
 
         private void Start()
         {
-            metricsView = Instantiate(metricPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            metricsView = Instantiate(metricPrefab, new Vector3(0, 0, 1), Quaternion.identity);
             RenderMetrics();
         }
 
