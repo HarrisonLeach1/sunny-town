@@ -147,6 +147,7 @@ namespace SunnyTown
                 dialogueManager.ShowAnimationProgress(time);
                 StartCoroutine(WaitForAnimation(time));
                 animationHandler.PlayAnimation(currentCard.BuildingName, time);
+                SFXAudioManager.Instance.PlayConstructionSound();
             }
             else
             {
