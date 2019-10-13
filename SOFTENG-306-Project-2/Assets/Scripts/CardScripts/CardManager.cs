@@ -154,6 +154,7 @@ namespace SunnyTown
             {
                 StartCoroutine(WaitForFeedback());
             }
+            AchievementsManager.Instance.IsAchievementMade();
         }
 
         /// <summary>

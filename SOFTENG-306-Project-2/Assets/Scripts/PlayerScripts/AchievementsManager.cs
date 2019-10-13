@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class AchievementsManager : MonoBehaviour
 {
+    public static AchievementsManager Instance { get; private set; }
 
     public GameObject AchievementsPrefab;
     private Transform highScoreContainer;
@@ -22,9 +23,11 @@ public class AchievementsManager : MonoBehaviour
     private const String PLAYER_NAME = "PlayerName";
     private const int HIGH_SCORE_SIZE = 5;
     
+    private AchievementsManager() { }
+    
     public void IsAchievementMade()
     {
-        
+        Debug.Log("checking for achievement");
     }
 
     public void Awake()
@@ -34,6 +37,14 @@ public class AchievementsManager : MonoBehaviour
         achievementsView.transform.SetParent(parentObject.transform, false);
         DisplayHighScores();
         DisplayAchievementsMenu();
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     
 
