@@ -27,7 +27,7 @@ namespace SunnyTown
         private MetricManager metricManager;
         private DialogueMapper dialogueMapper;
         private SpawnHandler animationHandler;
-        private Reader reader;
+        private LevelProgressScript levelProgress;
         private SimpleDialogue endGameDialogue;
 
         public bool LevelWon { get; private set; } = false;
@@ -40,13 +40,13 @@ namespace SunnyTown
         // Start is called before the first frame update
         void Start()
         {
-            reader = new Reader();
-            currentCard = reader.RootState;
             cardFactory = new CardFactory();
+            currentCard = cardFactory.CurrentPlotCard;
             dialogueManager = DialogueManager.Instance;
             metricManager = MetricManager.Instance;
             dialogueMapper = new DialogueMapper();
             animationHandler = spawnHandlerObject.GetComponent<SpawnHandler>();
+            levelProgress = GameObject.Find("LevelProgress").GetComponent<LevelProgressScript>();
         }
 
         private void Awake()
@@ -159,6 +159,7 @@ namespace SunnyTown
             if (string.IsNullOrEmpty(currentCard.Feedback))
             {
                 metricManager.RenderMetrics();
+                levelProgress.UpdateValue(cardFactory.PlotCardsRemaining, cardFactory.TotalPlotCardsInLevel);
                 SetState(GameState.WaitingForEvents);
             }
             else
@@ -259,6 +260,7 @@ namespace SunnyTown
         private void ShowFeedback()
         {
             metricManager.RenderMetrics();
+            levelProgress.UpdateValue(cardFactory.PlotCardsRemaining, cardFactory.TotalPlotCardsInLevel);
             dialogueManager.StartExplanatoryDialogue(dialogueMapper.FeedbackToDialogue(currentCard.Feedback, currentCard.FeedbackNPCName), MoveToNextState);
         }
 
