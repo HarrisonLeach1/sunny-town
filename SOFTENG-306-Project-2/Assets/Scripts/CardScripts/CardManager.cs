@@ -13,7 +13,7 @@ namespace SunnyTown
     /// </summary>
     public class CardManager : MonoBehaviour
     {
-        public const float time = 5f;
+        public const float time = 1f;
         public static CardManager Instance { get; private set; }
         public GameObject spawnHandlerObject;
 

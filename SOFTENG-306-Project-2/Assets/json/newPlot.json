@@ -181,7 +181,7 @@
         "label": "Solar sounds like a good idea, it's environmentally friendly. ",
         "npcName": "James the Dog",
         "feedback": "Solar panels are great for the environment, but without the extra investment they are still pricey. ",
-        "state": "s9"
+        "state": "s9b"
       },
       {
         "label": "Lets expand the coal plant",
@@ -204,7 +204,7 @@
         "label": "Solar sounds like a good idea, it's environmentally friendly. ",
         "npcName": "James the Dog",
         "feedback": "Solar panels are great for the environment, but without the extra investment they are still pricey. ",
-        "state": "s9"
+        "state": "s9b"
       },
       {
         "label": "Lets expand the coal plant",
@@ -227,7 +227,7 @@
         "label": "Solar sounds like a good idea, it's environmentally friendly. ",
         "npcName": "James the Dog",
         "feedback": "Solar panels are great for the environment, but without the extra investment they are still pricey. ",
-        "state": "s9"
+        "state": "s9b"
       },
       {
         "label": "Lets expand the coal plant",
@@ -250,7 +250,7 @@
         "label": "Solar sounds like a good idea, it's environmentally friendly. ",
         "npcName": "James the Dog",
         "feedback": "Solar panels are great for the environment, and with the efforts of the research group prices has been lowered significantly. ",
-        "state": "s9"
+        "state": "s9b"
       },
       {
         "label": "Lets expand the coal plant",
@@ -273,13 +273,13 @@
         "buildingName": "CoalMine",
         "npcName": "Advisory Board",
         "feedback": "Arvio begins constructing an coal mine. We're getting paid a great amount of money, but this is releasing a lot of CO2.",
-        "state": "s9"
+        "state": "s9a"
       },
       {
         "label": "No, go away Arvio.",
         "npcName": "Advisory Board",
         "feedback": "Arvio leaves you alone",
-        "state": "s9"
+        "state": "s9b"
       }
     ]
   },
@@ -298,13 +298,59 @@
         "buildingName": "CoalMine",
         "npcName": "Advisory Board",
         "feedback": "Arvio begins constructing an coal mine. We're getting paid a great amount of money, but this is releasing a lot of CO2.",
-        "state": "s9"
+        "state": "s9a"
       },
       {
         "label": "No",
         "npcName": "Advisory Board",
         "feedback": "Arvio leaves you alone",
-        "state": "s9"
+        "state": "s9b"
+      }
+    ]
+  },
+  {
+    "id": "s9a",
+    "name": "Hunter Gatberg",
+    "precedingDialogue": [
+      "[Ring Ring... Ring Ring...]",
+      "Mom! Mom! Remember when you promised me we would go on a trip to see the polar bears?"
+    ],
+    "question": "Next week is school holidays, would we please go?",
+    "transitions": [
+      {
+        "label": "Sorry Hunter, the ice bergs have been melting because of climate change, it's too dangerous to go. ",
+        "state": "s10"
+      }
+    ]
+  },
+  {
+    "id": "s9b",
+    "name": "Hunter Gatberg",
+    "precedingDialogue": [
+      "[Ring Ring... Ring Ring...]",
+      "Mom! Mom! Remember when you promised me we would go on a trip to see the polar bears?"
+    ],
+    "question": "Next week is school holidays, would we please go?",
+    "transitions": [
+      {
+        "label": "Of course, we'll have a great trip!",
+        "state": "s10"
+      }
+    ]
+  },
+  {
+    "id": "s10",
+    "name": "Advisory Board",
+    "precedingDialogue": [
+      ""
+    ],
+    "question": "what do?",
+    "transitions": [
+      {
+        "label": "Yes"
+      },
+      {
+        "label": "No"
       }
     ]
   }
