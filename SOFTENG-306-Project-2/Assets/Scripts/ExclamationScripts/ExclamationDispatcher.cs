@@ -46,6 +46,7 @@ namespace SunnyTown
                     r.enabled = true;
                 markSpawned = true;
                 animator.SetBool("isShow",true);
+                SFXAudioManager.Instance.PlayNotificationSound();
                 Debug.Log(randomTime);
             } else {
                 Debug.Log("waiting");
