@@ -15,6 +15,6 @@ namespace SunnyTown
         public string FeedbackNPCName { get; protected set; }
         public bool ShouldAnimate { get; protected set; } = false;
         public string BuildingName { get; protected set; } = "";
-        public abstract void HandleDecision(int decisionIndex);
+        public abstract void HandleDecision(int decisionIndex, string additionalState = "");
     }
 }
