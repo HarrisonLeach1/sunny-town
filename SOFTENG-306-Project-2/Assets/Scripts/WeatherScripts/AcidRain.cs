@@ -24,7 +24,7 @@ public class AcidRain : MonoBehaviour
      */    
     void OnClick()
     {
-        if (status){
+        if (!status){
             status = !status;
             rain.Play();
             Debug.Log(rain.isPlaying);

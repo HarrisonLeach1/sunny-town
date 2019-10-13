@@ -16507,6 +16507,21 @@ PrefabInstance:
       propertyPath: CollisionModule.collidesWith.m_Bits
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7886898498555135351, guid: bf4eaf0ca7e04804683ac075655e95fb,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7886898498555135351, guid: bf4eaf0ca7e04804683ac075655e95fb,
+        type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7886898498555135351, guid: bf4eaf0ca7e04804683ac075655e95fb,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 700
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf4eaf0ca7e04804683ac075655e95fb, type: 3}
 --- !u!198 &1073080646 stripped
