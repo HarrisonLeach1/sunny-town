@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 using System.Collections;
-using TMPro;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -15,7 +15,7 @@ namespace SunnyTown
     public class CardManager : MonoBehaviour
     {
         [SerializeField]
-        private float waitingForEventsDuration = 5f;
+        private float waitingForEventsDuration = 2f;
         [SerializeField]
         private float waitingForFeedbackDuration = 0.5f;
 
@@ -34,6 +34,7 @@ namespace SunnyTown
         public bool GameLost { get; private set; } = false;
 
         public GameState CurrentGameState { get; private set; } = GameState.GameStarting;
+        public Dictionary<string, string> PastTokens = new Dictionary<string, string>();
         private Card currentCard;
         private float timeRemainingInCurrentState = float.PositiveInfinity;
 
@@ -144,7 +145,7 @@ namespace SunnyTown
 
         private void TransitionFromWaitingForEvents()
         {
-            if ( LevelWon || GameLost )
+            if (LevelWon || GameLost)
             {
                 SetState(GameState.GameEnding);
             }
@@ -166,6 +167,7 @@ namespace SunnyTown
             {
                 SetState(GameState.WaitingForFeedback);
             }
+
         }
 
         /// <summary>
@@ -183,7 +185,7 @@ namespace SunnyTown
                     this.endGameDialogue,
                     () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
             }
-        } 
+        }
 
         /// <summary>
         /// Queues the dialogue to be played to the user when the current card 
@@ -202,14 +204,12 @@ namespace SunnyTown
         /// viewed
         /// </summary>
         /// <param name="button">To be destroyed</param>
-        public void QueueMinorCard(Button button)
+        public void QueueMinorCard()
         {
             if (CurrentGameState.Equals(GameState.WaitingForEvents))
             {
                 Debug.Log("Successfully selected minor card from world!");
                 SetState(GameState.SelectingMinorDecision);
-                PopupButtonControllerScript.popupShowing = false;
-                Destroy(button.gameObject);
                 //show exposition dialouge 
             }
             else
@@ -233,10 +233,30 @@ namespace SunnyTown
         /// <param name="decisionValue">The value chosen by the user</param>
         private void HandleOptionPressed(int decisionValue)
         {
-            currentCard.HandleDecision(decisionValue);
-            LevelWon = IsFinalCard(currentCard);
+            // TODO: Handle this more elegantly, maybe move into different methods
+            if (!(currentCard is SliderCard) && PastTokens.ContainsKey(currentCard.Options[decisionValue].AdditionalState))
+            {
+                Debug.Log("addition state added: " + PastTokens[currentCard.Options[decisionValue].AdditionalState]);
+                currentCard.HandleDecision(decisionValue, PastTokens[currentCard.Options[decisionValue].AdditionalState]);
+            }
+            else
+            {
+                currentCard.HandleDecision(decisionValue);
+            }
 
-            if (IsFinalCard(currentCard)){
+            if(!(currentCard is SliderCard))
+            {
+                string key = currentCard.Options[decisionValue].TokenKey;
+                string value = currentCard.Options[decisionValue].TokenValue;
+                if (!key.Equals(""))
+                {
+                    PastTokens.Add(key, value);
+                }
+            }
+
+
+            if (IsFinalCard(currentCard))
+            {
                 LevelWon = true;
                 waitingForEventsDuration = 0f;
             }
@@ -246,6 +266,7 @@ namespace SunnyTown
                 waitingForFeedbackDuration = 3f;
                 dialogueManager.ShowAnimationProgress(waitingForFeedbackDuration);
                 animationHandler.PlayAnimation(currentCard.BuildingName, waitingForFeedbackDuration);
+                SFXAudioManager.Instance.PlayConstructionSound();
             }
             else
             {

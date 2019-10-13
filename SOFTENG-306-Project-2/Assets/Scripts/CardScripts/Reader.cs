@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using System;
 using SimpleJSON;
@@ -22,8 +22,8 @@ namespace SunnyTown
         {
             var expo = Resources.Load<TextAsset>("json/expositionStates");
             AllExpositionDialogues =
-                this.ParseExpositionJson(expo.text);
-            AllStoryStates = this.ParseJson(Resources.Load<TextAsset>("json/plotStates").text, true)
+                this.ParseExpositionJson(Resources.Load<TextAsset>("json/expositionStates").text);
+            AllStoryStates = this.ParseJson(Resources.Load<TextAsset>("json/newPlot").text, true)
                 .Cast<PlotCard>().ToList();
             AllMinorStates = this.ParseJson(Resources.Load<TextAsset>("json/minorStates").text, false);
             RootState = this.AllStoryStates[0];
@@ -54,9 +54,13 @@ namespace SunnyTown
 
                 foreach (JSONNode transition in transitions)
                 {
+
                     int popHappinessModifier = 0;
                     int goldModifier = 0;
                     int envHealthModifier = 0;
+                    string tokenKey = "";
+                    string tokenValue = "";
+                    string additionalState = "";
 
                     if (transition["happiness"])
                     {
@@ -73,6 +77,17 @@ namespace SunnyTown
                         envHealthModifier = transition["environment"];
                     }
 
+                    if (transition["token"])
+                    {
+                        tokenKey = transition["token"];
+                        tokenValue = transition[tokenKey];
+                    }
+
+                    if (transition["additionalState"])
+                    {
+                        additionalState = transition["additionalState"];
+                    }
+
                     MetricsModifier metricsModifier =
                         new MetricsModifier(popHappinessModifier, goldModifier, envHealthModifier);
 
@@ -86,7 +101,7 @@ namespace SunnyTown
                     {
                         optionList.Add(new Transition(transition["feedback"], transition["npcName"],
                             metricsModifier, transition["hasAnimation"], transition["buildingName"],
-                            transition["label"], transition["state"]));
+                            transition["label"], transition["state"], tokenKey, tokenValue, additionalState));
                     }
                 }
 
