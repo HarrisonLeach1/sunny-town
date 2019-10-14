@@ -59,7 +59,6 @@ namespace SunnyTown
 
         public void RenderMetrics()
         {
-            Debug.Log("rendering metrics");
             var money = metricsView.transform.GetChild(0).GetComponent<Slider>();
             var happiness = metricsView.transform.GetChild(1).GetComponent<Slider>();
             var environment = metricsView.transform.GetChild(2).GetComponent<Slider>();
