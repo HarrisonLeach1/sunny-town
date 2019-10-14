@@ -466,7 +466,7 @@ GameObject:
   - component: {fileID: 5261260563394083073}
   - component: {fileID: 4118752795912302399}
   m_Layer: 5
-  m_Name: AchievementsLeftLabel
+  m_Name: AchievementsUnlockedLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -153,8 +153,10 @@ public class AchievementsManager : MonoBehaviour
     private Achievement GetAchievementByIndex(int i)
     {
         var achievementName = PlayerPrefs.GetString("achievement" + i);
+        Debug.Log("saved achievement name: " + achievementName);
         foreach (Achievement achievement in new Reader().AllAchievements)
         {
+            Debug.Log("all achievement names: " + achievement.name);
             if (achievement.name.Equals(achievementName))
             {
                 return achievement;
@@ -166,6 +168,9 @@ public class AchievementsManager : MonoBehaviour
     private void DisplayAchievementsMenu()
     {
         achievementsContainer = achievementsView.transform.GetChild(2).GetChild(2).GetChild(0).GetChild(0).GetComponent<Transform>();
+        var achievementsCompleted = achievementsView.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>();
+        achievementsCompleted.SetText("Achievements Unlocked: " + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + "/16");
+        
         achievementsTemplate = achievementsContainer.Find("AchievementsTemplate");
         achievementsTemplate.gameObject.SetActive(false);
         float templateHeight = 34f;
@@ -177,7 +182,7 @@ public class AchievementsManager : MonoBehaviour
             var description = entryRectTransform.GetChild(1).GetComponent<TextMeshProUGUI>();
             var date = entryRectTransform.GetChild(2).GetComponent<TextMeshProUGUI>();
             Achievement achievement = GetAchievementByIndex(i); 
-            description.SetText("asdfasdf");
+            description.SetText(achievement.name + " - " + achievement.description);
             date.SetText("asdfasdfasf");
             entryRectTransform.anchoredPosition = new Vector2(0, -templateHeight * i);
             entryTransform.gameObject.SetActive(true);
