@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections;
-using TMPro;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,7 +13,7 @@ namespace SunnyTown
     /// </summary>
     public class CardManager : MonoBehaviour
     {
-        public const float time = 5f;
+        public const float time = 1f;
         public static CardManager Instance { get; private set; }
         public GameObject spawnHandlerObject;
 
@@ -32,6 +31,7 @@ namespace SunnyTown
         private Coroutine cardWaitingRoutine;
         private bool gameLost = false;
         private SimpleDialogue endGameDialogue;
+        public Dictionary<string, string> PastTokens = new Dictionary<string, string>();
 
         private void Awake()
         {
@@ -72,16 +72,13 @@ namespace SunnyTown
         /// Displays a minor card to the user, ensuring not to interrupt any already being
         /// viewed
         /// </summary>
-        /// <param name="button">To be destroyed</param>
-        public void DisplayMinorCard(Button button)
+        public void DisplayMinorCard()
         {
             if (!currentlyProcessingCard)
             {
                 Debug.Log("Successfully selected minor card from world!");
                 StopCoroutine(cardWaitingRoutine);
                 currentlyProcessingCard = true;
-                PopupButtonControllerScript.popupShowing = false;
-                Destroy(button.gameObject);
                 //show exposition dialouge 
                 string[] statements = { "A new message has been addressed to you at the town hall !" };
                 dialogueManager.StartExplanatoryDialogue(new SimpleDialogue(statements, "You have mail"), DisplayMinorDecisionCard);
@@ -108,6 +105,7 @@ namespace SunnyTown
             {
                 dialogueManager.StartSliderOptionDialogue(dialogueMapper.SliderCardToSliderOptionDialogue((SliderCard)currentCard), HandleOptionPressed);
             }
+
         }
 
         /// <summary>
@@ -135,8 +133,24 @@ namespace SunnyTown
         /// <param name="decisionValue">The value chosen by the user</param>
         public void HandleOptionPressed(int decisionValue)
         {
-            currentCard.HandleDecision(decisionValue);
+            
+            if (PastTokens.ContainsKey(currentCard.Options[decisionValue].AdditionalState))
+            {
+                Debug.Log("addition state added: " + PastTokens[currentCard.Options[decisionValue].AdditionalState]);
+                currentCard.HandleDecision(decisionValue, PastTokens[currentCard.Options[decisionValue].AdditionalState]);
+            }
+            else
+            {
+                currentCard.HandleDecision(decisionValue);
+            }
 
+            string key = currentCard.Options[decisionValue].TokenKey;
+            string value = currentCard.Options[decisionValue].TokenValue;
+            if (!key.Equals(""))
+            {
+                PastTokens.Add(key, value);
+            }
+            
             if (string.IsNullOrEmpty(currentCard.Feedback))
             {
                 metricManager.RenderMetrics();
@@ -149,6 +163,7 @@ namespace SunnyTown
                 dialogueManager.ShowAnimationProgress(time);
                 StartCoroutine(WaitForAnimation(time));
                 animationHandler.PlayAnimation(currentCard.BuildingName, time);
+                SFXAudioManager.Instance.PlayConstructionSound();
             }
             else
             {

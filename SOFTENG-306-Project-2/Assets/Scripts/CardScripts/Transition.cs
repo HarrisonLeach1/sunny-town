@@ -23,9 +23,13 @@ namespace SunnyTown
         public bool HasAnimation { get; protected set; } = false;
         public string BuildingName { get; set; } = "";
         public MetricsModifier MetricsModifier { get; set; }
+        
+        public string TokenKey { get; set; }
+        public string TokenValue { get; set; }
+        public string AdditionalState { get; set; }
 
         public Transition(string feedback, string feedbackNpcName, MetricsModifier metricsmodifier, bool hasAnimation,
-            string buildingName, string dialogue = "", string nextStateId = "")
+            string buildingName, string dialogue = "", string nextStateId = "", string tokenKey = "", string tokenValue = "", string additionalState = "")
         {
             this.Dialogue = dialogue;
             this.Feedback = feedback;
@@ -34,6 +38,9 @@ namespace SunnyTown
             this.BuildingName = buildingName;
             this.MetricsModifier = metricsmodifier;
             this.NextStateId = nextStateId;
+            this.TokenKey = tokenKey;
+            this.TokenValue = tokenValue;
+            this.AdditionalState = additionalState;
         }
     }
 }

@@ -23,7 +23,7 @@ namespace SunnyTown
         {
             AllExpositionDialogues =
                 this.ParseExpositionJson(Directory.GetCurrentDirectory() + "/Assets/json/expositionStates.json");
-            AllStoryStates = this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/plotStates.json", true)
+            AllStoryStates = this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/newPlot.json", true)
                 .Cast<PlotCard>().ToList();
             AllMinorStates = this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/minorStates.json", false);
             AllAchievements =
@@ -62,6 +62,9 @@ namespace SunnyTown
                         int popHappinessModifier = 0;
                         int goldModifier = 0;
                         int envHealthModifier = 0;
+                        string tokenKey = "";
+                        string tokenValue = "";
+                        string additionalState = "";
 
                         if (transition["happiness"])
                         {
@@ -78,6 +81,17 @@ namespace SunnyTown
                             envHealthModifier = transition["environment"];
                         }
 
+                        if (transition["token"])
+                        {
+                            tokenKey = transition["token"];
+                            tokenValue = transition[tokenKey];
+                        }
+                        
+                        if (transition["additionalState"])
+                        {
+                            additionalState = transition["additionalState"];
+                        }
+                        
                         MetricsModifier metricsModifier =
                             new MetricsModifier(popHappinessModifier, goldModifier, envHealthModifier);
 
@@ -91,7 +105,7 @@ namespace SunnyTown
                         {
                             optionList.Add(new Transition(transition["feedback"], transition["npcName"],
                                 metricsModifier, transition["hasAnimation"], transition["buildingName"],
-                                transition["label"], transition["state"]));
+                                transition["label"], transition["state"], tokenKey, tokenValue, additionalState));
                         }
                     }
 
