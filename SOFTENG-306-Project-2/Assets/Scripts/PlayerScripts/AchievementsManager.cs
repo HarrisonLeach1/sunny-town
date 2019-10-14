@@ -45,9 +45,12 @@ public class AchievementsManager : MonoBehaviour
 
         if (envInARow == 5)
         {
-            PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
-            PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "Tree Hugger");
-            DisplayAchievementNotification("Tree Hugger");
+            if (!IsAchievementAlreadyEarned("Tree Hugger"))
+            {
+                PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "Tree Hugger");
+                PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
+                DisplayAchievementNotification("Tree Hugger");
+            }
         }
     }
 
@@ -134,21 +137,48 @@ public class AchievementsManager : MonoBehaviour
         }
     }
 
+    private bool IsAchievementAlreadyEarned(string achievementName)
+    {
+        for (int i = 1; i < PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS); i++)
+        {
+            if (PlayerPrefs.GetString("achievement" + i).Equals(achievementName))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private Achievement GetAchievementByIndex(int i)
+    {
+        var achievementName = PlayerPrefs.GetString("achievement" + i);
+        foreach (Achievement achievement in new Reader().AllAchievements)
+        {
+            if (achievement.name.Equals(achievementName))
+            {
+                return achievement;
+            }
+        }
+        return null;
+    }
+
     private void DisplayAchievementsMenu()
     {
         achievementsContainer = achievementsView.transform.GetChild(2).GetChild(2).GetChild(0).GetChild(0).GetComponent<Transform>();
         achievementsTemplate = achievementsContainer.Find("AchievementsTemplate");
         achievementsTemplate.gameObject.SetActive(false);
         float templateHeight = 34f;
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS); i++)
         {
             var entryTransform = Instantiate(achievementsTemplate, achievementsContainer);
             var entryRectTransform = entryTransform.GetComponent<RectTransform>();
             var badge = entryRectTransform.GetChild(0).GetComponent<Image>();
             var description = entryRectTransform.GetChild(1).GetComponent<TextMeshProUGUI>();
             var date = entryRectTransform.GetChild(2).GetComponent<TextMeshProUGUI>();
+            Achievement achievement = GetAchievementByIndex(i); 
             description.SetText("asdfasdf");
-            date.SetText("fdsafdsa");
+            date.SetText("asdfasdfasf");
             entryRectTransform.anchoredPosition = new Vector2(0, -templateHeight * i);
             entryTransform.gameObject.SetActive(true);
         }
