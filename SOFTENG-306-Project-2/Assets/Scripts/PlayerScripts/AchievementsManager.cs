@@ -33,12 +33,12 @@ public class AchievementsManager : MonoBehaviour
     
     public void IsAchievementMade()
     {
-        if (CardManager.Instance.isFinalCard && !IsAchievementAlreadyEarned("Winner"))
-        {
-            PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "Winner");
-            PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
-            DisplayAchievementNotification("Winner");
-        }
+        HandleWinnerAchievement();
+        HandleTreeHuggerAchievement();
+    }
+
+    private void HandleTreeHuggerAchievement()
+    {
         if (MetricManager.Instance.EnvHealth >= MetricManager.Instance.PrevEnvHealth)
         {
             envInARow++;
@@ -56,6 +56,16 @@ public class AchievementsManager : MonoBehaviour
                 PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
                 DisplayAchievementNotification("Tree Hugger");
             }
+        }
+    }
+
+    private void HandleWinnerAchievement()
+    {
+        if (CardManager.Instance.isFinalCard && !IsAchievementAlreadyEarned("Winner"))
+        {
+            PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "Winner");
+            PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
+            DisplayAchievementNotification("Winner");
         }
     }
 
@@ -122,6 +132,7 @@ public class AchievementsManager : MonoBehaviour
         {
             PlayerPrefs.DeleteKey(HIGH_SCORE + (HIGH_SCORE_SIZE + 1));
             PlayerPrefs.DeleteKey(PLAYER_NAME + (HIGH_SCORE_SIZE + 1));
+            PlayerPrefs.SetInt(NUMBER_OF_SCORES, HIGH_SCORE_SIZE);
         }
     }
 
@@ -196,7 +207,8 @@ public class AchievementsManager : MonoBehaviour
     {
         achievementsContainer = achievementsView.transform.GetChild(2).GetChild(2).GetChild(0).GetChild(0).GetComponent<Transform>();
         var achievementsCompleted = achievementsView.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>();
-        achievementsCompleted.SetText("Achievements Unlocked: " + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + "/16");
+        achievementsCompleted.SetText("Achievements Unlocked: " + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + "/" +
+                                      new Reader().AllAchievements.Count);
         
         achievementsTemplate = achievementsContainer.Find("AchievementsTemplate");
         achievementsTemplate.gameObject.SetActive(false);
@@ -225,11 +237,6 @@ public class AchievementsManager : MonoBehaviour
                 Debug.Log("Show achievement badge and notification for: " + achievementName);
             }
         }
-    }
-
-    private void DisplayAchievementsEndGame()
-    {
-        
     }
 
     public class HighScoreEntry
