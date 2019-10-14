@@ -66,6 +66,7 @@ namespace SunnyTown
         public enum GameState
         {
             GameStarting,
+            GamePaused,
             WaitingForEvents,
             SelectingPlotDecision,
             SelectingMinorDecision,
@@ -99,6 +100,9 @@ namespace SunnyTown
                     break;
                 case GameState.WaitingForFeedback:
                     timeRemainingInCurrentState = waitingForFeedbackDuration;
+                    break;
+                case GameState.GamePaused:
+                    timeRemainingInCurrentState = float.PositiveInfinity;
                     break;
                 case GameState.WaitingForEvents:
                     timeRemainingInCurrentState = waitingForEventsDuration;

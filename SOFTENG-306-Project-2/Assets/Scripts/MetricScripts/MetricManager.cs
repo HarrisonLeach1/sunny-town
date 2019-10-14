@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -20,6 +21,7 @@ namespace SunnyTown
         public int PopHappiness { get; private set; }
         public int Gold { get; private set; }
         public int EnvHealth { get; private set; }
+        public CampaignWeightings campaignWeightings {get; set;}
 
         public int PrevPopHappiness { get; set; }
         public int PrevGold { get; set; }
@@ -38,6 +40,7 @@ namespace SunnyTown
             this.PrevGold = START_VALUE;
             this.PrevEnvHealth = START_VALUE;
             this.PrevPopHappiness = START_VALUE;
+            campaignWeightings = new CampaignWeightings(0, 0, 0);
         }
 
         private void Awake()
@@ -66,6 +69,8 @@ namespace SunnyTown
             StartCoroutine(AnimateMetric(money, PrevGold, Gold));
             StartCoroutine(AnimateMetric(happiness, PrevPopHappiness, PopHappiness));
             StartCoroutine(AnimateMetric(environment, PrevEnvHealth, EnvHealth));
+
+            Debug.Log("Rendering Metrics: pop: " + PopHappiness + " gold: " + Gold + " envHealth: " + EnvHealth);
 
             PrevGold = Gold;
             PrevEnvHealth = EnvHealth;
@@ -117,6 +122,7 @@ namespace SunnyTown
         public void UpdatePopHappiness(int value)
         {
             this.PopHappiness += value;
+            this.PopHappiness += (int) Math.Round(value * campaignWeightings.Happiness);
             if (this.PopHappiness > MAX_VALUE)
             {
                 this.PopHappiness = MAX_VALUE;
@@ -141,6 +147,8 @@ namespace SunnyTown
         public void UpdateGold(int value)
         {
             this.Gold += value;
+            this.PopHappiness += (int)Math.Round(value * campaignWeightings.Gold);
+
             if (this.Gold > MAX_VALUE)
             {
                 this.Gold = MAX_VALUE;
@@ -164,6 +172,8 @@ namespace SunnyTown
         public void UpdateEnvHealth(int value)
         {
             this.EnvHealth += value;
+            this.PopHappiness += (int)Math.Round(value * campaignWeightings.EnvHealth);
+
             if (this.EnvHealth > MAX_VALUE)
             {
                 this.EnvHealth = MAX_VALUE;
