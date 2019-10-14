@@ -28,6 +28,7 @@ public class Clock : MonoBehaviour
     private TextMeshProUGUI timeText;
     private float dayCompletion = DAY_START_TIME / HOURS_PER_DAY;
     private float randomTimeInDay;
+    private float prevHours;
 
     private void Awake()
     {
@@ -80,14 +81,14 @@ public class Clock : MonoBehaviour
         float hours = Mathf.Floor(dayCompletion * HOURS_PER_DAY);
 
         float minutesPerHour = 60f;
-        float minutes = Mathf.Floor(((dayCompletion * HOURS_PER_DAY) % 1f) * minutesPerHour);
 
-        if (minutes % CLOCK_UPDATE_RATE_IN_MINS < 0.1)
+        if (hours != prevHours)
         {
             clockMinuteHandTransform.eulerAngles = new Vector3(0, 0, -dayCompletion * rotationDegreesPerDay * HOURS_PER_DAY);
             clockHourHandTransform.eulerAngles = new Vector3(0, 0, -dayCompletion * rotationDegreesPerDay);
 
-            timeText.text = hours.ToString("00") + ":" + minutes.ToString("00");
+            timeText.text = hours.ToString("00") + ":00";
+            prevHours = hours;
         }
     }
 }
