@@ -17,6 +17,7 @@ namespace SunnyTown
         public List<SimpleDialogue> AllExpositionDialogues { get; private set; }
         public List<PlotCard> AllStoryStates { get; private set; }
         public List<Card> AllMinorStates { get; private set; }
+        public List<Achievement> AllAchievements { get; private set; }
 
         public Reader()
         {
@@ -25,6 +26,8 @@ namespace SunnyTown
             AllStoryStates = this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/plotStates.json", true)
                 .Cast<PlotCard>().ToList();
             AllMinorStates = this.ParseJson(Directory.GetCurrentDirectory() + "/Assets/json/minorStates.json", false);
+            AllAchievements =
+                this.ParseAchievementsJson(Directory.GetCurrentDirectory() + "/Assets/json/achievements.json");
             RootState = this.AllStoryStates[0];
         }
 
@@ -135,6 +138,26 @@ namespace SunnyTown
 
                     SimpleDialogue sd = new SimpleDialogue(dialogueList.ToArray(), exposition["name"]);
                     result.Add(sd);
+                }
+            }
+
+            return result;
+        }
+
+        private List<Achievement> ParseAchievementsJson(string filePath)
+        {
+            List<Achievement> result = new List<Achievement>();
+            using (StreamReader r = new StreamReader(filePath))
+            {
+                string json = r.ReadToEnd();
+
+                JSONArray achievementArray = SimpleJSON.JSON.Parse(json).AsArray;
+                foreach (JSONNode achievement in achievementArray)
+                {
+
+                    Achievement ach = new Achievement(
+                        achievement["name"], achievement["description"], achievement["imageUrl"]);
+                    result.Add(ach);
                 }
             }
 

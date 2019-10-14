@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using SunnyTown;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,24 +20,39 @@ public class AchievementsManager : MonoBehaviour
     private GameObject achievementsView;
 
     private const String NUMBER_OF_SCORES = "NumberOfScores";
+    private const string NUMBER_OF_ACHIEVEMENTS = "NumberOfAchievements";
     private const String HIGH_SCORE = "HighScore";
     private const String PLAYER_NAME = "PlayerName";
     private const int HIGH_SCORE_SIZE = 5;
-    
-    private AchievementsManager() { }
+
+    private int envInARow;
+
+    private AchievementsManager()
+    {
+        envInARow = 0;
+    }
     
     public void IsAchievementMade()
     {
-        Debug.Log("checking for achievement");
+        if (MetricManager.Instance.EnvHealth >= MetricManager.Instance.PrevEnvHealth)
+        {
+            envInARow++;
+        }
+        else
+        {
+            envInARow = 0;
+        }
+
+        if (envInARow == 5)
+        {
+            PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
+            PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "Tree Hugger");
+            DisplayAchievementNotification("Tree Hugger");
+        }
     }
 
     public void Awake()
     {
-        achievementsView = Instantiate(AchievementsPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        var parentObject = GameObject.Find("AchievementsMenu");
-        achievementsView.transform.SetParent(parentObject.transform, false);
-        DisplayHighScores();
-        DisplayAchievementsMenu();
         if (Instance == null)
         {
             Instance = this;
@@ -45,6 +61,11 @@ public class AchievementsManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        achievementsView = Instantiate(AchievementsPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        var parentObject = GameObject.Find("AchievementsMenu");
+        achievementsView.transform.SetParent(parentObject.transform, false);
+        DisplayHighScores();
+        DisplayAchievementsMenu();
     }
     
 
@@ -131,7 +152,17 @@ public class AchievementsManager : MonoBehaviour
             entryRectTransform.anchoredPosition = new Vector2(0, -templateHeight * i);
             entryTransform.gameObject.SetActive(true);
         }
+    }
 
+    public void DisplayAchievementNotification(string achievementName)
+    {
+        foreach (Achievement a in new Reader().AllAchievements)
+        {
+            if (a.name.Equals(achievementName))
+            {
+                Debug.Log("Show achievement badge and notification for: " + achievementName);
+            }
+        }
     }
 
     private void DisplayAchievementsEndGame()

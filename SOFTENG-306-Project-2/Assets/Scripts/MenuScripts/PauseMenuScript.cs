@@ -15,8 +15,6 @@ public class PauseMenuScript : MonoBehaviour
     {
         Debug.Log("pause menu opened");
         pauseMenuView = Instantiate(PauseMenuPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        pauseMenu = pauseMenuView.transform.GetChild(0).GetChild(0).GetComponent<GameObject>();
-        pauseMenu.SetActive(true);
         PauseButton.gameObject.SetActive(false);
         Time.timeScale = 0;
     }

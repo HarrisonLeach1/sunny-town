@@ -1738,8 +1738,6 @@ GameObject:
   m_Component:
   - component: {fileID: 631568601097378909}
   - component: {fileID: 2502601901170961841}
-  - component: {fileID: 7017093367929819697}
-  - component: {fileID: 4803667828051638630}
   m_Layer: 5
   m_Name: PlayerMenuPrefab
   m_TagString: Untagged
@@ -1771,31 +1769,6 @@ RectTransform:
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2502601901170961841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4988204235061897425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 673e4cc321fba6042b848b470759ed7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7017093367929819697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4988204235061897425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afb7a3afda5623049abeadffd296b70a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AchievementsPrefab: {fileID: 0}
---- !u!114 &4803667828051638630
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

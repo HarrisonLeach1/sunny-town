@@ -22,9 +22,9 @@ namespace SunnyTown
         public int Gold { get; private set; }
         public int EnvHealth { get; private set; }
 
-        private int PrevPopHappiness { get; set; }
-        private int PrevGold { get; set; }
-        private int PrevEnvHealth { get; set; }
+        public int PrevPopHappiness { get; set; }
+        public int PrevGold { get; set; }
+        public int PrevEnvHealth { get; set; }
 
         private const int START_VALUE = 50;
         private const int MAX_VALUE = 100;
