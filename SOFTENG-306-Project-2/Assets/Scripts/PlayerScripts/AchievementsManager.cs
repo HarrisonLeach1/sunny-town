@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using SunnyTown;
 using TMPro;
@@ -19,10 +18,10 @@ public class AchievementsManager : MonoBehaviour
     private Transform highScoreTemplate;
     private GameObject achievementsView;
 
-    private const String NUMBER_OF_SCORES = "NumberOfScores";
+    private const string NUMBER_OF_SCORES = "NumberOfScores";
     private const string NUMBER_OF_ACHIEVEMENTS = "NumberOfAchievements";
-    private const String HIGH_SCORE = "HighScore";
-    private const String PLAYER_NAME = "PlayerName";
+    private const string HIGH_SCORE = "HighScore";
+    private const string PLAYER_NAME = "PlayerName";
     private const int HIGH_SCORE_SIZE = 5;
 
     private int envInARow;
@@ -34,6 +33,12 @@ public class AchievementsManager : MonoBehaviour
     
     public void IsAchievementMade()
     {
+        if (CardManager.Instance.isFinalCard && !IsAchievementAlreadyEarned("Winner"))
+        {
+            PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "Winner");
+            PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
+            DisplayAchievementNotification("Winner");
+        }
         if (MetricManager.Instance.EnvHealth >= MetricManager.Instance.PrevEnvHealth)
         {
             envInARow++;
@@ -72,41 +77,63 @@ public class AchievementsManager : MonoBehaviour
     }
     
 
+    /// <summary>
+    /// Checks if the new score is within the high score list, if it is, then add it to the list.
+    /// </summary>
+    /// <param name="newScore">Score to be checked to add to the high score list</param>
+    /// <returns>Rank of the new high score, -1 if the score is too low to be a high score</returns>
     public static int UpdateHighScores(int newScore)
     {
         var numberOfScores = PlayerPrefs.GetInt(NUMBER_OF_SCORES);
+        for (int i = 1; i <= numberOfScores; i++)
+        {
+            if (newScore > PlayerPrefs.GetInt(HIGH_SCORE + i))
+            {
+                LoadHighScoreIntoIndex(newScore, i);
+                return i;
+            }
+        }
+
         if (numberOfScores < HIGH_SCORE_SIZE)
         {
-            PlayerPrefs.SetInt(HIGH_SCORE + numberOfScores, newScore);
-            PlayerPrefs.SetString(PLAYER_NAME + numberOfScores, "BOB");
-            PlayerPrefs.SetInt(NUMBER_OF_SCORES, numberOfScores + 1);
+            LoadHighScoreIntoIndex(newScore, numberOfScores + 1);
             return numberOfScores + 1;
-        }
-        else
-        {
-            for (int i = 0; i < HIGH_SCORE_SIZE; i++)
-            {
-                if (newScore > PlayerPrefs.GetInt(HIGH_SCORE + i))
-                {
-                    PlayerPrefs.SetInt(HIGH_SCORE + (i + 1), newScore);
-                    PlayerPrefs.SetString(PLAYER_NAME + (i + 1), "Bob");
-                    return i + 1;
-                }
-            }
         }
 
         return -1;
     }
 
+    private static void LoadHighScoreIntoIndex(int newScore, int index)
+    {
+        //move the positions of all scores below the current one down
+        for (int i = PlayerPrefs.GetInt(NUMBER_OF_SCORES); i >= index; i--)
+        {
+            PlayerPrefs.SetInt(HIGH_SCORE + (i + 1), PlayerPrefs.GetInt(HIGH_SCORE + i));
+            PlayerPrefs.SetString(PLAYER_NAME + (i + 1), PlayerPrefs.GetString(PLAYER_NAME + i));
+        }
+        
+        //add in the new score in the indexed position
+        PlayerPrefs.SetInt(HIGH_SCORE + index, newScore);
+        PlayerPrefs.SetString(PLAYER_NAME + index, "bob");
+        PlayerPrefs.SetInt(NUMBER_OF_SCORES, PlayerPrefs.GetInt(NUMBER_OF_SCORES) + 1);
+
+        //if the number of high scores stored are now greater than the maximum, delete the lowest of the high scores
+        if (PlayerPrefs.GetInt(NUMBER_OF_SCORES) > HIGH_SCORE_SIZE)
+        {
+            PlayerPrefs.DeleteKey(HIGH_SCORE + (HIGH_SCORE_SIZE + 1));
+            PlayerPrefs.DeleteKey(PLAYER_NAME + (HIGH_SCORE_SIZE + 1));
+        }
+    }
+
     public List<HighScoreEntry> GetHighScores()
     {
         var highScores = new List<HighScoreEntry>();
-        for (var i = 0; i < PlayerPrefs.GetInt(NUMBER_OF_SCORES); i++)
+        for (var i = 1; i <= PlayerPrefs.GetInt(NUMBER_OF_SCORES); i++)
         {
             var hse = new HighScoreEntry(
                 PlayerPrefs.GetInt(HIGH_SCORE + i), 
                 PlayerPrefs.GetString(PLAYER_NAME + i),
-                i + 1);
+                i);
             highScores.Add(hse);
         }
 
@@ -139,7 +166,7 @@ public class AchievementsManager : MonoBehaviour
 
     private bool IsAchievementAlreadyEarned(string achievementName)
     {
-        for (int i = 1; i < PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS); i++)
+        for (int i = 0; i < PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS); i++)
         {
             if (PlayerPrefs.GetString("achievement" + i).Equals(achievementName))
             {

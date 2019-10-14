@@ -15,8 +15,7 @@
                 "money": 25,
                 "environment": -20,
                 "npcName": "Advisory Board",
-                "feedback": "Arvio brings his crew and begins inspecting your land",
-                "state": "s2"
+                "feedback": "Arvio brings his crew and begins inspecting your land"
             },
             {
                 "label": "No deal, mining for coal will ruin the natural landscape!",
