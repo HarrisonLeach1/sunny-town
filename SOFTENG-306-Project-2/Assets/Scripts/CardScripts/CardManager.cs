@@ -15,7 +15,7 @@ namespace SunnyTown
     public class CardManager : MonoBehaviour
     {
         [SerializeField]
-        private float waitingForEventsDuration = 2f;
+        private float waitingForEventsDuration = 15f;
         [SerializeField]
         private float waitingForFeedbackDuration = 0.5f;
 
@@ -32,6 +32,7 @@ namespace SunnyTown
 
         public bool LevelWon { get; private set; } = false;
         public bool GameLost { get; private set; } = false;
+        public bool EndOfDay { get; set; } = false;
 
         public GameState CurrentGameState { get; private set; } = GameState.GameStarting;
         public Dictionary<string, string> PastTokens = new Dictionary<string, string>();
@@ -70,6 +71,7 @@ namespace SunnyTown
             SelectingMinorDecision,
             WaitingForFeedback,
             ViewingFeedback,
+            DayEnding,
             GameEnding
         }
 
@@ -77,7 +79,7 @@ namespace SunnyTown
         /// Sets the current state of the game, this method also updates the view with the new state.
         /// </summary>
         /// <param name="state">The state to set the game to</param>
-        private void SetState(GameState state)
+        public void SetState(GameState state)
         {
             Debug.Log("Setting State: " + state);
             CurrentGameState = state;
@@ -105,11 +107,34 @@ namespace SunnyTown
                     timeRemainingInCurrentState = float.PositiveInfinity;
                     EndGame();
                     break;
+                case GameState.DayEnding:
+                    timeRemainingInCurrentState = float.PositiveInfinity;
+                    EndDay();
+                    break;
             }
+        }
+
+        private void EndDay()
+        {
+            var clock = GameObject.Find("Clock").GetComponent<Clock>();
+            Action resetDay = () =>
+            {
+                levelProgress.UpdateValue(cardFactory.PlotCardsRemaining, cardFactory.TotalPlotCardsInLevel);
+                SetState(GameState.WaitingForEvents);
+                EndOfDay = false;
+                clock.ResetDay();
+            };
+
+            dialogueManager.StartExplanatoryDialogue(new SimpleDialogue(new string[1] { "End of Day" }, "Advisory Board"), resetDay);
         }
 
         private void Update()
         {
+            if (EndOfDay && CurrentGameState == GameState.WaitingForEvents)
+            {
+                SetState(GameState.DayEnding);
+            }
+
             timeRemainingInCurrentState -= Time.deltaTime;
             if (timeRemainingInCurrentState <= 0)
                 MoveToNextState();
@@ -149,10 +174,6 @@ namespace SunnyTown
             {
                 SetState(GameState.GameEnding);
             }
-            else
-            {
-                SetState(GameState.SelectingPlotDecision);
-            }
         }
 
         private void TransitionFromSelectingDecision()
@@ -160,7 +181,6 @@ namespace SunnyTown
             if (string.IsNullOrEmpty(currentCard.Feedback))
             {
                 metricManager.RenderMetrics();
-                levelProgress.UpdateValue(cardFactory.PlotCardsRemaining, cardFactory.TotalPlotCardsInLevel);
                 SetState(GameState.WaitingForEvents);
             }
             else
@@ -281,7 +301,6 @@ namespace SunnyTown
         private void ShowFeedback()
         {
             metricManager.RenderMetrics();
-            levelProgress.UpdateValue(cardFactory.PlotCardsRemaining, cardFactory.TotalPlotCardsInLevel);
             dialogueManager.StartExplanatoryDialogue(dialogueMapper.FeedbackToDialogue(currentCard.Feedback, currentCard.FeedbackNPCName), MoveToNextState);
         }
 

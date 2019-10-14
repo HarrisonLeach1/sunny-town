@@ -15,8 +15,8 @@ namespace SunnyTown
         private List<Card> minorCards;
 
         // TODO: Change so this does not have to be hard-coded
-        public int TotalPlotCardsInLevel { get; private set; } = 5;
-        public int PlotCardsRemaining { get; private set; } = 5;
+        public int TotalPlotCardsInLevel { get; private set; } = 8;
+        public int PlotCardsRemaining { get; private set; } = 8;
 
         public CardFactory()
         {
