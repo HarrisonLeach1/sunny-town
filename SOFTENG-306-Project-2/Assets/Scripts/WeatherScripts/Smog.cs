@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AcidRain : MonoBehaviour
+public class Smog : MonoBehaviour
 {
     [SerializeField]
-    private ParticleSystem rain;
+    private ParticleSystem smog;
 
     private bool status = false;
 
@@ -16,8 +16,7 @@ public class AcidRain : MonoBehaviour
     void Start()
     {
         button.onClick.AddListener(OnClick); 
-        rain.Stop();
-        Debug.Log("stop her");
+        smog.Stop();
     }
 
     /** Right now rain is triggered on button click by the test button, will need to implement a weather controller that fires weather event
@@ -27,13 +26,13 @@ public class AcidRain : MonoBehaviour
     {
         if (!status){
             status = !status;
-            rain.Play();
-            Debug.Log(rain.isPlaying);
+            smog.Play();
+            Debug.Log(smog.isPlaying);
 
         } else {
             status = !status;
-            rain.Stop();
-            Debug.Log(rain.isPlaying);
+            smog.Stop();
+            Debug.Log(smog.isPlaying);
         }
     }
 }
