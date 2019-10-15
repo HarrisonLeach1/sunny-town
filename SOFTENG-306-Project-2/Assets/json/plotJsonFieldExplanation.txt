@@ -1,0 +1,15 @@
+explanation of json fields
+id: id of current state
+name: name of npc who brings up the dialogue. npc name and avatar is used if exists in database, otherwise, default is 'citizen'
+precedingDialogue: dialogue preceding questions and options, each string is displayed on a new card
+question: question displayed along with options/transitions
+transitions: options for the players to select
+transitions:label: text on the options button
+transitions:npcName: name of npc who brings up feedback, same system as name field
+transitions:feedback: feedback for the decision, meant to educate players on the effects of each action, this is displayed on its own card
+transitions:state: id of next state
+transitions:token: used for storing decisions for future use so forks can join and avoid unnecessary branches, token specifies which level the decision is made on
+transitions:[value for transitions:token]: this specifies the decision made on the level of the previous field
+transitions:additionalState: for using previous decisions, value is the token of when the decision is made, each decision made would at this point fork into a seperate node, with id being the transition's state concatenated with the decision of that token
+transitions:hasAnimation: boolean for if there is an animation associated with the decision
+transitions:buildingName: if decision has animation associated, buildingName specifies which building to create

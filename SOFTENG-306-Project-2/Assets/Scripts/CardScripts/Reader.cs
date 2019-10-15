@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
+using System.Collections.Generic;
 using System;
 using SimpleJSON;
 using UnityEngine;
@@ -17,15 +16,18 @@ namespace SunnyTown
         public List<SimpleDialogue> AllExpositionDialogues { get; private set; }
         public List<PlotCard> AllStoryStates { get; private set; }
         public List<Card> AllMinorStates { get; private set; }
+        public List<Achievement> AllAchievements { get; private set; }
 
         public Reader()
         {
             var expo = Resources.Load<TextAsset>("json/expositionStates");
             AllExpositionDialogues =
                 this.ParseExpositionJson(expo.text);
-            AllStoryStates = this.ParseJson(Resources.Load<TextAsset>("json/plotStates").text, true)
+            AllStoryStates = this.ParseJson(Resources.Load<TextAsset>("json/newPlot").text, true)
                 .Cast<PlotCard>().ToList();
             AllMinorStates = this.ParseJson(Resources.Load<TextAsset>("json/minorStates").text, false);
+            AllAchievements =
+                this.ParseAchievementsJson(Resources.Load<TextAsset>("json/achievements").text);
             RootState = this.AllStoryStates[0];
             Debug.Log(RootState.Name);
         }
@@ -57,6 +59,9 @@ namespace SunnyTown
                     int popHappinessModifier = 0;
                     int goldModifier = 0;
                     int envHealthModifier = 0;
+                    string tokenKey = "";
+                    string tokenValue = "";
+                    string additionalState = "";
 
                     if (transition["happiness"])
                     {
@@ -73,6 +78,17 @@ namespace SunnyTown
                         envHealthModifier = transition["environment"];
                     }
 
+                    if (transition["token"])
+                    {
+                        tokenKey = transition["token"];
+                        tokenValue = transition[tokenKey];
+                    }
+
+                    if (transition["additionalState"])
+                    {
+                        additionalState = transition["additionalState"];
+                    }
+
                     MetricsModifier metricsModifier =
                         new MetricsModifier(popHappinessModifier, goldModifier, envHealthModifier);
 
@@ -86,9 +102,10 @@ namespace SunnyTown
                     {
                         optionList.Add(new Transition(transition["feedback"], transition["npcName"],
                             metricsModifier, transition["hasAnimation"], transition["buildingName"],
-                            transition["label"], transition["state"]));
+                            transition["label"], transition["state"], tokenKey, tokenValue, additionalState));
                     }
                 }
+
 
                 if (isPlotJson)
                 {
@@ -132,6 +149,22 @@ namespace SunnyTown
                 result.Add(sd);
             }
 
+
+            return result;
+        }
+
+        private List<Achievement> ParseAchievementsJson(string json)
+        {
+            List<Achievement> result = new List<Achievement>();
+
+            JSONArray achievementArray = SimpleJSON.JSON.Parse(json).AsArray;
+            foreach (JSONNode achievement in achievementArray)
+            {
+
+                Achievement ach = new Achievement(
+                    achievement["name"], achievement["description"], achievement["imageUrl"]);
+                result.Add(ach);
+            }
 
             return result;
         }

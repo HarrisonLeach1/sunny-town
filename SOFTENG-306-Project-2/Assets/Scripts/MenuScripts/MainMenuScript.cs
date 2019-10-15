@@ -21,5 +21,10 @@ namespace SunnyTown
             Debug.Log("Application has quit");
             Application.Quit();
         }
+
+        public void ReturnToMenu()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }

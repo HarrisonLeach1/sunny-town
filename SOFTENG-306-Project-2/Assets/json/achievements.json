@@ -1,0 +1,14 @@
+﻿[
+  {
+    "id": "a1",
+    "name": "Winner",
+    "description": "Win the game for the first time",
+    "imageUrl": "asdfasdfasdf.jpg"
+  },
+  {
+    "id": "a2",
+    "name": "Tree Hugger",
+    "description": "Do not lose any environmental health for 5 turns in a row",
+    "imageUrl": "asdfasdfasdf.jpg"
+  }
+]
