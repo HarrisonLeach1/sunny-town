@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.IO;
 using System;
 using SimpleJSON;
 using UnityEngine;
@@ -17,15 +16,17 @@ namespace SunnyTown
         public List<SimpleDialogue> AllExpositionDialogues { get; private set; }
         public List<PlotCard> AllStoryStates { get; private set; }
         public List<Card> AllMinorStates { get; private set; }
+        public List<Achievement> AllAchievements { get; private set; }
 
         public Reader()
         {
-            var expo = Resources.Load<TextAsset>("json/expositionStates");
             AllExpositionDialogues =
                 this.ParseExpositionJson(Resources.Load<TextAsset>("json/expositionStates").text);
             AllStoryStates = this.ParseJson(Resources.Load<TextAsset>("json/newPlot").text, true)
                 .Cast<PlotCard>().ToList();
             AllMinorStates = this.ParseJson(Resources.Load<TextAsset>("json/minorStates").text, false);
+            AllAchievements =
+                this.ParseAchievementsJson(Resources.Load<TextAsset>("json/achievements").text);
             RootState = this.AllStoryStates[0];
             Debug.Log(RootState.Name);
         }
@@ -105,6 +106,7 @@ namespace SunnyTown
                     }
                 }
 
+
                 if (isPlotJson)
                 {
                     String name = "";
@@ -147,6 +149,22 @@ namespace SunnyTown
                 result.Add(sd);
             }
 
+
+            return result;
+        }
+
+        private List<Achievement> ParseAchievementsJson(string json)
+        {
+            List<Achievement> result = new List<Achievement>();
+
+            JSONArray achievementArray = SimpleJSON.JSON.Parse(json).AsArray;
+            foreach (JSONNode achievement in achievementArray)
+            {
+
+                Achievement ach = new Achievement(
+                    achievement["name"], achievement["description"], achievement["imageUrl"]);
+                result.Add(ach);
+            }
 
             return result;
         }

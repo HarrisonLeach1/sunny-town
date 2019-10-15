@@ -29,6 +29,7 @@ namespace SunnyTown
             Action handleDialogueClosed = () => this.TriggerDialogue();
             if (this.expositionDialogues.Count == 1)
             {
+                Debug.Log("yeet");
                 handleDialogueClosed = () => CardManager.Instance.StartDisplayingCards();
             }
 

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -237,6 +237,7 @@ namespace SunnyTown
                 Debug.Log("Not in approriate game state to display minor card");
                 // TODO: DisplayWarningDialogue();
             }
+            AchievementsManager.Instance.IsAchievementMade();
         }
 
         /// <summary>
@@ -264,7 +265,7 @@ namespace SunnyTown
                 currentCard.HandleDecision(decisionValue);
             }
 
-            if(!(currentCard is SliderCard))
+            if (!(currentCard is SliderCard))
             {
                 string key = currentCard.Options[decisionValue].TokenKey;
                 string value = currentCard.Options[decisionValue].TokenValue;
