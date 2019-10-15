@@ -1,13 +1,6 @@
 ﻿/* 
-    ------------------- Code Monkey -------------------
-
-    Thank you for downloading this package
-    I hope you find it useful in your projects
-    If you have any questions let me know
-    Cheers!
-
-               unitycodemonkey.com
-    --------------------------------------------------
+    Base code retrieved from: https://unitycodemonkey.com/video.php?v=pbTysQw-WNs
+    Modified to fit game requirements
  */
 
 using SunnyTown;
