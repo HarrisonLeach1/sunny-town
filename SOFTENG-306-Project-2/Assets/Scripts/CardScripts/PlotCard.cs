@@ -13,6 +13,7 @@ namespace SunnyTown
         public string Id { get; set; }
         public string Name { get; set; }
         public string NextStateId { get; private set; }
+        
 
         public PlotCard(string id, string[] precedingDialogue, string name, string question, List<Transition> options)
         {
@@ -23,14 +24,14 @@ namespace SunnyTown
             Options = options;
         }
 
-        public override void HandleDecision(int decisionIndex)
+        public override void HandleDecision(int decisionIndex, string additionalState = "")
         {
             if (Options.Count >= decisionIndex + 1)
             {
                 Options[decisionIndex].MetricsModifier.Modify();
                 Feedback = Options[decisionIndex].Feedback;
                 FeedbackNPCName = Options[decisionIndex].FeedbackNPCName;
-                NextStateId = Options[decisionIndex].NextStateId;
+                NextStateId = Options[decisionIndex].NextStateId + additionalState;
                 ShouldAnimate = Options[decisionIndex].HasAnimation;
                 BuildingName = Options[decisionIndex].BuildingName;
             }
