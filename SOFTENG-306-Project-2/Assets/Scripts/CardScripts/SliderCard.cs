@@ -12,7 +12,6 @@ namespace SunnyTown
     /// </summary>
     public class SliderCard : Card
     {
-        public string Name { get; set; }
         public new List<SliderTransition> Options { get; private set; }
         public int MaxValue { get; private set; }
         public int MinValue { get; private set; }
@@ -21,7 +20,7 @@ namespace SunnyTown
             int maxValue, int minValue)
         {
             PrecedingDialogue = precedingDialogue;
-            Name = name;
+            NPCName = name;
             Question = question;
             Options = options;
             MaxValue = maxValue;

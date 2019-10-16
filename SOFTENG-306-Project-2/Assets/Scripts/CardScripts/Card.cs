@@ -11,6 +11,7 @@ namespace SunnyTown
         public string[] PrecedingDialogue { get; set; }
         public string Question { get; set; }
         public List<Transition> Options { get; protected set; }
+        public string NPCName { get; protected set; }
         public string Feedback { get; protected set; }
         public string FeedbackNPCName { get; protected set; }
         public bool ShouldAnimate { get; protected set; } = false;

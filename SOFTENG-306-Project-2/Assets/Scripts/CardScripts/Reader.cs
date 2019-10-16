@@ -28,7 +28,7 @@ namespace SunnyTown
             AllAchievements =
                 this.ParseAchievementsJson(Resources.Load<TextAsset>("json/achievements").text);
             RootState = this.AllStoryStates[0];
-            Debug.Log(RootState.Name);
+            Debug.Log(RootState.NPCName);
         }
 
         private List<Card> ParseJson(string json, bool isPlotJson)

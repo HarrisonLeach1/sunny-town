@@ -20,7 +20,7 @@ namespace SunnyTown
         public Animator animationProgressAnimator;
 
         public SimpleDialogueView simpleDialogueView;
-        public BinaryOptionDialogueView binaryOptionDialogueView;
+        public OptionDialogueView binaryOptionDialogueView;
         public SliderOptionDialogueView sliderOptionDialogueView;
         public AnimationProgressDialgoueView animationProgressDialgoueView;
 
@@ -99,7 +99,7 @@ namespace SunnyTown
         /// </summary>
         /// <param name="dialogue">The BinaryOptionDialogue object which contains the information for the view</param>
         /// <param name="onOptionPressed">A callback which is used when the user interacts with the card</param>
-        public void StartBinaryOptionDialogue(BinaryOptionDialogue dialogue, Action<int> onOptionPressed)
+        public void StartBinaryOptionDialogue(OptionDialogue dialogue, Action<int> onOptionPressed)
         {
             Debug.Log("Got dialogue: " + dialogue.Question + dialogue.PrecedingDialogue);
             Action<int> handleButtonPressed = num =>

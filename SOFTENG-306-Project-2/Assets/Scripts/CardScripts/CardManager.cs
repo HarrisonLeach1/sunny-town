@@ -313,7 +313,7 @@ namespace SunnyTown
         private void DisplayPlotCard()
         {
             currentCard = cardFactory.GetNewCard("story");
-            dialogueManager.StartBinaryOptionDialogue(dialogueMapper.PlotCardToBinaryOptionDialogue((PlotCard)currentCard), HandleOptionPressed);
+            dialogueManager.StartBinaryOptionDialogue(dialogueMapper.CardToOptionDialogue(currentCard), HandleOptionPressed);
         }
 
         /// <summary>
@@ -327,7 +327,7 @@ namespace SunnyTown
                 currentCard = cardFactory.GetNewCard("minor");
                 if (currentCard is MinorCard)
                 {
-                    dialogueManager.StartBinaryOptionDialogue(dialogueMapper.MinorCardToBinaryOptionDialogue((MinorCard)currentCard), HandleOptionPressed);
+                    dialogueManager.StartBinaryOptionDialogue(dialogueMapper.CardToOptionDialogue(currentCard), HandleOptionPressed);
                 }
                 else
                 {
