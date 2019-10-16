@@ -15,16 +15,15 @@ namespace SunnyTown
     {
         public static MetricManager Instance { get; private set; }
 
-        [SerializeField] private GameObject metricPrefab;
-        private GameObject metricsView;
+        [SerializeField] private GameObject metricsView;
 
         public int PopHappiness { get; private set; }
         public int Gold { get; private set; }
         public int EnvHealth { get; private set; }
 
-        private int PrevPopHappiness { get; set; }
-        private int PrevGold { get; set; }
-        private int PrevEnvHealth { get; set; }
+        public int PrevPopHappiness { get; set; }
+        public int PrevGold { get; set; }
+        public int PrevEnvHealth { get; set; }
 
         private const int START_VALUE = 50;
         private const int MAX_VALUE = 100;
@@ -55,7 +54,6 @@ namespace SunnyTown
 
         private void Start()
         {
-            metricsView = Instantiate(metricPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             RenderMetrics();
         }
 
@@ -72,14 +70,18 @@ namespace SunnyTown
             PrevGold = Gold;
             PrevEnvHealth = EnvHealth;
             PrevPopHappiness = PopHappiness;
-
-            var parentObject = GameObject.Find("MetricPanel");
-            metricsView.transform.SetParent(parentObject.transform, false);
         }
 
         public int GetScore()
         {
-            return (int) (0.5 * EnvHealth + 0.25 * Gold + 0.25 * PopHappiness);
+            if (CardManager.Instance.LevelWon)
+            {
+                return (int) (0.5 * EnvHealth + 0.25 * Gold + 0.25 * PopHappiness) + 100;
+            }
+            else
+            {
+                return (int) (0.5 * EnvHealth + 0.25 * Gold + 0.25 * PopHappiness);
+            }
         }
 
         IEnumerator AnimateMetric(Slider metricBar, int oldValue, int newValue)
@@ -132,7 +134,7 @@ namespace SunnyTown
                     "very upset with your decisions. They have voted you out of power.",
                     " Try keeping them happier next time. "
                 }, "");
-                CardManager.Instance.QueueEndDialogue(endGameDialogue);
+                CardManager.Instance.QueueGameLost(endGameDialogue);
             }
         }
 
@@ -155,7 +157,7 @@ namespace SunnyTown
                         "You have lost all your town's money. Now you cannot build the town.",
                         "Be careful when making decisions that involve spending money next time."
                     }, "");
-                CardManager.Instance.QueueEndDialogue(endGameDialogue);
+                CardManager.Instance.QueueGameLost(endGameDialogue);
             }
         }
 
@@ -180,7 +182,7 @@ namespace SunnyTown
                 }, "");
 
 
-                CardManager.Instance.QueueEndDialogue(endGameDialogue);
+                CardManager.Instance.QueueGameLost(endGameDialogue);
             }
         }
     }

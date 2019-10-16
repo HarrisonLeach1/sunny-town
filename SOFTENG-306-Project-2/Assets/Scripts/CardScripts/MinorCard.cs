@@ -18,7 +18,7 @@ namespace SunnyTown
             Options = options;
         }
 
-        public override void HandleDecision(int decisionIndex)
+        public override void HandleDecision(int decisionIndex, string additionalState = "")
         {
             if (Options.Count >= decisionIndex + 1)
             {

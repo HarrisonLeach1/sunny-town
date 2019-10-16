@@ -1,0 +1,357 @@
+[
+  {
+    "id": "s1",
+    "name": "Advisory Board",
+    "precedingDialogue": [
+      "Mrs mayor, as you are new to the office, the townspeople would like to know your positions on certain issues,",
+      "what you decide on in the future can affect their lives in different ways, and it's always a trade-off.",
+      "We are here to help you make those decisions along the way!"
+    ],
+    "question": "Our town is surrounded by valuable natural resources such as rivers, forest and mountains, would you support industries that use those resources?",
+    "transitions": [
+      {
+        "label": "Yes, our town can prosper from such industries. ",
+        "npcName": "Advisory Board",
+        "feedback": "It is important for the town to have enough money to support ourselves, but we also don't want to exploit our resources too much as that can severely damage the environment. ",
+        "state": "s2"
+      },
+      {
+        "label": "No, these industries can harm the environment",
+        "npcName": "Advisory Board",
+        "feedback": "It is very good to take care when it comes to decisions surrounding the environment, as a lot of damages are hard to undo, just don't forget to make enough money to sustain the town. ",
+        "state": "s2"
+      }
+    ]
+  },
+  {
+    "id": "s2",
+    "name": "Jimmy Cash",
+    "precedingDialogue": [
+      "Mrs mayor, we have quite a bit of excess cash for city development, it is usually a good idea to invest these into something that can be useful down the road. ",
+      "We have proposals from both small businesses and our local university asking us to support their projects, they all seem very interesting. "
+    ],
+    "question": "Would you like to give extra funding to the university or local businesses?",
+    "transitions": [
+      {
+        "label": "Businesses promise economic growth, lets do that. ",
+        "state": "s3a"
+      },
+      {
+        "label": "University could be doing useful research, lets do that. ",
+        "state": "s3b"
+      }
+    ]
+  },
+  {
+    "id": "s3a",
+    "name": "Jimmy Cash",
+    "precedingDialogue": [
+      "There are two businesses that show the most promising growth, I have their proposals here. ",
+      "The first one is making cheap and efficient electric cars so people can slowly move away from gasoline. ",
+      "The second is a software company that has created an app to improve other business' efficiency. "
+    ],
+    "question": "Which do you think is a better use of the town's moneys?",
+    "transitions": [
+      {
+        "label": "I like the electric car company! ",
+        "state": "s4",
+        "token": "investment",
+        "investment": "EV"
+      },
+      {
+        "label": "I like the software company! ",
+        "state": "s4",
+        "token": "investment",
+        "investment": "SE"
+      }
+    ]
+  },
+  {
+    "id": "s3b",
+    "name": "Jimmy Cash",
+    "precedingDialogue": [
+      "There are two university groups that show the most promising research, I have their proposals here. ",
+      "The first one is a material science group that is researching better building materials, this can help when the town grows in population. ",
+      "The second is researching clean energy generation so when our town grows in size we can produce energy with less impact on the environment. "
+    ],
+    "question": "Which do you think is a better use of the town's moneys?",
+    "transitions": [
+      {
+        "label": "I like the material science project! ",
+        "state": "s4",
+        "token": "investment",
+        "investment": "material"
+      },
+      {
+        "label": "I like the clean energy group! ",
+        "state": "s4",
+        "token": "investment",
+        "investment": "energy"
+      }
+    ]
+  },
+  {
+    "id": "s4",
+    "name": "Hunter Gatberg",
+    "precedingDialogue": [
+      "[Ring Ring... Ring Ring...]",
+      "Hey Mum! We learnt about polar bears today, they look so cute. I would love to be able to see them one day."
+    ],
+    "question": "Could you take me on a trip someday?",
+    "transitions": [
+      {
+        "label": "Of course, my dear",
+        "state": "s5"
+      }
+    ]
+  },
+  {
+    "id": "s5",
+    "name": "Arvio",
+    "precedingDialogue": [
+      "Greetings! My name is Arvio, but people call me Arvio The Wealthy",
+      "Why? I'm the proprietor of MineCroft Coal Mines and the wealthiest coal baron on the seven mountains",
+      "My team of Geo ...erm ...geolis ...scientists, say that this town's neighbouring mountains promises bounds of wealth'",
+      "I have a proposition for you, allow me to inspect those lands and I may consider helping out this dump *erherm* town"
+    ],
+    "question": "So what do you say friend? Do we have a deal?",
+    "transitions": [
+      {
+        "label": "There's a lot of money in coal. It's a deal!",
+        "money": 25,
+        "environment": -20,
+        "npcName": "Advisory Board",
+        "feedback": "Arvio brings his crew and begins inspecting your land",
+        "token": "arvio",
+        "arvio": "yes",
+        "state": "s6"
+      },
+      {
+        "label": "No deal, mining for coal will ruin the natural landscape!",
+        "npcName": "Advisory Board",
+        "token": "arvio",
+        "arvio": "no",
+        "feedback": "Arvio leaves with a mischievous look on his face",
+        "state": "s6"
+      }
+    ]
+  },
+  {
+    "id": "s6",
+    "name": "Advisory Board",
+    "question": "Your town has grown",
+    "transitions": [
+      {
+        "label": "Continue",
+        "additionalState": "investment",
+        "state": "s7"
+      }
+    ]
+  },
+  {
+    "id": "s7energy",
+    "name": "Jimmy Cash",
+    "precedingDialogue": [
+      "I have some updates for you about how your investments are doing Mrs. Mayor.",
+      "The green energy group you have invested in is doing great and has developed a new solar panel that is cheap and efficient! "
+    ],
+    "question": "Would you like to invest more into this group?",
+    "transitions": [
+      {
+        "label": "Yes, that sounds like a good idea. ",
+        "state": "s8energy"
+      },
+      {
+        "label": "No thanks. ",
+        "state": "s8energy"
+      }
+    ]
+  },
+  {
+    "id": "s7SE",
+    "name": "James the Dog",
+    "precedingDialogue": [
+      "Mrs. Gatburg, your town has grown faster than expected. This is great as it means you're doing a great job making the town a nice place to live.",
+      "However, this growth has also meant that our infrastructure is having trouble catching up to demand, especially our power stations.",
+      "The high demand doubled the price of electricity and the townspeople are complaining, we should consider building a bigger power station. "
+    ],
+    "question": "Would you like to generate more power using solar panels or expand our coal plant?",
+    "transitions": [
+      {
+        "label": "Solar sounds like a good idea, it's environmentally friendly. ",
+        "npcName": "James the Dog",
+        "feedback": "Solar panels are great for the environment, but without the extra investment they are still pricey. ",
+        "state": "s9b"
+      },
+      {
+        "label": "Lets expand the coal plant",
+        "additionalState": "arvio",
+        "state": "s8"
+      }
+    ]
+  },
+  {
+    "id": "s7EV",
+    "name": "James the Dog",
+    "precedingDialogue": [
+      "Mrs. Gatburg, your town has grown faster than expected. This is great as it means you're doing a great job making the town a nice place to live.",
+      "However, this growth has also meant that our infrastructure is having trouble catching up to demand, especially our power stations.",
+      "The high demand doubled the price of electricity and the townspeople are complaining, we should consider building a bigger power station. "
+    ],
+    "question": "Would you like to generate more power using solar panels or expand our coal plant?",
+    "transitions": [
+      {
+        "label": "Solar sounds like a good idea, it's environmentally friendly. ",
+        "npcName": "James the Dog",
+        "feedback": "Solar panels are great for the environment, but without the extra investment they are still pricey. ",
+        "state": "s9b"
+      },
+      {
+        "label": "Lets expand the coal plant",
+        "additionalState": "arvio",
+        "state": "s8"
+      }
+    ]
+  },
+  {
+    "id": "s7material",
+    "name": "James the Dog",
+    "precedingDialogue": [
+      "Mrs. Gatburg, your town has grown faster than expected. This is great as it means you're doing a great job making the town a nice place to live.",
+      "However, this growth has also meant that our infrastructure is having trouble catching up to demand, especially our power stations.",
+      "The high demand doubled the price of electricity and the townspeople are complaining, we should consider building a bigger power station. "
+    ],
+    "question": "Would you like to generate more power using solar panels or expand our coal plant?",
+    "transitions": [
+      {
+        "label": "Solar sounds like a good idea, it's environmentally friendly. ",
+        "npcName": "James the Dog",
+        "feedback": "Solar panels are great for the environment, but without the extra investment they are still pricey. ",
+        "state": "s9b"
+      },
+      {
+        "label": "Lets expand the coal plant",
+        "additionalState": "arvio",
+        "state": "s8"
+      }
+    ]
+  },
+  {
+    "id": "s8energy",
+    "name": "James the Dog",
+    "precedingDialogue": [
+      "Mrs. Gatburg, your town has grown faster than expected. This is great as it means you're doing a great job making the town a nice place to live.",
+      "However, this growth has also meant that our infrastructure is having trouble catching up to demand, especially our power stations.",
+      "The high demand doubled the price of electricity and the townspeople are complaining, we should consider building a bigger power station. "
+    ],
+    "question": "Would you like to generate more power using solar panels or expand our coal plant?",
+    "transitions": [
+      {
+        "label": "Solar sounds like a good idea, it's environmentally friendly. ",
+        "npcName": "James the Dog",
+        "feedback": "Solar panels are great for the environment, and with the efforts of the research group prices has been lowered significantly. ",
+        "state": "s9b"
+      },
+      {
+        "label": "Lets expand the coal plant",
+        "additionalState": "arvio",
+        "state": "s8"
+      }
+    ]
+  },
+  {
+    "id": "s8yes",
+    "name": "Arvio",
+    "precedingDialogue": [
+      "Mrs. Gatberg, our prediction was right. Your land is rich with coal."
+    ],
+    "question": "Will you let us set up an coal mine? We'll pay you.",
+    "transitions": [
+      {
+        "label": "Yes",
+        "hasAnimation": true,
+        "buildingName": "CoalMine",
+        "npcName": "Advisory Board",
+        "feedback": "Arvio begins constructing an coal mine. We're getting paid a great amount of money, but this is releasing a lot of CO2.",
+        "state": "s9a"
+      },
+      {
+        "label": "No, go away Arvio.",
+        "npcName": "Advisory Board",
+        "feedback": "Arvio leaves you alone",
+        "state": "s9b"
+      }
+    ]
+  },
+  {
+    "id": "s8no",
+    "name": "Arvio",
+    "precedingDialogue": [
+      "Arvio is sneaky and he has inspected the land without your consent",
+      "but he has found that your land is rich with coal, and wishes for your permission to setup a coal mine"
+    ],
+    "question": "Will you let us set up? We'll pay you.",
+    "transitions": [
+      {
+        "label": "Yes",
+        "hasAnimation": true,
+        "buildingName": "CoalMine",
+        "npcName": "Advisory Board",
+        "feedback": "Arvio begins constructing an coal mine. We're getting paid a great amount of money, but this is releasing a lot of CO2.",
+        "state": "s9a"
+      },
+      {
+        "label": "No",
+        "npcName": "Advisory Board",
+        "feedback": "Arvio leaves you alone",
+        "state": "s9b"
+      }
+    ]
+  },
+  {
+    "id": "s9a",
+    "name": "Hunter Gatberg",
+    "precedingDialogue": [
+      "[Ring Ring... Ring Ring...]",
+      "Mom! Mom! Remember when you promised me we would go on a trip to see the polar bears?"
+    ],
+    "question": "Next week is school holidays, would we please go?",
+    "transitions": [
+      {
+        "label": "Sorry Hunter, the ice bergs have been melting because of climate change, it's too dangerous to go. ",
+        "state": "s10"
+      }
+    ]
+  },
+  {
+    "id": "s9b",
+    "name": "Hunter Gatberg",
+    "precedingDialogue": [
+      "[Ring Ring... Ring Ring...]",
+      "Mom! Mom! Remember when you promised me we would go on a trip to see the polar bears?"
+    ],
+    "question": "Next week is school holidays, would we please go?",
+    "transitions": [
+      {
+        "label": "Of course, we'll have a great trip!",
+        "state": "s10"
+      }
+    ]
+  },
+  {
+    "id": "s10",
+    "name": "Advisory Board",
+    "precedingDialogue": [
+      ""
+    ],
+    "question": "what do?",
+    "transitions": [
+      {
+        "label": "Yes"
+      },
+      {
+        "label": "No"
+      }
+    ]
+  }
+]
