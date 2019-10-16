@@ -18804,7 +18804,6 @@ GameObject:
   - component: {fileID: 4193726526400553828}
   - component: {fileID: 4193726526400553827}
   - component: {fileID: 4193726526400553829}
-  - component: {fileID: 4193726526400553830}
   m_Layer: 0
   m_Name: storm
   m_TagString: Untagged
@@ -23515,18 +23514,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4193726526400553830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4193726526400553831}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b9327b6b518e6b40a977cdb8889b18a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obj: {fileID: 4193726526400553831}
-  button: {fileID: 0}
-  storm: {fileID: 4193726526400553828}

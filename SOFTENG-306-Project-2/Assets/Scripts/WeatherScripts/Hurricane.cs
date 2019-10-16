@@ -29,8 +29,9 @@ namespace SunnyTown
             animator.SetBool("triggerAnim",false);
         }
 
-        void TriggerHurricane()
+        public void TriggerHurricane()
         {
+            showing = false;
             if (!showing){
                 Debug.Log("in her e");
                 storm.Play();

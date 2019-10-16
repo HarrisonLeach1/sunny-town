@@ -19,7 +19,6 @@ namespace SunnyTown
         {
             button.onClick.AddListener(OnClick); 
             fire.Stop();
-            Debug.Log("stop her");
         }
 
         /** Right now rain is triggered on button click by the test button, will need to implement a weather controller that fires weather event
@@ -30,12 +29,10 @@ namespace SunnyTown
             if (!status){
                 status = !status;
                 fire.Play();
-                Debug.Log(fire.isPlaying);
 
             } else {
                 status = !status;
                 fire.Stop();
-                Debug.Log(fire.isPlaying);
             }
         }
     }
