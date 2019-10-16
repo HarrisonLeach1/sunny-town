@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SunnyTown;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +23,7 @@ public class AchievementsManager : MonoBehaviour
     private const string NUMBER_OF_ACHIEVEMENTS = "NumberOfAchievements";
     private const string HIGH_SCORE = "HighScore";
     private const string PLAYER_NAME = "PlayerName";
+    private const string ACHIEVEMENT_DATE = "AchievementDate";
     private const int HIGH_SCORE_SIZE = 5;
 
     private int envInARow;
@@ -53,6 +55,7 @@ public class AchievementsManager : MonoBehaviour
             if (!IsAchievementAlreadyEarned("Tree Hugger"))
             {
                 PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "Tree Hugger");
+                PlayerPrefs.SetString(ACHIEVEMENT_DATE + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), DateTime.Today.ToShortDateString() );
                 PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
                 DisplayAchievementNotification("Tree Hugger");
             }
@@ -64,6 +67,7 @@ public class AchievementsManager : MonoBehaviour
         if (CardManager.Instance.LevelWon && !IsAchievementAlreadyEarned("Winner"))
         {
             PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "Winner");
+            PlayerPrefs.SetString(ACHIEVEMENT_DATE + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), DateTime.Today.ToShortDateString() );
             PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
             DisplayAchievementNotification("Winner");
         }
@@ -191,12 +195,11 @@ public class AchievementsManager : MonoBehaviour
     private Achievement GetAchievementByIndex(int i)
     {
         var achievementName = PlayerPrefs.GetString("achievement" + i);
-        Debug.Log("saved achievement name: " + achievementName);
         foreach (Achievement achievement in new Reader().AllAchievements)
         {
-            Debug.Log("all achievement names: " + achievement.name);
             if (achievement.name.Equals(achievementName))
             {
+                achievement.dateEarned = PlayerPrefs.GetString(ACHIEVEMENT_DATE + i);
                 return achievement;
             }
         }
@@ -222,7 +225,7 @@ public class AchievementsManager : MonoBehaviour
             var date = entryRectTransform.GetChild(2).GetComponent<TextMeshProUGUI>();
             Achievement achievement = GetAchievementByIndex(i); 
             description.SetText(achievement.name + " - " + achievement.description);
-            date.SetText("asdfasdfasf");
+            date.SetText("Date achieved: " +  achievement.dateEarned);
             entryRectTransform.anchoredPosition = new Vector2(0, -templateHeight * i);
             entryTransform.gameObject.SetActive(true);
         }
