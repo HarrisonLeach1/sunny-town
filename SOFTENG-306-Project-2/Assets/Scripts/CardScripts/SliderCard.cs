@@ -28,7 +28,7 @@ namespace SunnyTown
             MinValue = minValue;
         }
 
-        public override void HandleDecision(int valueSelected)
+        public override void HandleDecision(int valueSelected, string additionalState = "")
         {
             if (Options.Count >= 1)
             {
