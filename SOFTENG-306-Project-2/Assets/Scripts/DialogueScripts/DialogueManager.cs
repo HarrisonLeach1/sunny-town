@@ -15,12 +15,12 @@ namespace SunnyTown
     public class DialogueManager : MonoBehaviour
     {
         public Animator simpleDialogueViewAnimator;
-        public Animator binaryOptionViewAnimator;
+        public Animator optionViewAnimator;
         public Animator sliderOptionViewAnimator;
         public Animator animationProgressAnimator;
 
         public SimpleDialogueView simpleDialogueView;
-        public OptionDialogueView binaryOptionDialogueView;
+        public OptionDialogueView optionDialogueView;
         public SliderOptionDialogueView sliderOptionDialogueView;
         public AnimationProgressDialgoueView animationProgressDialgoueView;
 
@@ -105,8 +105,8 @@ namespace SunnyTown
             Action<int> handleButtonPressed = num =>
             {
                 onOptionPressed(num);
-                binaryOptionViewAnimator.SetBool("InstantTransition", false);
-                binaryOptionViewAnimator.SetBool("IsVisible", false);
+                optionViewAnimator.SetBool("InstantTransition", false);
+                optionViewAnimator.SetBool("IsVisible", false);
             };
 
             //TODO handle if absent preceding dialogue
@@ -114,18 +114,18 @@ namespace SunnyTown
             {
                 StartSimpleDialogue(dialogue.PrecedingDialogue, () =>
                 {
-                    binaryOptionDialogueView.SetContent(dialogue, handleButtonPressed);
+                    optionDialogueView.SetContent(dialogue, handleButtonPressed);
                     simpleDialogueViewAnimator.SetBool("InstantTransition", true);
                     simpleDialogueViewAnimator.SetBool("IsVisible", false);
-                    binaryOptionViewAnimator.SetBool("InstantTransition", true);
-                    binaryOptionViewAnimator.SetBool("IsVisible", true);
+                    optionViewAnimator.SetBool("InstantTransition", true);
+                    optionViewAnimator.SetBool("IsVisible", true);
                 });
             }
             else
             {
-                binaryOptionDialogueView.SetContent(dialogue, handleButtonPressed);
-                binaryOptionViewAnimator.SetBool("InstantTransition", false);
-                binaryOptionViewAnimator.SetBool("IsVisible", true);
+                optionDialogueView.SetContent(dialogue, handleButtonPressed);
+                optionViewAnimator.SetBool("InstantTransition", false);
+                optionViewAnimator.SetBool("IsVisible", true);
             }
         }
 

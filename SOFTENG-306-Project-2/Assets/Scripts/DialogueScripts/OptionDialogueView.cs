@@ -36,15 +36,24 @@ namespace SunnyTown
                 button.onClick.RemoveAllListeners();
                 button.gameObject.SetActive(false);
             }
+
             npcImage = GameObject.Find("BinaryNPCImage").GetComponent<Image>();
             Debug.Log("Binary NPC Name: " + dialogue.PrecedingDialogue.Name);
             npcImage.sprite = NPCSpriteManager.Instance.GetSprite(dialogue.PrecedingDialogue.Name);
             npcNameText.text = dialogue.PrecedingDialogue.Name;
             npcDialogueText.text = dialogue.Question;
 
-            foreach(string optionDialogue in dialogue.Options)
-            option1Button.onClick.AddListener(() => onOptionPressed(0));
-            option2Button.onClick.AddListener(() => onOptionPressed(1));
+            // Add buttons for each option available
+            foreach (var item in dialogue.Options.Select((value, index) => (value, index)))
+            {
+                var optionText = item.value;
+                // currently 2 is used to render the bottom button first
+                var buttonIndex = item.index;
+                Button buttonToDisplay = optionButtons[buttonIndex];
+                buttonToDisplay.gameObject.SetActive(true);
+                optionTexts[buttonIndex].text = optionText;
+                buttonToDisplay.onClick.AddListener(() => onOptionPressed(item.index));
+            }
         }
 
     }
