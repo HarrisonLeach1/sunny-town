@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class LevelControl : MonoBehaviour
 {
     public GameObject[] levels;
     public GameObject levelUpTransition;
+    public bool levelUp;
 
     private int currentLevel;
     // Start is called before the first frame update
@@ -29,11 +31,19 @@ public class LevelControl : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (levelUp)
+        {
+            NextLevel();
+            levelUp = false;
+        }
+    }
+
     /// <summary>
     ///  This method can be called to advance to the next level
     /// </summary>
-
-    public void nextLevel()
+    public void NextLevel()
     {
         // Checking if the current level is below 3
         if (currentLevel < 3)
@@ -46,17 +56,25 @@ public class LevelControl : MonoBehaviour
                 if (level.name.Contains(currentLevel.ToString()))
                 {
                     levelUpTransition.SetActive(true);
-                    Thread.Sleep(2000);
-                    level.SetActive(true);
-                    levelUpTransition.SetActive(false);
                     
-                    // Making previous level inactive
-                    levels[currentLevel-2].SetActive(false);
-                    
+                    // Waiting before the next level is loaded
+                    StartCoroutine(LateCall());
+
                 }
                 
             }
         }
 
+    }
+
+    IEnumerator LateCall()
+    {
+        yield return new WaitForSeconds(3);
+        
+        levels[currentLevel - 1].SetActive(true);
+        levelUpTransition.SetActive(false);
+                    
+        //Making previous level inactive
+        levels[currentLevel-2].SetActive(false);
     }
 }
