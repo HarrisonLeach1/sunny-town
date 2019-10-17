@@ -5,14 +5,14 @@ using UnityEngine;
 
 namespace SunnyTown
 {
-    public class MainFire : MonoBehaviour
+    public class MainFire : WeatherEvent
     {
         [SerializeField]
         private ParticleSystem fire;
 
         void Start()
         {
-            fire.Play();
+            fire.Stop();
         }
 
         public void PlayAnim()

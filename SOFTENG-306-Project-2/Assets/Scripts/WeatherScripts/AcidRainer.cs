@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace SunnyTown
 {
-    public class AcidRainer : MonoBehaviour
+    public class AcidRainer : WeatherEvent
     {
         [SerializeField]
         private ParticleSystem rain;
 
         void Start()
         {
-            rain.Play();
+            rain.Stop();
         }
 
         public void PlayAnim()

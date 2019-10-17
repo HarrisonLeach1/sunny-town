@@ -9,12 +9,13 @@ namespace SunnyTown
         private WeatherEvent[] events;
 
         [SerializeField]
-        private AcidRain rain;
+        private AcidRainer rain;
 
         [SerializeField]
-        private Fire wildfire;
+        private MainFire wildfire;
+        
         [SerializeField]
-        private Hurricane storm;
+        private Hurricaner storm;
 
         [SerializeField]
         private Smogger smog; 
@@ -31,7 +32,7 @@ namespace SunnyTown
             events[2] = (WeatherEvent) storm;
             events[3] = (WeatherEvent) smog;
             
-            smog.PlayAnim();
+            storm.PlayAnim();
 
             //y = ((5/((x+15)/100))-4)/30 function to map score to probability
             if (envHealth >= 40){

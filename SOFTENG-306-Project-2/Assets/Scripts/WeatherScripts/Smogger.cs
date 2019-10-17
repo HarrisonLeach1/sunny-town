@@ -11,14 +11,13 @@ namespace SunnyTown
 
         void Start()
         {
-            smog.Play();
-            Debug.Log("shohuld stop");
+            smog.Stop();
         }
 
         public void PlayAnim()
         {
             smog.Stop();
-            Debug.Log("start plaing");
+            Debug.Log("start plaing smog");
         }
 
     }

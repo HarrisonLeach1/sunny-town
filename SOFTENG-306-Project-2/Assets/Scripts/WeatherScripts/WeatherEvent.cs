@@ -6,10 +6,6 @@ namespace SunnyTown
 {
     public class WeatherEvent : MonoBehaviour
     {
-        public WeatherEvent()
-        {
-
-        }
-    
+   
     }
 }
