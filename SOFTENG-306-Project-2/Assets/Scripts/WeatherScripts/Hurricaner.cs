@@ -22,10 +22,10 @@ namespace SunnyTown
 
         void Start()
         {
-            storm.Play();
+            storm.Stop();
             obj = GameObject.Find("storm");
             animator = obj.GetComponent<Animator>();
-            animator.SetBool("triggerHurricane",false);
+            animator.SetBool("triggerHurricane",true);
         }
 
         public void PlayAnim()
@@ -34,13 +34,13 @@ namespace SunnyTown
             storm.Play();
             animator = obj.GetComponent<Animator>();
             animator.SetBool("triggerHurricane",true);
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Hurricane")){
-                Debug.Log("fuck off");
-            } else if (animator.GetCurrentAnimatorStateInfo(0).IsName("InvisHurricane")) {
-                Debug.Log("fuck righjt off");
-            } else {
-                Debug.Log("no way");
-            }
+            // if (animator.GetCurrentAnimatorStateInfo(0).IsName("Hurricane")){
+            //     Debug.Log("fuck off");
+            // } else if (animator.GetCurrentAnimatorStateInfo(0).IsName("InvisHurricane")) {
+            //     Debug.Log("fuck righjt off");
+            // } else {
+            //     Debug.Log("no way");
+            // }
 
         }
 
