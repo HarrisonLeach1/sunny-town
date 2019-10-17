@@ -17,9 +17,14 @@ public class LevelControl : MonoBehaviour
             // Making level 1 active when the game starts
             if (level.name.Contains("1"))
             {
-                print("This happens");
+                print(level.name);
                 currentLevel = 1;
                 level.SetActive(true);
+            }
+            else
+            {
+                print("This happens too");
+                level.SetActive(false);
             }
         }
     }
