@@ -346,13 +346,123 @@
       "It is triggered by emissions, and bad decisions from people",
       "If we are not careful, it can cause extreme events. "
     ],
-    "question": "what do?",
     "transitions": [
       {
-        "label": "Yes"
+        "label": "continue",
+        "state": "S11",
+        "additonalState": "investment"
+      }
+    ]
+  },
+  {
+    "id": "s11SE",
+    "name": "Allena",
+    "precedingDialogue": [
+      "Mayor from neighbouring city is sending you a letter asking for your advice",
+      "They want to scale their city, and they're wondering if they should build up or out",
+      "up is harder and requires better material science research, out is harder but maybe harder to transport and create environmental problems. "
+    ],
+    "question": "shoudl they build up or out?",
+    "transitions": [
+      {
+        "label": "up ",
+        "npcName": "allena",
+        "token": "scale",
+        "scale": "up",
+        "feedback": "mayor took your advice, and thanks you",
+        "state": "12"
       },
       {
-        "label": "No"
+        "label": "out",
+        "npcName": "allena",
+        "token": "scale",
+        "scale": "out",
+        "feedback": "mayor took your advice, and thanks you",
+        "state": "12"
+      }
+    ]
+  },
+  {
+    "id": "s11energy",
+    "name": "Allena",
+    "precedingDialogue": [
+      "Mayor from neighbouring city is sending you a letter asking for your advice",
+      "They want to scale their city, and they're wondering if they should build up or out",
+      "up is harder and requires better material science research, out is harder but maybe harder to transport and create environmental problems. "
+    ],
+    "question": "shoudl they build up or out?",
+    "transitions": [
+      {
+        "label": "up ",
+        "npcName": "allena",
+        "token": "scale",
+        "scale": "up",
+        "feedback": "mayor took your advice, and thanks you",
+        "state": "12"
+      },
+      {
+        "label": "out",
+        "npcName": "allena",
+        "token": "scale",
+        "scale": "out",
+        "feedback": "mayor took your advice, and thanks you",
+        "state": "12"
+      }
+    ]
+  },
+  {
+    "id": "s11EV",
+    "name": "Allena",
+    "precedingDialogue": [
+      "Mayor from neighbouring city is sending you a letter asking for your advice",
+      "They want to scale their city, and they're wondering if they should build up or out",
+      "up is harder and requires better material science research, out is harder but maybe harder to transport and create environmental problems. "
+    ],
+    "question": "shoudl they build up or out?",
+    "transitions": [
+      {
+        "label": "up ",
+        "npcName": "allena",
+        "token": "scale",
+        "scale": "up",
+        "feedback": "mayor took your advice, and thanks you",
+        "state": "12"
+      },
+      {
+        "label": "out",
+        "npcName": "allena",
+        "token": "scale",
+        "scale": "out",
+        "feedback": "mayor took your advice, you get to export some electric cars",
+        "state": "12"
+      }
+    ]
+  },
+  {
+    "id": "s11material",
+    "name": "Allena",
+    "precedingDialogue": [
+      "Mayor from neighbouring city is sending you a letter asking for your advice",
+      "They want to scale their city, and they're wondering if they should build up or out",
+      "up is harder and requires better material science research, out is harder but maybe harder to transport and create environmental problems. "
+    ],
+    "question": "shoudl they build up or out?",
+    "transitions": [
+      {
+        "label": "up ",
+        "npcName": "allena",
+        "token": "scale",
+        "scale": "up",
+        "feedback": "mayor took your advice, you get to export some fancy materials",
+        "state": "12"
+      },
+      {
+        "label": "out",
+        "npcName": "allena",
+        "token": "scale",
+        "scale": "out",
+        "feedback": "mayor took your advice, and thanks you",
+        "state": "12"
       }
     ]
   }
