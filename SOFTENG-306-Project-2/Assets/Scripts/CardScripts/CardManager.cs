@@ -13,7 +13,7 @@ namespace SunnyTown
     public class CardManager : MonoBehaviour
     {
         [SerializeField]
-        private float waitingForEventsDuration = 15f;
+        private float waitingForEventsDuration = 5f;
         [SerializeField]
         private float waitingForFeedbackDuration = 0.5f;
 
@@ -121,7 +121,7 @@ namespace SunnyTown
             var clock = GameObject.Find("Clock").GetComponent<Clock>();
             Action resetDay = () =>
             {
-                levelProgress.UpdateValue(cardFactory.PlotCardsRemaining, cardFactory.TotalPlotCardsInLevel);
+                levelProgress.UpdateValue(cardFactory.CurrentPlotCard);
                 SetState(GameState.WaitingForEvents);
                 EndOfDay = false;
                 clock.ResetDay();

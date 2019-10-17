@@ -15,9 +15,6 @@ namespace SunnyTown
         private List<Card> minorCards;
 
         // TODO: Change so this does not have to be hard-coded
-        public int TotalPlotCardsInLevel { get; private set; } = 8;
-        public int PlotCardsRemaining { get; private set; } = 8;
-
         public CardFactory()
         {
             reader = new Reader();
@@ -42,7 +39,6 @@ namespace SunnyTown
                         ? CurrentPlotCard.Id
                         : CurrentPlotCard.NextStateId;
                     CurrentPlotCard = reader.AllStoryStates.Single(s => s.Id.Equals(nextStateId));
-                    PlotCardsRemaining--;
                     return CurrentPlotCard;
                 case ("minor"):
                     if (minorCards.Count == 0)
