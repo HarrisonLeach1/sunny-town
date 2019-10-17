@@ -12,10 +12,10 @@ namespace SunnyTown
     /// </summary>
     public class CardManager : MonoBehaviour
     {
-        [SerializeField]
-        private float waitingForEventsDuration = 5f;
-        [SerializeField]
-        private float waitingForFeedbackDuration = 0.5f;
+        private static float WAITING_FOR_FEEDBACK_DURATION = 0.1f;  
+        private float waitingForEventsDuration = 0.1f;
+        private float waitingForFeedbackDuration = WAITING_FOR_FEEDBACK_DURATION;
+
 
         public static CardManager Instance { get; private set; }
         public GameObject spawnHandlerObject;
@@ -27,6 +27,7 @@ namespace SunnyTown
         private SpawnHandler animationHandler;
         private LevelProgressScript levelProgress;
         private SimpleDialogue endGameDialogue;
+        private int cardCount = 0;
 
         public bool LevelWon { get; private set; } = false;
         public bool GameLost { get; private set; } = false;
@@ -127,7 +128,6 @@ namespace SunnyTown
             var clock = GameObject.Find("Clock").GetComponent<Clock>();
             Action resetDay = () =>
             {
-                levelProgress.UpdateValue(cardFactory.CurrentPlotCard);
                 SetState(GameState.WaitingForEvents);
                 EndOfDay = false;
                 clock.ResetDay();
@@ -184,6 +184,10 @@ namespace SunnyTown
             if (LevelWon || GameLost)
             {
                 SetState(GameState.GameEnding);
+            }
+            else
+            {
+                SetState(GameState.SelectingPlotDecision);
             }
         }
 
@@ -302,7 +306,12 @@ namespace SunnyTown
             }
             else
             {
-                waitingForFeedbackDuration = 0.5f;
+                waitingForFeedbackDuration = WAITING_FOR_FEEDBACK_DURATION;
+            }
+
+            if (currentCard is PlotCard)
+            {
+                levelProgress.UpdateValue((PlotCard)currentCard);
             }
             MoveToNextState();
         }
@@ -321,8 +330,15 @@ namespace SunnyTown
         /// </summary>
         private void DisplayPlotCard()
         {
-            currentCard = cardFactory.GetNewCard("story");
-            dialogueManager.StartBinaryOptionDialogue(dialogueMapper.CardToOptionDialogue(currentCard), HandleOptionPressed);
+            currentCard = cardCount++ % 3 == 0 ? cardFactory.GetNewCard("story") : cardFactory.GetNewCard("minor");
+            if (currentCard is SliderCard)
+            {
+                dialogueManager.StartSliderOptionDialogue(dialogueMapper.SliderCardToSliderOptionDialogue((SliderCard)currentCard), HandleOptionPressed);
+            }
+            else
+            {
+                dialogueManager.StartBinaryOptionDialogue(dialogueMapper.CardToOptionDialogue(currentCard), HandleOptionPressed);
+            }
         }
 
         /// <summary>
