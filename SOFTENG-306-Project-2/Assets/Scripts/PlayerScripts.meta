@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:SOFTENG-306-Project-2/Assets/Scripts/PlayerScripts.meta
 guid: 8ba0db0c53290d64fa17ef7a7142f2ef
 folderAsset: yes
+=======
+guid: b92a60cb99fd29d4b9bb90d085c34968
+>>>>>>> master:SOFTENG-306-Project-2/Assets/Audio Mixers.meta.orig.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

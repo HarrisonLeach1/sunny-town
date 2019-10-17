@@ -48,8 +48,6 @@ public class Clock : MonoBehaviour
             dayCompletion += Time.deltaTime / REAL_SECONDS_PER_INGAME_DAY;
 
             RenderClockUpdate();
-
-            Debug.Log("Days Completion: " + dayCompletion);
         }
     }
 

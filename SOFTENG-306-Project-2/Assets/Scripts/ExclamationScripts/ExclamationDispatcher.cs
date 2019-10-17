@@ -15,6 +15,7 @@ namespace SunnyTown
         public Animator animator;
         void Start()
         {
+            Debug.Log("Started dispatcher");
             manager = GameObject.Find("CardManager");
             // dont render the individual shapes that make up the exclamation mark 
             foreach (Renderer r in GetComponentsInChildren<Renderer>())

@@ -15,7 +15,7 @@ namespace SunnyTown
     public class EndGameMenuScript : MonoBehaviour
     {
 
-        public GameObject endGameView;
+        private GameObject endGameView;
         public GameObject endGamePrefab;
 
         void Awake()
