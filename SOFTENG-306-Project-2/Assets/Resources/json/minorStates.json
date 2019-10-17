@@ -10,7 +10,7 @@
                 "label": "Meat, because it tastes better",
                 "environment": -10,
                 "hasAnimation": true,
-                "buildingName": "Farm",
+                "buildingName": "Fard",
                 "npcName": "Allena",
                 "feedback": "While it is true meat tastes better. It is a less environmentally efficient food source."
             },
