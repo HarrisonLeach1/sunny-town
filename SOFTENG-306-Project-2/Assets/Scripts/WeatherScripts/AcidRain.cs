@@ -38,5 +38,11 @@ namespace SunnyTown
                 Debug.Log(rain.isPlaying);
             }
         }
+
+        public void StartAnim()
+        {
+            rain.Play();
+            Debug.Log("nosnfopd");
+        }
     }
 }

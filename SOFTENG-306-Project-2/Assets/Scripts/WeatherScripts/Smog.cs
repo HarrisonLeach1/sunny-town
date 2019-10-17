@@ -37,5 +37,6 @@ namespace SunnyTown
                 Debug.Log(smog.isPlaying);
             }
         }
+
     }
 }
