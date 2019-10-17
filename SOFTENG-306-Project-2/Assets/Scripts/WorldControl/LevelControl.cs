@@ -7,8 +7,9 @@ using UnityEngine;
 public class LevelControl : MonoBehaviour
 {
     public GameObject[] levels;
-    public GameObject levelUpTransition;
+    public GameObject[] levelUpTransition;
     public bool levelUp;
+    public float cloudFadeDuration = 1.0f; 
 
     private int currentLevel;
     // Start is called before the first frame update
@@ -16,6 +17,11 @@ public class LevelControl : MonoBehaviour
     {
         foreach (GameObject level in levels)
         {
+            // Used for setting cloud animation to false at the beginning 
+            foreach (GameObject cloud in levelUpTransition)
+            {
+                cloud.GetComponent<ParticleSystem>().enableEmission = false;
+            }
             // Making level 1 active when the game starts
             if (level.name.Contains("1"))
             {
@@ -55,7 +61,11 @@ public class LevelControl : MonoBehaviour
                 
                 if (level.name.Contains(currentLevel.ToString()))
                 {
-                    levelUpTransition.SetActive(true);
+                    // Starting cloud animation for transition 
+                    foreach (GameObject cloud in levelUpTransition)
+                    {
+                        cloud.GetComponent<ParticleSystem>().enableEmission = true;
+                    }
                     
                     // Waiting before the next level is loaded
                     StartCoroutine(LateCall());
@@ -72,9 +82,15 @@ public class LevelControl : MonoBehaviour
         yield return new WaitForSeconds(3);
         
         levels[currentLevel - 1].SetActive(true);
-        levelUpTransition.SetActive(false);
-                    
         //Making previous level inactive
         levels[currentLevel-2].SetActive(false);
+        
+        // Fading out the particles
+        foreach (GameObject cloud in levelUpTransition)
+        {
+            cloud.GetComponent<ParticleSystem>().enableEmission = false;
+        }
+                    
+
     }
 }
