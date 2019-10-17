@@ -349,7 +349,7 @@
     "transitions": [
       {
         "label": "continue",
-        "state": "S11",
+        "state": "s11",
         "additonalState": "investment"
       }
     ]
@@ -370,7 +370,7 @@
         "token": "scale",
         "scale": "up",
         "feedback": "mayor took your advice, and thanks you",
-        "state": "12"
+        "state": "s12"
       },
       {
         "label": "out",
@@ -378,7 +378,7 @@
         "token": "scale",
         "scale": "out",
         "feedback": "mayor took your advice, and thanks you",
-        "state": "12"
+        "state": "s12"
       }
     ]
   },
@@ -398,7 +398,7 @@
         "token": "scale",
         "scale": "up",
         "feedback": "mayor took your advice, and thanks you",
-        "state": "12"
+        "state": "s12"
       },
       {
         "label": "out",
@@ -406,7 +406,7 @@
         "token": "scale",
         "scale": "out",
         "feedback": "mayor took your advice, and thanks you",
-        "state": "12"
+        "state": "s12"
       }
     ]
   },
@@ -426,7 +426,7 @@
         "token": "scale",
         "scale": "up",
         "feedback": "mayor took your advice, and thanks you",
-        "state": "12"
+        "state": "s12"
       },
       {
         "label": "out",
@@ -434,7 +434,7 @@
         "token": "scale",
         "scale": "out",
         "feedback": "mayor took your advice, you get to export some electric cars",
-        "state": "12"
+        "state": "s12"
       }
     ]
   },
@@ -454,7 +454,7 @@
         "token": "scale",
         "scale": "up",
         "feedback": "mayor took your advice, you get to export some fancy materials",
-        "state": "12"
+        "state": "s12"
       },
       {
         "label": "out",
@@ -462,7 +462,170 @@
         "token": "scale",
         "scale": "out",
         "feedback": "mayor took your advice, and thanks you",
-        "state": "12"
+        "state": "s12"
+      }
+    ]
+  },
+  {
+    "id": "s12",
+    "name": "James the Dog",
+    "precedingDialogue": [
+      "your city is scaling fast, you need to find ways of getting more food",
+      "you can either buy more from other cities or grow more."
+    ],
+    "question": "buy or grow?",
+    "transitions": [
+      {
+        "label": "buy",
+        "npcName": "James the Dog",
+        "additionalState": "scale",
+        "feedback": "buying is good, but someone else is still growing them. ",
+        "state": "s13"
+      },
+      {
+        "label": "grow",
+        "npcName": "James the Dog",
+        "feedback": "growing is important, but agriculture is a heavy contributor to climate change",
+        "state": "s13"
+      }
+    ]
+  },
+  {
+    "id": "s13",
+    "name": "James the Dog",
+    "precedingDialogue": [
+      "meat is yum, but vege is good for environment"
+    ],
+    "question": "do you want to farm meat or vege?",
+    "transitions": [
+      {
+        "label": "meat",
+        "npcName": "James the Dog",
+        "feedback": "meat is bad for environment",
+        "state": "s14"
+      },
+      {
+        "label": "vege",
+        "npcName": "James the Dog",
+        "feedback": "vege is yuck",
+        "state": "s15"
+      }
+    ]
+  },
+  {
+    "id": "s13up",
+    "name": "James the Dog",
+    "precedingDialogue": [
+      "meat is yum, but vege is good for environment"
+    ],
+    "question": "do you want to import meat or vege?",
+    "transitions": [
+      {
+        "label": "meat",
+        "npcName": "James the Dog",
+        "feedback": "meat is bad for environment",
+        "state": "s13out"
+      },
+      {
+        "label": "vege",
+        "npcName": "James the Dog",
+        "feedback": "vege is yuck",
+        "state": "s15"
+      }
+    ]
+  },
+  {
+    "id": "s13out",
+    "name": "James the Dog",
+    "precedingDialogue": [
+      "neighbouring city is having a drought"
+    ],
+    "question": "would you like to help them by welcoming their citizens over as refugees?",
+    "transitions": [
+      {
+        "label": "yes",
+        "npcName": "James the Dog",
+        "feedback": "they thank you",
+        "token": "refugee",
+        "refugee": "yes",
+        "state": "s15"
+      },
+      {
+        "label": "no",
+        "npcName": "James the Dog",
+        "feedback": "understandable",
+        "token": "refugee",
+        "refugee": "no",
+        "state": "s15"
+      }
+    ]
+  },
+  {
+    "id": "s14",
+    "name": "James the Dog",
+    "precedingDialogue": [
+      "you have a drought in your city because of dairy farming"
+    ],
+    "transitions": [
+      {
+        "label": "continue",
+        "npcName": "James the Dog",
+        "feedback": "meat is bad for environment",
+        "state": "s15"
+      }
+    ]
+  },
+  {
+    "id": "s15",
+    "name": "Hunter Gatberg",
+    "precedingDialogue": [
+      "some random hunter dialogue idk man"
+    ],
+    "transitions": [
+      {
+        "label": "continue",
+        "state": "s16"
+      }
+    ]
+  },
+  {
+    "id": "16",
+    "name": "Advisory Board",
+    "precedingDialogue": [
+      "uuh, bruh, you need to fix transport",
+      "transport is kinda important, if you don't wanna trash the city"
+    ],
+    "question": "what do?",
+    "transitions": [
+      {
+        "label": "ev",
+        "npcName": "Advisory Board",
+        "feedback": "ev is gud",
+        "state": "s18"
+      },
+      {
+        "label": "public transport",
+        "npcName": "Advisory Board",
+        "feedback": "public transport can be good, AT is shite tho :'(",
+        "state": "s18"
+      },
+      {
+        "label": "do nothing, keep gas cars",
+        "npcName": "Advisory Board",
+        "feedback": "yeah at this point if you choose this you're just kinda dumb",
+        "state": "s18"
+      }
+    ]
+  },
+  {
+    "id": "s18",
+    "name": "Hunter Gatberg",
+    "precedingDialogue": [
+      "some random hunter dialogue idk man"
+    ],
+    "transitions": [
+      {
+        "label": "continue"
       }
     ]
   }
