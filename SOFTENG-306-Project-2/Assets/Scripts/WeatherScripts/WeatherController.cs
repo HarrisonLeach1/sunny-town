@@ -24,16 +24,16 @@ namespace SunnyTown
         //private WeatherEvent[] events;
 
         [SerializeField]
-        private AcidRainer rain;
+        private AcidRain rain;
 
         [SerializeField]
-        private MainFire wildfire;
+        private Fire wildfire;
 
         [SerializeField]
-        private Hurricaner storm;
+        private Hurricane storm;
 
         [SerializeField]
-        private Smogger smog; 
+        private Smog smog; 
 
         private float probability;
 
@@ -109,6 +109,10 @@ namespace SunnyTown
             }
         }
 
+
+        // TODO: need to reset the probability some how so weather events arent chained back to back
+        //       need to change other effects into animations like the hurricane 
+        //       need to create weather event card, right now is using minor decision place holder
         private void AttemptWeatherEvent()
         {
             float randomTime = (float)UnityEngine.Random.Range(0f, 1f);
@@ -122,9 +126,12 @@ namespace SunnyTown
 
         IEnumerator TriggerWeatherEvent(Action callback) 
         {
-            cardManager.SetState(CardManager.GameState.WaitingForFeedback);
+            cardManager.SetState(CardManager.GameState.WeatherEvent);
             int eventIndex = UnityEngine.Random.Range(0,4);
-            Debug.Log("triggering weather");
+
+
+            eventIndex = 2;
+            Debug.Log("triggering weather "+eventIndex);
             if (weatherEvents.TryGetValue(eventIndex, out ClimateEvent value))
             {
                 switch(value)
@@ -150,7 +157,7 @@ namespace SunnyTown
                     break;
                 }
             }
-            yield return null;
+            yield return new WaitForSeconds(4);
             if (callback != null) callback();
         }
         

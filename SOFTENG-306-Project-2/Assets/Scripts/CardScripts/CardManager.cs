@@ -72,7 +72,8 @@ namespace SunnyTown
             WaitingForFeedback,
             ViewingFeedback,
             DayEnding,
-            GameEnding
+            GameEnding,
+            WeatherEvent
         }
 
         /// <summary>
@@ -107,6 +108,11 @@ namespace SunnyTown
                 case GameState.GameEnding:
                     timeRemainingInCurrentState = float.PositiveInfinity;
                     EndGame();
+                    break;
+                case GameState.WeatherEvent:
+                    timeRemainingInCurrentState = float.PositiveInfinity;
+                    Debug.Log("displying weather card rn");
+                    DisplayWeatherCard();
                     break;
                 case GameState.DayEnding:
                     timeRemainingInCurrentState = float.PositiveInfinity;
@@ -164,6 +170,9 @@ namespace SunnyTown
                     SetState(GameState.ViewingFeedback);
                     break;
                 case GameState.ViewingFeedback:
+                    SetState(GameState.WaitingForEvents);
+                    break;
+                case GameState.WeatherEvent:
                     SetState(GameState.WaitingForEvents);
                     break;
             }
@@ -355,6 +364,27 @@ namespace SunnyTown
                 }
             }
             return false;
+        }
+
+        private void DisplayWeatherCard()
+        {
+            string[] statements = { "Your town has been struck by a weather event!" };
+            Action displayWeatherInfo = () =>
+            {
+                currentCard = cardFactory.GetNewCard("minor");
+                if (currentCard is MinorCard)
+                {
+                    dialogueManager.StartBinaryOptionDialogue(dialogueMapper.MinorCardToBinaryOptionDialogue((MinorCard)currentCard), HandleOptionPressed);
+                }
+                else
+                {
+                    dialogueManager.StartSliderOptionDialogue(dialogueMapper.SliderCardToSliderOptionDialogue((SliderCard)currentCard), HandleOptionPressed);
+                }
+            };
+
+            // minor card should be displayed upon the callback to the mail message
+            dialogueManager.StartExplanatoryDialogue(new SimpleDialogue(statements, "You have mail"), displayWeatherInfo);
+
         }
 
     }

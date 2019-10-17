@@ -1,51 +1,56 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace SunnyTown
 {
-    public class Hurricane : WeatherEvent
+    public class Hurricane : MonoBehaviour
     {
         [SerializeField]
-        private GameObject obj;
+        private ParticleSystem storm; 
+
+        // [SerializeField]
+        // private GameObject obj;
 
         private Animator animator;
 
+
         [SerializeField]
-        private Button button;
+        private GameObject obj;
 
         private bool showing;
 
-        [SerializeField]
-        private ParticleSystem storm; 
         void Start()
-        {   
+        {
             storm.Stop();
             obj = GameObject.Find("storm");
             animator = obj.GetComponent<Animator>();
-            showing = false;
-            button.onClick.AddListener(TriggerHurricane);
-            animator.SetBool("triggerAnim",false);
+            animator.SetBool("triggerHurricane",true);
         }
 
-        public void TriggerHurricane()
+        public void PlayAnim()
         {
-            showing = false;
-            if (!showing){
-                Debug.Log("in her e");
-                storm.Play();
-                animator.SetBool("triggerAnim",true);
-                showing = true;
-            }
+            Debug.Log("start plaing storm");
+            storm.Play();
+            animator = obj.GetComponent<Animator>();
+            animator.SetBool("triggerHurricane",true);
+            // if (animator.GetCurrentAnimatorStateInfo(0).IsName("Hurricane")){
+            //     Debug.Log("fuck off");
+            // } else if (animator.GetCurrentAnimatorStateInfo(0).IsName("InvisHurricane")) {
+            //     Debug.Log("fuck righjt off");
+            // } else {
+            //     Debug.Log("no way");
+            // }
+
         }
 
-        void onEndOfAnim()
+        void OnEndOfAnim()
         {
-            storm.Stop();
-            animator.SetBool("triggerAnim", false);
             Debug.Log("stopped");
-            showing = false;
+            storm.Stop();
+            animator = obj.GetComponent<Animator>();
+            animator.SetBool("triggerHurricane", false);
         }
+        
     }
 }
