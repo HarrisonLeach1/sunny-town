@@ -8,8 +8,6 @@ public class LevelControl : MonoBehaviour
 {
     public GameObject[] levels;
     public GameObject[] levelUpTransition;
-    public bool levelUp;
-    public float cloudFadeDuration = 1.0f; 
 
     private int currentLevel;
     // Start is called before the first frame update
@@ -34,15 +32,6 @@ public class LevelControl : MonoBehaviour
                 print("This happens too");
                 level.SetActive(false);
             }
-        }
-    }
-
-    private void Update()
-    {
-        if (levelUp)
-        {
-            NextLevel();
-            levelUp = false;
         }
     }
 
@@ -77,10 +66,14 @@ public class LevelControl : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Method is called to finish animation transition to the next level
+    /// </summary>
+    /// <returns></returns>
     IEnumerator LateCall()
     {
+        // Waits 3 seconds for the clouds before activating the new level
         yield return new WaitForSeconds(3);
-        
         levels[currentLevel - 1].SetActive(true);
         //Making previous level inactive
         levels[currentLevel-2].SetActive(false);
