@@ -12,7 +12,6 @@ namespace SunnyTown
     [System.Serializable]
     public class BinaryOptionDialogueView
     {
-        private NPCSpriteManager npcSpriteManager = NPCSpriteManager.Instance;
         public GameObject viewObject;
         public Image image;
         public Image npcImage;
@@ -36,8 +35,7 @@ namespace SunnyTown
 
             npcImage = GameObject.Find("BinaryNPCImage").GetComponent<Image>();
             Debug.Log("Binary NPC Name: " + dialogue.PrecedingDialogue.Name);
-            npcImage.sprite = this.npcSpriteManager.GetSprite(dialogue.PrecedingDialogue.Name);
-            //npcImage.sprite = this.getSprite(dialogue.PrecedingDialogue.Name);
+            npcImage.sprite = NPCSpriteManager.Instance.GetSprite(dialogue.PrecedingDialogue.Name);
             npcNameText.text = dialogue.PrecedingDialogue.Name;
             npcDialogueText.text = dialogue.Question;
             option1Text.text = dialogue.Option1;

@@ -79,7 +79,7 @@ namespace SunnyTown
 
         public int GetScore()
         {
-            if (CardManager.Instance.isFinalCard)
+            if (CardManager.Instance.LevelWon)
             {
                 return (int) (0.5 * EnvHealth + 0.25 * Gold + 0.25 * PopHappiness) + 100;
             }
@@ -139,7 +139,7 @@ namespace SunnyTown
                     "very upset with your decisions. They have voted you out of power.",
                     " Try keeping them happier next time. "
                 }, "");
-                CardManager.Instance.QueueEndDialogue(endGameDialogue);
+                CardManager.Instance.QueueGameLost(endGameDialogue);
             }
         }
 
@@ -162,7 +162,7 @@ namespace SunnyTown
                         "You have lost all your town's money. Now you cannot build the town.",
                         "Be careful when making decisions that involve spending money next time."
                     }, "");
-                CardManager.Instance.QueueEndDialogue(endGameDialogue);
+                CardManager.Instance.QueueGameLost(endGameDialogue);
             }
         }
 
@@ -187,7 +187,7 @@ namespace SunnyTown
                 }, "");
 
 
-                CardManager.Instance.QueueEndDialogue(endGameDialogue);
+                CardManager.Instance.QueueGameLost(endGameDialogue);
             }
         }
     }

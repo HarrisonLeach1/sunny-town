@@ -33,7 +33,7 @@ namespace SunnyTown
         IEnumerator CreateExclamationMark()
         {
             // wait while a card or an exclamation mark is already showing 
-            while (cardManager.GetCardStatus() || markSpawned)
+            while (cardManager.CurrentGameState != CardManager.GameState.WaitingForEvents || markSpawned)
             {
                 yield return new WaitForSeconds(1);
             }
@@ -61,10 +61,10 @@ namespace SunnyTown
          */
         void OnMouseDown()
         {
-            if (markSpawned && !cardManager.GetCardStatus()){
+            if (markSpawned && cardManager.CurrentGameState == CardManager.GameState.WaitingForEvents){
                 animator.SetBool("isShow",false);
                 markSpawned = false;
-                cardManager.DisplayMinorCard();
+                cardManager.QueueMinorCard();
                 foreach (Renderer r in GetComponentsInChildren<Renderer>())
                     r.enabled = false;
             } else {

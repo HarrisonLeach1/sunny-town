@@ -1,7 +1,4 @@
-using System.IO;
-using System;
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
 
 namespace SunnyTown
@@ -10,41 +7,40 @@ namespace SunnyTown
     /// An NPC sprite manager handles the resolution of character names 
     /// into their appropriate sprites on dialogue box views
     /// </summary>
-    public class NPCSpriteManager
+    public class NPCSpriteManager : MonoBehaviour
     {
-        public static NPCSpriteManager instance = null;
+        public static NPCSpriteManager Instance { get; private set; }
         public const string NAME_FOR_DEFAULT_SPRITE = "citizen";
-        private Dictionary<string, byte[]> spriteDictionary { get; set; }
-        private Sprite defaultSprite;
+        private Dictionary<string, Texture2D> spriteDictionary { get; set; }
+        private Texture2D defaultSprite;
 
-        private NPCSpriteManager()
+        void Awake()
         {
-            spriteDictionary = new Dictionary<string, byte[]>();
-            spriteDictionary.Add(NAME_FOR_DEFAULT_SPRITE, File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/Harry.png"));
-            spriteDictionary.Add("Arvio", File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/Arvio.png"));
-            spriteDictionary.Add("James the Dog", File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/JamesTheDog.png"));
-            spriteDictionary.Add("Allena", File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/Allena.png"));
-            spriteDictionary.Add("Jimmy Cash", File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/JimmyCash.png"));
-            spriteDictionary.Add("Hunter Gatberg", File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/William.png"));
-            spriteDictionary.Add("Cowboy Willy", File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/CowboyWilly.png"));
-            spriteDictionary.Add("You have mail", File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/mail.png"));
-            spriteDictionary.Add("Advisory Board", File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/Sprites/Board.jpg"));
-        }
-
-        public static NPCSpriteManager Instance
-        {
-            get
+            if (Instance == null)
             {
-                if (instance == null)
-                {
-                    instance = new NPCSpriteManager();
-                }
-
-                return instance;
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
             }
         }
 
-        public byte[] GetSpriteByteArray(string name)
+        void Start()
+        {
+            spriteDictionary = new Dictionary<string, Texture2D>();
+            spriteDictionary.Add(NAME_FOR_DEFAULT_SPRITE, Resources.Load<Texture2D>("Sprites/Harry"));
+            spriteDictionary.Add("Arvio", Resources.Load<Texture2D>("Sprites/Arvio"));
+            spriteDictionary.Add("James the Dog", Resources.Load<Texture2D>("Sprites/JamesTheDog"));
+            spriteDictionary.Add("Allena", Resources.Load<Texture2D>("Sprites/Allena"));
+            spriteDictionary.Add("Jimmy Cash", Resources.Load<Texture2D>("Sprites/JimmyCash"));
+            spriteDictionary.Add("Hunter Gatberg", Resources.Load<Texture2D>("Sprites/William"));
+            spriteDictionary.Add("Cowboy Willy", Resources.Load<Texture2D>("Sprites/CowboyWilly"));
+            spriteDictionary.Add("You have mail", Resources.Load<Texture2D>("Sprites/mail"));
+            spriteDictionary.Add("Advisory Board", Resources.Load<Texture2D>("Sprites/Board"));
+        }
+
+        private Texture2D GetSpriteTexture(string name)
         {
             if (spriteDictionary.ContainsKey(name))
             {
@@ -70,11 +66,9 @@ namespace SunnyTown
 
             int width = 250;
             int height = 250;
-            Debug.Log("Getting sprite for: " + name);
-            byte[] bytes = this.GetSpriteByteArray(name);
-            Texture2D texture = new Texture2D(width, height);
+
+            Texture2D texture = this.GetSpriteTexture(name);
             texture.filterMode = FilterMode.Trilinear;
-            texture.LoadImage(bytes);
             Sprite sprite = Sprite.Create(texture, new Rect(0, 0, width, height), new Vector2(0.5f, 0.0f), 1.0f);
             return sprite;
         }
