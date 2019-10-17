@@ -83,6 +83,7 @@ namespace SunnyTown
         {
             Debug.Log("Setting State: " + state);
             CurrentGameState = state;
+            WeatherController.Instance.CheckGameStatus();
             switch (CurrentGameState)
             {
                 case GameState.SelectingPlotDecision:

@@ -49,7 +49,7 @@ public class Clock : MonoBehaviour
 
             RenderClockUpdate();
 
-            Debug.Log("Days Completion: " + dayCompletion);
+            //Debug.Log("Days Completion: " + dayCompletion);
         }
     }
 
