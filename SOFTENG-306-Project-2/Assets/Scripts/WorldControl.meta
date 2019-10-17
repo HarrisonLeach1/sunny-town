@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:SOFTENG-306-Project-2/Assets/Scripts/WorldControl.meta
 guid: 37b68915bdf58654d83a88c820d702d9
+=======
+guid: 60cb0277cb012924eacf1c18af904392
+>>>>>>> feature/weather-trigger-system:SOFTENG-306-Project-2/Assets/Fire/Objects.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

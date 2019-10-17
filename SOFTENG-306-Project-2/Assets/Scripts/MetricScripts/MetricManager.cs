@@ -31,6 +31,8 @@ namespace SunnyTown
         private const int MAX_VALUE = 100;
         private const int MIN_VALUE = 0;
 
+        private WeatherController weatherController;
+
 
         private MetricManager()
         {
@@ -193,6 +195,11 @@ namespace SunnyTown
 
 
                 CardManager.Instance.QueueGameLost(endGameDialogue);
+            } else 
+            {
+                //notify weather controller of new metric  
+                weatherController = WeatherController.Instance;
+                weatherController.UpdateWeatherProbabilities((float) this.EnvHealth);
             }
         }
     }

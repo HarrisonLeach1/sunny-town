@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:SOFTENG-306-Project-2/Assets/school/DemoScene.meta
 guid: 0c9d307adbbd8f2418823db7c488f7d6
+=======
+guid: 1bc50db8e2e64ed44985a57280412e18
+>>>>>>> feature/weather-trigger-system:SOFTENG-306-Project-2/Assets/Fire/Materials.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

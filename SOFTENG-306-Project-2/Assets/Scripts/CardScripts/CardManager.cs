@@ -71,7 +71,8 @@ namespace SunnyTown
             WaitingForFeedback,
             ViewingFeedback,
             DayEnding,
-            GameEnding
+            GameEnding,
+            WeatherEvent
         }
 
         /// <summary>
@@ -82,6 +83,7 @@ namespace SunnyTown
         {
             Debug.Log("Setting State: " + state);
             CurrentGameState = state;
+            WeatherController.Instance.CheckGameStatus();
             switch (CurrentGameState)
             {
                 case GameState.SelectingPlotDecision:
@@ -108,6 +110,10 @@ namespace SunnyTown
                 case GameState.GameEnding:
                     timeRemainingInCurrentState = float.PositiveInfinity;
                     EndGame();
+                    break;
+                case GameState.WeatherEvent:
+                    timeRemainingInCurrentState = float.PositiveInfinity;
+                    DisplayWeatherCard();
                     break;
                 case GameState.DayEnding:
                     timeRemainingInCurrentState = float.PositiveInfinity;
@@ -165,6 +171,9 @@ namespace SunnyTown
                     SetState(GameState.ViewingFeedback);
                     break;
                 case GameState.ViewingFeedback:
+                    SetState(GameState.WaitingForEvents);
+                    break;
+                case GameState.WeatherEvent:
                     SetState(GameState.WaitingForEvents);
                     break;
             }
@@ -356,6 +365,27 @@ namespace SunnyTown
                 }
             }
             return false;
+        }
+
+        private void DisplayWeatherCard()
+        {
+            string[] statements = { "Your town has been struck by a weather event!" };
+            Action displayWeatherInfo = () =>
+            {
+                WeatherController.Instance.StopAnim();
+                Debug.Log("Clicked continue on weather event");
+                SetState(GameState.WaitingForEvents);
+                //TODO: balance numbers on event
+                MetricsModifier modifier = new MetricsModifier(-5,-5,0);
+                modifier.Modify();
+                metricManager.RenderMetrics();
+                WeatherController.Instance.probability = 0;
+                Debug.Log("new prob "+WeatherController.Instance.probability);
+            };
+
+            // minor card should be displayed upon the callback to the mail message
+            dialogueManager.StartExplanatoryDialogue(new SimpleDialogue(statements, "Weather event"), displayWeatherInfo);
+
         }
 
     }
