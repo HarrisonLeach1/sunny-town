@@ -43,7 +43,7 @@ public class LevelProgressScript : MonoBehaviour
             levelProgressBar.value = levelProgress;
         }
 
-        if (levelProgress == 1)
+        if (cardIdNumber == LEVEL_ONE_CAP || cardIdNumber == LEVEL_TWO_CAP)
         {
             levelController.NextLevel();
         }

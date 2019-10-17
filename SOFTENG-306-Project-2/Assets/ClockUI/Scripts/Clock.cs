@@ -33,7 +33,7 @@ public class Clock : MonoBehaviour
 
     private void Update()
     {
-        if (CardManager.Instance.CurrentGameState == CardManager.GameState.WaitingForEvents)
+        if (false && CardManager.Instance.CurrentGameState == CardManager.GameState.WaitingForEvents)
         {
             if (dayCompletion >= randomTimeInDay)
             {
