@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,11 +18,11 @@ namespace SunnyTown
         // TODO: will need to change this later depending on playtesting
         private float waitingForEventsDuration = 4f;
         private const int MINOR_CARDS_PER_PLOT_CARD = 1;
+        private int START_CAMPAIGN_CARD_NUMBER = 6;
         private float waitingForFeedbackDuration = WAITING_FOR_FEEDBACK_DURATION;
 
         public static CardManager Instance { get; private set; }
         public GameObject spawnHandlerObject;
-
         private CardFactory cardFactory;
         private DialogueManager dialogueManager;
         private MetricManager metricManager;
@@ -33,13 +34,13 @@ namespace SunnyTown
 
         public bool GameWon { get; private set; } = false;
         public bool GameLost { get; private set; } = false;
-
         public GameState CurrentGameState { get; private set; } = GameState.GameStarting;
 
         private HashSet<Card> storyCardsTravelled = new HashSet<Card>();
         public Dictionary<string, string> PastTokens = new Dictionary<string, string>();
         private Card currentCard;
         private float timeRemainingInCurrentState = float.PositiveInfinity;
+        private bool hadCampaign = false;
 
         // Start is called before the first frame update
         void Start()
@@ -91,7 +92,7 @@ namespace SunnyTown
             {
                 case GameState.SelectingPlotDecision:
                     timeRemainingInCurrentState = float.PositiveInfinity;
-                    DisplayPlotCard();
+                    DisplayAnyCard();
                     break;
                 case GameState.SelectingMinorDecision:
                     timeRemainingInCurrentState = float.PositiveInfinity;
@@ -312,17 +313,27 @@ namespace SunnyTown
         /// <summary>
         /// Displays a Plot Card if there is one
         /// </summary>
-        private void DisplayPlotCard()
+        private void DisplayAnyCard()
         {
-            currentCard = cardCount++ % MINOR_CARDS_PER_PLOT_CARD == 0 ? cardFactory.GetNewCard("story") : cardFactory.GetNewCard("minor");
-            if (currentCard is SliderCard)
+            int currentStateInt = int.Parse(Regex.Match(cardFactory.CurrentPlotCard.Id, @"\d+").Value);
+            if (!hadCampaign && currentStateInt == START_CAMPAIGN_CARD_NUMBER)
             {
-                dialogueManager.StartSliderOptionDialogue(dialogueMapper.SliderCardToSliderOptionDialogue((SliderCard)currentCard), HandleOptionPressed);
-            }
+                hadCampaign = true;
+                GameObject.Find("CampaignManager").GetComponent<CampaignManager>().StartCampaignDialogue();
+            } 
             else
             {
-                dialogueManager.StartBinaryOptionDialogue(dialogueMapper.CardToOptionDialogue(currentCard), HandleOptionPressed);
+                currentCard = cardCount++ % MINOR_CARDS_PER_PLOT_CARD == 0 ? cardFactory.GetNewCard("story") : cardFactory.GetNewCard("minor");
+                if (currentCard is SliderCard)
+                {
+                    dialogueManager.StartSliderOptionDialogue(dialogueMapper.SliderCardToSliderOptionDialogue((SliderCard)currentCard), HandleOptionPressed);
+                }
+                else
+                {
+                    dialogueManager.StartBinaryOptionDialogue(dialogueMapper.CardToOptionDialogue(currentCard), HandleOptionPressed);
+                }
             }
+
         }
 
         /// <summary>

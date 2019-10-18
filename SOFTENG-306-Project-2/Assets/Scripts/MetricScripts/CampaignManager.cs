@@ -33,6 +33,7 @@ namespace SunnyTown
         /// </summary>
         public void OnSubmit()
         {
+            MetricManager.Instance.RenderMetrics();
             campaignPanel.gameObject.SetActive(false);
             // Reset the weightings on every campaign
             popHappinessScore = 0;
@@ -59,26 +60,19 @@ namespace SunnyTown
         /// Opens the campaign panel if the game is in the correct state to do so. Additionally, provides a
         /// small explanatory dialogue of the campaign mechanic. Also, oves the game into a paused state.
         /// </summary>
-        public void OnOpen()
+        public void StartCampaignDialogue()
         {
-            if (CardManager.Instance.CurrentGameState == CardManager.GameState.WaitingForEvents)
+            CardManager.Instance.SetState(CardManager.GameState.GamePaused);
+            Action onClosed = () =>
             {
-                CardManager.Instance.SetState(CardManager.GameState.GamePaused);
-                Action onClosed = () =>
-                {
-                    campaignPanel.gameObject.SetActive(true);
-                };
-                SimpleDialogue dialogue = new SimpleDialogue(new string[2] {
-                    "Hello Mrs. Gatberg, we see you have decided to launch a new campaign. This will involve giving guidance for your campaign poster.",
+                campaignPanel.gameObject.SetActive(true);
+            };
+            SimpleDialogue dialogue = new SimpleDialogue(new string[2] {
+                    "Hello Mrs. Gatberg, to keep your position as mayor we must launch a new campaign. We need your guidance in designing the new campaign poster.",
                     "Be careful what you choose, as it will shape the public's opinion on your future decisions." },
-                    "Advisory Board");
-                DialogueManager.Instance.StartExplanatoryDialogue(dialogue, onClosed);
-                Debug.Log("Successfully opened campaign");
-            }
-            else
-            {
-                Debug.Log("Cannot open campaign, not in appropriate game state");
-            }
+                "Advisory Board");
+            DialogueManager.Instance.StartExplanatoryDialogue(dialogue, onClosed);
+            Debug.Log("Successfully opened campaign");
         }
 
         /// <summary>
