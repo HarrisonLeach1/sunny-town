@@ -19,5 +19,9 @@ namespace SunnyTown
             rain.Stop();
             Debug.Log("start plaing rain");
         }
+        public void StopAnim()
+        {
+            
+        }
     }
 }

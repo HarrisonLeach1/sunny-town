@@ -19,6 +19,9 @@ namespace SunnyTown
             smog.Stop();
             Debug.Log("start plaing smog");
         }
-
+        public void StopAnim()
+        {
+            
+        }
     }
 }

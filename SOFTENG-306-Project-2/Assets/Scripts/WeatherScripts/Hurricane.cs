@@ -25,7 +25,7 @@ namespace SunnyTown
             storm.Stop();
             obj = GameObject.Find("storm");
             animator = obj.GetComponent<Animator>();
-            animator.SetBool("triggerHurricane",true);
+            animator.SetBool("triggerHurricane",false);
         }
 
         public void PlayAnim()
@@ -44,6 +44,13 @@ namespace SunnyTown
 
         }
 
+        public void StopAnim()
+        {
+            Debug.Log("stopped from stopanim");
+            storm.Stop();
+            animator = obj.GetComponent<Animator>();
+            animator.SetBool("triggerHurricane", false);
+        }
         void OnEndOfAnim()
         {
             Debug.Log("stopped");

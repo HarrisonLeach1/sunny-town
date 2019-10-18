@@ -20,6 +20,9 @@ namespace SunnyTown
             fire.Stop();
             Debug.Log("start plaing fire");
         }
-
+        public void StopAnim()
+        {
+            
+        }
     }
 }

@@ -371,15 +371,12 @@ namespace SunnyTown
             string[] statements = { "Your town has been struck by a weather event!" };
             Action displayWeatherInfo = () =>
             {
-                currentCard = cardFactory.GetNewCard("minor");
-                if (currentCard is MinorCard)
-                {
-                    dialogueManager.StartBinaryOptionDialogue(dialogueMapper.MinorCardToBinaryOptionDialogue((MinorCard)currentCard), HandleOptionPressed);
-                }
-                else
-                {
-                    dialogueManager.StartSliderOptionDialogue(dialogueMapper.SliderCardToSliderOptionDialogue((SliderCard)currentCard), HandleOptionPressed);
-                }
+                WeatherController.Instance.StopAnim();
+                Debug.Log("Clicked continue on weather event");
+                SetState(GameState.WaitingForEvents);
+                MetricsModifier modifier = new MetricsModifier(-10,-20,0);
+                modifier.Modify();
+                metricManager.RenderMetrics();
             };
 
             // minor card should be displayed upon the callback to the mail message
