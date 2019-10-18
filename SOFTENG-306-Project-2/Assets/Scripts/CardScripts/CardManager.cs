@@ -200,6 +200,7 @@ namespace SunnyTown
             if (string.IsNullOrEmpty(currentCard.Feedback))
             {
                 metricManager.RenderMetrics();
+                AchievementsManager.Instance.IsAchievementMade();
                 SetState(GameState.WaitingForEvents);
             }
             else
@@ -257,7 +258,6 @@ namespace SunnyTown
                 Debug.Log("Not in approriate game state to display minor card");
                 // TODO: DisplayWarningDialogue();
             }
-            AchievementsManager.Instance.IsAchievementMade();
         }
 
         /// <summary>
@@ -329,6 +329,7 @@ namespace SunnyTown
         private void ShowFeedback()
         {
             metricManager.RenderMetrics();
+            AchievementsManager.Instance.IsAchievementMade();
             dialogueManager.StartExplanatoryDialogue(dialogueMapper.FeedbackToDialogue(currentCard.Feedback, currentCard.FeedbackNPCName), MoveToNextState);
         }
 

@@ -28,6 +28,7 @@ public class AchievementsManager : MonoBehaviour
     private const string HIGH_SCORE = "HighScore";
     private const string PLAYER_NAME = "PlayerName";
     private const string ACHIEVEMENT_DATE = "AchievementDate";
+    private const float POPUP_ANIMATION_TIME = 3f;
     private const int HIGH_SCORE_SIZE = 5;
 
     private int envInARow;
@@ -54,7 +55,7 @@ public class AchievementsManager : MonoBehaviour
             envInARow = 0;
         }
 
-        if (envInARow == 1)
+        if (envInARow == 5)
         {
             Debug.Log("got into thing");
             if (!IsAchievementAlreadyEarned("Tree Hugger"))
@@ -225,8 +226,15 @@ public class AchievementsManager : MonoBehaviour
                 achievementNotificationText.text = a.name;
                 achievementNotificationImage.sprite = Resources.Load<Sprite>("Sprites/" + a.imageUrl);
                 achievementNotificationAnimator.SetBool("IsVisible", true);
+                StartCoroutine(WaitForDownAnimation());
             }
         }
+    }
+    
+    private IEnumerator WaitForDownAnimation()
+    {
+        yield return new WaitForSeconds(POPUP_ANIMATION_TIME);
+        achievementNotificationAnimator.SetBool("IsVisible", false);
     }
 
     private void DisplayAchievementsMenu()
