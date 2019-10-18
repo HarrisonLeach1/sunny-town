@@ -19,7 +19,7 @@ namespace SunnyTown
         private void Start()
         {
             this.reader = Reader.Instance;
-            this.expositionDialogues = reader.AllExpositionDialogues;
+            this.expositionDialogues = new List<SimpleDialogue>(reader.AllExpositionDialogues);
             Debug.Log("Number of exposition states: " + this.expositionDialogues.Count);
             TriggerDialogue();
         }
