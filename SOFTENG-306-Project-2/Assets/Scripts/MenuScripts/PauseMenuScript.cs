@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PauseMenuScript : MonoBehaviour
 {
+	public GameObject PausePanel;
     public GameObject PauseMenuPrefab;
     private GameObject pauseMenuView;
     public Button PauseButton;
@@ -17,6 +18,7 @@ public class PauseMenuScript : MonoBehaviour
     {
         Time.timeScale = 0f;
         Debug.Log("pause menu opened");
+		PausePanel.gameObject.SetActive(true);
 		PauseMenuPrefab.gameObject.SetActive(true);
         //pauseMenuView = Instantiate(PauseMenuPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         PauseButton.gameObject.SetActive(false);
@@ -26,6 +28,7 @@ public class PauseMenuScript : MonoBehaviour
 
     public void ClosePauseMenu()
     {
+		PausePanel.gameObject.SetActive(false);
         Time.timeScale = 1f;
         Debug.Log("pause menu closed");
         PauseMenuPrefab.gameObject.SetActive(false);
