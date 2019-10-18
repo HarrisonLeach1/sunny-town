@@ -391,7 +391,27 @@ namespace SunnyTown
 
         private void DisplayWeatherCard()
         {
-            string[] statements = { "Your town has been struck by a weather event!" };
+            String weatherEvent = "";
+            switch(WeatherController.Instance.currentEvent)
+            {
+                case WeatherController.ClimateEvent.AcidRain:
+                weatherEvent = "acid rain";
+                break;
+
+                case WeatherController.ClimateEvent.Hurricane:
+                weatherEvent = "hurricane";
+                break;
+
+                case WeatherController.ClimateEvent.Smog:
+                weatherEvent = "smog";
+                break;
+
+                case WeatherController.ClimateEvent.WildFire:
+                weatherEvent = "wildfire";
+                break;
+            }    
+            string statement = "Your town has been struck by "+ weatherEvent +"! Try raise your environment health to avoid more disasters"; 
+            string[] statements = { statement };
             Action displayWeatherInfo = () =>
             {
                 WeatherController.Instance.StopAnim();
