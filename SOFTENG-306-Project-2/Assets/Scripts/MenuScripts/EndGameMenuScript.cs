@@ -61,7 +61,7 @@ namespace SunnyTown
 
         public void ReplayGame()
         {
-            SceneManager.LoadScene("WorldScene");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
     }
 }
