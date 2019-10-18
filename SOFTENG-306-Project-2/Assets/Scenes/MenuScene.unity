@@ -404,8 +404,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f450e28237e0d4f945af2e11650db3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: 4f4fc8a440547734ba532132ed397117, type: 2}
-  slider: {fileID: 1693669669}
+  SFXMixer: {fileID: 24100000, guid: 4f4fc8a440547734ba532132ed397117, type: 2}
+  MusicMixer: {fileID: 0}
+  SFXslider: {fileID: 1693669669}
+  MusicSlider: {fileID: 0}
 --- !u!1 &447091556
 GameObject:
   m_ObjectHideFlags: 0
@@ -2223,8 +2225,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f450e28237e0d4f945af2e11650db3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: 15a19a3807f65fb47a55f6504e8c6e22, type: 2}
-  slider: {fileID: 60449461}
+  SFXMixer: {fileID: 0}
+  MusicMixer: {fileID: 24100000, guid: 15a19a3807f65fb47a55f6504e8c6e22, type: 2}
+  SFXslider: {fileID: 0}
+  MusicSlider: {fileID: 60449461}
 --- !u!114 &1693669669 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2253200262256107781, guid: 0a242615ce38e444b93af994320ba851,

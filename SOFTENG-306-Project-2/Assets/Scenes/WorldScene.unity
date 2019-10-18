@@ -21708,7 +21708,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestSFXButton
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 2253200261665914136, guid: 0a242615ce38e444b93af994320ba851,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1044121652}
+    - target: {fileID: 2253200261665914136, guid: 0a242615ce38e444b93af994320ba851,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayClickSound
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2253200261665914135, guid: 0a242615ce38e444b93af994320ba851, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0a242615ce38e444b93af994320ba851, type: 3}
 --- !u!1001 &945644523
 PrefabInstance:

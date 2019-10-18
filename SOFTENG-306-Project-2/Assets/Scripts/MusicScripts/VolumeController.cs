@@ -11,24 +11,43 @@ namespace SunnyTown
    /// to the volume of AudioSources it is added to
    /// </summary>
     public class VolumeController : MonoBehaviour
-    {
+   {
 
-       public AudioMixer mixer;
-       public Slider slider;
+      public VolumeController Instance { get; set; }
+       public AudioMixer SFXMixer;
+       public AudioMixer MusicMixer;
+       public Slider SFXslider;
+       public Slider MusicSlider;
        
 
        void Start()
        {
           SetLevel();
        }
+       
+       private void Awake()
+       {
+          if (Instance == null)
+          {
+             Instance = this;
+             DontDestroyOnLoad(this.gameObject);
+          }
+          else
+          {
+             Destroy(gameObject);
+          }
+       }
 
        public void SetLevel()
        {
-          float sliderValue = slider.value;
+          float SFXsliderValue = SFXslider.value;
+          float MusicSliderValue = MusicSlider.value;
           //using logarithmic conversion
           //takes 0.001 and 1 value into a value between -80 and 0 on a log scale
-          mixer.SetFloat("MusicVolume", Mathf.Log10(sliderValue) * 20);
-          PlayerPrefs.SetFloat("MusicVolume", sliderValue);
+          MusicMixer.SetFloat("MusicVolume", Mathf.Log10(MusicSliderValue) * 20);
+          PlayerPrefs.SetFloat("MusicVolume", MusicSliderValue);
+          
+          SFXMixer.SetFloat("MusicVolume", Mathf.Log10(SFXsliderValue) * 20);
        }
 
     }  
