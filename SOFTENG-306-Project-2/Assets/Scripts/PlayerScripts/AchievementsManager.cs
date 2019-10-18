@@ -12,7 +12,8 @@ public class AchievementsManager : MonoBehaviour
     public static AchievementsManager Instance { get; private set; }
 
     public GameObject AchievementsPrefab;
-    public GameObject AchievementNotification;
+    public GameObject AchievementNotificationAnimator;
+
     private Transform highScoreContainer;
     private Transform achievementsContainer;
     private Transform achievementsTemplate;
