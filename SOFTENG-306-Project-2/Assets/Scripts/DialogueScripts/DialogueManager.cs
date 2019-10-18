@@ -15,12 +15,12 @@ namespace SunnyTown
     public class DialogueManager : MonoBehaviour
     {
         public Animator simpleDialogueViewAnimator;
-        public Animator binaryOptionViewAnimator;
+        public Animator optionViewAnimator;
         public Animator sliderOptionViewAnimator;
         public Animator animationProgressAnimator;
 
         public SimpleDialogueView simpleDialogueView;
-        public BinaryOptionDialogueView binaryOptionDialogueView;
+        public OptionDialogueView optionDialogueView;
         public SliderOptionDialogueView sliderOptionDialogueView;
         public AnimationProgressDialgoueView animationProgressDialgoueView;
 
@@ -54,7 +54,9 @@ namespace SunnyTown
                 StopCoroutine(progressAnimationCoroutine);
             }
             animationProgressAnimator.SetBool("IsVisible", true);
-            progressAnimationCoroutine = StartCoroutine(AnimationWait(seconds));
+            // need offset here otherwise the progress bar will stay visible
+            float offset = 0.1f;
+            progressAnimationCoroutine = StartCoroutine(AnimationWait(seconds - offset));
         }
 
         /// <summary>
@@ -97,14 +99,14 @@ namespace SunnyTown
         /// </summary>
         /// <param name="dialogue">The BinaryOptionDialogue object which contains the information for the view</param>
         /// <param name="onOptionPressed">A callback which is used when the user interacts with the card</param>
-        public void StartBinaryOptionDialogue(BinaryOptionDialogue dialogue, Action<int> onOptionPressed)
+        public void StartBinaryOptionDialogue(OptionDialogue dialogue, Action<int> onOptionPressed)
         {
             Debug.Log("Got dialogue: " + dialogue.Question + dialogue.PrecedingDialogue);
             Action<int> handleButtonPressed = num =>
             {
                 onOptionPressed(num);
-                binaryOptionViewAnimator.SetBool("InstantTransition", false);
-                binaryOptionViewAnimator.SetBool("IsVisible", false);
+                optionViewAnimator.SetBool("InstantTransition", false);
+                optionViewAnimator.SetBool("IsVisible", false);
             };
 
             //TODO handle if absent preceding dialogue
@@ -112,18 +114,18 @@ namespace SunnyTown
             {
                 StartSimpleDialogue(dialogue.PrecedingDialogue, () =>
                 {
-                    binaryOptionDialogueView.SetContent(dialogue, handleButtonPressed);
+                    optionDialogueView.SetContent(dialogue, handleButtonPressed);
                     simpleDialogueViewAnimator.SetBool("InstantTransition", true);
                     simpleDialogueViewAnimator.SetBool("IsVisible", false);
-                    binaryOptionViewAnimator.SetBool("InstantTransition", true);
-                    binaryOptionViewAnimator.SetBool("IsVisible", true);
+                    optionViewAnimator.SetBool("InstantTransition", true);
+                    optionViewAnimator.SetBool("IsVisible", true);
                 });
             }
             else
             {
-                binaryOptionDialogueView.SetContent(dialogue, handleButtonPressed);
-                binaryOptionViewAnimator.SetBool("InstantTransition", false);
-                binaryOptionViewAnimator.SetBool("IsVisible", true);
+                optionDialogueView.SetContent(dialogue, handleButtonPressed);
+                optionViewAnimator.SetBool("InstantTransition", false);
+                optionViewAnimator.SetBool("IsVisible", true);
             }
         }
 

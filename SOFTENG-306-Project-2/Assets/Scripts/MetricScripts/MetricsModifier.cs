@@ -22,10 +22,10 @@ namespace SunnyTown
 
         public void Modify()
         {
-            Debug.Log("Modifying metrics: " + EnvHealthModifier + PopHappinessModifier + GoldModifier);
-            MetricManager.Instance.UpdatePopHappiness(PopHappinessModifier);
+            Debug.Log("Modifying metrics: pop: " + PopHappinessModifier + " gold: " + GoldModifier + " envHealth: " + EnvHealthModifier);
             MetricManager.Instance.UpdateGold(GoldModifier);
             MetricManager.Instance.UpdateEnvHealth(EnvHealthModifier);
+            MetricManager.Instance.UpdatePopHappiness(PopHappinessModifier);
         }
     }
 }

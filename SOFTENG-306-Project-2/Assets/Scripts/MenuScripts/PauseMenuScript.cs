@@ -13,18 +13,18 @@ public class PauseMenuScript : MonoBehaviour
     
     public void OpenPauseMenu()
     {
+        Time.timeScale = 0f;
         Debug.Log("pause menu opened");
         pauseMenuView = Instantiate(PauseMenuPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         PauseButton.gameObject.SetActive(false);
-        Time.timeScale = 0;
     }
 
     public void ClosePauseMenu()
     {
-        Debug.Log("pause menu opened");
+        Time.timeScale = 1f;
+        Debug.Log("pause menu closed");
         pauseMenu.SetActive(false);
         PauseButton.gameObject.SetActive(true);
-        Time.timeScale = 1;
     }
     
     public void NavigateToMainMenu()

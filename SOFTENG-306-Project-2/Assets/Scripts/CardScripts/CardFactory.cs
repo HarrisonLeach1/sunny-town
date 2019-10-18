@@ -11,16 +11,17 @@ namespace SunnyTown
     public class CardFactory
     {
         private Reader reader;
-        private PlotCard currentPlotCard;
+        public PlotCard CurrentPlotCard { get; private set; }
         private List<Card> minorCards;
 
+        // TODO: Change so this does not have to be hard-coded
         public CardFactory()
         {
             reader = new Reader();
-            currentPlotCard = reader.RootState;
+            CurrentPlotCard = reader.RootState;
             minorCards = new List<Card>(reader.AllMinorStates);
 
-            minorCards.Randomize();
+            //minorCards.Randomize();
         }
 
         /// <summary>
@@ -34,11 +35,11 @@ namespace SunnyTown
             switch (cardDescriptor)
             {
                 case ("story"):
-                    string nextStateId = string.IsNullOrEmpty(currentPlotCard.NextStateId)
-                        ? currentPlotCard.Id
-                        : currentPlotCard.NextStateId;
-                    currentPlotCard = reader.AllStoryStates.Single(s => s.Id.Equals(nextStateId));
-                    return currentPlotCard;
+                    string nextStateId = string.IsNullOrEmpty(CurrentPlotCard.NextStateId)
+                        ? CurrentPlotCard.Id
+                        : CurrentPlotCard.NextStateId;
+                    CurrentPlotCard = reader.AllStoryStates.Single(s => s.Id.Equals(nextStateId));
+                    return CurrentPlotCard;
                 case ("minor"):
                     if (minorCards.Count == 0)
                     {

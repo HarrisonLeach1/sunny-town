@@ -11,7 +11,6 @@ namespace SunnyTown
     public class PlotCard : Card
     {
         public string Id { get; set; }
-        public string Name { get; set; }
         public string NextStateId { get; private set; }
         
 
@@ -19,7 +18,7 @@ namespace SunnyTown
         {
             PrecedingDialogue = precedingDialogue;
             Id = id;
-            Name = name;
+            NPCName = name;
             Question = question;
             Options = options;
         }
@@ -32,6 +31,7 @@ namespace SunnyTown
                 Feedback = Options[decisionIndex].Feedback;
                 FeedbackNPCName = Options[decisionIndex].FeedbackNPCName;
                 NextStateId = Options[decisionIndex].NextStateId + additionalState;
+                Debug.Log("next state id: " + NextStateId);
                 ShouldAnimate = Options[decisionIndex].HasAnimation;
                 BuildingName = Options[decisionIndex].BuildingName;
             }

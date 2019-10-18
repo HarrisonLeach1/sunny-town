@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,12 +16,12 @@ namespace SunnyTown
     {
         public static MetricManager Instance { get; private set; }
 
-        [SerializeField] private GameObject metricPrefab;
-        private GameObject metricsView;
+        [SerializeField] private GameObject metricsView;
 
         public int PopHappiness { get; private set; }
         public int Gold { get; private set; }
         public int EnvHealth { get; private set; }
+        public CampaignWeightings campaignWeightings {get; set;}
 
         public int PrevPopHappiness { get; set; }
         public int PrevGold { get; set; }
@@ -39,6 +40,7 @@ namespace SunnyTown
             this.PrevGold = START_VALUE;
             this.PrevEnvHealth = START_VALUE;
             this.PrevPopHappiness = START_VALUE;
+            campaignWeightings = new CampaignWeightings(0, 0, 0);
         }
 
         private void Awake()
@@ -55,7 +57,6 @@ namespace SunnyTown
 
         private void Start()
         {
-            metricsView = Instantiate(metricPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             RenderMetrics();
         }
 
@@ -69,17 +70,16 @@ namespace SunnyTown
             StartCoroutine(AnimateMetric(happiness, PrevPopHappiness, PopHappiness));
             StartCoroutine(AnimateMetric(environment, PrevEnvHealth, EnvHealth));
 
+            Debug.Log("Rendering Metrics: pop: " + PopHappiness + " gold: " + Gold + " envHealth: " + EnvHealth);
+
             PrevGold = Gold;
             PrevEnvHealth = EnvHealth;
             PrevPopHappiness = PopHappiness;
-
-            var parentObject = GameObject.Find("MetricPanel");
-            metricsView.transform.SetParent(parentObject.transform, false);
         }
 
         public int GetScore()
         {
-            if (CardManager.Instance.isFinalCard)
+            if (CardManager.Instance.LevelWon)
             {
                 return (int) (0.5 * EnvHealth + 0.25 * Gold + 0.25 * PopHappiness) + 100;
             }
@@ -122,6 +122,7 @@ namespace SunnyTown
         public void UpdatePopHappiness(int value)
         {
             this.PopHappiness += value;
+            this.PopHappiness += (int) Math.Round(value * campaignWeightings.Happiness);
             if (this.PopHappiness > MAX_VALUE)
             {
                 this.PopHappiness = MAX_VALUE;
@@ -139,13 +140,15 @@ namespace SunnyTown
                     "very upset with your decisions. They have voted you out of power.",
                     " Try keeping them happier next time. "
                 }, "");
-                CardManager.Instance.QueueEndDialogue(endGameDialogue);
+                CardManager.Instance.QueueGameLost(endGameDialogue);
             }
         }
 
         public void UpdateGold(int value)
         {
             this.Gold += value;
+            this.PopHappiness += (int)Math.Round(value * campaignWeightings.Gold);
+
             if (this.Gold > MAX_VALUE)
             {
                 this.Gold = MAX_VALUE;
@@ -162,13 +165,15 @@ namespace SunnyTown
                         "You have lost all your town's money. Now you cannot build the town.",
                         "Be careful when making decisions that involve spending money next time."
                     }, "");
-                CardManager.Instance.QueueEndDialogue(endGameDialogue);
+                CardManager.Instance.QueueGameLost(endGameDialogue);
             }
         }
 
         public void UpdateEnvHealth(int value)
         {
             this.EnvHealth += value;
+            this.PopHappiness += (int)Math.Round(value * campaignWeightings.EnvHealth);
+
             if (this.EnvHealth > MAX_VALUE)
             {
                 this.EnvHealth = MAX_VALUE;
@@ -187,7 +192,7 @@ namespace SunnyTown
                 }, "");
 
 
-                CardManager.Instance.QueueEndDialogue(endGameDialogue);
+                CardManager.Instance.QueueGameLost(endGameDialogue);
             }
         }
     }
