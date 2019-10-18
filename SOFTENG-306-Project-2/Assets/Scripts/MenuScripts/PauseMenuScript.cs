@@ -48,4 +48,10 @@ public class PauseMenuScript : MonoBehaviour
 		SettingsMenuPrefab.gameObject.SetActive(true);
 	}
 
+	public void CloseSettings()
+	{
+		SettingsMenuPrefab.gameObject.SetActive(false);
+		PauseMenuPrefab.gameObject.SetActive(true);
+	}
+
 }

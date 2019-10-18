@@ -21462,6 +21462,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.x
       value: 0.59996
       objectReference: {fileID: 0}
+    - target: {fileID: 2253200261665914133, guid: 0a242615ce38e444b93af994320ba851,
+        type: 3}
+      propertyPath: m_Name
+      value: TestSFXButton
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a242615ce38e444b93af994320ba851, type: 3}
 --- !u!1001 &945644523
