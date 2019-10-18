@@ -31,7 +31,7 @@ namespace SunnyTown
         private SimpleDialogue endGameDialogue;
         private int cardCount = 0;
 
-        public bool LevelWon { get; private set; } = false;
+        public bool GameWon { get; private set; } = false;
         public bool GameLost { get; private set; } = false;
         public bool EndOfDay { get; set; } = false;
 
@@ -185,7 +185,7 @@ namespace SunnyTown
 
         private void TransitionFromWaitingForEvents()
         {
-            if (LevelWon || GameLost)
+            if (GameWon || GameLost)
             {
                 SetState(GameState.GameEnding);
             }
@@ -214,7 +214,7 @@ namespace SunnyTown
         /// </summary>
         private void EndGame()
         {
-            if (LevelWon)
+            if (GameWon)
             {
                 Debug.Log(storyCardsTravelled.Count);
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -300,7 +300,7 @@ namespace SunnyTown
 
             if (IsFinalCard(currentCard))
             {
-                LevelWon = true;
+                GameWon = true;
                 waitingForEventsDuration = 0f;
             }
 
@@ -379,10 +379,9 @@ namespace SunnyTown
         private bool IsFinalCard(Card currentCard)
         {
             // Game is ended on story cards with no transitions
-
             if (currentCard is PlotCard)
             {
-                if (((PlotCard)currentCard).NextStateId == null)
+                if (String.IsNullOrEmpty(((PlotCard)currentCard).NextStateId))
                 {
                     return true;
                 }

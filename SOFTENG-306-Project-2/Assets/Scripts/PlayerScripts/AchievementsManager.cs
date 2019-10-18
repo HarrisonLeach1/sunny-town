@@ -61,7 +61,7 @@ public class AchievementsManager : MonoBehaviour
 
     private void HandleWinnerAchievement()
     {
-        if (CardManager.Instance.LevelWon && !IsAchievementAlreadyEarned("Winner"))
+        if (CardManager.Instance.GameWon && !IsAchievementAlreadyEarned("Winner"))
         {
             PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "Winner");
             PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
