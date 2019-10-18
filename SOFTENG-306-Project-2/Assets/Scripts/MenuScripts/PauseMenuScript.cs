@@ -10,20 +10,25 @@ public class PauseMenuScript : MonoBehaviour
     private GameObject pauseMenuView;
     public Button PauseButton;
     private GameObject pauseMenu;
+	public GameObject SettingsMenuPrefab;
+	private GameObject settingsMenuView;
     
     public void OpenPauseMenu()
     {
         Time.timeScale = 0f;
         Debug.Log("pause menu opened");
-        pauseMenuView = Instantiate(PauseMenuPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+		PauseMenuPrefab.gameObject.SetActive(true);
+        //pauseMenuView = Instantiate(PauseMenuPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         PauseButton.gameObject.SetActive(false);
+		//settingsMenuView = Instantiate(SettingsMenuPrefab, new Vector3(0,0,0), Quaternion.identity);
+		SettingsMenuPrefab.gameObject.SetActive(false);
     }
 
     public void ClosePauseMenu()
     {
         Time.timeScale = 1f;
         Debug.Log("pause menu closed");
-        pauseMenu.SetActive(false);
+        PauseMenuPrefab.gameObject.SetActive(false);
         PauseButton.gameObject.SetActive(true);
     }
     
@@ -36,4 +41,11 @@ public class PauseMenuScript : MonoBehaviour
     {
         Application.Quit();
     }
+
+	public void OpenSettings() 
+	{
+		PauseMenuPrefab.gameObject.SetActive(false);
+		SettingsMenuPrefab.gameObject.SetActive(true);
+	}
+
 }
