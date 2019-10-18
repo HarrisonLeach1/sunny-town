@@ -33,7 +33,6 @@ namespace SunnyTown
 
         public bool GameWon { get; private set; } = false;
         public bool GameLost { get; private set; } = false;
-        public bool EndOfDay { get; set; } = false;
 
         public GameState CurrentGameState { get; private set; } = GameState.GameStarting;
 
@@ -75,7 +74,6 @@ namespace SunnyTown
             SelectingMinorDecision,
             WaitingForFeedback,
             ViewingFeedback,
-            DayEnding,
             GameEnding,
             WeatherEvent
         }
@@ -120,33 +118,11 @@ namespace SunnyTown
                     timeRemainingInCurrentState = float.PositiveInfinity;
                     DisplayWeatherCard();
                     break;
-                case GameState.DayEnding:
-                    timeRemainingInCurrentState = float.PositiveInfinity;
-                    EndDay();
-                    break;
             }
-        }
-
-        private void EndDay()
-        {
-            var clock = GameObject.Find("Clock").GetComponent<Clock>();
-            Action resetDay = () =>
-            {
-                SetState(GameState.WaitingForEvents);
-                EndOfDay = false;
-                clock.ResetDay();
-            };
-
-            dialogueManager.StartExplanatoryDialogue(new SimpleDialogue(new string[1] { "End of Day" }, "Advisory Board"), resetDay);
         }
 
         private void Update()
         {
-            if (EndOfDay && CurrentGameState == GameState.WaitingForEvents)
-            {
-                SetState(GameState.DayEnding);
-            }
-
             timeRemainingInCurrentState -= Time.deltaTime;
             if (timeRemainingInCurrentState <= 0)
                 MoveToNextState();

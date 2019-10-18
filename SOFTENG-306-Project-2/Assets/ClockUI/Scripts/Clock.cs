@@ -33,23 +33,7 @@ public class Clock : MonoBehaviour
 
     private void Update()
     {
-        if (false && CardManager.Instance.CurrentGameState == CardManager.GameState.WaitingForEvents)
-        {
-            if (dayCompletion >= randomTimeInDay)
-            {
-                CardManager.Instance.SetState(CardManager.GameState.SelectingPlotDecision);
-                randomTimeInDay = float.PositiveInfinity;
-            }
-            else if (dayCompletion >= DAY_END_TIME / HOURS_PER_DAY)
-            {
-                CardManager.Instance.EndOfDay = true;
-                return;
-            };
 
-            dayCompletion += Time.deltaTime / REAL_SECONDS_PER_INGAME_DAY;
-
-            RenderClockUpdate();
-        }
     }
 
     private static float GenerateRandomTimeInDay()
