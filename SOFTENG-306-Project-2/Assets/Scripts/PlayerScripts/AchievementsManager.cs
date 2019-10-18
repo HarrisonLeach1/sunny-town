@@ -12,6 +12,7 @@ public class AchievementsManager : MonoBehaviour
     public static AchievementsManager Instance { get; private set; }
 
     public GameObject AchievementsPrefab;
+    public GameObject AchievementNotification;
     private Transform highScoreContainer;
     private Transform achievementsContainer;
     private Transform achievementsTemplate;
@@ -192,7 +193,7 @@ public class AchievementsManager : MonoBehaviour
     {
         var achievementName = PlayerPrefs.GetString("achievement" + i);
         Debug.Log("saved achievement name: " + achievementName);
-        foreach (Achievement achievement in new Reader().AllAchievements)
+        foreach (Achievement achievement in Reader.Instance.AllAchievements)
         {
             Debug.Log("all achievement names: " + achievement.name);
             if (achievement.name.Equals(achievementName))
@@ -208,7 +209,7 @@ public class AchievementsManager : MonoBehaviour
         achievementsContainer = achievementsView.transform.GetChild(2).GetChild(2).GetChild(0).GetChild(0).GetComponent<Transform>();
         var achievementsCompleted = achievementsView.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>();
         achievementsCompleted.SetText("Achievements Unlocked: " + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + "/" +
-                                      new Reader().AllAchievements.Count);
+                                      Reader.Instance.AllAchievements.Count);
         
         achievementsTemplate = achievementsContainer.Find("AchievementsTemplate");
         achievementsTemplate.gameObject.SetActive(false);
@@ -230,13 +231,7 @@ public class AchievementsManager : MonoBehaviour
 
     public void DisplayAchievementNotification(string achievementName)
     {
-        foreach (Achievement a in new Reader().AllAchievements)
-        {
-            if (a.name.Equals(achievementName))
-            {
-                Debug.Log("Show achievement badge and notification for: " + achievementName);
-            }
-        }
+        Debug.Log("Show achievement badge and notification for: " + achievementName);
     }
 
     public class HighScoreEntry
