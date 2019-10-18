@@ -111,7 +111,6 @@ namespace SunnyTown
                     break;
                 case GameState.WeatherEvent:
                     timeRemainingInCurrentState = float.PositiveInfinity;
-                    Debug.Log("displying weather card rn");
                     DisplayWeatherCard();
                     break;
                 case GameState.DayEnding:
@@ -374,9 +373,12 @@ namespace SunnyTown
                 WeatherController.Instance.StopAnim();
                 Debug.Log("Clicked continue on weather event");
                 SetState(GameState.WaitingForEvents);
-                MetricsModifier modifier = new MetricsModifier(-10,-20,0);
+                //TODO: balance numbers on event
+                MetricsModifier modifier = new MetricsModifier(-5,-5,0);
                 modifier.Modify();
                 metricManager.RenderMetrics();
+                WeatherController.Instance.probability = 0;
+                Debug.Log("new prob "+WeatherController.Instance.probability);
             };
 
             // minor card should be displayed upon the callback to the mail message

@@ -17,12 +17,11 @@ namespace SunnyTown
 
         public void PlayAnim()
         {
-            fire.Stop();
-            Debug.Log("start plaing fire");
+            fire.Play();
         }
         public void StopAnim()
         {
-            
+            fire.Stop();
         }
     }
 }

@@ -16,12 +16,12 @@ namespace SunnyTown
 
         public void PlayAnim()
         {
-            smog.Stop();
+            smog.Play();
             Debug.Log("start plaing smog");
         }
         public void StopAnim()
         {
-            
+            smog.Stop();
         }
     }
 }

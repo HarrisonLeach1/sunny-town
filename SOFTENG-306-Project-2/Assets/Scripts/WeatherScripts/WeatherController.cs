@@ -35,7 +35,7 @@ namespace SunnyTown
         [SerializeField]
         private Smog smog; 
 
-        private float probability;
+        public float probability;
 
         private float envHealth;
 
@@ -43,7 +43,7 @@ namespace SunnyTown
 
         private int eventIndex;
 
-        private const int TURN_COUNTER = 3;
+        private const int TURN_COUNTER = 4;
         private MetricManager metricManager;
 
         private CardManager cardManager;
@@ -77,11 +77,6 @@ namespace SunnyTown
             weatherEvents.Add(2,ClimateEvent.Hurricane);
             weatherEvents.Add(3,ClimateEvent.Smog);
             turnCounter = TURN_COUNTER;
-            //events = new WeatherEvent[4];
-            // events[0] = (WeatherEvent) rain;
-            // events[1] = (WeatherEvent) wildfire;
-            // events[2] = (WeatherEvent) storm;
-            // events[3] = (WeatherEvent) smog;
 
             //y = ((5/((x+15)/100))-4)/30 function to map score to probability
             Debug.Log("heres is prob");
@@ -111,9 +106,7 @@ namespace SunnyTown
             //if waiting for event then free to fire weather event   
             if (state.Equals(CardManager.GameState.WaitingForEvents))
             {
-                Debug.Log(turnCounter +" before");
                 turnCounter = (turnCounter == 1)? 1 : --turnCounter;
-                Debug.Log(turnCounter +" after");
                 if (turnCounter == 1)
                 {
                     this.AttemptWeatherEvent();
@@ -128,9 +121,9 @@ namespace SunnyTown
         private void AttemptWeatherEvent()
         {
             float randomTime = (float)UnityEngine.Random.Range(0f, 1f);
+            Debug.Log("Random number is "+randomTime+" prob is "+probability);
             if (randomTime <= this.probability)
             {
-                Debug.Log("attempgint weather");
                 //if random number is lower than probability then fire event
                 StartCoroutine("TriggerWeatherEvent");
             }
@@ -142,8 +135,6 @@ namespace SunnyTown
             eventIndex = UnityEngine.Random.Range(0,4);
             //reset turn counter
             turnCounter = TURN_COUNTER;
-
-            eventIndex = 2;
             Debug.Log("triggering weather "+eventIndex);
             if (weatherEvents.TryGetValue(eventIndex, out ClimateEvent value))
             {
@@ -171,12 +162,6 @@ namespace SunnyTown
                 }
             }
             yield return null;
-        }
-        
-        private void ChangeState()
-        {
-            Debug.Log("end of anim here");
-            cardManager.SetState(CardManager.GameState.WaitingForEvents);
         }
 
         public void StopAnim()
