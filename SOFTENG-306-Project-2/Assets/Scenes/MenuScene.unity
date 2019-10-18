@@ -172,8 +172,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afb7a3afda5623049abeadffd296b70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AchievementsPrefab: {fileID: 4988204235061897425, guid: c6272942dbb0a3c4e852f0eae488c43a,
+  achievementsPrefab: {fileID: 4988204235061897425, guid: c6272942dbb0a3c4e852f0eae488c43a,
     type: 3}
+  achievementNotificationAnimator: {fileID: 0}
+  achievementNotification: {fileID: 0}
+  achievementNotificationImage: {fileID: 0}
+  achievementNotificationText: {fileID: 0}
 --- !u!1 &178087780
 GameObject:
   m_ObjectHideFlags: 0

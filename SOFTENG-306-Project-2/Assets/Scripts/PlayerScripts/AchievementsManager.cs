@@ -12,9 +12,11 @@ public class AchievementsManager : MonoBehaviour
 {
     public static AchievementsManager Instance { get; private set; }
 
-    public GameObject AchievementsPrefab;
-    public GameObject AchievementNotificationAnimator;
-
+    public GameObject achievementsPrefab;
+    public Animator achievementNotificationAnimator;
+    public GameObject achievementNotification;
+    public Image achievementNotificationImage;
+    public TextMeshProUGUI achievementNotificationText;
     private Transform highScoreContainer;
     private Transform achievementsContainer;
     private Transform achievementsTemplate;
@@ -52,10 +54,12 @@ public class AchievementsManager : MonoBehaviour
             envInARow = 0;
         }
 
-        if (envInARow == 5)
+        if (envInARow == 1)
         {
+            Debug.Log("got into thing");
             if (!IsAchievementAlreadyEarned("Tree Hugger"))
             {
+                Debug.Log("Achieved achievement tree hugger");
                 PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "Tree Hugger");
                 PlayerPrefs.SetString(ACHIEVEMENT_DATE + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), DateTime.Today.ToShortDateString());
                 PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
@@ -85,9 +89,12 @@ public class AchievementsManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        achievementsView = Instantiate(AchievementsPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        achievementsView = Instantiate(achievementsPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         var parentObject = GameObject.Find("AchievementsMenu");
-        achievementsView.transform.SetParent(parentObject.transform, false);
+        if (parentObject != null)
+        {
+            achievementsView.transform.SetParent(parentObject.transform, false);
+        }
         DisplayHighScores();
         DisplayAchievementsMenu();
     }
@@ -209,6 +216,19 @@ public class AchievementsManager : MonoBehaviour
         return null;
     }
 
+    public void DisplayAchievementNotification(string achievementName)
+    {
+        foreach (Achievement a in Reader.Instance.AllAchievements)
+        {
+            if (a.name.Equals(achievementName))
+            {
+                achievementNotificationText.text = a.name;
+                achievementNotificationImage.sprite = Resources.Load<Sprite>("Sprites/" + a.imageUrl);
+                achievementNotificationAnimator.SetBool("IsVisible", true);
+            }
+        }
+    }
+
     private void DisplayAchievementsMenu()
     {
         achievementsContainer = achievementsView.transform.GetChild(2).GetChild(2).GetChild(0).GetChild(0).GetComponent<Transform>();
@@ -229,14 +249,10 @@ public class AchievementsManager : MonoBehaviour
             Achievement achievement = GetAchievementByIndex(i);
             description.SetText(achievement.name + " - " + achievement.description);
             date.SetText("Date achieved: " + achievement.dateEarned);
+            badge.sprite = Resources.Load<Sprite>("Sprites/" + achievement.imageUrl);
             entryRectTransform.anchoredPosition = new Vector2(0, -templateHeight * i);
             entryTransform.gameObject.SetActive(true);
         }
-    }
-
-    public void DisplayAchievementNotification(string achievementName)
-    {
-        Debug.Log("Show achievement badge and notification for: " + achievementName);
     }
 
     public class HighScoreEntry
