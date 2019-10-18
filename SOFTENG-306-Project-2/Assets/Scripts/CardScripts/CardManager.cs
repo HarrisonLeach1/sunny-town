@@ -12,12 +12,12 @@ namespace SunnyTown
     /// </summary>
     public class CardManager : MonoBehaviour
     {
-        private static float WAITING_FOR_FEEDBACK_DURATION = 0.1f;  
+        private static float WAITING_FOR_FEEDBACK_DURATION = 0.1f;
 
         // TODO: will need to change this later depending on playtesting
         private float waitingForEventsDuration = 4f;
+        private const int MINOR_CARDS_PER_PLOT_CARD = 1;
         private float waitingForFeedbackDuration = WAITING_FOR_FEEDBACK_DURATION;
-
 
         public static CardManager Instance { get; private set; }
         public GameObject spawnHandlerObject;
@@ -36,6 +36,8 @@ namespace SunnyTown
         public bool EndOfDay { get; set; } = false;
 
         public GameState CurrentGameState { get; private set; } = GameState.GameStarting;
+
+        private HashSet<Card> storyCardsTravelled = new HashSet<Card>();
         public Dictionary<string, string> PastTokens = new Dictionary<string, string>();
         private Card currentCard;
         private float timeRemainingInCurrentState = float.PositiveInfinity;
@@ -214,6 +216,7 @@ namespace SunnyTown
         {
             if (LevelWon)
             {
+                Debug.Log(storyCardsTravelled.Count);
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
             else if (GameLost)
@@ -282,6 +285,8 @@ namespace SunnyTown
                 currentCard.HandleDecision(decisionValue);
             }
 
+            storyCardsTravelled.Add(currentCard);
+
             if (!(currentCard is SliderCard))
             {
                 string key = currentCard.Options[decisionValue].TokenKey;
@@ -332,7 +337,7 @@ namespace SunnyTown
         /// </summary>
         private void DisplayPlotCard()
         {
-            currentCard = cardCount++ % 3 == 0 ? cardFactory.GetNewCard("story") : cardFactory.GetNewCard("minor");
+            currentCard = cardCount++ % MINOR_CARDS_PER_PLOT_CARD == 0 ? cardFactory.GetNewCard("story") : cardFactory.GetNewCard("minor");
             if (currentCard is SliderCard)
             {
                 dialogueManager.StartSliderOptionDialogue(dialogueMapper.SliderCardToSliderOptionDialogue((SliderCard)currentCard), HandleOptionPressed);
@@ -394,11 +399,11 @@ namespace SunnyTown
                 Debug.Log("Clicked continue on weather event");
                 SetState(GameState.WaitingForEvents);
                 //TODO: balance numbers on event
-                MetricsModifier modifier = new MetricsModifier(-5,-5,0);
+                MetricsModifier modifier = new MetricsModifier(-5, -5, 0);
                 modifier.Modify();
                 metricManager.RenderMetrics();
                 WeatherController.Instance.probability = 0;
-                Debug.Log("new prob "+WeatherController.Instance.probability);
+                Debug.Log("new prob " + WeatherController.Instance.probability);
             };
 
             // minor card should be displayed upon the callback to the mail message
