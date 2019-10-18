@@ -78,9 +78,9 @@ namespace SunnyTown
             weatherEvents.Add(3,ClimateEvent.Smog);
             turnCounter = TURN_COUNTER;
 
-            //y = ((5/((x+15)/100))-4)/30 function to map score to probability
-            Debug.Log("heres is prob");
-            Debug.Log(probability);
+            eventIndex = UnityEngine.Random.Range(0,4);
+
+            //y = ((5/((x+15)/100))-4)/30 function to map score to probability          
         }        
 
         /* Function is called whenever environment health is changed, it updates the probability of 
@@ -93,6 +93,7 @@ namespace SunnyTown
             if (this.envHealth >= 40){
                 probability = 0;
             } else {
+                //TODO: balance functions
                 probability = (((5/((this.envHealth+25)/100))-4)+2)/16;
             }
             Debug.Log("new probability is "+probability+" new health is "+this.envHealth);
@@ -131,8 +132,8 @@ namespace SunnyTown
 
         IEnumerator TriggerWeatherEvent() 
         {
+            // eventindex is randomised at start, order of weather events is cyclic
             cardManager.SetState(CardManager.GameState.WeatherEvent);
-            eventIndex = UnityEngine.Random.Range(0,4);
             //reset turn counter
             turnCounter = TURN_COUNTER;
             Debug.Log("triggering weather "+eventIndex);
@@ -173,7 +174,7 @@ namespace SunnyTown
                 {
                     case ClimateEvent.AcidRain:
                     rain.StopAnim();
-                    Debug.Log("stop raining");
+                    Debug.Log("cut raining");
                     break;
 
                     case ClimateEvent.Hurricane:
@@ -192,6 +193,7 @@ namespace SunnyTown
                     break;
                 }
             }
+            eventIndex = (eventIndex==3) ? 0 : ++eventIndex;
         }
     }
 }
