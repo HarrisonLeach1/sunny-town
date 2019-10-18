@@ -127,14 +127,13 @@ namespace SunnyTown
         //       need to create weather event card, right now is using minor decision place holder
         private void AttemptWeatherEvent()
         {
-            // float randomTime = (float)UnityEngine.Random.Range(0f, 1f);
-            // if (randomTime <= this.probability)
-            // {
-            //     Debug.Log("attempgint weather");
-            //     //if random number is lower than probability then fire event
-            //     StartCoroutine("TriggerWeatherEvent");
-            // }
-            StartCoroutine("TriggerWeatherEvent");
+            float randomTime = (float)UnityEngine.Random.Range(0f, 1f);
+            if (randomTime <= this.probability)
+            {
+                Debug.Log("attempgint weather");
+                //if random number is lower than probability then fire event
+                StartCoroutine("TriggerWeatherEvent");
+            }
         }
 
         IEnumerator TriggerWeatherEvent() 
