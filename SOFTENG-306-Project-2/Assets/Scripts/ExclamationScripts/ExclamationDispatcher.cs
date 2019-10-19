@@ -29,8 +29,9 @@ namespace SunnyTown
             StartCoroutine("CreateExclamationMark");
         }
 
-        /** Method starts the exclamation mark spawning animation, and reschedules itself at a random time in the future
-         */
+         /// <summary>
+         ///  Starts the exclmation mark spawining animation, and reschedules itself at a random time in the future
+         /// </summary>
         IEnumerator CreateExclamationMark()
         {
             // wait while a card or an exclamation mark is already showing 
@@ -60,9 +61,10 @@ namespace SunnyTown
 
         }
 
-        /** Transition to default state (invisible) when it has been clicked  
-         ** and create the minor cards to be displayed 
-         */
+         /// <summary>
+         /// Transition to default state (invisible) when mark has been clicked
+         /// also queues the minor cards to be displayed
+         /// </summary>
         void OnMouseDown()
         {
             if (markSpawned && cardManager.CurrentGameState == CardManager.GameState.WaitingForEvents)
@@ -80,8 +82,9 @@ namespace SunnyTown
 
         }
 
-        /** At the end of the animation, set the animator to default invisible state
-         */
+         /// <summary>
+         /// At the end of animation, set the animator to default invisible state
+         /// </summary>
         void OnEndOfAnimation()
         {
             foreach (Renderer r in GetComponentsInChildren<Renderer>())
