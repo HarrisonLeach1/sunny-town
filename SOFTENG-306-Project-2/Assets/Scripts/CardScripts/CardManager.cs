@@ -18,6 +18,7 @@ namespace SunnyTown
         private float waitingForEventsDuration = 4f;
         private const int MINOR_CARDS_PER_PLOT_CARD = 1;
         private float waitingForFeedbackDuration = WAITING_FOR_FEEDBACK_DURATION;
+        private const string FINAL_LEVEL_ID = "s15";
 
         public static CardManager Instance { get; private set; }
         public GameObject spawnHandlerObject;
@@ -384,7 +385,7 @@ namespace SunnyTown
             // Game is ended on story cards with no transitions
             if (currentCard is PlotCard)
             {
-                if (String.IsNullOrEmpty(((PlotCard)currentCard).NextStateId))
+                if (((PlotCard)currentCard).Id == FINAL_LEVEL_ID)
                 {
                     return true;
                 }

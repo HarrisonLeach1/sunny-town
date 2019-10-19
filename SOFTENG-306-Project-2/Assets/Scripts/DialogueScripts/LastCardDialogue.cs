@@ -14,7 +14,7 @@ namespace SunnyTown
             finalDialogue.Add("Mrs. Gatburg, it's your last day as Mayor! ");
             string accomplishments = "You've done plenty in your time, and we're honoured to have helped you along the way. ";
             goodDeeds.Add("You've made plenty of swell decisions that did wonders for the townspeople. ");
-            badDeeds.Add("You've also made some not so swell decisions that on hindsight could've been done better. ");
+            badDeeds.Add("You've made some not so swell decisions that on hindsight could've been done better. ");
 
             foreach(KeyValuePair<string, string> entry in PastTokens)
             {
@@ -72,8 +72,17 @@ namespace SunnyTown
                     }
                 }
             }
-            finalDialogue.Append<>(goodDeeds);
-            finalDialogue.Append<>(badDeeds);
+
+            if (goodDeeds.Count > 1)
+            {
+                finalDialogue.AddRange(goodDeeds);
+            }
+
+            if (badDeeds.Count > 1)
+            {
+                finalDialogue.AddRange(badDeeds);
+
+            }
             finalDialogue.Add("It was a lot of fun working with you, and we hoped you learn't a lot through your time as mayor!");
             finalDialogue.Add("Goodbye~~");
             lastCard.PrecedingDialogue = finalDialogue.ToArray();
