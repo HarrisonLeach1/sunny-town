@@ -46,15 +46,15 @@
       "Greetings! My name is Arvio, but people call me Arvio The Wealthy",
       "Why? I'm the proprietor of MineCroft Coal Mines and the wealthiest coal baron on the seven mountains",
       "My team of Geo ...erm ...geolis ...scientists, say that this town's neighbouring mountains promises bounds of wealth'",
-      "I have a proposition for you, allow me to inspect those lands and I may consider helping out this dump *erherm* town"
+      "I have a proposition for you, allow me to inspect those lands and I may consider helping out this dump *erherm* town!"
     ],
     "question": "So what do you say friend? Do we have a deal?",
     "transitions": [
       {
-        "label": "There's a lot of money in coal. It's a deal!",
+        "label": "There's a lot of money in coal. Go ahead!",
         "money": 10,
         "npcName": "Advisory Board",
-        "feedback": "Arvio brings his crew and begins inspecting your land",
+        "feedback": "Arvio brings his crew and begins inspecting your land. ",
         "token": "arvio",
         "arvio": "yes",
         "state": "s3"
@@ -65,7 +65,7 @@
         "npcName": "Advisory Board",
         "token": "arvio",
         "arvio": "no",
-        "feedback": "Arvio leaves with a mischievous look on his face",
+        "feedback": "Arvio leaves with a mischievous look on his face. ",
         "state": "s3"
       }
     ]
@@ -80,7 +80,7 @@
     "question": "Could you take me on a trip someday?",
     "transitions": [
       {
-        "label": "Of course, my dear",
+        "label": "Of course, my dear. ",
         "happiness": 5,
         "state": "s4"
       }
@@ -102,7 +102,7 @@
     "name": "Advisory Board",
     "precedingDialogue": [
       "The scientists have said that the world is getting warmer because of all the things we're building, ",
-      "cars and factories can make it worse, protecting the environment and planting trees help make it better"
+      "Cars and factories can make it worse, protecting the environment and planting trees help make it better"
     ],
     "question": "If we don't make it better, it can cause bad weather events, even floods! ",
     "transitions": [
@@ -120,7 +120,7 @@
       "Woof! [Mrs. Gatburg, your town is growing fast. however, this means that our power station is chocking]",
       "Woof! [The citizens are not happy with the high electricity prices, we should consider building a bigger power station.]"
     ],
-    "question": "Woof [What kind of power plant should we build?]",
+    "question": "Woof! [What kind of power plant should we build?]",
     "transitions": [
       {
         "label": "Let's build a solar farm",
@@ -149,7 +149,7 @@
       "Woof! [Mrs. Gatburg, your town is growing fast. however, this means that our power station is chocking]",
       "Woof! [The citizens are not happy with the high electricity prices, we should consider building a bigger power station.]"
     ],
-    "question": "Woof [What kind of power plant should we build?]",
+    "question": "Woof! [What kind of power plant should we build?]",
     "transitions": [
       {
         "label": "Let's build a solar farm",
@@ -178,7 +178,7 @@
       "Woof! [Mrs. Gatburg, your town is growing fast. however, this means that our power station is chocking]",
       "Woof! [The citizens are not happy with the high electricity prices, we should consider building a bigger power station.]"
     ],
-    "question": "Woof [What kind of power plant should we build?]",
+    "question": "Woof! [What kind of power plant should we build?]",
     "transitions": [
       {
         "label": "Let's build a solar farm",
@@ -345,7 +345,7 @@
         "state": "s11"
       },
       {
-        "label": "out",
+        "label": "They should build out",
         "npcName": "Allena",
         "money": 15,
         "token": "scale",
@@ -374,7 +374,7 @@
         "state": "s11"
       },
       {
-        "label": "out",
+        "label": "They should build out",
         "npcName": "Allena",
         "environment": -5,
         "token": "scale",
