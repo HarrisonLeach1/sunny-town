@@ -13,7 +13,9 @@ namespace SunnyTown
     public class CardManager : MonoBehaviour
     {
         private static float WAITING_FOR_FEEDBACK_DURATION = 0.1f;  
-        private float waitingForEventsDuration = 0.1f;
+
+        // TODO: will need to change this later depending on playtesting
+        private float waitingForEventsDuration = 4f;
         private float waitingForFeedbackDuration = WAITING_FOR_FEEDBACK_DURATION;
 
 
