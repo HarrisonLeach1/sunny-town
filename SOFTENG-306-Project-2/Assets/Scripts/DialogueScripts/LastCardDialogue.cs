@@ -5,7 +5,7 @@ namespace SunnyTown
 {
     public class LastCardDialogue
     {
-        public static void setFinalDialogue(PlotCard lastCard, Dictionary<string, string> PastTokens)
+        public static SimpleDialogue createFinalDialogue(Dictionary<string, string> PastTokens)
         {
             List<string> finalDialogue = new List<string>();
             List<string> goodDeeds = new List<string>();
@@ -85,7 +85,8 @@ namespace SunnyTown
             }
             finalDialogue.Add("It was a lot of fun working with you, and we hoped you learn't a lot through your time as mayor!");
             finalDialogue.Add("Goodbye~~");
-            lastCard.PrecedingDialogue = finalDialogue.ToArray();
+            SimpleDialogue output = new SimpleDialogue(finalDialogue.ToArray(), "Advisory Board");
+            return output;
         }
     }
 }
