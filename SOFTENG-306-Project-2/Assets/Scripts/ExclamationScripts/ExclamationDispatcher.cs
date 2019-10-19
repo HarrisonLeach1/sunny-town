@@ -45,23 +45,24 @@ namespace SunnyTown
                 Destroy(gameObject);
             }
         }
-        
-        
-         /// <summary>
-         ///  Starts the exclmation mark spawining animation, and reschedules itself at a random time in the future
-         /// </summary>
+
+
+        /// <summary>
+        ///  Starts the exclmation mark spawining animation, and reschedules itself at a random time in the future
+        /// </summary>
         IEnumerator CreateExclamationMark()
         {
             // wait while a card or an exclamation mark is already showing 
             while (cardManager.CurrentGameState != CardManager.GameState.WaitingForEvents || markSpawned)
             {
+                Debug.Log("ex waiting");
                 yield return new WaitForSeconds(1);
             }
             float randomTime = (float)Random.Range(2f, 4f);
             //dont show exclamation mark while card showing 
             Debug.Log("creating mark " + randomTime);
             //spawn card exclamation mark half the time
-            if (randomTime >= 3f)
+            if (randomTime <= 3f)
             {
                 foreach (Renderer r in GetComponentsInChildren<Renderer>())
                     r.enabled = true;
@@ -79,10 +80,10 @@ namespace SunnyTown
 
         }
 
-         /// <summary>
-         /// Transition to default state (invisible) when mark has been clicked
-         /// also queues the minor cards to be displayed
-         /// </summary>
+        /// <summary>
+        /// Transition to default state (invisible) when mark has been clicked
+        /// also queues the minor cards to be displayed
+        /// </summary>
         void OnMouseDown()
         {
             if (markSpawned && cardManager.CurrentGameState == CardManager.GameState.WaitingForEvents)
@@ -101,15 +102,18 @@ namespace SunnyTown
 
         }
 
-         /// <summary>
-         /// At the end of animation, set the animator to default invisible state.
-         /// </summary>
+        /// <summary>
+        /// At the end of animation, set the animator to default invisible state and decrease happiness metric
+        /// </summary>
         void OnEndOfAnimation()
         {
             foreach (Renderer r in GetComponentsInChildren<Renderer>())
                 r.enabled = false;
             animator.SetBool("isShow", false);
             markSpawned = false;
+            MetricsModifier modifier = new MetricsModifier(-5, 0, 0);
+            modifier.Modify();
+            MetricManager.Instance.RenderMetrics();
         }
     }
 }
