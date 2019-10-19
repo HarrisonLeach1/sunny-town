@@ -12,13 +12,16 @@ namespace SunnyTown
     public class WeatherController : MonoBehaviour
     {
 
-        private enum ClimateEvent 
+        public enum ClimateEvent 
         {
+            NoEvent,
             AcidRain,
             WildFire,
             Hurricane,
             Smog
         }
+
+        public ClimateEvent currentEvent;
         public static WeatherController Instance { get; private set; }
 
         //private WeatherEvent[] events;
@@ -77,6 +80,7 @@ namespace SunnyTown
             weatherEvents.Add(2,ClimateEvent.Hurricane);
             weatherEvents.Add(3,ClimateEvent.Smog);
             turnCounter = TURN_COUNTER;
+            currentEvent = ClimateEvent.NoEvent;
 
             eventIndex = UnityEngine.Random.Range(0,4);
 
@@ -121,24 +125,25 @@ namespace SunnyTown
         //       need to create weather event card, right now is using minor decision place holder
         private void AttemptWeatherEvent()
         {
-            float randomTime = (float)UnityEngine.Random.Range(0f, 1f);
-            Debug.Log("Random number is "+randomTime+" prob is "+probability);
-            if (randomTime <= this.probability)
-            {
-                //if random number is lower than probability then fire event
-                StartCoroutine("TriggerWeatherEvent");
-            }
+            // float randomTime = (float)UnityEngine.Random.Range(0f, 1f);
+            // Debug.Log("Random number is "+randomTime+" prob is "+probability);
+            // if (randomTime <= this.probability)
+            // {
+            //     //if random number is lower than probability then fire event
+            //     StartCoroutine("TriggerWeatherEvent");
+            // }
+            StartCoroutine("TriggerWeatherEvent");
         }
 
         IEnumerator TriggerWeatherEvent() 
         {
             // eventindex is randomised at start, order of weather events is cyclic
-            cardManager.SetState(CardManager.GameState.WeatherEvent);
             //reset turn counter
             turnCounter = TURN_COUNTER;
             Debug.Log("triggering weather "+eventIndex);
             if (weatherEvents.TryGetValue(eventIndex, out ClimateEvent value))
             {
+                currentEvent = value;
                 switch(value)
                 {
                     case ClimateEvent.AcidRain:
@@ -161,10 +166,10 @@ namespace SunnyTown
                     Debug.Log("smogging");
                     break;
                 }
+                cardManager.SetState(CardManager.GameState.WeatherEvent);
             }
             yield return null;
         }
-
         public void StopAnim()
         {
             Debug.Log(eventIndex);
