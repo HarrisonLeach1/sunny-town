@@ -10,7 +10,7 @@
     "transitions": [
       {
         "label": "An electric car company",
-        "state": "s15",
+        "state": "s2",
         "npcName": "Jimmy Cash",
         "feedback": "Electric cars are all the rage these days, and they save the environment, what a deal!",
         "money": 10,

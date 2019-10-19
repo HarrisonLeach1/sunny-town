@@ -1,0 +1,213 @@
+fileFormatVersion: 2
+guid: a6caa9e523a42cd46a85a7c0a00560c2
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Box.1
+    100002: Box.2
+    100004: Box.3
+    100006: Box.4
+    100008: Box.5
+    100010: Box.6
+    100012: Box.7
+    100014: Box.8
+    100016: Box.9
+    100018: Cone
+    100020: Cone.2
+    100022: Cone.3
+    100024: Cone.4
+    100026: Cone.5
+    100028: forgo
+    100030: forgo.1
+    100032: head
+    100034: Stairs
+    100036: test
+    100038: Torus
+    100040: //RootNode
+    400000: Box.1
+    400002: Box.2
+    400004: Box.3
+    400006: Box.4
+    400008: Box.5
+    400010: Box.6
+    400012: Box.7
+    400014: Box.8
+    400016: Box.9
+    400018: Cone
+    400020: Cone.2
+    400022: Cone.3
+    400024: Cone.4
+    400026: Cone.5
+    400028: forgo
+    400030: forgo.1
+    400032: head
+    400034: Stairs
+    400036: test
+    400038: Torus
+    400040: //RootNode
+    2100000: Box.1Mat
+    2100002: Box.2Mat
+    2100004: Box.3Mat
+    2100006: Box.4Mat
+    2100008: Box.5Mat
+    2100010: Box.6Mat
+    2100012: Box.7Mat
+    2100014: Box.8Mat
+    2100016: Box.9Mat
+    2100018: ConeMat
+    2100020: Cone.2Mat
+    2100022: Cone.3Mat
+    2100024: Cone.4Mat
+    2100026: Cone.5Mat
+    2100028: forgoMat
+    2100030: forgo.1Mat
+    2100032: headMat
+    2100034: StairsMat
+    2100036: testMat
+    2100038: TorusMat
+    2300000: Box.1
+    2300002: Box.2
+    2300004: Box.3
+    2300006: Box.4
+    2300008: Box.5
+    2300010: Box.6
+    2300012: Box.7
+    2300014: Box.8
+    2300016: Box.9
+    2300018: Cone
+    2300020: Cone.2
+    2300022: Cone.3
+    2300024: Cone.4
+    2300026: Cone.5
+    2300028: forgo
+    2300030: forgo.1
+    2300032: head
+    2300034: Stairs
+    2300036: test
+    2300038: Torus
+    3300000: Box.1
+    3300002: Box.2
+    3300004: Box.3
+    3300006: Box.4
+    3300008: Box.5
+    3300010: Box.6
+    3300012: Box.7
+    3300014: Box.8
+    3300016: Box.9
+    3300018: Cone
+    3300020: Cone.2
+    3300022: Cone.3
+    3300024: Cone.4
+    3300026: Cone.5
+    3300028: forgo
+    3300030: forgo.1
+    3300032: head
+    3300034: Stairs
+    3300036: test
+    3300038: Torus
+    4300000: Box.1
+    4300002: Box.2
+    4300004: Box.3
+    4300006: Box.4
+    4300008: Box.5
+    4300010: Box.6
+    4300012: Box.7
+    4300014: Box.8
+    4300016: Box.9
+    4300018: Cone
+    4300020: Cone.2
+    4300022: Cone.3
+    4300024: Cone.4
+    4300026: Cone.5
+    4300028: forgo
+    4300030: forgo.1
+    4300032: head
+    4300034: Stairs
+    4300036: test
+    4300038: Torus
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
