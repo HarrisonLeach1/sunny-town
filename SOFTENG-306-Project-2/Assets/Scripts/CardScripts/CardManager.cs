@@ -12,7 +12,8 @@ namespace SunnyTown
     /// </summary>
     public class CardManager : MonoBehaviour
     {
-        private static float WAITING_FOR_FEEDBACK_DURATION = 0.1f;  
+        private static float WAITING_FOR_FEEDBACK_DURATION = 0.1f;
+        private const int MINOR_CARDS_PER_PLOT_CARD = 1;
         private float waitingForEventsDuration = 0.1f;
         private float waitingForFeedbackDuration = WAITING_FOR_FEEDBACK_DURATION;
 
@@ -330,7 +331,7 @@ namespace SunnyTown
         /// </summary>
         private void DisplayPlotCard()
         {
-            currentCard = cardCount++ % 3 == 0 ? cardFactory.GetNewCard("story") : cardFactory.GetNewCard("minor");
+            currentCard = cardCount++ % MINOR_CARDS_PER_PLOT_CARD == 0 ? cardFactory.GetNewCard("story") : cardFactory.GetNewCard("minor");
             if (currentCard is SliderCard)
             {
                 dialogueManager.StartSliderOptionDialogue(dialogueMapper.SliderCardToSliderOptionDialogue((SliderCard)currentCard), HandleOptionPressed);
