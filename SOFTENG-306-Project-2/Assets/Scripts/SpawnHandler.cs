@@ -3,15 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Timers;
 using UnityEngine;
+using Random = System.Random;
 
 namespace SunnyTown
 {
     public class SpawnHandler : MonoBehaviour
     {
-        public GameObject[] buildings;
-        private Dictionary<GameObject, bool> visibilityMap = new Dictionary<GameObject, bool>();
-        private GameObject buildingCloud;
         private float instantiationTimer = 3f;
+        public GameObject[] buildings;
+        public bool buildSomeThing;
+        private Dictionary<GameObject, bool> visibilityMap = new Dictionary<GameObject, bool>();
+
 
         // Start is called before the first frame update
         void Start()
@@ -20,36 +22,33 @@ namespace SunnyTown
             foreach (GameObject building in buildings)
             {
                 visibilityMap.Add(building, false);
+                building.SetActive(false);
             }
 
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-            StopBuildingCloud();
-        }
-
+        
         public void PlayAnimation(string buildingName, float animationTime)
         {
             instantiationTimer = animationTime;
-            if (buildingName.Equals(Building.CoalMine.ToString()))
+            try
             {
-                Debug.Log("Building coal mine");
-                Build(Building.CoalMine);
+                Build((Building)Enum.Parse(typeof(Building), buildingName));
             }
-            else if (buildingName.Equals(Building.PowerPlant.ToString()))
+            catch (ArgumentException e)
             {
-                Debug.Log("Building powerplant");
-                Build(Building.PowerPlant);
+                Debug.Log("Building animation was not found");
             }
-            else if (buildingName.Equals(Building.Farm.ToString()))
-            {
-                Debug.Log("Building farm");
-                Build(Building.Farm);
-            }
-
             // if no building name is found it will simply play the progress bar only
+        }
+        
+        private void Update()
+        {
+            if (buildSomeThing)
+            {
+                Random random = new Random();  
+                buildings[random.Next(0, 8)].SetActive(true);
+                buildSomeThing = false;
+            }
         }
 
         // Method called to set building to appear
@@ -61,33 +60,9 @@ namespace SunnyTown
                 if (building.name.Contains(buildingName.ToString()))
                 {
                     building.SetActive(true);
-
-                    foreach (var b in visibilityMap.Keys)
-                    {
-                        // Getting the visibility of the cloud
-                        if (b.name.Equals("Cloud" + building.name.ToString()
-                                              .Substring(building.name.ToString().Length - 1)))
-                        {
-                            b.SetActive(true);
-
-                            // Setting cloud for it to get disabled
-                            buildingCloud = b;
-                        }
-                    }
                 }
 
             }
-        }
-
-        private void StopBuildingCloud()
-        {
-            instantiationTimer -= Time.deltaTime;
-            if (instantiationTimer <= 0 && buildingCloud != null)
-            {
-                buildingCloud.SetActive(false);
-                instantiationTimer = 2f;
-            }
-
         }
     }
 }
