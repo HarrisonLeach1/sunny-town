@@ -12,6 +12,12 @@ public class NPCLogic: MonoBehaviour
     private bool isRotLeft = false;
     private bool isRotRight = false;
     private bool isWalking = false;
+    private bool c = true;
+    
+    private int xmax = 20;
+    private int xmin = -400;
+    private int zmax = 120;
+    private int zmin = 100;
     
     
     // Start is called before the first frame update
@@ -41,9 +47,19 @@ public class NPCLogic: MonoBehaviour
         }
         if (isWalking)
         {
-            //Debug.Log(transform.position);
-            transform.position += transform.forward * Time.deltaTime * moveSpeed;
+            Vector3 trans = transform.forward * Time.deltaTime * moveSpeed;
 
+//            if (transform.position[0] + trans[0] < xmin |
+//                transform.position[0] + trans[0] > xmax |
+//                transform.position[2] + trans[2] < zmin |
+//                transform.position[2] + trans[2] > zmax)
+//            {
+//
+//                transform.Rotate(transform.up * Time.deltaTime * -rotSpeed);
+//                //trans = -trans;
+//            }
+            
+            transform.position += trans;
         }
     }
 
