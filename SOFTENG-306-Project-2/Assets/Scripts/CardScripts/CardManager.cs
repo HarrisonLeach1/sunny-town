@@ -427,7 +427,7 @@ namespace SunnyTown
             };
 
             // minor card should be displayed upon the callback to the mail message
-            dialogueManager.StartExplanatoryDialogue(new SimpleDialogue(statements, "Weather event"), displayWeatherInfo);
+            dialogueManager.StartExplanatoryDialogue(new SimpleDialogue(statements,weatherEvent ), displayWeatherInfo);
 
         }
 
