@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,10 +12,12 @@ namespace SunnyTown
     /// </summary>
     public class CardManager : MonoBehaviour
     {
-        [SerializeField]
-        private float waitingForEventsDuration = 5f;
-        [SerializeField]
-        private float waitingForFeedbackDuration = 0.5f;
+        private static float WAITING_FOR_FEEDBACK_DURATION = 0.1f;
+
+        // TODO: will need to change this later depending on playtesting
+        private float waitingForEventsDuration = 4f;
+        private const int MINOR_CARDS_PER_PLOT_CARD = 1;
+        private float waitingForFeedbackDuration = WAITING_FOR_FEEDBACK_DURATION;
 
         public static CardManager Instance { get; private set; }
         public GameObject spawnHandlerObject;
@@ -25,27 +27,31 @@ namespace SunnyTown
         private MetricManager metricManager;
         private DialogueMapper dialogueMapper;
         private SpawnHandler animationHandler;
-        private Reader reader;
+        private LevelProgressScript levelProgress;
         private SimpleDialogue endGameDialogue;
-        public Dictionary<string, string> PastTokens = new Dictionary<string, string>();
+        private int cardCount = 0;
 
-        public bool LevelWon { get; private set; } = false;
+        public bool GameWon { get; private set; } = false;
         public bool GameLost { get; private set; } = false;
+        public bool EndOfDay { get; set; } = false;
 
         public GameState CurrentGameState { get; private set; } = GameState.GameStarting;
+
+        private HashSet<Card> storyCardsTravelled = new HashSet<Card>();
+        public Dictionary<string, string> PastTokens = new Dictionary<string, string>();
         private Card currentCard;
         private float timeRemainingInCurrentState = float.PositiveInfinity;
 
         // Start is called before the first frame update
         void Start()
         {
-            reader = new Reader();
-            currentCard = reader.RootState;
             cardFactory = new CardFactory();
+            currentCard = cardFactory.CurrentPlotCard;
             dialogueManager = DialogueManager.Instance;
             metricManager = MetricManager.Instance;
             dialogueMapper = new DialogueMapper();
             animationHandler = spawnHandlerObject.GetComponent<SpawnHandler>();
+            levelProgress = GameObject.Find("LevelProgress").GetComponent<LevelProgressScript>();
         }
 
         private void Awake()
@@ -63,22 +69,26 @@ namespace SunnyTown
         public enum GameState
         {
             GameStarting,
+            GamePaused,
             WaitingForEvents,
             SelectingPlotDecision,
             SelectingMinorDecision,
             WaitingForFeedback,
             ViewingFeedback,
-            GameEnding
+            DayEnding,
+            GameEnding,
+            WeatherEvent
         }
 
         /// <summary>
         /// Sets the current state of the game, this method also updates the view with the new state.
         /// </summary>
         /// <param name="state">The state to set the game to</param>
-        private void SetState(GameState state)
+        public void SetState(GameState state)
         {
             Debug.Log("Setting State: " + state);
             CurrentGameState = state;
+            WeatherController.Instance.CheckGameStatus();
             switch (CurrentGameState)
             {
                 case GameState.SelectingPlotDecision:
@@ -96,6 +106,9 @@ namespace SunnyTown
                 case GameState.WaitingForFeedback:
                     timeRemainingInCurrentState = waitingForFeedbackDuration;
                     break;
+                case GameState.GamePaused:
+                    timeRemainingInCurrentState = float.PositiveInfinity;
+                    break;
                 case GameState.WaitingForEvents:
                     timeRemainingInCurrentState = waitingForEventsDuration;
                     break;
@@ -103,11 +116,37 @@ namespace SunnyTown
                     timeRemainingInCurrentState = float.PositiveInfinity;
                     EndGame();
                     break;
+                case GameState.WeatherEvent:
+                    timeRemainingInCurrentState = float.PositiveInfinity;
+                    DisplayWeatherCard();
+                    break;
+                case GameState.DayEnding:
+                    timeRemainingInCurrentState = float.PositiveInfinity;
+                    EndDay();
+                    break;
             }
+        }
+
+        private void EndDay()
+        {
+            var clock = GameObject.Find("Clock").GetComponent<Clock>();
+            Action resetDay = () =>
+            {
+                SetState(GameState.WaitingForEvents);
+                EndOfDay = false;
+                clock.ResetDay();
+            };
+
+            dialogueManager.StartExplanatoryDialogue(new SimpleDialogue(new string[1] { "End of Day" }, "Advisory Board"), resetDay);
         }
 
         private void Update()
         {
+            if (EndOfDay && CurrentGameState == GameState.WaitingForEvents)
+            {
+                SetState(GameState.DayEnding);
+            }
+
             timeRemainingInCurrentState -= Time.deltaTime;
             if (timeRemainingInCurrentState <= 0)
                 MoveToNextState();
@@ -138,12 +177,15 @@ namespace SunnyTown
                 case GameState.ViewingFeedback:
                     SetState(GameState.WaitingForEvents);
                     break;
+                case GameState.WeatherEvent:
+                    SetState(GameState.WaitingForEvents);
+                    break;
             }
         }
 
         private void TransitionFromWaitingForEvents()
         {
-            if (LevelWon || GameLost)
+            if (GameWon || GameLost)
             {
                 SetState(GameState.GameEnding);
             }
@@ -172,8 +214,9 @@ namespace SunnyTown
         /// </summary>
         private void EndGame()
         {
-            if (LevelWon)
+            if (GameWon)
             {
+                Debug.Log(storyCardsTravelled.Count);
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
             else if (GameLost)
@@ -231,10 +274,33 @@ namespace SunnyTown
         /// <param name="decisionValue">The value chosen by the user</param>
         private void HandleOptionPressed(int decisionValue)
         {
-            currentCard.HandleDecision(decisionValue);
+            // TODO: Handle this more elegantly, maybe move into different methods
+            if (!(currentCard is SliderCard) && PastTokens.ContainsKey(currentCard.Options[decisionValue].AdditionalState))
+            {
+                Debug.Log("addition state added: " + PastTokens[currentCard.Options[decisionValue].AdditionalState]);
+                currentCard.HandleDecision(decisionValue, PastTokens[currentCard.Options[decisionValue].AdditionalState]);
+            }
+            else
+            {
+                currentCard.HandleDecision(decisionValue);
+            }
+
+            storyCardsTravelled.Add(currentCard);
+
+            if (!(currentCard is SliderCard))
+            {
+                string key = currentCard.Options[decisionValue].TokenKey;
+                string value = currentCard.Options[decisionValue].TokenValue;
+                if (!key.Equals(""))
+                {
+                    PastTokens.Add(key, value);
+                }
+            }
+
+
             if (IsFinalCard(currentCard))
             {
-                LevelWon = true;
+                GameWon = true;
                 waitingForEventsDuration = 0f;
             }
 
@@ -243,10 +309,16 @@ namespace SunnyTown
                 waitingForFeedbackDuration = 3f;
                 dialogueManager.ShowAnimationProgress(waitingForFeedbackDuration);
                 animationHandler.PlayAnimation(currentCard.BuildingName, waitingForFeedbackDuration);
+                SFXAudioManager.Instance.PlayConstructionSound();
             }
             else
             {
-                waitingForFeedbackDuration = 0.5f;
+                waitingForFeedbackDuration = WAITING_FOR_FEEDBACK_DURATION;
+            }
+
+            if (currentCard is PlotCard)
+            {
+                levelProgress.UpdateValue((PlotCard)currentCard);
             }
             MoveToNextState();
         }
@@ -265,8 +337,15 @@ namespace SunnyTown
         /// </summary>
         private void DisplayPlotCard()
         {
-            currentCard = cardFactory.GetNewCard("story");
-            dialogueManager.StartBinaryOptionDialogue(dialogueMapper.PlotCardToBinaryOptionDialogue((PlotCard)currentCard), HandleOptionPressed);
+            currentCard = cardCount++ % MINOR_CARDS_PER_PLOT_CARD == 0 ? cardFactory.GetNewCard("story") : cardFactory.GetNewCard("minor");
+            if (currentCard is SliderCard)
+            {
+                dialogueManager.StartSliderOptionDialogue(dialogueMapper.SliderCardToSliderOptionDialogue((SliderCard)currentCard), HandleOptionPressed);
+            }
+            else
+            {
+                dialogueManager.StartBinaryOptionDialogue(dialogueMapper.CardToOptionDialogue(currentCard), HandleOptionPressed);
+            }
         }
 
         /// <summary>
@@ -280,7 +359,7 @@ namespace SunnyTown
                 currentCard = cardFactory.GetNewCard("minor");
                 if (currentCard is MinorCard)
                 {
-                    dialogueManager.StartBinaryOptionDialogue(dialogueMapper.MinorCardToBinaryOptionDialogue((MinorCard)currentCard), HandleOptionPressed);
+                    dialogueManager.StartBinaryOptionDialogue(dialogueMapper.CardToOptionDialogue(currentCard), HandleOptionPressed);
                 }
                 else
                 {
@@ -300,15 +379,55 @@ namespace SunnyTown
         private bool IsFinalCard(Card currentCard)
         {
             // Game is ended on story cards with no transitions
-
             if (currentCard is PlotCard)
             {
-                if (((PlotCard)currentCard).NextStateId == null)
+                if (String.IsNullOrEmpty(((PlotCard)currentCard).NextStateId))
                 {
                     return true;
                 }
             }
             return false;
+        }
+
+        private void DisplayWeatherCard()
+        {
+            String weatherEvent = "";
+            switch(WeatherController.Instance.currentEvent)
+            {
+                case WeatherController.ClimateEvent.AcidRain:
+                weatherEvent = "acid rain";
+                break;
+
+                case WeatherController.ClimateEvent.Hurricane:
+                weatherEvent = "hurricane";
+                break;
+
+                case WeatherController.ClimateEvent.Smog:
+                weatherEvent = "smog";
+                break;
+
+                case WeatherController.ClimateEvent.WildFire:
+                weatherEvent = "wildfire";
+                break;
+            }    
+            string statement = "Your town has been struck by "+ weatherEvent +"! Try raise your environment health to avoid more disasters"; 
+            string[] statements = { statement };
+            Action displayWeatherInfo = () =>
+            {
+                WeatherController.Instance.StopAnim();
+                Debug.Log("Clicked continue on weather event");
+                SetState(GameState.WaitingForEvents);
+                //TODO: balance numbers on event
+                MetricsModifier modifier = new MetricsModifier(-5, -5, 0);
+                modifier.Modify();
+                metricManager.RenderMetrics();
+                WeatherController.Instance.probability = 0;
+                Debug.Log("new prob " + WeatherController.Instance.probability);
+            };
+
+            // minor card should be displayed upon the callback to the mail message
+            dialogueManager.StartExplanatoryDialogue(new SimpleDialogue(statements, "Weather event"), displayWeatherInfo);
+
         }
 
     }

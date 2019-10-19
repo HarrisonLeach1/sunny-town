@@ -9,11 +9,10 @@ namespace SunnyTown
     /// </summary>
     public class MinorCard : Card
     {
-        public string Name { get; set; }
         public MinorCard(string[] precedingDialogue, string name, string dialogue, List<Transition> options)
         {
             PrecedingDialogue = precedingDialogue;
-            Name = name;
+            NPCName = name;
             Question = dialogue;
             Options = options;
         }

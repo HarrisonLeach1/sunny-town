@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace SunnyTown
 {
@@ -9,46 +10,19 @@ namespace SunnyTown
     public class DialogueMapper
     {
         /// <summary>
-        /// Converts a PlotCard into a BinaryOptionDialogue, allowing it to be displayed by the 
-        /// Dialogue Manager
+        /// Converts a Card into an OptionDialogue, allowing it to be displayed by the 
+        /// Dialogue Manager.
         /// </summary>
-        /// <param name="plotCard">To convert into a BinaryOptionDialogue</param>
-        /// <returns>The BinaryOptionDialogue that can be used by the DialogueManager </returns>
-        public BinaryOptionDialogue PlotCardToBinaryOptionDialogue(PlotCard plotCard)
+        /// <param name="card">To convert into a OptionDialogue</param>
+        /// <returns>The OptionDialogue that can be used by the DialogueManager</returns>
+        public OptionDialogue CardToOptionDialogue(Card card)
         {
-            if (plotCard.Options.Count > 1)
-            {
-                return new BinaryOptionDialogue(plotCard.Question,
-                            plotCard.Options[0].Dialogue,
-                            plotCard.Options[1].Dialogue,
-                            new SimpleDialogue(
-                            plotCard.PrecedingDialogue,
-                            plotCard.Name));
-            }
-
-            return new BinaryOptionDialogue(plotCard.Question,
-                plotCard.Options[0].Dialogue,
-                "",
+            string[] optionDialogues = card.Options.Select(o => o.Dialogue).ToArray();
+            return new OptionDialogue(card.Question,
+                optionDialogues,
                 new SimpleDialogue(
-                    plotCard.PrecedingDialogue,
-                    plotCard.Name));
-        }
-
-        /// <summary>
-        /// Converts a Minor into a BinaryOptionDialogue, allowing it to be displayed by the 
-        /// Dialogue Manager
-        /// </summary>
-        /// <param name="minorCard">To convert into a BinaryOptionDialogue</param>
-        /// <returns>The BinaryOptionDialogue that can be used by the DialogueManager </returns>
-        public BinaryOptionDialogue MinorCardToBinaryOptionDialogue(MinorCard minorCard)
-        {
-
-            return new BinaryOptionDialogue(minorCard.Question,
-                minorCard.Options[0].Dialogue,
-                minorCard.Options[1].Dialogue,
-                new SimpleDialogue(
-                    minorCard.PrecedingDialogue,
-                    minorCard.Name));
+                    card.PrecedingDialogue,
+                    card.NPCName));
         }
 
         /// <summary>
@@ -81,7 +55,7 @@ namespace SunnyTown
                 currentCard.MinValue,
                 new SimpleDialogue(
                     currentCard.PrecedingDialogue,
-                    currentCard.Name));
+                    currentCard.NPCName));
         }
     }
 }

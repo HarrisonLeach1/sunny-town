@@ -20,16 +20,15 @@ namespace SunnyTown
 
         public Reader()
         {
-            var expo = Resources.Load<TextAsset>("json/expositionStates");
             AllExpositionDialogues =
-                this.ParseExpositionJson(expo.text);
-            AllStoryStates = this.ParseJson(Resources.Load<TextAsset>("json/newPlot").text, true)
+                this.ParseExpositionJson(Resources.Load<TextAsset>("json/expositionStates").text);
+            AllStoryStates = this.ParseJson(Resources.Load<TextAsset>("json/newNewPlot").text, true)
                 .Cast<PlotCard>().ToList();
             AllMinorStates = this.ParseJson(Resources.Load<TextAsset>("json/minorStates").text, false);
             AllAchievements =
                 this.ParseAchievementsJson(Resources.Load<TextAsset>("json/achievements").text);
             RootState = this.AllStoryStates[0];
-            Debug.Log(RootState.Name);
+            Debug.Log(RootState.NPCName);
         }
 
         private List<Card> ParseJson(string json, bool isPlotJson)
@@ -56,6 +55,7 @@ namespace SunnyTown
 
                 foreach (JSONNode transition in transitions)
                 {
+
                     int popHappinessModifier = 0;
                     int goldModifier = 0;
                     int envHealthModifier = 0;

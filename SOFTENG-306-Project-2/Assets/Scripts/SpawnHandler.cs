@@ -33,22 +33,14 @@ namespace SunnyTown
         public void PlayAnimation(string buildingName, float animationTime)
         {
             instantiationTimer = animationTime;
-            if (buildingName.Equals(Building.CoalMine.ToString()))
+            try
             {
-                Debug.Log("Building coal mine");
-                Build(Building.CoalMine);
+                Build((Building)Enum.Parse(typeof(Building), buildingName));
             }
-            else if (buildingName.Equals(Building.PowerPlant.ToString()))
+            catch (ArgumentException e)
             {
-                Debug.Log("Building powerplant");
-                Build(Building.PowerPlant);
+                Debug.Log("Building animation was not found");
             }
-            else if (buildingName.Equals(Building.Farm.ToString()))
-            {
-                Debug.Log("Building farm");
-                Build(Building.Farm);
-            }
-
             // if no building name is found it will simply play the progress bar only
         }
 

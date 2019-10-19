@@ -25,8 +25,8 @@ namespace SunnyTown
             var gameOutcome = endGameView.transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
             var gameBackground = endGameView.transform.GetChild(0).GetChild(0).GetComponent<Image>();
             AchievementsManager.Instance.IsAchievementMade();
-            gameOutcome.SetText(CardManager.Instance.LevelWon ? "Game Won" : "Game lost");
-            if (CardManager.Instance.LevelWon)
+            gameOutcome.SetText(CardManager.Instance.GameWon ? "Game Won" : "Game lost");
+            if (CardManager.Instance.GameWon)
             {
                 gameOutcome.SetText("Game Won");
                 gameBackground.color = new Color32(0, 255, 0, 130);
@@ -61,7 +61,7 @@ namespace SunnyTown
 
         public void ReplayGame()
         {
-            SceneManager.LoadScene("WorldScene");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
     }
 }

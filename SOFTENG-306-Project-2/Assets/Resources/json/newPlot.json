@@ -342,7 +342,9 @@
     "id": "s10",
     "name": "Advisory Board",
     "precedingDialogue": [
-      ""
+      "Global warming is a pretty big problem",
+      "It is triggered by emissions, and bad decisions from people",
+      "If we are not careful, it can cause extreme events. "
     ],
     "question": "what do?",
     "transitions": [
