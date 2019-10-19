@@ -14,7 +14,6 @@ namespace SunnyTown
         public PlotCard CurrentPlotCard { get; private set; }
         private List<Card> minorCards;
 
-        // TODO: Change so this does not have to be hard-coded
         public CardFactory()
         {
             reader = Reader.Instance;

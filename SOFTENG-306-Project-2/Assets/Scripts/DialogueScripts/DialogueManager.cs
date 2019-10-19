@@ -10,8 +10,6 @@ namespace SunnyTown
     /// The DialogueManager is a singleton that handles displaying views of Dialogue 
     /// objects to the user. 
     /// </summary>
-    // Initial Dialogue implementation based on code from: 
-    // https://github.com/Brackeys/Dialogue-System
     public class DialogueManager : MonoBehaviour
     {
         public Animator simpleDialogueViewAnimator;

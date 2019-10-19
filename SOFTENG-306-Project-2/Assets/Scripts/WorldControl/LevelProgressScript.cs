@@ -5,6 +5,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// A LevelProgress Script is used on a game object to render a plot progress value 
+/// within a Slider. The game object should be updated by other modules
+/// to receive the progress updates.
+/// </summary>
 public class LevelProgressScript : MonoBehaviour
 {
     [SerializeField]
@@ -21,6 +26,10 @@ public class LevelProgressScript : MonoBehaviour
         levelController = GameObject.Find("LevelManager").GetComponent<LevelControl>();
     }
 
+    /// <summary>
+    /// Updates the progress displayed on the slider game object owning this script. 
+    /// </summary>
+    /// <param name="card">The plot card from which to render the plot progress</param>
     internal void UpdateValue(PlotCard card)
     {
         var cardIdString = Regex.Match(card.Id, @"\d+").Value;

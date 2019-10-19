@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace SunnyTown
 {
     /// <summary>
-    /// A BinaryOptionDialogueView represents the view on which a binary
+    /// A OptionDialogueView represents the view on which a multiple choice
     /// decision is displayed to the user
     /// </summary>
     [System.Serializable]

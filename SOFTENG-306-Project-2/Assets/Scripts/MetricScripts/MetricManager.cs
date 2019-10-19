@@ -139,6 +139,11 @@ namespace SunnyTown
             metricBar.value = (float) newValue / MAX_VALUE;
         }
 
+        /// <summary>
+        /// Changes the population happiness metric by the given value. Note that the min
+        /// value of the metric is 0 and the max is 100.
+        /// </summary>
+        /// <param name="value">The value by which to modify population happiness</param>
         public void UpdatePopHappiness(int value)
         {
             this.PopHappiness += value;
@@ -161,6 +166,11 @@ namespace SunnyTown
             }
         }
 
+        /// <summary>
+        /// Changes the gold metric by the given value. Note that the min
+        /// value of the metric is 0 and the max is 100.
+        /// </summary>
+        /// <param name="value">The value by which to modify gold</param>
         public void UpdateGold(int value)
         {
             this.Gold += value;
@@ -185,6 +195,11 @@ namespace SunnyTown
             }
         }
 
+        /// <summary>
+        /// Changes the environmental health metric by the given value. Note that the min
+        /// value of the metric is 0 and the max is 100.
+        /// </summary>
+        /// <param name="value">The value by which to modify environmental health</param>
         public void UpdateEnvHealth(int value)
         {
             this.EnvHealth += value;

@@ -10,8 +10,8 @@ namespace SunnyTown
 {
 
     /// <summary>
-    /// A CardManager handles the state of cards and makes calls to the DialogueManager
-    /// to render the appropriates Cards
+    /// A CardManager maintains the state of cards and makes calls to the DialogueManager
+    /// to render the appropriates Cards.
     /// </summary>
     public class CardManager : MonoBehaviour
     {
@@ -69,8 +69,13 @@ namespace SunnyTown
             }
         }
 
+        /// <summary>
+        /// A GameState represents the state of the game and cards. GameState should be used 
+        /// to determine whether or not the game is in an appropriate state to perform some action.
+        /// </summary>
         public enum GameState
         {
+
             GameStarting,
             GamePaused,
             WaitingForEvents,
@@ -83,7 +88,8 @@ namespace SunnyTown
         }
 
         /// <summary>
-        /// Sets the current state of the game, this method also updates the view with the new state.
+        /// Sets the current state of the game, changing the state of the game 
+        /// updates the view with the new state.
         /// </summary>
         /// <param name="state">The state to set the game to</param>
         public void SetState(GameState state)
@@ -133,9 +139,9 @@ namespace SunnyTown
         }
 
         /// <summary>
-        /// Moves the Game state to a new state depending on the current state and 
-        /// other values, this should not contain any logic updating the view. That 
-        /// should be in the SetState method instead.
+        /// Moves the Game state to the next state depending on the current state. 
+        /// This method sshould not contain any logic updating the view. The SetState
+        /// method is used to perform this instead.
         /// </summary>
         private void MoveToNextState()
         {
@@ -201,7 +207,7 @@ namespace SunnyTown
             GameObject.Find("PauseButton").SetActive(false);
             if (GameWon)
             {
-                SimpleDialogue endGameDialogue = LastCardDialogue.createFinalDialogue(PastTokens);
+                SimpleDialogue endGameDialogue = LastCardDialogue.CreateFinalDialogue(PastTokens);
                 Sprite sprite;
                 if (MetricManager.Instance.ScoreLow())
                 {

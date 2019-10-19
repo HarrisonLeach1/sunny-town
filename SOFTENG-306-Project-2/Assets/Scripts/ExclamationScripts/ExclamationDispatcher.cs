@@ -4,17 +4,20 @@ using UnityEngine;
 
 namespace SunnyTown
 {
+    /// <summary>
+    /// An ExclamationDispatcher is responsible for creating controlling the display
+    /// and interactivity of the exclamation mark in the world. 
+    /// </summary>
     public class ExclamationDispatcher : MonoBehaviour
     {
         public static ExclamationDispatcher Instance { get; private set; }
         public GameObject manager;
         private bool markSpawned;
         private CardManager cardManager;
-
-        public int clickCount; 
+        public int clickCount;
         public MeshRenderer render;
-
         public Animator animator;
+
         void Start()
         {
             Debug.Log("Started dispatcher");
@@ -99,7 +102,7 @@ namespace SunnyTown
         }
 
          /// <summary>
-         /// At the end of animation, set the animator to default invisible state
+         /// At the end of animation, set the animator to default invisible state.
          /// </summary>
         void OnEndOfAnimation()
         {

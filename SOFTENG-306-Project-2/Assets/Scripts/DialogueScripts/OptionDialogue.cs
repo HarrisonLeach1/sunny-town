@@ -3,8 +3,8 @@
 namespace SunnyTown
 {
     /// <summary>
-    /// A BinaryOptionDialogue represents the dialogue displayed to the user
-    /// for a binary option.
+    /// An OptionDialogue represents the dialogue displayed to the user
+    /// for multiple options.
     /// </summary>
     [System.Serializable]
     public class OptionDialogue

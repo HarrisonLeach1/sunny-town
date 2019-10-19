@@ -49,6 +49,9 @@ namespace SunnyTown
             }
         }
 
+        /// <summary>
+        /// Sets the currently displayed screen to be the main menu
+        /// </summary>
         public void NavigateToMainMenu()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
@@ -59,6 +62,9 @@ namespace SunnyTown
             Application.Quit();
         }
 
+        /// <summary>
+        /// Starts the game again from the beginning of the WorldScene.
+        /// </summary>
         public void ReplayGame()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);

@@ -24,6 +24,9 @@ namespace SunnyTown
             TriggerDialogue();
         }
 
+        /// <summary>
+        /// Starts the beginning dialogue displayed to the user
+        /// </summary>
         public void TriggerDialogue()
         {
             Action handleDialogueClosed = () => this.TriggerDialogue();

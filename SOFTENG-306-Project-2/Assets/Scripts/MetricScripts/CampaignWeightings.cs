@@ -2,6 +2,10 @@
 
 namespace SunnyTown
 {
+    /// <summary>
+    /// A CampaignWeightings object is a dto representing the multipliers to apply to metrics
+    /// to represent the effects of a Campaign.
+    /// </summary>
     public struct CampaignWeightings
     {
         public float Happiness { get; private set; }
@@ -10,7 +14,6 @@ namespace SunnyTown
 
         public CampaignWeightings(float happiness, float gold, float envHealth)
         {
-            Debug.Log("Creating weightings, hap: " + happiness + " gold: " + gold + " envHealth: " + envHealth);
             Happiness = happiness;
             Gold = gold;
             EnvHealth = envHealth;

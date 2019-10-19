@@ -3,9 +3,18 @@ using System.Linq;
 
 namespace SunnyTown
 {
+    /// <summary>
+    /// A LastCardDialogue represents the dialogue text that is displayed to the user at the end of the game. 
+    /// The dialogue is determined by the decisions the player has made in the game.
+    /// </summary>
     public class LastCardDialogue
     {
-        public static SimpleDialogue createFinalDialogue(Dictionary<string, string> PastTokens)
+        /// <summary>
+        /// Creates a SimpleDialogue object based on the the provided PastTokens.
+        /// </summary>
+        /// <param name="PastTokens">PastTokens representing the users story decisions.</param>
+        /// <returns>A SimpleDialogue representing the dialogue played to the user reflecting their decisions</returns>
+        public static SimpleDialogue CreateFinalDialogue(Dictionary<string, string> PastTokens)
         {
             List<string> finalDialogue = new List<string>();
             List<string> goodDeeds = new List<string>();

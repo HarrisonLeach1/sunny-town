@@ -7,6 +7,11 @@ using UnityEngine.UI;
 
 namespace SunnyTown
 {
+    /// <summary>
+    /// A CampaignMaanger is responsible for managing the interactions that can be made on 
+    /// a campaign panel. It takes the inputs from the campaign panel and adds CampaignWeightings
+    /// to the MetricManager.
+    /// </summary>
     public class CampaignManager : MonoBehaviour
     {
         [SerializeField]
