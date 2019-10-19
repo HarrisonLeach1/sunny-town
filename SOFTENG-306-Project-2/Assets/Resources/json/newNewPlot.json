@@ -434,6 +434,7 @@
         "happiness": 5,
         "environment": 10,
         "feedback": "Woof! [You made happy both the environment and lactose intolerant people]",
+        "additionalState": "investment",
         "state": "s14"
       }
     ]
@@ -626,7 +627,9 @@
     ],
     "transitions": [
       {
-        "label": "continue"
+        "label": "continue",
+        "state": "s16",
+        "additionalState": "end"
       }
     ]
   }
