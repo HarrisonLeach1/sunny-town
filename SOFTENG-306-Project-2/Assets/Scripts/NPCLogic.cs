@@ -41,6 +41,7 @@ public class NPCLogic: MonoBehaviour
         }
         if (isWalking)
         {
+            //Debug.Log(transform.position);
             transform.position += transform.forward * Time.deltaTime * moveSpeed;
 
         }
