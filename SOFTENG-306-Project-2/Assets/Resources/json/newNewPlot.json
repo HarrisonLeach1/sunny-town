@@ -81,6 +81,7 @@
     "transitions": [
       {
         "label": "Of course, my dear",
+        "happiness": 5,
         "state": "s4"
       }
     ]
@@ -92,131 +93,168 @@
     "transitions": [
       {
         "label": "Continue",
-        "additionalState": "investment",
+        "state": "s5"
+      }
+    ]
+  },
+  {
+    "id": "s5",
+    "name": "Advisory Board",
+    "precedingDialogue": [
+      "The scientists have said that the world is getting warmer because of all the things we're building, ",
+      "cars and factories can make it worse, protecting the environment and planting trees help make it better",
+      "If we don't make it better, it can cause bad weather events, even floods! "
+    ],
+    "transitions": [
+      {
+        "label": "continue",
+        "state": "s6",
+        "additionalState": "investment"
+      }
+    ]
+  },
+  {
+    "id": "s6energy",
+    "name": "James the Dog",
+    "precedingDialogue": [
+      "Woof! [Mrs. Gatburg, your town is growing fast. however, this means that our power station is chocking]",
+      "Woof! [The citizens are not happy with the high electricity prices, we should consider building a bigger power station.]"
+    ],
+    "question": "Woof [What kind of power plant should we build?]",
+    "transitions": [
+      {
+        "label": "Let's build a solar farm",
+        "npcName": "James the Dog",
+        "feedback": "Solar panels are great for the environment, and with the efforts of the research group prices has been lowered significantly. ",
+        "money": -5,
+        "happiness": 15,
+        "environment": 15,
+        "state": "s8b"
+      },
+      {
+        "label": "Lets expand the coal plant",
+        "npcName": "James the Dog",
+        "feedback": "It's a shame that you invested in solar energy but never used it :( plus coal is bad for the environment. ",
+        "money": -5,
+        "environment": -15,
+        "additionalState": "arvio",
         "state": "s7"
       }
     ]
   },
   {
-    "id": "s7energy",
+    "id": "s6EV",
     "name": "James the Dog",
     "precedingDialogue": [
-      "Mrs. Gatburg, your town has grown faster than expected. This is great as it means you're doing a great job making the town a nice place to live.",
-      "However, this growth has also meant that our infrastructure is having trouble catching up to demand, especially our power stations.",
-      "The high demand doubled the price of electricity and the townspeople are complaining, we should consider building a bigger power station. "
+      "Woof! [Mrs. Gatburg, your town is growing fast. however, this means that our power station is chocking]",
+      "Woof! [The citizens are not happy with the high electricity prices, we should consider building a bigger power station.]"
     ],
-    "question": "Would you like to generate more power using solar panels or expand our coal plant?",
+    "question": "Woof [What kind of power plant should we build?]",
     "transitions": [
       {
-        "label": "Solar sounds like a good idea, it's environmentally friendly. ",
+        "label": "Let's build a solar farm",
         "npcName": "James the Dog",
-        "feedback": "Solar panels are great for the environment, and with the efforts of the research group prices has been lowered significantly. ",
-        "state": "s9b"
+        "feedback": "Solar panels are great for the environment, but it's pretty expensive if you haven't invested much into research",
+        "money": -15,
+        "happiness": 15,
+        "environment": 15,
+        "state": "s8b"
       },
       {
         "label": "Lets expand the coal plant",
+        "npcName": "James the Dog",
+        "feedback": "Coal power is really bad for the environment. ",
+        "money": -5,
+        "environment": -15,
         "additionalState": "arvio",
-        "state": "s8"
+        "state": "s7"
       }
     ]
   },
   {
-    "id": "s7EV",
+    "id": "s6material",
     "name": "James the Dog",
     "precedingDialogue": [
-      "Mrs. Gatburg, your town has grown faster than expected. This is great as it means you're doing a great job making the town a nice place to live.",
-      "However, this growth has also meant that our infrastructure is having trouble catching up to demand, especially our power stations.",
-      "The high demand doubled the price of electricity and the townspeople are complaining, we should consider building a bigger power station. "
+      "Woof! [Mrs. Gatburg, your town is growing fast. however, this means that our power station is chocking]",
+      "Woof! [The citizens are not happy with the high electricity prices, we should consider building a bigger power station.]"
     ],
-    "question": "Would you like to generate more power using solar panels or expand our coal plant?",
+    "question": "Woof [What kind of power plant should we build?]",
     "transitions": [
       {
-        "label": "Solar sounds like a good idea, it's environmentally friendly. ",
+        "label": "Let's build a solar farm",
         "npcName": "James the Dog",
-        "feedback": "Solar panels are great for the environment, but without the extra investment they are still pricey. ",
-        "state": "s9b"
+        "feedback": "Solar panels are great for the environment, but it's pretty expensive if you haven't invested much into research",
+        "money": -15,
+        "happiness": 15,
+        "environment": 15,
+        "state": "s8b"
       },
       {
         "label": "Lets expand the coal plant",
+        "npcName": "James the Dog",
+        "feedback": "Coal power is really bad for the environment. ",
+        "money": -5,
+        "environment": -15,
         "additionalState": "arvio",
-        "state": "s8"
+        "state": "s7"
       }
     ]
   },
   {
-    "id": "s7material",
-    "name": "James the Dog",
-    "precedingDialogue": [
-      "Mrs. Gatburg, your town has grown faster than expected. This is great as it means you're doing a great job making the town a nice place to live.",
-      "However, this growth has also meant that our infrastructure is having trouble catching up to demand, especially our power stations.",
-      "The high demand doubled the price of electricity and the townspeople are complaining, we should consider building a bigger power station. "
-    ],
-    "question": "Would you like to generate more power using solar panels or expand our coal plant?",
-    "transitions": [
-      {
-        "label": "Solar sounds like a good idea, it's environmentally friendly. ",
-        "npcName": "James the Dog",
-        "feedback": "Solar panels are great for the environment, but without the extra investment they are still pricey. ",
-        "state": "s9b"
-      },
-      {
-        "label": "Lets expand the coal plant",
-        "additionalState": "arvio",
-        "state": "s8"
-      }
-    ]
-  },
-  {
-    "id": "s8yes",
+    "id": "s7yes",
     "name": "Arvio",
     "precedingDialogue": [
-      "Mrs. Gatberg, our prediction was right. Your land is rich with coal."
+      "Mrs. Gatberg, our prediction was dead-on! Your land is rich with coal! "
     ],
-    "question": "Will you let us set up an coal mine? We'll pay you.",
+    "question": "Will you let us set up an coal mine? We'll make the town richer than your dreams!",
     "transitions": [
       {
-        "label": "Yes",
+        "label": "Yes go ahead!",
         "hasAnimation": true,
         "buildingName": "CoalMine",
+        "environment": -20,
+        "money": 20,
         "npcName": "Advisory Board",
         "feedback": "Arvio begins constructing an coal mine. We're getting paid a great amount of money, but this is releasing a lot of CO2.",
-        "state": "s9a"
+        "state": "s8a"
       },
       {
         "label": "No, go away Arvio.",
         "npcName": "Advisory Board",
         "feedback": "Arvio leaves you alone",
-        "state": "s9b"
+        "state": "s8b"
       }
     ]
   },
   {
-    "id": "s8no",
+    "id": "s7no",
     "name": "Arvio",
     "precedingDialogue": [
-      "Arvio is sneaky and he has inspected the land without your consent",
-      "but he has found that your land is rich with coal, and wishes for your permission to setup a coal mine"
+      "We inspected the land anyways, that's why they also call me Arvio the Sneaky",
+      "You know why we did that? Cause' our prediction was dead-on! Your land is rich with coal! "
     ],
-    "question": "Will you let us set up? We'll pay you.",
+    "question": "Will you let us set up an coal mine? We'll make the town richer than your dreams!",
     "transitions": [
       {
-        "label": "Yes",
+        "label": "Yes go ahead!",
         "hasAnimation": true,
         "buildingName": "CoalMine",
         "npcName": "Advisory Board",
+        "environment": -20,
+        "money": 20,
         "feedback": "Arvio begins constructing an coal mine. We're getting paid a great amount of money, but this is releasing a lot of CO2.",
-        "state": "s9a"
+        "state": "s8a"
       },
       {
-        "label": "No",
+        "label": "No, go away Arvio.",
         "npcName": "Advisory Board",
         "feedback": "Arvio leaves you alone",
-        "state": "s9b"
+        "state": "s8b"
       }
     ]
   },
   {
-    "id": "s9a",
+    "id": "s8a",
     "name": "Hunter Gatberg",
     "precedingDialogue": [
       "[Ring Ring... Ring Ring...]",
@@ -225,13 +263,14 @@
     "question": "Next week is school holidays, would we please go?",
     "transitions": [
       {
-        "label": "Sorry Hunter, the ice bergs have been melting because of climate change, it's too dangerous to go. ",
-        "state": "s10"
+        "label": "Sorry Hunter, climate change has melted the ice bergs. ",
+        "happiness": -10,
+        "state": "s9"
       }
     ]
   },
   {
-    "id": "s9b",
+    "id": "s8b",
     "name": "Hunter Gatberg",
     "precedingDialogue": [
       "[Ring Ring... Ring Ring...]",
@@ -241,21 +280,18 @@
     "transitions": [
       {
         "label": "Of course, we'll have a great trip!",
-        "state": "s10"
+        "happiness": 10,
+        "state": "s9"
       }
     ]
   },
   {
-    "id": "s10",
+    "id": "s9",
     "name": "Advisory Board",
-    "precedingDialogue": [
-      "Global warming is a pretty big problem",
-      "It is triggered by emissions, and bad decisions from people",
-      "If we are not careful, it can cause extreme events. "
-    ],
+    "question": "Your town has grown",
     "transitions": [
       {
-        "label": "continue",
+        "label": "Continue",
         "state": "s11",
         "additionalState": "investment"
       }

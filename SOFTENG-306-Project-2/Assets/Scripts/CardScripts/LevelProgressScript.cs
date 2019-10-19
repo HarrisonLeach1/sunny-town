@@ -12,8 +12,8 @@ public class LevelProgressScript : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI daysRemainingText;
     private LevelControl levelController;
-    private const float LEVEL_ONE_CAP = 6f;
-    private const float LEVEL_TWO_CAP = 10f;
+    private const float LEVEL_ONE_CAP = 4f;
+    private const float LEVEL_TWO_CAP = 8f;
     private const float LEVEL_THREE_CAP = 18f;
 
     private void Start()
