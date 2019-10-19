@@ -1,6 +1,89 @@
 ﻿[
     {
         "name": "Allena",
+        "sliderType": true,
+        "precedingDialogue": [
+            "The increasing population of our town has increased our CO2 emission levels",
+            "The local environmentalists wishes for funding to plant trees to counteract the effects."
+        ],
+        "question": "How much money do you provide to the tree planting initiative?",
+        "maxValue": 100,
+        "minValue": 0,
+        "options": [
+            {
+                "threshold": 50,
+                "money": -20,
+                "environment": 25,
+                "hasAnimation": true,
+                "buildingName": "Trees",
+                "feedback": "The environmentalists are very grateful for your support, it's made a marked improvement on the environment",
+                "npcName": "Allena"
+            },
+            {
+                "threshold": 25,
+                "money": -10,
+                "happiness": 5,
+                "environment": 5,
+                "hasAnimation": true,
+                "buildingName": "Trees",
+                "feedback": "The environmentalists are thankful for your funding, but more funding could've made more of a difference",
+                "npcName": "Allena"
+            },
+            {
+                "threshold": 0,
+                "label": "No",
+                "environment": -25,
+                "happiness": -10,
+                "feedback": "The environmentalists are very upset, as the pollutions were not helped",
+                "npcName": "Allena"
+            }
+        ]
+    },
+    {
+        "name": "Allena",
+        "question": "The city is generating a lot of rubbish, how should we treat them?",
+        "options": [
+            {
+                "label": "Build another landfill",
+                "happiness": -10,
+                "environment": -15,
+                "npcName": "Allena",
+                "hasAnimation": true,
+                "buildingName": "LandFill",
+                "feedback": "Landfills release a lot of bad gas into the environment, and it's making the local people unhappy. "
+            },
+            {
+                "label": "Recycle the rubbish",
+                "environment": 15,
+                "money": -10,
+                "happiness": 10,
+                "npcName": "Allena",
+                "feedback": "Even though recycling rubbish is expensive, it is very good for the environment. "
+            }
+        ]
+    },
+    {
+        "name": "Jimmy Cash",
+        "question": "An international corporation is wanting to setup a chemical factory in the city, should we let them??",
+        "options": [
+            {
+                "label": "Yes",
+                "environment": -10,
+                "money": 25,
+                "npcName": "Jimmy Cash",
+                "hasAnimation": true,
+                "buildingName": "ChemicalFactory",
+                "feedback": "The city gets a lot more tax from the factory, but also taking a lot of pollution from them. "
+            },
+            {
+                "label": "No",
+                "npcName": "Jimmy Cash",
+                "feedback": "The company leaves you alone. "
+            }
+        ]
+    },
+    {
+        "name": "Allena",
         "precedingDialogue": [
             "Many world leaders are demanding more radical climate change initiatives",
             "In response, the council wants to ban all vehicles for 1 week."
@@ -15,7 +98,7 @@
                 "feedback": "The town is not happy. On the flip side, the air has become cleaner."
             },
             {
-                "label": "No this is a bit drastic, let's just do one day",
+                "label": "No this is too drastic, lets just do one day",
                 "happiness": -5,
                 "environment": 3,
                 "npcName": "Allena",
@@ -28,42 +111,6 @@
                 "environment": -5,
                 "npcName": "Allena",
                 "feedback": "The townspeople's daily routines were not disrupted, but emissions kept going up. "
-            }
-        ]
-    },
-    {
-        "name": "Allena",
-        "sliderType": true,
-        "precedingDialogue": [
-            "The increasing population of our town has increased our CO2 emission levels",
-            "The local environmentalists wishes for funding to plant trees to counteract the effects."
-        ],
-        "question": "How much money do you provide to the tree planting initiative?",
-        "maxValue": 100,
-        "minValue": 0,
-        "options": [
-            {
-                "threshold": 50,
-                "money": -20,
-                "environment": 25,
-                "feedback": "The environmentalists are very grateful for your support, it's made a marked improvement on the environment",
-                "npcName": "Allena"
-            },
-            {
-                "threshold": 25,
-                "money": -10,
-                "happiness": 5,
-                "environment": 5,
-                "feedback": "The environmentalists are thankful for your funding, but more funding could've made more of a difference",
-                "npcName": "Allena"
-            },
-            {
-                "threshold": 0,
-                "label": "No",
-                "environment": -25,
-                "happiness": -10,
-                "feedback": "The environmentalists are very upset, as the pollutions were not helped",
-                "npcName": "Allena"
             }
         ]
     },
@@ -200,22 +247,79 @@
         ]
     },
     {
-        "name": "Advisory Board",
-        "question": "The town is using more energy than we produce. What do you do?",
+        "name": "First Plebeian",
+        "question": "Help! Our house got burnt down in a fire, we have nowhere to live now. ",
         "options": [
             {
-                "label": "Invest in wind turbines",
-                "money": -20,
-                "environment": 5,
-                "npcName": "Advisory Board",
-                "feedback": "You made a smart long term decision, even though research costs much, they often result in much bigger pay offs"
+                "label": "Lend them a hand. ",
+                "money": -5,
+                "happiness": 5,
+                "npcName": "First Plebeian",
+                "feedback": "The plebeian thanks you! "
             },
             {
-                "label": "Dig for more fossil fuels",
+                "label": "That's the insurance company's job. ",
                 "happiness": -5,
-                "environment": -10,
-                "npcName": "Advisory Board",
-                "feedback": "Using more depletable resources may be easy, but it just delays the problem doesnt it. "
+                "npcName": "First Plebeian",
+                "feedback": "The plebeian resents you "
+            }
+        ]
+    },
+    {
+        "name": "Second Plebeian",
+        "question": "Mayor, can you come give a speech at my daughter's high school's graduation? ",
+        "options": [
+            {
+                "label": "It would be my pleasure",
+                "happiness": 5,
+                "npcName": "Second Plebeian",
+                "feedback": "The plebeian and his daughter thanks you! "
+            },
+            {
+                "label": "Sorry I'm too busy.  ",
+                "happiness": -5,
+                "npcName": "Second Plebeian",
+                "feedback": "The plebeian understands.  "
+            }
+        ]
+    },
+    {
+        "name": "Third Plebeian",
+        "question": "Mrs Gatburg, I think our streets are a bit dirty lately, could we hire some more cleaners?",
+        "options": [
+            {
+                "label": "Yes of course. ",
+                "happiness": 5,
+                "money": -5,
+                "environment": 5,
+                "npcName": "Third Plebeian",
+                "feedback": "The plebeian is happy! "
+            },
+            {
+                "label": "Sorry the budget is too tight. ",
+                "happiness": -5,
+                "environment": -5,
+                "npcName": "Third Plebeian",
+                "feedback": "The plebeian is upset.  "
+            }
+        ]
+    },
+    {
+        "name": "Forth Plebeian",
+        "question": "Mrs Mayor, could I have a dollar for the bus? ",
+        "options": [
+            {
+                "label": "Yes here you go. ",
+                "happiness": 1,
+                "money": -1,
+                "npcName": "Forth Plebeian",
+                "feedback": "The plebeian takes his bus! "
+            },
+            {
+                "label": "Sorry, no change on me. ",
+                "happiness": -1,
+                "npcName": "Forth Plebeian",
+                "feedback": "The plebeian walks home.  "
             }
         ]
     }
