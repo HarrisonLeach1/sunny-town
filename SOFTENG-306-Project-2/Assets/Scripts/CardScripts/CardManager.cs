@@ -20,6 +20,7 @@ namespace SunnyTown
         private const int MINOR_CARDS_PER_PLOT_CARD = 1;
         private int START_CAMPAIGN_CARD_NUMBER = 6;
         private float waitingForFeedbackDuration = WAITING_FOR_FEEDBACK_DURATION;
+        private const string FINAL_LEVEL_ID = "s15";
 
         public static CardManager Instance { get; private set; }
         public GameObject spawnHandlerObject;
@@ -274,7 +275,6 @@ namespace SunnyTown
                 }
             }
 
-
             if (IsFinalCard(currentCard))
             {
                 GameWon = true;
@@ -320,7 +320,7 @@ namespace SunnyTown
             {
                 hadCampaign = true;
                 GameObject.Find("CampaignManager").GetComponent<CampaignManager>().StartCampaignDialogue();
-            } 
+            }
             else
             {
                 currentCard = cardCount++ % MINOR_CARDS_PER_PLOT_CARD == 0 ? cardFactory.GetNewCard("story") : cardFactory.GetNewCard("minor");
@@ -330,6 +330,10 @@ namespace SunnyTown
                 }
                 else
                 {
+                    if (IsFinalCard(currentCard))
+                    {
+                        LastCardDialogue.setFinalDialogue((PlotCard)currentCard, PastTokens);
+                    }
                     dialogueManager.StartBinaryOptionDialogue(dialogueMapper.CardToOptionDialogue(currentCard), HandleOptionPressed);
                 }
             }
@@ -369,7 +373,7 @@ namespace SunnyTown
             // Game is ended on story cards with no transitions
             if (currentCard is PlotCard)
             {
-                if (String.IsNullOrEmpty(((PlotCard)currentCard).NextStateId))
+                if (((PlotCard)currentCard).Id == FINAL_LEVEL_ID)
                 {
                     return true;
                 }
@@ -380,25 +384,25 @@ namespace SunnyTown
         private void DisplayWeatherCard()
         {
             String weatherEvent = "";
-            switch(WeatherController.Instance.currentEvent)
+            switch (WeatherController.Instance.currentEvent)
             {
                 case WeatherController.ClimateEvent.AcidRain:
-                weatherEvent = "acid rain";
-                break;
+                    weatherEvent = "acid rain";
+                    break;
 
                 case WeatherController.ClimateEvent.Hurricane:
-                weatherEvent = "hurricane";
-                break;
+                    weatherEvent = "hurricane";
+                    break;
 
                 case WeatherController.ClimateEvent.Smog:
-                weatherEvent = "smog";
-                break;
+                    weatherEvent = "smog";
+                    break;
 
                 case WeatherController.ClimateEvent.WildFire:
-                weatherEvent = "wildfire";
-                break;
-            }    
-            string statement = "Your town has been struck by "+ weatherEvent +"! Try raise your environment health to avoid more disasters"; 
+                    weatherEvent = "wildfire";
+                    break;
+            }
+            string statement = "Your town has been struck by " + weatherEvent + "! Try raise your environment health to avoid more disasters";
             string[] statements = { statement };
             Action displayWeatherInfo = () =>
             {

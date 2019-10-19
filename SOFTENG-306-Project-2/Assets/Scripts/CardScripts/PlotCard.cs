@@ -25,16 +25,16 @@ namespace SunnyTown
 
         public override void HandleDecision(int decisionIndex, string additionalState = "")
         {
-            if (Options.Count >= decisionIndex + 1)
-            {
-                Options[decisionIndex].MetricsModifier.Modify();
-                Feedback = Options[decisionIndex].Feedback;
-                FeedbackNPCName = Options[decisionIndex].FeedbackNPCName;
-                NextStateId = Options[decisionIndex].NextStateId + additionalState;
-                Debug.Log("next state id: " + NextStateId);
-                ShouldAnimate = Options[decisionIndex].HasAnimation;
-                BuildingName = Options[decisionIndex].BuildingName;
-            }
+//            if (Options.Count >= decisionIndex + 1)
+//            {
+            Options[decisionIndex].MetricsModifier.Modify();
+            Feedback = Options[decisionIndex].Feedback;
+            FeedbackNPCName = Options[decisionIndex].FeedbackNPCName;
+            NextStateId = Options[decisionIndex].NextStateId + additionalState;
+            Debug.Log("next state id: " + NextStateId);
+            ShouldAnimate = Options[decisionIndex].HasAnimation;
+            BuildingName = Options[decisionIndex].BuildingName;
+//            }
         }
     }
 }

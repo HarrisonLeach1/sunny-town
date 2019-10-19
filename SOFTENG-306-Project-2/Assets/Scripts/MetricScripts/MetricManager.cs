@@ -141,7 +141,7 @@ namespace SunnyTown
                     "Oh no, the people in our town became " +
                     "very upset with your decisions. They have voted you out of power.",
                     " Try keeping them happier next time. "
-                }, "");
+                }, "Advisory Board");
                 CardManager.Instance.QueueGameLost(endGameDialogue);
             }
         }
@@ -166,7 +166,7 @@ namespace SunnyTown
                     {
                         "You have lost all your town's money. Now you cannot build the town.",
                         "Be careful when making decisions that involve spending money next time."
-                    }, "");
+                    }, "Advisory Board");
                 CardManager.Instance.QueueGameLost(endGameDialogue);
             }
         }
@@ -191,7 +191,7 @@ namespace SunnyTown
                     "Your decisions have led to a lot of damage to the environment." +
                     "Natural disasters have ravaged the city.",
                     " Take better care of your environment next time"
-                }, "");
+                }, "Advisory Board");
 
 
                 CardManager.Instance.QueueGameLost(endGameDialogue);
