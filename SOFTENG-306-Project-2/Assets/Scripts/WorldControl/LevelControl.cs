@@ -68,6 +68,7 @@ public class LevelControl : MonoBehaviour
     {
         // Checking if the current level is below 3
         if (currentLevel < 3)
+            Debug.Log("current level: " +currentLevel);
         {
             // Setting the next level to be active
             currentLevel++;
@@ -95,17 +96,20 @@ public class LevelControl : MonoBehaviour
     IEnumerator LateCall()
     {
         yield return new WaitForSeconds(3);
-        
-        levels[currentLevel - 1].SetActive(true);
-        //Making previous level inactive
-        levels[currentLevel-2].SetActive(false);
-        
+
+        if (currentLevel < 5)
+        {
+            Debug.Log("setting active level: " + currentLevel);
+            levels[currentLevel - 1].SetActive(true);
+            //Making previous level inactive
+            levels[currentLevel - 2].SetActive(false);
+        }
+
         // Fading out the particles
         foreach (GameObject cloud in levelUpTransition)
         {
             cloud.GetComponent<ParticleSystem>().enableEmission = false;
         }
-                    
-
+        
     }
 }
