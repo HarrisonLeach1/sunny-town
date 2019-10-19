@@ -19,7 +19,7 @@ namespace SunnyTown
             if (Input.GetKey(KeyCode.L))
             {
                 Debug.Log("Level up cheatcode entered");
-                LevelControl.Instance.NextLevel();
+                //LevelControl.Instance.NextLevel();
             }
             
             //cheatcode for maxing out metrics
