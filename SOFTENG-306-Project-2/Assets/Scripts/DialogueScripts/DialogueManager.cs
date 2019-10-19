@@ -27,6 +27,7 @@ namespace SunnyTown
         private Queue<string> statements = new Queue<string>();
         private Action onEndOfStatements;
         private Coroutine progressAnimationCoroutine;
+        public GameObject cutsceneView;
 
         public static DialogueManager Instance { get; private set; }
 
@@ -192,6 +193,18 @@ namespace SunnyTown
             }
 
             DisplayNextStatement();
+        }
+
+        public void StartCutsceneDialogue(string[] sentences, Action onEndOfStatements)
+        {
+            Action onClose = () =>
+            {
+                cutsceneView.gameObject.SetActive(false);
+                onEndOfStatements();
+            };
+            cutsceneView.gameObject.SetActive(true);
+            var dialogueScript = cutsceneView.GetComponent<CutsceneDialogueScript>();
+            dialogueScript.StartCutsceneDialogue(sentences, onClose);
         }
     }
 }

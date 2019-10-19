@@ -205,15 +205,15 @@ namespace SunnyTown
                 Sprite sprite = Resources.Load<Sprite>("Sprites/BadWinCutscene");
                 endGameImage.sprite = sprite;
                 this.endGameDialogue = endGameDialogue;
-                dialogueManager.StartExplanatoryDialogue(
-                    this.endGameDialogue,
+                dialogueManager.StartCutsceneDialogue(
+                    this.endGameDialogue.Statements,
                     () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
             }
             else if (GameLost)
             {
                 Sprite sprite = Resources.Load<Sprite>("Sprites/LoseCutscene");
-                dialogueManager.StartExplanatoryDialogue(
-                    this.endGameDialogue,
+                dialogueManager.StartCutsceneDialogue(
+                    this.endGameDialogue.Statements,
                     () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
             }
         }
