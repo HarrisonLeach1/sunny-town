@@ -3,8 +3,8 @@
     "id": "s1",
     "name": "Jimmy Cash",
     "precedingDialogue": [
-      "Mayor Gatburg, we have some excess cash for city development - it's usually a good idea to invest this into something that can be useful down the road. ",
-      "We have a few proposals from both small businesses and our local university asking us to support their projects, they all seem very interesting. "
+      "Mayor Gatburg, we have some excess cash for city development - it's usually a good idea to invest this into something that can be useful down the road.",
+      "There are research groups and businesses bidding for our cash, of course, we want good stuff in return too!"
     ],
     "question": "What would you like to fund?",
     "transitions": [
@@ -12,8 +12,8 @@
         "label": "An electric car company",
         "state": "s15",
         "npcName": "Jimmy Cash",
-        "feedback": "Electric cars are all the rage these days, and they save the environment, what a deal!",
-        "money": 10,
+        "feedback": "Electric cars are all the rage these days, and they save the environment, two for one!",
+        "money": -10,
         "environment": 10,
         "token": "investment",
         "investment": "EV"
@@ -23,7 +23,7 @@
         "state": "s2",
         "npcName": "Jimmy Cash",
         "feedback": "Material science helps with industry, and that's money!",
-        "money": 15,
+        "money": 10,
         "token": "investment",
         "investment": "material"
       },
@@ -31,8 +31,8 @@
         "label": "A clean energy research group",
         "state": "s2",
         "npcName": "Jimmy Cash",
-        "feedback": "Clean energy is not easy, but it can save the world in the future!",
-        "money": -10,
+        "feedback": "Clean energy is popular umong the people cause it saves our future, but it costs an arm and a leg!",
+        "money": -20,
         "environment": 15,
         "token": "investment",
         "investment": "energy"
@@ -134,7 +134,7 @@
         "state": "s8b"
       },
       {
-        "label": "Lets expand the coal plant",
+        "label": "Let's expand the coal plant",
         "hasAnimation": true,
         "buildingName": "PowerPlant",
         "npcName": "James the Dog",
@@ -160,14 +160,14 @@
         "npcName": "James the Dog",
         "hasAnimation": true,
         "buildingName": "WindFarm",
-        "feedback": "Woof! [Wind turbines are great for the environment, but it's pretty expensive if you haven't invested much into research]",
+        "feedback": "Woof! [Wind turbines are great for the environment, but it's expensive if you haven't invested much into research]",
         "money": -15,
         "happiness": 15,
         "environment": 15,
         "state": "s8b"
       },
       {
-        "label": "Lets expand the coal plant",
+        "label": "Let's expand the coal plant",
         "npcName": "James the Dog",
         "hasAnimation": true,
         "buildingName": "PowerPlant",
@@ -193,14 +193,14 @@
         "hasAnimation": true,
         "buildingName": "WindFarm",
         "npcName": "James the Dog",
-        "feedback": "Woof! [Wind turbines are great for the environment, but it's pretty expensive if you haven't invested much into research] ",
+        "feedback": "Woof! [Wind turbines are great for the environment, but it's expensive if you haven't invested much into research] ",
         "money": -15,
         "happiness": 15,
         "environment": 15,
         "state": "s8b"
       },
       {
-        "label": "Lets expand the coal plant",
+        "label": "Let's expand the coal plant",
         "npcName": "James the Dog",
         "hasAnimation": true,
         "buildingName": "PowerPlant",
@@ -283,7 +283,7 @@
     "question": "Next week is school holidays, could we please go?",
     "transitions": [
       {
-        "label": "Sorry Hunter, climate change has melted the icebergs. ",
+        "label": "Sorry Hunter, the icebergs are melting and it's too dangerous to go there. ",
         "happiness": -10,
         "state": "s9"
       }
@@ -296,7 +296,7 @@
       "[Ring Ring... Ring Ring...]",
       "Mom! Mom! Remember when you promised me we would go on a trip to see the polar bears?"
     ],
-    "question": "Next week is school holidays, would we please go?",
+    "question": "Next week is school holidays, could we please go?",
     "transitions": [
       {
         "label": "Of course, we'll have a great trip!",
@@ -409,7 +409,7 @@
     "name": "James the Dog",
     "precedingDialogue": [
       "Woof! [Our city is getting so big that we're struggling to provide enough food!]",
-      "Woof! [People don't ever want to have to choose between overpriced food and hunger!!]"
+      "Woof! [It's the duty of the Mayor to ensure people can afford to eat!!]"
     ],
     "question": "Woof! [Should we increase our farming efforts or import more food?]",
     "transitions": [
@@ -444,7 +444,7 @@
         "label": "Dairy",
         "npcName": "James the Dog",
         "hasAnimation": true,
-        "buildingName": "farm",
+        "buildingName": "Farm",
         "token": "farming",
         "farming": "dairy",
         "happiness": 10,
@@ -457,7 +457,7 @@
         "token": "farming",
         "farming": "vege",
         "hasAnimation": true,
-        "buildingName": "farm",
+        "buildingName": "Farm",
         "npcName": "James the Dog",
         "happiness": 5,
         "environment": 10,
@@ -502,7 +502,7 @@
     "id": "s12out",
     "name": "Allena",
     "precedingDialogue": [
-      "Your neighbouring city is having a bad drought - do you think it could be related to their damaging the environment?"
+      "Your neighbouring city is having a bad drought - it seems related to their damaging the environment."
     ],
     "question": "Should we give them a hand?",
     "transitions": [
@@ -532,7 +532,7 @@
     "id": "s13",
     "name": "Allena",
     "precedingDialogue": [
-      "Our city is having a bad drought, we really shouldn't have support so much dairy farming"
+      "Our city is having a bad drought, we really shouldn't have allowed so much dairy farming"
     ],
     "question": "Please take more care with our environment in the future! ",
     "transitions": [
@@ -550,7 +550,7 @@
     "id": "s14EV",
     "name": "Jimmy Cash",
     "precedingDialogue": [
-      "People love living in the city, but they drive everywhere, that's pretty bad for our environment"
+      "People love living in the city, but they drive everywhere, and that's pretty bad for our environment"
     ],
     "question": "How should we make transport better?",
     "transitions": [
@@ -574,7 +574,7 @@
         "hasAnimation": true,
         "buildingName": "Bus",
         "transport": "public",
-        "feedback": "Public transport is a lot greener, but they're pretty pricey. ",
+        "feedback": "Public transport is a lot greener, but they sure are pricey. ",
         "state": "s18"
       },
       {
@@ -584,7 +584,7 @@
         "happiness": 10,
         "token": "transport",
         "transport": "gas",
-        "feedback": "Not wise, petrol cars are really bad for your environment. ",
+        "feedback": "What a brilliant plan! Saving humanity from extinction never made much economic sense to me and this way, we'll save loads of cash! ",
         "state": "s15"
       }
     ]
@@ -617,7 +617,7 @@
         "hasAnimation": true,
         "buildingName": "Bus",
         "transport": "public",
-        "feedback": "Public transport is a lot greener, but they're pretty pricey. ",
+        "feedback": "Public transport is a lot greener, but they sure are pricey. ",
         "state": "s15"
       },
       {
@@ -627,7 +627,7 @@
         "happiness": 10,
         "token": "transport",
         "transport": "gas",
-        "feedback": "Not wise, petrol cars are really bad for your environment. ",
+        "feedback": "What a brilliant plan! Saving humanity from extinction never made much economic sense to me and this way, we'll save loads of cash! ",
         "state": "s15"
       }
     ]
@@ -660,7 +660,7 @@
         "buildingName": "Bus",
         "token": "transport",
         "transport": "public",
-        "feedback": "Public transport is a lot greener, but they're pretty pricey. ",
+        "feedback": "Public transport is a lot greener, but they sure are pricey. ",
         "state": "s15"
       },
       {
@@ -670,17 +670,8 @@
         "happiness": 10,
         "token": "transport",
         "transport": "gas",
-        "feedback": "Not wise, petrol cars are really bad for your environment. ",
+        "feedback": "What a brilliant plan! Saving humanity from extinction never made much economic sense to me and this way, we'll save loads of cash! ",
         "state": "s15"
-      }
-    ]
-  },
-  {
-    "id": "s15",
-    "name": "Advisory Board",
-    "transitions": [
-      {
-        "label": "continue"
       }
     ]
   }

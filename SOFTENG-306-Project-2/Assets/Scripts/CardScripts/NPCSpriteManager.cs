@@ -47,6 +47,7 @@ namespace SunnyTown
             spriteDictionary.Add("Second Plebeian", Resources.Load<Texture2D>("Sprites/Pleb2"));
             spriteDictionary.Add("Third Plebeian", Resources.Load<Texture2D>("Sprites/Pleb3"));
             spriteDictionary.Add("Forth Plebeian", Resources.Load<Texture2D>("Sprites/Pleb4"));
+            spriteDictionary.Add("exclamation", Resources.Load<Texture2D>("Sprites/exclamation"));
         }
 
         private Texture2D GetSpriteTexture(string name)
