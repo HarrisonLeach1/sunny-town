@@ -6,12 +6,27 @@ using UnityEngine;
 
 public class LevelControl : MonoBehaviour
 {
+    public static LevelControl Instance { get; set; }
     public GameObject[] levels;
     public GameObject[] levelUpTransition;
     public bool levelUp;
     public float cloudFadeDuration = 1.0f; 
 
     private int currentLevel;
+    
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +68,7 @@ public class LevelControl : MonoBehaviour
     {
         // Checking if the current level is below 3
         if (currentLevel < 3)
+            Debug.Log("current level: " +currentLevel);
         {
             // Setting the next level to be active
             currentLevel++;
@@ -80,17 +96,20 @@ public class LevelControl : MonoBehaviour
     IEnumerator LateCall()
     {
         yield return new WaitForSeconds(3);
-        
-        levels[currentLevel - 1].SetActive(true);
-        //Making previous level inactive
-        levels[currentLevel-2].SetActive(false);
-        
+
+        if (currentLevel < 5)
+        {
+            Debug.Log("setting active level: " + currentLevel);
+            levels[currentLevel - 1].SetActive(true);
+            //Making previous level inactive
+            levels[currentLevel - 2].SetActive(false);
+        }
+
         // Fading out the particles
         foreach (GameObject cloud in levelUpTransition)
         {
             cloud.GetComponent<ParticleSystem>().enableEmission = false;
         }
-                    
-
+        
     }
 }

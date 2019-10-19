@@ -5,7 +5,7 @@
 | Name           | GitHub Username  | UoA UPI |
 | -------------- | ---------------- | ------- |
 | Harrison Leach | HarrisonLeach1   | hlea849 |
-| Willian Li     | TwelveHertz      | zli667  |
+| William Li     | TwelveHertz      | zli667  |
 | Nidhinesh Nand | nidhineshnand    | nnan773 |
 | Allen Nian     | anian100         | ania716 |
 | William Shin   | william-shin-387 | wshi593 |
