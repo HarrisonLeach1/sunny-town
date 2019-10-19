@@ -1,0 +1,51 @@
+﻿[
+    {
+        "id": "s1",
+        "name": "Jimmy Cash",
+        "precedingDialogue": [
+            "Mrs mayor, we have quite a bit of excess cash for city development, it is usually a good idea to invest these into something that can be useful down the road. ",
+            "We have a few proposals from both small businesses and our local university asking us to support their projects, they all seem very interesting. "
+        ],
+        "question": "What would you like to fund?",
+        "transitions": [
+            {
+                "label": "An electric car company",
+                "state": "s2",
+                "npcName": "Jimmy Cash",
+                "feedback": "Electric cars are all the rage these days, and they save the environment, what a deal!",
+                "money": 10,
+                "environment": 10,
+                "token": "investment",
+                "investment": "EV"
+            },
+            {
+                "label": "A material science research group",
+                "state": "s2",
+                "npcName": "Jimmy Cash",
+                "feedback": "Material science helps with industry, and that's money!",
+                "money": 15,
+                "token": "investment",
+                "investment": "material"
+            },
+            {
+                "label": "A clean energy research group",
+                "state": "s2",
+                "npcName": "Jimmy Cash",
+                "feedback": "Clean energy is not easy, but it can save the world in the future!",
+                "money": -10,
+                "environment": 15,
+                "token": "investment",
+                "investment": "energy"
+            }
+        ]
+    },
+    {
+        "id": "s2",
+        "name": "Advisory Board",
+        "transitions": [
+            {
+                "label": "continue"
+            }
+        ]
+    }
+]

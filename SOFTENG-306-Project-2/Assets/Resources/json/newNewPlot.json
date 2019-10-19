@@ -621,15 +621,10 @@
   },
   {
     "id": "s15",
-    "name": "Hunter Gatberg",
-    "precedingDialogue": [
-      "Mom! Mom! I'm graduating, I'm so excited for what is to come! You've done so much for the town in your time! "
-    ],
+    "name": "Advisory Board",
     "transitions": [
       {
-        "label": "continue",
-        "state": "s16",
-        "additionalState": "end"
+        "label": "continue"
       }
     ]
   }

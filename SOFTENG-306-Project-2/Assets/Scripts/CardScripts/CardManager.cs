@@ -300,6 +300,7 @@ namespace SunnyTown
 
             if (IsFinalCard(currentCard))
             {
+                setFinalCard();
                 GameWon = true;
                 waitingForEventsDuration = 0f;
             }
@@ -321,6 +322,11 @@ namespace SunnyTown
                 levelProgress.UpdateValue((PlotCard)currentCard);
             }
             MoveToNextState();
+        }
+
+        private void setFinalCard()
+        {
+            currentCard.PrecedingDialogue = new[] {"this is the final dialogue", "this is also the final dialogue"};
         }
 
         /// <summary>
