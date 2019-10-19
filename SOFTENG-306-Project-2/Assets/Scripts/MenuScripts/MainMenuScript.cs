@@ -13,7 +13,8 @@ namespace SunnyTown
         public void PlayGame()
         {
             Debug.Log("Start game");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+			SceneManager.LoadScene("WorldScene");
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 4);
         }
 
         public void QuitGame()
