@@ -51,7 +51,7 @@ namespace SunnyTown
             //using logarithmic conversion
             //takes 0.001 and 1 value into a value between -80 and 0 on a log scale
             MusicMixer.SetFloat("MusicVolume", Mathf.Log10(MusicSliderValue) * 20);
-            SFXMixer.SetFloat("SFXVolume", Mathf.Log10(SFXsliderValue) * 20);
+            SFXMixer.SetFloat("MusicVolume", Mathf.Log10(SFXsliderValue) * 20);
 
             PlayerPrefs.SetFloat("SFXVolume", SFXsliderValue);
             PlayerPrefs.SetFloat("MusicVolume", MusicSliderValue);

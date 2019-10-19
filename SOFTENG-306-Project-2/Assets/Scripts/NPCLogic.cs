@@ -12,12 +12,12 @@ public class NPCLogic: MonoBehaviour
     private bool isRotLeft = false;
     private bool isRotRight = false;
     private bool isWalking = false;
-    private bool c = true;
+    //private bool c = true;
     
-    private int xmax = 20;
-    private int xmin = -400;
-    private int zmax = 120;
-    private int zmin = 100;
+    //private int xmax = 20;
+    //private int xmin = -400;
+    //private int zmax = 120;
+    //private int zmin = 100;
     
     
     // Start is called before the first frame update
