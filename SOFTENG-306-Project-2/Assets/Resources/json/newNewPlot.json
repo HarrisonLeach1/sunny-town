@@ -212,6 +212,8 @@
         "label": "Yes go ahead!",
         "hasAnimation": true,
         "buildingName": "CoalMine",
+        "token": "arvio2",
+        "arvio2": "yes",
         "environment": -20,
         "money": 20,
         "npcName": "Advisory Board",
@@ -220,6 +222,8 @@
       },
       {
         "label": "No, go away Arvio.",
+        "token": "arvio2",
+        "arvio2": "no",
         "npcName": "Advisory Board",
         "feedback": "Arvio leaves you alone",
         "state": "s8b"
@@ -240,6 +244,8 @@
         "hasAnimation": true,
         "buildingName": "CoalMine",
         "npcName": "Advisory Board",
+        "token": "arvio2",
+        "arvio2": "yes",
         "environment": -20,
         "money": 20,
         "feedback": "Arvio begins constructing an coal mine. We're getting paid a great amount of money, but this is releasing a lot of CO2.",
@@ -247,6 +253,8 @@
       },
       {
         "label": "No, go away Arvio.",
+        "token": "arvio2",
+        "arvio2": "no",
         "npcName": "Advisory Board",
         "feedback": "Arvio leaves you alone",
         "state": "s8b"
@@ -423,6 +431,8 @@
       {
         "label": "Dairy",
         "npcName": "James the Dog",
+        "token": "farming",
+        "farming": "dairy",
         "happiness": 10,
         "environment": -10,
         "feedback": "Woof! [People like dairy, that's for sure! But dairy farming is real bad for the environment.]",
@@ -430,6 +440,8 @@
       },
       {
         "label": "Vegetable",
+        "token": "farming",
+        "farming": "vege",
         "npcName": "James the Dog",
         "happiness": 5,
         "environment": 10,
@@ -450,6 +462,8 @@
       {
         "label": "Dairy",
         "npcName": "James the Dog",
+        "token": "farming",
+        "farming": "dairy",
         "happiness": 10,
         "environment": -10,
         "feedback": "Woof! [People like dairy, that's for sure! But dairy farming is real bad for the environment.]",
@@ -458,6 +472,8 @@
       {
         "label": "Fruits and Veges",
         "npcName": "James the Dog",
+        "token": "farming",
+        "farming": "vege",
         "happiness": 5,
         "environment": 10,
         "feedback": "Woof! [You made happy both the environment and lactose intolerant people]",
@@ -528,6 +544,8 @@
         "environment": 20,
         "money": -5,
         "happiness": 10,
+        "token": "transport",
+        "transport": "ev",
         "feedback": "Electric cars are much greener, plus our earlier investment made them cheap too. What a deal!",
         "state": "s15"
       },
@@ -536,6 +554,8 @@
         "npcName": "Jimmy Cash",
         "money": -20,
         "environment": 20,
+        "token": "transport",
+        "transport": "public",
         "feedback": "Public transport is a lot greener, but they're pretty pricey. ",
         "state": "s18"
       },
@@ -544,6 +564,8 @@
         "npcName": "Jimmy Cash",
         "environment": -30,
         "happiness": 10,
+        "token": "transport",
+        "transport": "gas",
         "feedback": "Not wise, petrol cars are really bad for your environment. ",
         "state": "s15"
       }
@@ -563,6 +585,8 @@
         "environment": 20,
         "money": -20,
         "happiness": 10,
+        "token": "transport",
+        "transport": "ev",
         "feedback": "Electric cars are much greener, but they're still pretty expensive since we didn't invest in them earlier. ",
         "state": "s15"
       },
@@ -571,6 +595,8 @@
         "npcName": "Jimmy Cash",
         "money": -20,
         "environment": 20,
+        "token": "transport",
+        "transport": "public",
         "feedback": "Public transport is a lot greener, but they're pretty pricey. ",
         "state": "s15"
       },
@@ -579,6 +605,8 @@
         "npcName": "Jimmy Cash",
         "environment": -30,
         "happiness": 10,
+        "token": "transport",
+        "transport": "gas",
         "feedback": "Not wise, petrol cars are really bad for your environment. ",
         "state": "s15"
       }
@@ -598,6 +626,8 @@
         "environment": 20,
         "money": -20,
         "happiness": 10,
+        "token": "transport",
+        "transport": "ev",
         "feedback": "Electric cars are much greener, but they're still pretty expensive since we didn't invest in them earlier. ",
         "state": "s15"
       },
@@ -606,6 +636,8 @@
         "npcName": "Jimmy Cash",
         "money": -20,
         "environment": 20,
+        "token": "transport",
+        "transport": "public",
         "feedback": "Public transport is a lot greener, but they're pretty pricey. ",
         "state": "s15"
       },
@@ -614,6 +646,8 @@
         "npcName": "Jimmy Cash",
         "environment": -30,
         "happiness": 10,
+        "token": "transport",
+        "transport": "gas",
         "feedback": "Not wise, petrol cars are really bad for your environment. ",
         "state": "s15"
       }

@@ -16,7 +16,7 @@
                 "money": 10,
                 "environment": 10,
                 "token": "investment",
-                "investment": "EV"
+                "investment": "electric cars"
             },
             {
                 "label": "A material science research group",
@@ -25,7 +25,7 @@
                 "feedback": "Material science helps with industry, and that's money!",
                 "money": 15,
                 "token": "investment",
-                "investment": "material"
+                "investment": "material science"
             },
             {
                 "label": "A clean energy research group",
@@ -35,7 +35,7 @@
                 "money": -10,
                 "environment": 15,
                 "token": "investment",
-                "investment": "energy"
+                "investment": "green energy"
             }
         ]
     },
