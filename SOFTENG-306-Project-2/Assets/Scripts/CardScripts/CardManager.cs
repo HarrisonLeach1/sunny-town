@@ -13,7 +13,7 @@ namespace SunnyTown
     public class CardManager : MonoBehaviour
     {
         private static float WAITING_FOR_FEEDBACK_DURATION = 0.1f;
-        private const int MINOR_CARDS_PER_PLOT_CARD = 1;
+        private const int MINOR_CARDS_PER_PLOT_CARD = 2;
         private float waitingForEventsDuration = 0.1f;
         private float waitingForFeedbackDuration = WAITING_FOR_FEEDBACK_DURATION;
 
