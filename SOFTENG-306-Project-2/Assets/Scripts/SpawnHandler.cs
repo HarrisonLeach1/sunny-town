@@ -11,7 +11,7 @@ namespace SunnyTown
     {
         private float instantiationTimer = 3f;
         public GameObject[] buildings;
-        public bool buildSomeThing = false;
+        public int buildSomeThing = 10;
         private Dictionary<GameObject, bool> visibilityMap = new Dictionary<GameObject, bool>();
 
 
@@ -43,11 +43,10 @@ namespace SunnyTown
 
         private void Update()
         {
-            if (buildSomeThing)
+            if (buildSomeThing < 9)
             {
-                Random random = new Random();
-                buildings[random.Next(0, 8)].SetActive(true);
-                buildSomeThing = false;
+                buildings[buildSomeThing].SetActive(true);
+                buildSomeThing = 10;
             }
         }
 
