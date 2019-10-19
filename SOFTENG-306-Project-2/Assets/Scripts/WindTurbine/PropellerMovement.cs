@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class PropellerMovement : MonoBehaviour
 {
-    GameObject[] propellers;
-    private int speed = 0.1;
+    public float speed = 1;
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
+        transform.Rotate(speed, 0, 0);    }
 }
