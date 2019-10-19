@@ -31,6 +31,7 @@ public class AchievementsManager : MonoBehaviour
     private const float POPUP_ANIMATION_TIME = 5f;
     private const int HIGH_SCORE_SIZE = 5;
 
+    public static string playerName;
     private int envInARow;
     //private MetricManager metricManager;
 
@@ -227,7 +228,7 @@ public class AchievementsManager : MonoBehaviour
 
         //add in the new score in the indexed position
         PlayerPrefs.SetInt(HIGH_SCORE + index, newScore);
-        PlayerPrefs.SetString(PLAYER_NAME + index, "bob");
+        PlayerPrefs.SetString(PLAYER_NAME + index, playerName);
         PlayerPrefs.SetInt(NUMBER_OF_SCORES, PlayerPrefs.GetInt(NUMBER_OF_SCORES) + 1);
 
         //if the number of high scores stored are now greater than the maximum, delete the lowest of the high scores
