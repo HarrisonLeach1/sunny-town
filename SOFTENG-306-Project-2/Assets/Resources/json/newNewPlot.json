@@ -102,9 +102,9 @@
     "name": "Advisory Board",
     "precedingDialogue": [
       "The scientists have said that the world is getting warmer because of all the things we're building, ",
-      "cars and factories can make it worse, protecting the environment and planting trees help make it better",
-      "If we don't make it better, it can cause bad weather events, even floods! "
+      "cars and factories can make it worse, protecting the environment and planting trees help make it better"
     ],
+    "question": "If we don't make it better, it can cause bad weather events, even floods! ",
     "transitions": [
       {
         "label": "continue",
@@ -125,7 +125,7 @@
       {
         "label": "Let's build a solar farm",
         "npcName": "James the Dog",
-        "feedback": "Solar panels are great for the environment, and with the efforts of the research group prices has been lowered significantly. ",
+        "feedback": "Woof! [Solar panels are great for the environment, and with the efforts of the research group prices has been lowered significantly.]",
         "money": -5,
         "happiness": 15,
         "environment": 15,
@@ -134,7 +134,7 @@
       {
         "label": "Lets expand the coal plant",
         "npcName": "James the Dog",
-        "feedback": "It's a shame that you invested in solar energy but never used it :( plus coal is bad for the environment. ",
+        "feedback": "Woof! [It's a shame that you invested in solar energy but never used it :( plus coal is bad for the environment.]",
         "money": -5,
         "environment": -15,
         "additionalState": "arvio",
@@ -154,7 +154,7 @@
       {
         "label": "Let's build a solar farm",
         "npcName": "James the Dog",
-        "feedback": "Solar panels are great for the environment, but it's pretty expensive if you haven't invested much into research",
+        "feedback": "Woof! [Solar panels are great for the environment, but it's pretty expensive if you haven't invested much into research]",
         "money": -15,
         "happiness": 15,
         "environment": 15,
@@ -163,7 +163,7 @@
       {
         "label": "Lets expand the coal plant",
         "npcName": "James the Dog",
-        "feedback": "Coal power is really bad for the environment. ",
+        "feedback": "Woof! [Coal power is really bad for the environment.]",
         "money": -5,
         "environment": -15,
         "additionalState": "arvio",
@@ -183,7 +183,7 @@
       {
         "label": "Let's build a solar farm",
         "npcName": "James the Dog",
-        "feedback": "Solar panels are great for the environment, but it's pretty expensive if you haven't invested much into research",
+        "feedback": "Woof! [Solar panels are great for the environment, but it's pretty expensive if you haven't invested much into research] ",
         "money": -15,
         "happiness": 15,
         "environment": 15,
@@ -192,7 +192,7 @@
       {
         "label": "Lets expand the coal plant",
         "npcName": "James the Dog",
-        "feedback": "Coal power is really bad for the environment. ",
+        "feedback": "Woof! [Coal power is really bad for the environment.]",
         "money": -5,
         "environment": -15,
         "additionalState": "arvio",
@@ -292,91 +292,122 @@
     "transitions": [
       {
         "label": "Continue",
-        "state": "s11",
+        "state": "s10",
         "additionalState": "investment"
       }
     ]
   },
   {
-    "id": "s11energy",
+    "id": "s10energy",
     "name": "Allena",
     "precedingDialogue": [
-      "Mayor from neighbouring city is sending you a letter asking for your advice",
-      "They want to scale their city, and they're wondering if they should build up or out",
-      "up is harder and requires better material science research, out is harder but maybe harder to transport and create environmental problems. "
+      "Peter the mayor from our neighbouring city sent you a letter asking for your advice",
+      "They want to scale their city, and they're wondering if they should build up or out"
     ],
-    "question": "shoudl they build up or out?",
+    "question": "How would you advise them?",
     "transitions": [
       {
-        "label": "up ",
-        "npcName": "allena",
+        "label": "They should build up",
+        "npcName": "Allena",
+        "money": -5,
         "token": "scale",
         "scale": "up",
-        "feedback": "mayor took your advice, and thanks you",
-        "state": "s12"
+        "feedback": "Building up can be expensive, but makes it easier to have sustainable transport. Peter thanks you for your advice. ",
+        "state": "s11"
       },
       {
-        "label": "out",
-        "npcName": "allena",
+        "label": "They should build out",
+        "npcName": "Allena",
+        "environment": -5,
         "token": "scale",
         "scale": "out",
-        "feedback": "mayor took your advice, and thanks you",
-        "state": "s12"
+        "feedback": "Building out is cheaper, but people drive more harms the environment. Peter takes your advice anyhow. ",
+        "state": "s11"
       }
     ]
   },
   {
-    "id": "s11EV",
+    "id": "s10EV",
     "name": "Allena",
     "precedingDialogue": [
-      "Mayor from neighbouring city is sending you a letter asking for your advice",
-      "They want to scale their city, and they're wondering if they should build up or out",
-      "up is harder and requires better material science research, out is harder but maybe harder to transport and create environmental problems. "
+      "Peter the mayor from our neighbouring city sent you a letter asking for your advice",
+      "They want to scale their city, and they're wondering if they should build up or out"
     ],
-    "question": "shoudl they build up or out?",
+    "question": "How would you advise them?",
     "transitions": [
       {
-        "label": "up ",
-        "npcName": "allena",
+        "label": "They should build up",
+        "npcName": "Allena",
+        "money": -5,
         "token": "scale",
         "scale": "up",
-        "feedback": "mayor took your advice, and thanks you",
-        "state": "s12"
+        "feedback": "Building up can be expensive, but makes it easier to have sustainable transport. Peter thanks you for your advice. ",
+        "state": "s11"
       },
       {
         "label": "out",
-        "npcName": "allena",
+        "npcName": "Allena",
+        "money": 15,
         "token": "scale",
         "scale": "out",
-        "feedback": "mayor took your advice, you get to export some electric cars",
-        "state": "s12"
+        "feedback": "People need to travel further and since we invested in electric cars earlier our exports are increasing. ",
+        "state": "s11"
       }
     ]
   },
   {
-    "id": "s11material",
+    "id": "s10material",
     "name": "Allena",
     "precedingDialogue": [
-      "Mayor from neighbouring city is sending you a letter asking for your advice",
-      "They want to scale their city, and they're wondering if they should build up or out",
-      "up is harder and requires better material science research, out is harder but maybe harder to transport and create environmental problems. "
+      "Peter the mayor from our neighbouring city sent you a letter asking for your advice",
+      "They want to scale their city, and they're wondering if they should build up or out"
     ],
-    "question": "shoudl they build up or out?",
+    "question": "How would you advise them?",
     "transitions": [
       {
-        "label": "up ",
-        "npcName": "allena",
+        "label": "They should build up",
+        "npcName": "Allena",
+        "money": -5,
         "token": "scale",
         "scale": "up",
-        "feedback": "mayor took your advice, you get to export some fancy materials",
-        "state": "s12"
+        "feedback": "Building up can be expensive, but makes it easier to have sustainable transport. Peter thanks you for your advice. ",
+        "state": "s11"
       },
       {
         "label": "out",
-        "npcName": "allena",
+        "npcName": "Allena",
+        "environment": -5,
         "token": "scale",
         "scale": "out",
-        "feedback": "mayor took your advice, and thanks you",
+        "feedback": "Building out is cheaper, but people drive more harms the environment. Peter takes your advice anyhow. ",
+        "state": "s11"
+      }
+    ]
+  },
+  {
+    "id": "s11",
+    "name": "James the Dog",
+    "precedingDialogue": [
+      "Woof! [Our city is getting so big that we're struggling to provide enough food!]",
+      "Woof! [People don't ever want to have to choose between overpriced food and hunger!!]"
+    ],
+    "question": "Woof! [Should we increase our farming efforts or import more food?]",
+    "transitions": [
+      {
+        "label": "Import some from neighbouring cities. ",
+        "npcName": "James the Dog",
+        "additionalState": "scale",
+        "money": -20,
+        "happiness": 15,
+        "feedback": "Woof! [Buying food is expensive, even though it doesn't increase our city's pollutions.]",
+        "state": "s12"
+      },
+      {
+        "label": "We should have more farms in the city. ",
+        "npcName": "James the Dog",
+        "environment": -10,
+        "happiness": 15,
+        "feedback": "Woof! [Farming is important, but it does a lot of damage to the environment, be careful!]",
         "state": "s12"
       }
     ]
@@ -385,107 +416,204 @@
     "id": "s12",
     "name": "James the Dog",
     "precedingDialogue": [
-      "your city is scaling fast, you need to find ways of getting more food",
-      "you can either buy more from other cities or grow more."
+      "Woof! [There's farming and there's farming, humans are omnivores and we have choices to make]"
     ],
-    "question": "buy or grow?",
+    "question": "Woof! [Should we encourage dairy farming or vegetable farming?]",
     "transitions": [
       {
-        "label": "buy",
+        "label": "Dairy",
         "npcName": "James the Dog",
-        "additionalState": "scale",
-        "feedback": "buying is good, but someone else is still growing them. ",
+        "happiness": 10,
+        "environment": -10,
+        "feedback": "Woof! [People like dairy, that's for sure! But dairy farming is real bad for the environment.]",
         "state": "s13"
       },
       {
-        "label": "grow",
+        "label": "Vegetable",
         "npcName": "James the Dog",
-        "feedback": "growing is important, but agriculture is a heavy contributor to climate change",
-        "state": "s13"
+        "happiness": 5,
+        "environment": 10,
+        "feedback": "Woof! [You made happy both the environment and lactose intolerant people]",
+        "state": "s14"
+      }
+    ]
+  },
+  {
+    "id": "s12up",
+    "name": "James the Dog",
+    "precedingDialogue": [
+      "Woof! [There's farming and there's farming, humans are omnivores and we have choices to make]"
+    ],
+    "question": "Woof! [Should we import more dairy products or fruits and vegetable?]",
+    "transitions": [
+      {
+        "label": "Dairy",
+        "npcName": "James the Dog",
+        "happiness": 10,
+        "environment": -10,
+        "feedback": "Woof! [People like dairy, that's for sure! But dairy farming is real bad for the environment.]",
+        "state": "s12out"
+      },
+      {
+        "label": "Fruits and Veges",
+        "npcName": "James the Dog",
+        "happiness": 5,
+        "environment": 10,
+        "feedback": "Woof! [You made happy both the environment and lactose intolerant people]",
+        "state": "s14",
+        "additionalState": "investment"
+      }
+    ]
+  },
+  {
+    "id": "s12out",
+    "name": "Allena",
+    "precedingDialogue": [
+      "Your neighbouring city is having a bad drought from damaging the environment too much"
+    ],
+    "question": "Should we give them a hand?",
+    "transitions": [
+      {
+        "label": "Yes definitely!",
+        "npcName": "Allena",
+        "feedback": "That was really kind of you!",
+        "token": "refugee",
+        "refugee": "yes",
+        "happiness": 20,
+        "money": -20,
+        "state": "s14",
+        "additionalState": "investment"
+      },
+      {
+        "label": "No, we can't afford that!",
+        "npcName": "James the Dog",
+        "feedback": "It's understandable, that was a tough ask. ",
+        "token": "refugee",
+        "refugee": "no",
+        "state": "s14",
+        "additionalState": "investment"
       }
     ]
   },
   {
     "id": "s13",
-    "name": "James the Dog",
+    "name": "Allena",
     "precedingDialogue": [
-      "meat is yum, but vege is good for environment"
+      "Our city is having a bad drought, we really shouldn't have support so much dairy farming"
     ],
-    "question": "do you want to farm meat or vege?",
+    "question": "Please take more care with our environment in the future! ",
     "transitions": [
       {
-        "label": "meat",
-        "npcName": "James the Dog",
-        "feedback": "meat is bad for environment",
-        "state": "s14"
+        "environment": -20,
+        "money": -10,
+        "happiness": -10,
+        "label": "Continue",
+        "state": "s14",
+        "additionalState": "investment"
+      }
+    ]
+  },
+  {
+    "id": "s14EV",
+    "name": "Jimmy Cash",
+    "precedingDialogue": [
+      "People love living in the city, but they drive everywhere, that's pretty bad for our environment"
+    ],
+    "question": "How should we make transport better?",
+    "transitions": [
+      {
+        "label": "Promote electric vehicles! ",
+        "npcName": "Jimmy Cash",
+        "environment": 20,
+        "money": -5,
+        "happiness": 10,
+        "feedback": "Electric cars are much greener, plus our earlier investment made them cheap too. What a deal!",
+        "state": "s15"
       },
       {
-        "label": "vege",
-        "npcName": "James the Dog",
-        "feedback": "vege is yuck",
+        "label": "Lets beef up our public transport! ",
+        "npcName": "Jimmy Cash",
+        "money": -20,
+        "environment": 20,
+        "feedback": "Public transport is a lot greener, but they're pretty pricey. ",
+        "state": "s18"
+      },
+      {
+        "label": "Let's keep letting people drive what they wish. ",
+        "npcName": "Jimmy Cash",
+        "environment": -30,
+        "happiness": 10,
+        "feedback": "Not wise, petrol cars are really bad for your environment. ",
         "state": "s15"
       }
     ]
   },
   {
-    "id": "s13up",
-    "name": "James the Dog",
+    "id": "s14material",
+    "name": "Jimmy Cash",
     "precedingDialogue": [
-      "meat is yum, but vege is good for environment"
+      "People love living in the city, but they drive everywhere, that's pretty bad for our environment"
     ],
-    "question": "do you want to import meat or vege?",
+    "question": "How should we make transport better?",
     "transitions": [
       {
-        "label": "meat",
-        "npcName": "James the Dog",
-        "feedback": "meat is bad for environment",
-        "state": "s13out"
+        "label": "Promote electric vehicles! ",
+        "npcName": "Jimmy Cash",
+        "environment": 20,
+        "money": -20,
+        "happiness": 10,
+        "feedback": "Electric cars are much greener, but they're still pretty expensive since we didn't invest in them earlier. ",
+        "state": "s15"
       },
       {
-        "label": "vege",
-        "npcName": "James the Dog",
-        "feedback": "vege is yuck",
+        "label": "Lets beef up our public transport! ",
+        "npcName": "Jimmy Cash",
+        "money": -20,
+        "environment": 20,
+        "feedback": "Public transport is a lot greener, but they're pretty pricey. ",
+        "state": "s15"
+      },
+      {
+        "label": "Let's keep letting people drive what they wish. ",
+        "npcName": "Jimmy Cash",
+        "environment": -30,
+        "happiness": 10,
+        "feedback": "Not wise, petrol cars are really bad for your environment. ",
         "state": "s15"
       }
     ]
   },
   {
-    "id": "s13out",
-    "name": "James the Dog",
+    "id": "s14energy",
+    "name": "Jimmy Cash",
     "precedingDialogue": [
-      "neighbouring city is having a drought"
+      "People love living in the city, but they drive everywhere, that's pretty bad for our environment"
     ],
-    "question": "would you like to help them by welcoming their citizens over as refugees?",
+    "question": "How should we make transport better?",
     "transitions": [
       {
-        "label": "yes",
-        "npcName": "James the Dog",
-        "feedback": "they thank you",
-        "token": "refugee",
-        "refugee": "yes",
+        "label": "Promote electric vehicles! ",
+        "npcName": "Jimmy Cash",
+        "environment": 20,
+        "money": -20,
+        "happiness": 10,
+        "feedback": "Electric cars are much greener, but they're still pretty expensive since we didn't invest in them earlier. ",
         "state": "s15"
       },
       {
-        "label": "no",
-        "npcName": "James the Dog",
-        "feedback": "understandable",
-        "token": "refugee",
-        "refugee": "no",
+        "label": "Lets beef up our public transport! ",
+        "npcName": "Jimmy Cash",
+        "money": -20,
+        "environment": 20,
+        "feedback": "Public transport is a lot greener, but they're pretty pricey. ",
         "state": "s15"
-      }
-    ]
-  },
-  {
-    "id": "s14",
-    "name": "James the Dog",
-    "precedingDialogue": [
-      "you have a drought in your city because of dairy farming"
-    ],
-    "transitions": [
+      },
       {
-        "label": "continue",
-        "npcName": "James the Dog",
-        "feedback": "meat is bad for environment",
+        "label": "Let's keep letting people drive what they wish. ",
+        "npcName": "Jimmy Cash",
+        "environment": -30,
+        "happiness": 10,
+        "feedback": "Not wise, petrol cars are really bad for your environment. ",
         "state": "s15"
       }
     ]
@@ -494,49 +622,7 @@
     "id": "s15",
     "name": "Hunter Gatberg",
     "precedingDialogue": [
-      "some random hunter dialogue idk man"
-    ],
-    "transitions": [
-      {
-        "label": "continue",
-        "state": "s16"
-      }
-    ]
-  },
-  {
-    "id": "16",
-    "name": "Advisory Board",
-    "precedingDialogue": [
-      "uuh, bruh, you need to fix transport",
-      "transport is kinda important, if you don't wanna trash the city"
-    ],
-    "question": "what do?",
-    "transitions": [
-      {
-        "label": "ev",
-        "npcName": "Advisory Board",
-        "feedback": "ev is gud",
-        "state": "s18"
-      },
-      {
-        "label": "public transport",
-        "npcName": "Advisory Board",
-        "feedback": "public transport can be good, AT is shite tho :'(",
-        "state": "s18"
-      },
-      {
-        "label": "do nothing, keep gas cars",
-        "npcName": "Advisory Board",
-        "feedback": "yeah at this point if you choose this you're just kinda dumb",
-        "state": "s18"
-      }
-    ]
-  },
-  {
-    "id": "s18",
-    "name": "Hunter Gatberg",
-    "precedingDialogue": [
-      "some random hunter dialogue idk man"
+      "Mom! Mom! I'm graduating, I'm so excited for what is to come! You've done so much for the town in your time! "
     ],
     "transitions": [
       {

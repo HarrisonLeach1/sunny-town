@@ -13,8 +13,8 @@ public class LevelProgressScript : MonoBehaviour
     private TextMeshProUGUI daysRemainingText;
     private LevelControl levelController;
     private const float LEVEL_ONE_CAP = 4f;
-    private const float LEVEL_TWO_CAP = 8f;
-    private const float LEVEL_THREE_CAP = 18f;
+    private const float LEVEL_TWO_CAP = 9f;
+    private const float LEVEL_THREE_CAP = 15f;
 
     private void Start()
     {
