@@ -8,11 +8,11 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class AchievementsManager : MonoBehaviour
 {
     public static AchievementsManager Instance { get; private set; }
 
-    public GameObject achievementsView;
     public Animator achievementNotificationAnimator;
     public GameObject achievementNotification;
     public Image achievementNotificationImage;
@@ -180,18 +180,6 @@ public class AchievementsManager : MonoBehaviour
         }
     }
 
-    public void Start()
-    {
-        var parentObject = GameObject.Find("AchievementsMenu");
-        if (parentObject != null)
-        {
-            achievementsView.transform.SetParent(parentObject.transform, false);
-        }
-        DisplayHighScores();
-        DisplayAchievementsMenu();
-    }
-
-
     /// <summary>
     /// Checks if the new score is within the high score list, if it is, then add it to the list.
     /// </summary>
@@ -256,8 +244,9 @@ public class AchievementsManager : MonoBehaviour
         return highScores;
     }
 
-    private void DisplayHighScores()
+    public void DisplayHighScores()
     {
+        var achievementsView = GameObject.Find("AchievementsMenu");
         highScoreContainer = achievementsView.transform.GetChild(1).GetChild(4).GetComponent<Transform>();
         highScoreTemplate = highScoreContainer.Find("HighScoreTemplate");
         highScoreTemplate.gameObject.SetActive(false);
@@ -329,8 +318,9 @@ public class AchievementsManager : MonoBehaviour
         achievementNotificationAnimator.SetBool("IsVisible", false);
     }
 
-    private void DisplayAchievementsMenu()
+    public void DisplayAchievementsMenu()
     {
+        var achievementsView = GameObject.Find("AchievementsMenu");
         achievementsContainer = achievementsView.transform.GetChild(2).GetChild(2).GetChild(0).GetChild(0).GetComponent<Transform>();
         var achievementsCompleted = achievementsView.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>();
         achievementsCompleted.SetText("Achievements Unlocked: " + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + "/" +
