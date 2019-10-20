@@ -47,6 +47,7 @@ public class AchievementsManager : MonoBehaviour
 		HandleGoldDiggerAchievement();
 		HandleCaptainPlanetAchievement();
 		HandleAllRounderAchievement();
+        HandleExclamationMarkClickAchievement();
     }
 
     private void HandleTreeHuggerAchievement()
@@ -74,6 +75,32 @@ public class AchievementsManager : MonoBehaviour
         }
     }
 
+    private void HandleExclamationMarkClickAchievement()
+    {
+        if (ExclamationDispatcher.Instance.clickCount == 5 && !IsAchievementAlreadyEarned("Crowd Pleaser 1"))
+        {
+            PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "Crowd Pleaser 1");
+            PlayerPrefs.SetString(ACHIEVEMENT_DATE + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), DateTime.Today.ToShortDateString());
+            PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
+            DisplayAchievementNotification("Crowd Pleaser 1");
+        } else if (ExclamationDispatcher.Instance.clickCount == 10 && !IsAchievementAlreadyEarned("Crowd Pleaser 2"))
+        {
+            PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "Crowd Pleaser 2");
+            PlayerPrefs.SetString(ACHIEVEMENT_DATE + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), DateTime.Today.ToShortDateString());
+            PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
+            DisplayAchievementNotification("Crowd Pleaser 2");
+        } else if (ExclamationDispatcher.Instance.clickCount == 15 && !IsAchievementAlreadyEarned("Crowd Pleaser 3"))
+        {
+            PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "Crowd Pleaser 3");
+            PlayerPrefs.SetString(ACHIEVEMENT_DATE + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), DateTime.Today.ToShortDateString());
+            PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
+            DisplayAchievementNotification("Crowd Pleaser 3");
+        }
+        else
+        {
+            return;
+        }
+    }
     private void HandleWinnerAchievement()
     {
         if (CardManager.Instance.GameWon && !IsAchievementAlreadyEarned("Winner"))
@@ -130,7 +157,7 @@ public class AchievementsManager : MonoBehaviour
 
     private void HandleAllRounderAchievement()
     {
-        if (MetricManager.Instance.EnvHealth >= 80 && MetricManager.Instance.Gold >= 80 && MetricManager.Instance.PopHappiness >= 80 &&
+        if (MetricManager.Instance.EnvHealth >= 75 && MetricManager.Instance.Gold >= 75 && MetricManager.Instance.PopHappiness >= 75 &&
             !IsAchievementAlreadyEarned("All Rounder"))
         {
             PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "All Rounder");

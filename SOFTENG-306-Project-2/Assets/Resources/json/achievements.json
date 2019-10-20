@@ -32,7 +32,7 @@
     {
         "id": "a6",
         "name": "All Rounder",
-        "description" : "Reach X in all 3 metrics at any one time",
+        "description" : "Reach 75 in all 3 metrics at any one time",
         "imageUrl": "HunterGatberg"
     },
     {
@@ -40,5 +40,23 @@
         "name": "Clutch Gamer",
         "description" : "Beat the game with a dangerously low score",
         "imageUrl" : "Arvio"
+    },
+    {
+        "id": "a8",
+        "name": "Crowd Pleaser 1",
+        "description" : "Dealt with town's request 5 times",
+        "imageUrl" : "James the Dog"
+    },
+    {
+        "id": "a9",
+        "name": "Crowd Pleaser 2",
+        "description" : "Dealt with town's request 10 times",
+        "imageUrl" : "James the Dog"
+    },
+    {
+        "id": "a10",
+        "name": "Crowd Pleaser 3",
+        "description" : "Dealt with town's request 15 times",
+        "imageUrl" : "James the Dog"
     }
 ]
