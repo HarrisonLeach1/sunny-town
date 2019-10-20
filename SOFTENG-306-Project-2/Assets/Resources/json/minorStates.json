@@ -1,57 +1,5 @@
 ﻿[
   {
-    "name": "Cowboy Willy",
-    "precedingDialogue": [
-      "Howdy thur partner! I'm starting up a farm and I'm wondering whether I should farm me some meat or vegetables?"
-    ],
-    "question": "Meat or vegetables?",
-    "options": [
-      {
-        "label": "Meat, because it tastes better",
-        "environment": -10,
-        "hasAnimation": true,
-        "buildingName": "Farm",
-        "npcName": "Allena",
-        "feedback": "While it is true meat tastes better. It is a less environmentally efficient food source."
-      },
-      {
-        "label": "Vegetables",
-        "environment": 10,
-        "hasAnimation": true,
-        "buildingName": "Farm",
-        "npcName": "Allena",
-        "feedback": "Well done! Vegetables are a more environmentally efficient food source!"
-      }
-    ]
-  },
-  {
-    "name": "Jimmy Cash",
-    "precedingDialogue": [
-      "The town's population has grown more than our power station could handle",
-      "Power bills have reached record high, the people are demanding cheaper electricity"
-    ],
-    "question": "Would you like to invest in a bigger, more powerful power plant?",
-    "options": [
-      {
-        "label": "Yes",
-        "hasAnimation": true,
-        "buildingName": "PowerPlant",
-        "happiness": 20,
-        "environment": -20,
-        "money": -5,
-        "npcName": "Jimmy Cash",
-        "feedback": "The people are happy, but the environment suffers from increased consumerism"
-      },
-      {
-        "label": "No",
-        "happiness": -15,
-        "environment": -20,
-        "npcName": "Jimmy Cash",
-        "feedback": "The towns people are unhappy, but it is better for the environment"
-      }
-    ]
-  },
-  {
     "name": "Allena",
     "precedingDialogue": [
       "Many world leaders are demanding more radical climate change initiatives",
@@ -98,6 +46,8 @@
         "threshold": 50,
         "money": -20,
         "environment": 25,
+        "hasAnimation": true,
+        "buildingName": "Trees",
         "feedback": "The environmentalists are very grateful for your support, it's made a marked improvement on the environment",
         "npcName": "Allena"
       },
@@ -106,6 +56,8 @@
         "money": -10,
         "happiness": 5,
         "environment": 5,
+        "hasAnimation": true,
+        "buildingName": "Trees",
         "feedback": "The environmentalists are thankful for your funding, but more funding could've made more of a difference",
         "npcName": "Allena"
       },
@@ -252,22 +204,82 @@
     ]
   },
   {
-    "name": "Advisory Board",
-    "question": "The town is using more energy than we produce. What do you do?",
+    "name": "Allena",
+    "question": "The city is generating a lot of rubbish, how should we treat them?",
     "options": [
       {
-        "label": "Invest in wind turbines",
-        "money": -20,
-        "environment": 5,
-        "npcName": "Advisory Board",
-        "feedback": "You made a smart long term decision, even though research costs much, they often result in much bigger pay offs"
+        "label": "Build another landfill",
+        "happiness": -10,
+        "environment": -15,
+        "npcName": "Allena",
+        "hasAnimation": true,
+        "buildingName": "LandFill",
+        "feedback": "Landfills release a lot of bad gas into the environment, and it's making the local people unhappy. "
       },
       {
-        "label": "Dig for more fossil fuels",
-        "happiness": -5,
+        "label": "Recycle the rubbish",
+        "environment": 15,
+        "money": "-10",
+        "happiness": "10",
+        "npcName": "Allena",
+        "feedback": "Even though recycling rubbish is expensive, it is very good for the environment. "
+      }
+    ]
+  },
+  {
+    "name": "Jimmy Cash",
+    "question": "An international corporation is wanting to setup a chemical factory in the city, should we let them??",
+    "options": [
+      {
+        "label": "Yes",
         "environment": -10,
-        "npcName": "Advisory Board",
-        "feedback": "Using more depletable resources may be easy, but it just delays the problem doesnt it. "
+        "money": 25,
+        "npcName": "Jimmy Cash",
+        "hasAnimation": true,
+        "buildingName": "ChemicalFactory",
+        "feedback": "The city gets a lot more tax from the factory, but also taking a lot of pollution from them. "
+      },
+      {
+        "label": "No",
+        "npcName": "Jimmy Cash",
+        "feedback": "The company leaves you alone. "
+      }
+    ]
+  },
+  {
+    "name": "First Plebeian",
+    "question": "Help! Our house got burnt down in a fire, we have nowhere to live now. ",
+    "options": [
+      {
+        "label": "Lend them a hand. ",
+        "money": -5,
+        "happiness": 5,
+        "npcName": "First Plebeian",
+        "feedback": "The plebeian thanks you! "
+      },
+      {
+        "label": "That's the insurance company's job. ",
+        "happiness": -5,
+        "npcName": "First Plebeian",
+        "feedback": "The plebeian resents you "
+      }
+    ]
+  },
+  {
+    "name": "Second Plebeian",
+    "question": "Mayor, can you come give a speech at my daughter's high school's graduation? ",
+    "options": [
+      {
+        "label": "It would be my pleasure",
+        "happiness": 5,
+        "npcName": "Second Plebeian",
+        "feedback": "The plebeian and his daughter thanks you! "
+      },
+      {
+        "label": "Sorry I'm too busy.  ",
+        "happiness": -5,
+        "npcName": "Second Plebeian",
+        "feedback": "The plebeian understands.  "
       }
     ]
   }
