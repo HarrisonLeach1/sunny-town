@@ -18,7 +18,6 @@ public class LevelProgressScript : MonoBehaviour
 
     private void Start()
     {
-        //levelController = levelController.Instance;
         levelController = GameObject.Find("LevelManager").GetComponent<LevelControl>();
     }
 

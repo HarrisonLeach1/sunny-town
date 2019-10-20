@@ -54,7 +54,6 @@ namespace SunnyTown
             dialogueMapper = new DialogueMapper();
             animationHandler = spawnHandlerObject.GetComponent<SpawnHandler>();
             levelProgress = GameObject.Find("LevelProgress").GetComponent<LevelProgressScript>();
-            //LevelControl lc = GameObject.Find("LevelManager").GetComponent<LevelControl>();
         }
 
         private void Awake()

@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class LevelControl : MonoBehaviour
 {
-    //public static LevelControl Instance { get; set; }
 
     public GameObject[] levels;
     public GameObject[] levelUpTransition;
@@ -16,19 +15,7 @@ public class LevelControl : MonoBehaviour
     private int currentLevel;
     private Dictionary<int, int> metricMultiplierDictionary;
     public int Multiplier { get; set; }
-    
-//    private void Awake()
-//    {
-//        if (Instance == null)
-//        {
-//            Instance = this;
-//        }
-//        else
-//        {
-//            Destroy(gameObject);
-//        }
-//    }
-    
+
     // Start is called before the first frame update
     void Start()
     {
