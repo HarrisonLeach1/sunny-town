@@ -34,7 +34,7 @@ namespace SunnyTown
             {
                 Build((Building)Enum.Parse(typeof(Building), buildingName));
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 Debug.Log("Building animation was not found");
             }

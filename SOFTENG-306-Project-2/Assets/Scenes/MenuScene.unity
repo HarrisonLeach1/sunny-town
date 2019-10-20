@@ -6346,7 +6346,7 @@ PrefabInstance:
     - target: {fileID: 3047270743384620581, guid: c6272942dbb0a3c4e852f0eae488c43a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000016208389
+      value: -0.00003698667
       objectReference: {fileID: 0}
     - target: {fileID: 3544810696345932361, guid: c6272942dbb0a3c4e852f0eae488c43a,
         type: 3}
@@ -6381,7 +6381,7 @@ PrefabInstance:
     - target: {fileID: 2576030415616814541, guid: c6272942dbb0a3c4e852f0eae488c43a,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.000000059604645
       objectReference: {fileID: 0}
     - target: {fileID: 3184904013738561694, guid: c6272942dbb0a3c4e852f0eae488c43a,
         type: 3}
@@ -6492,6 +6492,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5779440115889819265, guid: c6272942dbb0a3c4e852f0eae488c43a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -22.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5779440115889819265, guid: c6272942dbb0a3c4e852f0eae488c43a,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 198.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8148448221942821763, guid: c6272942dbb0a3c4e852f0eae488c43a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -42.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8148448221942821763, guid: c6272942dbb0a3c4e852f0eae488c43a,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 85.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6272942dbb0a3c4e852f0eae488c43a, type: 3}
@@ -20575,8 +20595,6 @@ MonoBehaviour:
   MusicMixer: {fileID: 24100000, guid: 15a19a3807f65fb47a55f6504e8c6e22, type: 2}
   SFXslider: {fileID: 1693669669}
   MusicSlider: {fileID: 421593283}
-  initialMusicValue: 0
-  initialSFXValue: 0
 --- !u!4 &694772410
 Transform:
   m_ObjectHideFlags: 0
@@ -31555,11 +31573,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afb7a3afda5623049abeadffd296b70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  achievementsView: {fileID: 1718552081}
-  achievementNotificationAnimator: {fileID: 0}
-  achievementNotification: {fileID: 0}
-  achievementNotificationImage: {fileID: 0}
-  achievementNotificationText: {fileID: 0}
 --- !u!4 &1038782747
 Transform:
   m_ObjectHideFlags: 0
@@ -49184,6 +49197,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 244201670}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1718552082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718552081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f6fc40441950da4b868b62a706ddb4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1720025439
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62379,4 +62404,5 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2253200262256107780, guid: 0a242615ce38e444b93af994320ba851, type: 3}
     - {fileID: 2253200261608544918, guid: 0a242615ce38e444b93af994320ba851, type: 3}
+    - {fileID: 5277067621149109207, guid: 0a242615ce38e444b93af994320ba851, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0a242615ce38e444b93af994320ba851, type: 3}

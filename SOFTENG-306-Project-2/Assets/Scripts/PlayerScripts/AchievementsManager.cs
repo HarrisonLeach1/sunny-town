@@ -13,10 +13,7 @@ public class AchievementsManager : MonoBehaviour
 {
     public static AchievementsManager Instance { get; private set; }
 
-    public Animator achievementNotificationAnimator;
-    public GameObject achievementNotification;
-    public Image achievementNotificationImage;
-    public TextMeshProUGUI achievementNotificationText;
+    private Animator achievementNotificationAnimator;
     private Transform highScoreContainer;
     private Transform achievementsContainer;
     private Transform achievementsTemplate;
@@ -63,10 +60,8 @@ public class AchievementsManager : MonoBehaviour
 
         if (envInARow == 5)
         {
-            Debug.Log("got into thing");
             if (!IsAchievementAlreadyEarned("Tree Hugger"))
             {
-                Debug.Log("Achieved achievement tree hugger");
                 PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "Tree Hugger");
                 PlayerPrefs.SetString(ACHIEVEMENT_DATE + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), DateTime.Today.ToShortDateString());
                 PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
@@ -147,7 +142,6 @@ public class AchievementsManager : MonoBehaviour
     {
         if (MetricManager.Instance.EnvHealth == 100 && !IsAchievementAlreadyEarned("Captain Planet"))
         {
-            Debug.Log("CAPTAIN PLANET");
             PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "Captain Planet");
             PlayerPrefs.SetString(ACHIEVEMENT_DATE + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), DateTime.Today.ToShortDateString());
             PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
@@ -285,7 +279,6 @@ public class AchievementsManager : MonoBehaviour
     private Achievement GetAchievementByIndex(int i)
     {
         var achievementName = PlayerPrefs.GetString("achievement" + i);
-        Debug.Log("saved achievement name: " + achievementName);
         foreach (Achievement achievement in Reader.Instance.AllAchievements)
         {
             if (achievement.name.Equals(achievementName))
@@ -303,11 +296,17 @@ public class AchievementsManager : MonoBehaviour
         {
             if (a.name.Equals(achievementName))
             {
-                achievementNotificationText.text = a.name;
-                achievementNotificationImage.sprite = Resources.Load<Sprite>("Sprites/" + a.imageUrl);
-                achievementNotificationAnimator.SetBool("IsVisible", true);
-                SFXAudioManager.Instance.PlayAchievementSound();
-                StartCoroutine(WaitForDownAnimation());
+                var achievementNotificationView = GameObject.Find("AchievementNotification");
+                if (achievementNotificationView != null)
+                {
+                    achievementNotificationView.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = a.name;
+                    achievementNotificationView.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + a.imageUrl);
+                    achievementNotificationAnimator = achievementNotificationView.GetComponent<Animator>();
+                    achievementNotificationAnimator.SetBool("IsVisible", true);
+                    SFXAudioManager.Instance.PlayAchievementSound();
+                    StartCoroutine(WaitForDownAnimation());
+                }
+
             }
         }
     }
