@@ -1,4 +1,4 @@
-# SOFTENG306 Project 2 Group 11
+# Global Warning Studios: Sunny Town
 
 ## Team Members
 
@@ -26,9 +26,13 @@
 
 ## Execution Instructions
 
+### Use the WebGL Build
+
+-   Can be found [here](https://global-warning.s3-ap-southeast-2.amazonaws.com/index.html)
+
 ### Through Unity (Version 2018.4.9f1)
 
-1. Checkout the "Prototype" branch from the repository.
+1. Checkout the "Final" branch from the repository.
 2. Navigate to `Assets/Scenes/MenuScene.unity` and open the file with Unity.
 3. Press the play button in Unity.
 4. You will begin on the start screen where you will be able to select "Play" to begin.
