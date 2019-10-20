@@ -13,7 +13,7 @@
         "state": "s2",
         "npcName": "Jimmy Cash",
         "feedback": "Electric cars are all the rage these days, and they save the environment, two for one!",
-        "money": -100,
+        "money": -10,
         "environment": 8,
         "token": "investment",
         "investment": "EV"
