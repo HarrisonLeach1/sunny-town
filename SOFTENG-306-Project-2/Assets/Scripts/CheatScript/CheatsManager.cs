@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,9 +7,11 @@ namespace SunnyTown
     public class CheatsManager : MonoBehaviour
     {
 
+        private bool levelUpPressed = false;
+        private float decay;
         private LevelControl levelController;
         private LevelProgressScript levelProgressScript;
-        
+
         // Start is called before the first frame update
         void Start()
         {
@@ -39,7 +41,7 @@ namespace SunnyTown
                     levelProgressScript.UpdateValue((PlotCard)card);
                 }
             }
-            
+
             //cheatcode for maxing out metrics
             if (Input.GetKey(KeyCode.M))
             {
@@ -48,9 +50,6 @@ namespace SunnyTown
                 MetricManager.Instance.RenderMetrics();
             }
         }
-
-        private bool levelUpPressed = false;
-        private float decay;
 
         private void Reset()
         {
@@ -64,6 +63,6 @@ namespace SunnyTown
                 levelUpPressed = false;
             }
         }
-    }    
+    }
 }
 

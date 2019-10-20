@@ -458,7 +458,7 @@ namespace SunnyTown
                 Debug.Log("Clicked continue on weather event");
                 SetState(GameState.WaitingForEvents);
                 //TODO: balance numbers on event
-                MetricsModifier modifier = new MetricsModifier(-5, -5, 0);
+                MetricsModifier modifier = new MetricsModifier(-4, -3, 0);
                 modifier.Modify();
                 metricManager.RenderMetrics();
                 WeatherController.Instance.probability = 0;
