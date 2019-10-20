@@ -24,6 +24,13 @@
 -   The objective of the game is to make appropriate tradeoffs to ensure no metric in the town drops too low.
     This should teach the player the tradeoffs that are necessary in maintaining the environments health.
 
+## Cheat codes (For testing purposes)
+
+-   Pressing key "M" will boost all metrics to 100 - useful for testing achievements and winning
+-   Pressing key "N" will lower all metrics to 30 - useful for testing natural disasters
+-   Pressing key "K" will lower all metrics to 0 - useful for testing the lose scene
+-   Pressing key "L" will advance you to the next level - with a default decision tree being used (investing in EVs, and saying no to arvio) - useful for testing one of the win endings
+
 ## Execution Instructions
 
 ### Use the WebGL Build
