@@ -15,12 +15,10 @@ namespace SunnyTown
     public class EndGameMenuScript : MonoBehaviour
     {
 
-        private GameObject endGameView;
-        public GameObject endGamePrefab;
+        public GameObject endGameView;
 
         void Awake()
         {
-            endGameView = Instantiate(endGamePrefab, new Vector3(0, 0, 0), Quaternion.identity);
             var gameScore = endGameView.transform.GetChild(0).GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>();
             var gameOutcome = endGameView.transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
             var gameBackground = endGameView.transform.GetChild(0).GetChild(0).GetComponent<Image>();
