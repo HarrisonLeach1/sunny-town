@@ -45,8 +45,9 @@ namespace SunnyTown
         {
             if (buildSomeThing)
             {
-                Random random = new Random();  
-                buildings[random.Next(0, 8)].SetActive(true);
+                //Random random = new Random();  
+                //buildings[random.Next(0, 8)].SetActive(true);
+                buildings[8].SetActive(true);
                 buildSomeThing = false;
             }
         }
@@ -57,7 +58,7 @@ namespace SunnyTown
             foreach (var building in visibilityMap.Keys)
             {
                 // Setting visibility for the building to true
-                if (building.name.Contains(buildingName.ToString()))
+                if (building.name.Equals(buildingName.ToString()))
                 {
                     building.SetActive(true);
                 }
