@@ -213,6 +213,7 @@ namespace SunnyTown
             else if (GameLost)
             {
                 Sprite sprite = Resources.Load<Sprite>("Sprites/LoseCutscene");
+                endGameImage.sprite = sprite;
                 dialogueManager.StartExplanatoryDialogue(
                     this.endGameDialogue,
                     () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
