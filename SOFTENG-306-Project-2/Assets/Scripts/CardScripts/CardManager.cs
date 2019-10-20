@@ -194,6 +194,9 @@ namespace SunnyTown
         {
             var endGameImage = GameObject.Find("EndGameImage").GetComponent<Image>();
             endGameImage.color = Color.white;
+            GameObject.Find("MetricPanel").SetActive(false);
+            GameObject.Find("CampaignButton").SetActive(false);
+            GameObject.Find("LevelProgressPanel").SetActive(false);
             if (GameWon)
             {
                 Sprite sprite = Resources.Load<Sprite>("Sprites/BadWinCutscene");
