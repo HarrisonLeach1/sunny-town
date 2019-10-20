@@ -12,7 +12,7 @@ public class AchievementsManager : MonoBehaviour
 {
     public static AchievementsManager Instance { get; private set; }
 
-    public GameObject achievementsPrefab;
+    public GameObject achievementsView;
     public Animator achievementNotificationAnimator;
     public GameObject achievementNotification;
     public Image achievementNotificationImage;
@@ -21,7 +21,6 @@ public class AchievementsManager : MonoBehaviour
     private Transform achievementsContainer;
     private Transform achievementsTemplate;
     private Transform highScoreTemplate;
-    private GameObject achievementsView;
 
     private const string NUMBER_OF_SCORES = "NumberOfScores";
     private const string NUMBER_OF_ACHIEVEMENTS = "NumberOfAchievements";
@@ -179,9 +178,10 @@ public class AchievementsManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
-//        MetricManager metricManager = MetricManager.Instance;
-        achievementsView = Instantiate(achievementsPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+    }
+
+    public void Start()
+    {
         var parentObject = GameObject.Find("AchievementsMenu");
         if (parentObject != null)
         {
