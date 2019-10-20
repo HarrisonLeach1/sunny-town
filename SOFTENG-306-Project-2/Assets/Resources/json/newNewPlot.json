@@ -123,9 +123,11 @@
     "question": "Woof! [What kind of power plant should we build?]",
     "transitions": [
       {
-        "label": "Let's build a solar farm",
+        "label": "Let's build a wind farm",
         "npcName": "James the Dog",
-        "feedback": "Woof! [Solar panels are great for the environment, and with the efforts of the research group prices has been lowered significantly.]",
+        "hasAnimation": true,
+        "buildingName": "WindFarm",
+        "feedback": "Woof! [Wind turbines are great for the environment, and with the efforts of the research group prices has been lowered significantly.]",
         "money": -5,
         "happiness": 15,
         "environment": 15,
@@ -133,8 +135,10 @@
       },
       {
         "label": "Lets expand the coal plant",
+        "hasAnimation": true,
+        "buildingName": "PowerPlant",
         "npcName": "James the Dog",
-        "feedback": "Woof! [It's a shame that you invested in solar energy but never used it :( plus coal is bad for the environment.]",
+        "feedback": "Woof! [It's a shame that you invested in green energy but never used it :( plus coal is bad for the environment.]",
         "money": -5,
         "environment": -15,
         "additionalState": "arvio",
@@ -152,9 +156,11 @@
     "question": "Woof! [What kind of power plant should we build?]",
     "transitions": [
       {
-        "label": "Let's build a solar farm",
+        "label": "Let's build a wind farm",
         "npcName": "James the Dog",
-        "feedback": "Woof! [Solar panels are great for the environment, but it's pretty expensive if you haven't invested much into research]",
+        "hasAnimation": true,
+        "buildingName": "WindFarm",
+        "feedback": "Woof! [Wind turbines are great for the environment, but it's pretty expensive if you haven't invested much into research]",
         "money": -15,
         "happiness": 15,
         "environment": 15,
@@ -163,6 +169,8 @@
       {
         "label": "Lets expand the coal plant",
         "npcName": "James the Dog",
+        "hasAnimation": true,
+        "buildingName": "PowerPlant",
         "feedback": "Woof! [Coal power is really bad for the environment.]",
         "money": -5,
         "environment": -15,
@@ -181,9 +189,11 @@
     "question": "Woof! [What kind of power plant should we build?]",
     "transitions": [
       {
-        "label": "Let's build a solar farm",
+        "label": "Let's build a wind farm",
+        "hasAnimation": true,
+        "buildingName": "WindFarm",
         "npcName": "James the Dog",
-        "feedback": "Woof! [Solar panels are great for the environment, but it's pretty expensive if you haven't invested much into research] ",
+        "feedback": "Woof! [Wind turbines are great for the environment, but it's pretty expensive if you haven't invested much into research] ",
         "money": -15,
         "happiness": 15,
         "environment": 15,
@@ -192,6 +202,8 @@
       {
         "label": "Lets expand the coal plant",
         "npcName": "James the Dog",
+        "hasAnimation": true,
+        "buildingName": "PowerPlant",
         "feedback": "Woof! [Coal power is really bad for the environment.]",
         "money": -5,
         "environment": -15,
@@ -431,6 +443,8 @@
       {
         "label": "Dairy",
         "npcName": "James the Dog",
+        "hasAnimation": true,
+        "buildingName": "farm",
         "token": "farming",
         "farming": "dairy",
         "happiness": 10,
@@ -442,6 +456,8 @@
         "label": "Vegetable",
         "token": "farming",
         "farming": "vege",
+        "hasAnimation": true,
+        "buildingName": "farm",
         "npcName": "James the Dog",
         "happiness": 5,
         "environment": 10,
@@ -555,6 +571,8 @@
         "money": -20,
         "environment": 20,
         "token": "transport",
+        "hasAnimation": true,
+        "buildingName": "Bus",
         "transport": "public",
         "feedback": "Public transport is a lot greener, but they're pretty pricey. ",
         "state": "s18"
@@ -596,6 +614,8 @@
         "money": -20,
         "environment": 20,
         "token": "transport",
+        "hasAnimation": true,
+        "buildingName": "Bus",
         "transport": "public",
         "feedback": "Public transport is a lot greener, but they're pretty pricey. ",
         "state": "s15"
@@ -636,6 +656,8 @@
         "npcName": "Jimmy Cash",
         "money": -20,
         "environment": 20,
+        "hasAnimation": true,
+        "buildingName": "Bus",
         "token": "transport",
         "transport": "public",
         "feedback": "Public transport is a lot greener, but they're pretty pricey. ",
