@@ -470,19 +470,40 @@ namespace SunnyTown
 
         }
 
+        /// <summary>
+        /// Sets the next plot card to be the start of level two.
+        /// </summary>
+        /// <returns>The card which transfers to level two</returns>
         public Card SetLevelTwo()
         {
             var card = (PlotCard) cardFactory.GetLevelTwoCard();
             card.NextStateId = "s5";
+            SetCheatcodePath();
             return card;
         }
 
+        /// <summary>
+        /// Sets the next plot card to be the start of level three.
+        /// </summary>
+        /// <returns>The card which transfers to level three</returns>
         public Card SetLevelThree()
         {
             var card = (PlotCard) cardFactory.GetLevelThreeCard();
             card.NextStateId = "s10EV";
+            SetCheatcodePath();
             return card;
         }
+
+        /// <summary>
+        /// Sets the decision-tree as a set of default ideal decisions
+        /// </summary>
+        private void SetCheatcodePath()
+        {
+            PastTokens.Clear();
+            PastTokens.Add("investment", "EV");
+            PastTokens.Add("arvio", "no");
+        }
+
 
     }
 }
