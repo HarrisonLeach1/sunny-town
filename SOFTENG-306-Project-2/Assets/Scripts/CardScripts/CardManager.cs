@@ -21,7 +21,7 @@ namespace SunnyTown
         private const int MINOR_CARDS_PER_PLOT_CARD = 1;
         private int START_CAMPAIGN_CARD_NUMBER = 6;
         private float waitingForFeedbackDuration = WAITING_FOR_FEEDBACK_DURATION;
-        private const string FINAL_LEVEL_ID = "s15";
+        private const string FINAL_LEVEL_ID = "s14";
 
         public static CardManager Instance { get; private set; }
         public GameObject spawnHandlerObject;
