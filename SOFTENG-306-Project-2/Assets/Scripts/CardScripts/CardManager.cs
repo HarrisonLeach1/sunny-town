@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -193,7 +194,6 @@ namespace SunnyTown
         private void EndGame()
         {
             var endGameImage = GameObject.Find("EndGameImage").GetComponent<Image>();
-            endGameImage.color = Color.white;
             GameObject.Find("MetricPanel").SetActive(false);
             GameObject.Find("CampaignButton").SetActive(false);
             GameObject.Find("LevelProgressPanel").SetActive(false);
@@ -201,6 +201,7 @@ namespace SunnyTown
             {
                 Sprite sprite = Resources.Load<Sprite>("Sprites/BadWinCutscene");
                 endGameImage.sprite = sprite;
+                StartCoroutine(FadeInCutScene(endGameImage));
                 SimpleDialogue endGameDialogue = new SimpleDialogue(new string[1]
                 {
                     "You have won the game, good job!! :D lit times"
@@ -214,9 +215,23 @@ namespace SunnyTown
             {
                 Sprite sprite = Resources.Load<Sprite>("Sprites/LoseCutscene");
                 endGameImage.sprite = sprite;
+                StartCoroutine(FadeInCutScene(endGameImage));
                 dialogueManager.StartExplanatoryDialogue(
                     this.endGameDialogue,
                     () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
+            }
+        }
+        
+        private static IEnumerator FadeInCutScene(Image image)
+        {
+            float elapsedTime = 0.0f;
+            Color c = image.color;
+            while (elapsedTime < 1)
+            {
+                yield return null;
+                elapsedTime += Time.deltaTime ;
+                c.a = Mathf.Clamp01(elapsedTime / 1);
+                image.color = c;
             }
         }
 
