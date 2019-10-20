@@ -34,6 +34,8 @@ namespace SunnyTown
         private LevelProgressScript levelProgress;
         private SimpleDialogue endGameDialogue;
         private int cardCount = 0;
+        private TownAudioClipSwitch townAudioClipSwitch;
+
 
         public bool GameWon { get; private set; } = false;
         public bool GameLost { get; private set; } = false;
@@ -55,6 +57,7 @@ namespace SunnyTown
             dialogueMapper = new DialogueMapper();
             animationHandler = spawnHandlerObject.GetComponent<SpawnHandler>();
             levelProgress = GameObject.Find("LevelProgress").GetComponent<LevelProgressScript>();
+            townAudioClipSwitch = GameObject.Find("TownAudioClipSwitch").GetComponent<TownAudioClipSwitch>();
         }
 
         private void Awake()
@@ -207,6 +210,7 @@ namespace SunnyTown
             GameObject.Find("PauseButton").SetActive(false);
             if (GameWon)
             {
+                townAudioClipSwitch.PlayWinScreenMusic();
                 SimpleDialogue endGameDialogue = LastCardDialogue.CreateFinalDialogue(PastTokens);
                 Sprite sprite;
                 if (MetricManager.Instance.ScoreLow())
@@ -227,6 +231,7 @@ namespace SunnyTown
             }
             else if (GameLost)
             {
+                townAudioClipSwitch.PlayLoseScreenMusic();
                 Sprite sprite = Resources.Load<Sprite>("Sprites/LoseCutscene");
                 endGameImage.sprite = sprite;
                 StartCoroutine(FadeInCutScene(endGameImage));

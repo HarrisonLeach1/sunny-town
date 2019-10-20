@@ -34,11 +34,11 @@ public class KeyboardInputManager : InputManager
         // Rotation input
         if (Input.GetKey(KeyCode.E))
         {
-            OnRotateInput?.Invoke(1f);
+            OnRotateInput?.Invoke(-1f);
         }
         if (Input.GetKey(KeyCode.Q))
         {
-            OnRotateInput?.Invoke(-1f);
+            OnRotateInput?.Invoke(1f);
         }
         
         // Zoom input

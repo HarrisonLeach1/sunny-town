@@ -161,15 +161,15 @@ namespace SunnyTown
             string[] statements;
             if (currentWeightings.Happiness > 0)
             {
-                statements = new string[2] { "Your campaign has convinced the citisens that you are a woman of the people", "They will now react more strongly to decisions that affect them" };
+                statements = new string[2] { "Your campaign has convinced the citizens that you are a woman of the people", "Population happiness increases more" };
             }
             else if (currentWeightings.Gold > 0)
             {
-                statements = new string[2] { "Your campaign has convinced the citisens that you will create a thriving economy in Sunnytown", "They will now react to decisions that impact the economy" };
+                statements = new string[2] { "Your campaign has convinced the citizens that you will create a thriving economy in Sunnytown", "Population happiness will now change a little with decisions that affect money" };
             }
             else if (currentWeightings.EnvHealth > 0)
             {
-                statements = new string[2] { "Your campaign has convinced the citisens that environmental health is of utmost importance", "They will now react to decisions that impact the environment" };
+                statements = new string[2] { "Your campaign has convinced the citizens that environmental health is of utmost importance", "Population happiness will now change a little with decisions that affect environmental health" };
             }
             else
             {
