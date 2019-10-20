@@ -16,17 +16,21 @@ namespace SunnyTown
         [SerializeField] private string question;
         [SerializeField] private int maxValue;
         [SerializeField] private int minValue;
+        [SerializeField] private string cardType;
+
         public string Question => question;
         public SimpleDialogue PrecedingDialogue => precedingDialogue;
         public int MaxValue => maxValue;
         public int MinValue => minValue;
+        public string CardType => cardType;
 
-        public SliderOptionDialogue(string question, int maxValue, int minValue, SimpleDialogue dialogue)
+        public SliderOptionDialogue(string question, int maxValue, int minValue, SimpleDialogue dialogue, string cardType)
         {
             this.maxValue = maxValue;
             this.minValue = minValue;
             this.precedingDialogue = dialogue;
             this.question = question;
+            this.cardType = cardType;
         }
 
     }

@@ -6,10 +6,12 @@ namespace SunnyTown
 {
     public class ExclamationDispatcher : MonoBehaviour
     {
+        public static ExclamationDispatcher Instance { get; private set; }
         public GameObject manager;
         private bool markSpawned;
         private CardManager cardManager;
 
+        public int clickCount; 
         public MeshRenderer render;
 
         public Animator animator;
@@ -20,7 +22,7 @@ namespace SunnyTown
             // dont render the individual shapes that make up the exclamation mark 
             foreach (Renderer r in GetComponentsInChildren<Renderer>())
                 r.enabled = false;
-
+            clickCount = 0;
             animator = GetComponent<Animator>();
             // set animator to default state 
             animator.SetBool("isShow", false);
@@ -29,6 +31,19 @@ namespace SunnyTown
             StartCoroutine("CreateExclamationMark");
         }
 
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+        
+        
          /// <summary>
          ///  Starts the exclmation mark spawining animation, and reschedules itself at a random time in the future
          /// </summary>
@@ -71,6 +86,7 @@ namespace SunnyTown
             if (markSpawned && cardManager.CurrentGameState == CardManager.GameState.WaitingForEvents)
             {
                 animator.SetBool("isShow", false);
+                clickCount++;
                 markSpawned = false;
                 cardManager.QueueMinorCard();
                 foreach (Renderer r in GetComponentsInChildren<Renderer>())

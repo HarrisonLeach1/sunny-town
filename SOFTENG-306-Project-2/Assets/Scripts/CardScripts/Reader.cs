@@ -34,7 +34,7 @@ namespace SunnyTown
         {
             AllExpositionDialogues =
                 this.ParseExpositionJson(Resources.Load<TextAsset>("json/expositionStates").text);
-            AllStoryStates = this.ParseJson(Resources.Load<TextAsset>("json/newNewPlot").text, true)
+            AllStoryStates = this.ParseJson(Resources.Load<TextAsset>("json/plotStates").text, true)
                 .Cast<PlotCard>().ToList();
             AllMinorStates = this.ParseJson(Resources.Load<TextAsset>("json/minorStates").text, false);
             AllAchievements =

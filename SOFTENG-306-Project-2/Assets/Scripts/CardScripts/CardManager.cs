@@ -21,7 +21,7 @@ namespace SunnyTown
         private const int MINOR_CARDS_PER_PLOT_CARD = 1;
         private int START_CAMPAIGN_CARD_NUMBER = 6;
         private float waitingForFeedbackDuration = WAITING_FOR_FEEDBACK_DURATION;
-        private const string FINAL_LEVEL_ID = "s15";
+        private const string FINAL_LEVEL_ID = "s14";
 
         public static CardManager Instance { get; private set; }
         public GameObject spawnHandlerObject;
@@ -205,15 +205,15 @@ namespace SunnyTown
                 Sprite sprite = Resources.Load<Sprite>("Sprites/BadWinCutscene");
                 endGameImage.sprite = sprite;
                 this.endGameDialogue = endGameDialogue;
-                dialogueManager.StartExplanatoryDialogue(
-                    this.endGameDialogue,
+                dialogueManager.StartCutsceneDialogue(
+                    this.endGameDialogue.Statements,
                     () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
             }
             else if (GameLost)
             {
                 Sprite sprite = Resources.Load<Sprite>("Sprites/LoseCutscene");
-                dialogueManager.StartExplanatoryDialogue(
-                    this.endGameDialogue,
+                dialogueManager.StartCutsceneDialogue(
+                    this.endGameDialogue.Statements,
                     () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
             }
         }

@@ -38,11 +38,16 @@ namespace SunnyTown
             spriteDictionary.Add("Cowboy Willy", Resources.Load<Texture2D>("Sprites/CowboyWilly"));
             spriteDictionary.Add("You have mail", Resources.Load<Texture2D>("Sprites/mail"));
             spriteDictionary.Add("Advisory Board", Resources.Load<Texture2D>("Sprites/Board"));
-            
             spriteDictionary.Add("acid rain", Resources.Load<Texture2D>("Sprites/WeatherSprites/acid-rain"));
             spriteDictionary.Add("hurricane", Resources.Load<Texture2D>("Sprites/WeatherSprites/tornado"));
             spriteDictionary.Add("smog", Resources.Load<Texture2D>("Sprites/WeatherSprites/smog"));
             spriteDictionary.Add("wildfire", Resources.Load<Texture2D>("Sprites/WeatherSprites/wildfire"));
+            spriteDictionary.Add("Weather event", Resources.Load<Texture2D>("Sprites/weather"));
+            spriteDictionary.Add("First Plebeian", Resources.Load<Texture2D>("Sprites/Pleb1"));
+            spriteDictionary.Add("Second Plebeian", Resources.Load<Texture2D>("Sprites/Pleb2"));
+            spriteDictionary.Add("Third Plebeian", Resources.Load<Texture2D>("Sprites/Pleb3"));
+            spriteDictionary.Add("Forth Plebeian", Resources.Load<Texture2D>("Sprites/Pleb4"));
+            spriteDictionary.Add("exclamation", Resources.Load<Texture2D>("Sprites/exclamation"));
         }
 
         private Texture2D GetSpriteTexture(string name)
