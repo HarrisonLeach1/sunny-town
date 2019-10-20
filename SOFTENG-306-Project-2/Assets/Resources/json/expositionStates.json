@@ -34,8 +34,15 @@
     "dialogue": [
       "To help you navigate the world, here are some tricks: ",
       "Press W, A, S, D help you look at different parts of your town",
-      "Press X to get a more close up look at the town, Z for the opposite",
+      "Press Z to get a more close up look at the town, X  for the opposite",
       "To gain a new perspective, try Q and E!"
+    ]
+  },
+  {
+    "id": "e5",
+    "name": "exclamation",
+    "dialogue": [
+      "This pops up from time to time, clicking on it gives you side quests you can complete along the way. "
     ]
   }
 ]
