@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using SunnyTown;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-
+/// <summary>
+/// An AchievementsManager is responsible for listening to achievement events and notifying 
+/// the appropriate views of these events. 
+/// </summary>
 public class AchievementsManager : MonoBehaviour
 {
     public static AchievementsManager Instance { get; private set; }
@@ -36,6 +38,11 @@ public class AchievementsManager : MonoBehaviour
         envInARow = 0;
     }
 
+    /// <summary>
+    /// Should be called to determine if the game is in an appropriate state to gain a new 
+    /// achievement for the player. This will also update the views if an achievement has 
+    /// been achieved. 
+    /// </summary>
     public void IsAchievementMade()
     {
         HandleWinnerAchievement();
@@ -223,6 +230,10 @@ public class AchievementsManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Returns a list of highscore entry to be displayed or inspected.
+    /// </summary>
+    /// <returns>The list of saved HighScoreEntry objects</returns>
     public List<HighScoreEntry> GetHighScores()
     {
         var highScores = new List<HighScoreEntry>();
@@ -238,6 +249,11 @@ public class AchievementsManager : MonoBehaviour
         return highScores;
     }
 
+    /// <summary>
+    /// Updates the AchievementsMenu view to display all high scores for this players instance.
+    /// This should only be called from the MainMenuScene or a scene with an AchievementsMenu.
+    /// High Scores are stored in player prefs.
+    /// </summary>
     public void DisplayHighScores()
     {
         var achievementsView = GameObject.Find("AchievementsMenu");
@@ -290,6 +306,11 @@ public class AchievementsManager : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// Displays an achievement popup notification with sound. The name and sprite displayed
+    /// corresponds to the given achievement name.
+    /// </summary>
+    /// <param name="achievementName">The achievement to display</param>
     public void DisplayAchievementNotification(string achievementName)
     {
         foreach (Achievement a in Reader.Instance.AllAchievements)
@@ -317,6 +338,11 @@ public class AchievementsManager : MonoBehaviour
         achievementNotificationAnimator.SetBool("IsVisible", false);
     }
 
+    /// <summary>
+    /// Displays the list of achievements achieved by the player in the achievements menu. 
+    /// This should be used in classes with an AchivementsMenu.
+    /// The achievements retrieved are from playerprefs.
+    /// </summary>
     public void DisplayAchievementsMenu()
     {
         var achievementsView = GameObject.Find("AchievementsMenu");
