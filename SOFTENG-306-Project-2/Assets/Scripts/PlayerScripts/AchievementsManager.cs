@@ -316,6 +316,7 @@ public class AchievementsManager : MonoBehaviour
                 achievementNotificationText.text = a.name;
                 achievementNotificationImage.sprite = Resources.Load<Sprite>("Sprites/" + a.imageUrl);
                 achievementNotificationAnimator.SetBool("IsVisible", true);
+                SFXAudioManager.Instance.PlayAchievementSound();
                 StartCoroutine(WaitForDownAnimation());
             }
         }

@@ -15,6 +15,7 @@ namespace SunnyTown
         public AudioClip buttonClip;
         public AudioClip constructionClip;
         public AudioClip notificationClip;
+        public AudioClip achievementClip;
 
         private SFXAudioManager()
         {
@@ -46,6 +47,11 @@ namespace SunnyTown
         public void PlayNotificationSound()
         {
             source.PlayOneShot(notificationClip);
+        }
+        
+        public void PlayAchievementSound()
+        {
+            source.PlayOneShot(achievementClip);
         }
         
         
