@@ -1,57 +1,5 @@
 ﻿[
     {
-        "name": "Cowboy Willy",
-        "precedingDialogue": [
-            "Howdy thur partner! I'm starting up a farm and I'm wondering whether I should farm me some meat or vegetables?"
-        ],
-        "question": "Meat or vegetables?",
-        "options": [
-            {
-                "label": "Meat, because it tastes better",
-                "environment": -10,
-                "hasAnimation": true,
-                "buildingName": "Farm",
-                "npcName": "Allena",
-                "feedback": "While it is true meat tastes better. It is a less environmentally efficient food source."
-            },
-            {
-                "label": "Vegetables",
-                "environment": 10,
-                "hasAnimation": true,
-                "buildingName": "Farm",
-                "npcName": "Allena",
-                "feedback": "Well done! Vegetables are a more environmentally efficient food source!"
-            }
-        ]
-    },
-    {
-        "name": "Jimmy Cash",
-        "precedingDialogue": [
-            "The town's population has grown more than our power station could handle",
-            "Power bills have reached record high, the people are demanding cheaper electricity"
-        ],
-        "question": "Would you like to invest in a bigger, more powerful power plant?",
-        "options": [
-            {
-                "label": "Yes",
-                "hasAnimation": true,
-                "buildingName": "PowerPlant",
-                "happiness": 20,
-                "environment": -20,
-                "money": -5,
-                "npcName": "Jimmy Cash",
-                "feedback": "The people are happy, but the environment suffers from increased consumerism"
-            },
-            {
-                "label": "No",
-                "happiness": -15,
-                "environment": -20,
-                "npcName": "Jimmy Cash",
-                "feedback": "The towns people are unhappy, but it is better for the environment"
-            }
-        ]
-    },
-    {
         "name": "Allena",
         "precedingDialogue": [
             "Many world leaders are demanding more radical climate change initiatives",

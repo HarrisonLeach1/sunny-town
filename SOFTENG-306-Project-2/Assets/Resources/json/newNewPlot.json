@@ -124,6 +124,8 @@
     "transitions": [
       {
         "label": "Let's build a solar farm",
+        "hasAnimation": true,
+        "buildingName": "PowerPlant",
         "npcName": "James the Dog",
         "feedback": "Woof! [Solar panels are great for the environment, and with the efforts of the research group prices has been lowered significantly.]",
         "money": -5,
@@ -153,6 +155,8 @@
     "transitions": [
       {
         "label": "Let's build a solar farm",
+        "hasAnimation": true,
+        "buildingName": "PowerPlant",
         "npcName": "James the Dog",
         "feedback": "Woof! [Solar panels are great for the environment, but it's pretty expensive if you haven't invested much into research]",
         "money": -15,
@@ -182,6 +186,8 @@
     "transitions": [
       {
         "label": "Let's build a solar farm",
+        "hasAnimation": true,
+        "buildingName": "PowerPlant",
         "npcName": "James the Dog",
         "feedback": "Woof! [Solar panels are great for the environment, but it's pretty expensive if you haven't invested much into research] ",
         "money": -15,
@@ -433,6 +439,8 @@
         "npcName": "James the Dog",
         "token": "farming",
         "farming": "dairy",
+        "hasAnimation": true,
+        "buildingName": "Farm",
         "happiness": 10,
         "environment": -10,
         "feedback": "Woof! [People like dairy, that's for sure! But dairy farming is real bad for the environment.]",
@@ -444,6 +452,8 @@
         "farming": "vege",
         "npcName": "James the Dog",
         "happiness": 5,
+        "hasAnimation": true,
+        "buildingName": "Farm",
         "environment": 10,
         "feedback": "Woof! [You made happy both the environment and lactose intolerant people]",
         "additionalState": "investment",
