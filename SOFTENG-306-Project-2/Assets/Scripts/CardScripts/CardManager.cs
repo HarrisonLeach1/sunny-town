@@ -201,12 +201,9 @@ namespace SunnyTown
             GameObject.Find("PauseButton").SetActive(false);
             if (GameWon)
             {
+                SimpleDialogue endGameDialogue = LastCardDialogue.createFinalDialogue(PastTokens);
                 Sprite sprite = Resources.Load<Sprite>("Sprites/BadWinCutscene");
                 endGameImage.sprite = sprite;
-                SimpleDialogue endGameDialogue = new SimpleDialogue(new string[1]
-                {
-                    "You have won the game, good job!! :D lit times"
-                }, "");
                 this.endGameDialogue = endGameDialogue;
                 dialogueManager.StartExplanatoryDialogue(
                     this.endGameDialogue,
@@ -346,10 +343,6 @@ namespace SunnyTown
                 }
                 else
                 {
-                    if (IsFinalCard(currentCard))
-                    {
-                        LastCardDialogue.setFinalDialogue((PlotCard)currentCard, PastTokens);
-                    }
                     dialogueManager.StartBinaryOptionDialogue(dialogueMapper.CardToOptionDialogue(currentCard), HandleOptionPressed);
                 }
             }
