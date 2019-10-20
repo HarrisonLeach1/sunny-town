@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace SunnyTown
 {
@@ -191,13 +192,24 @@ namespace SunnyTown
         /// </summary>
         private void EndGame()
         {
+            var endGameImage = GameObject.Find("EndGameImage").GetComponent<Image>();
+            endGameImage.color = Color.white;
             if (GameWon)
             {
-                Debug.Log(storyCardsTravelled.Count);
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                Sprite sprite = Resources.Load<Sprite>("Sprites/BadWinCutscene");
+                endGameImage.sprite = sprite;
+                SimpleDialogue endGameDialogue = new SimpleDialogue(new string[1]
+                {
+                    "You have won the game, good job!! :D lit times"
+                }, "");
+                this.endGameDialogue = endGameDialogue;
+                dialogueManager.StartExplanatoryDialogue(
+                    this.endGameDialogue,
+                    () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
             }
             else if (GameLost)
             {
+                Sprite sprite = Resources.Load<Sprite>("Sprites/LoseCutscene");
                 dialogueManager.StartExplanatoryDialogue(
                     this.endGameDialogue,
                     () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
@@ -213,6 +225,7 @@ namespace SunnyTown
         {
             GameLost = true;
             waitingForEventsDuration = 0f;
+            
             this.endGameDialogue = endGameDialogue;
         }
 
