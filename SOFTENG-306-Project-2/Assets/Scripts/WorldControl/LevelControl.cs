@@ -15,18 +15,6 @@ public class LevelControl : MonoBehaviour
     private Dictionary<int, int> metricMultiplierDictionary;
     public int Multiplier { get; set; }
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-    
     // Start is called before the first frame update
     void Start()
     {
