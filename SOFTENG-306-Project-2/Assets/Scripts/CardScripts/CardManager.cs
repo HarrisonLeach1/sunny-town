@@ -220,7 +220,7 @@ namespace SunnyTown
                 else
                 {
                     //TODO: change to new image when finished art
-                    sprite = Resources.Load<Sprite>("Sprites/BadWinCutscene");
+                    sprite = Resources.Load<Sprite>("Sprites/GoodWinCutscene");
                 }
                 endGameImage.sprite = sprite;
                 this.endGameDialogue = endGameDialogue;

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 namespace SunnyTown
 {
     /// <summary>
-    /// The MainMenuScript is a simple script used to load the Main Menu of the game
+    /// The MainMenuScript is a simple script used to load the Main Menu of the game and all of its components
     /// </summary>
     public class MainMenuScript : MonoBehaviour
     {
@@ -36,6 +36,10 @@ namespace SunnyTown
             Application.Quit();
         }
 
+        /// <summary>
+        /// A method that is used to return back to the menu scene. Not to be used in the main menu itself however, as
+        /// it results in the main menu's music restarting.
+        /// </summary>
         public void ReturnToMenu()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

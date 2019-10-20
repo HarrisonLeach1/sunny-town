@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace SunnyTown
 {
     /// <summary>
-    /// An NPC sprite manager handles the resolution of character names 
+    /// The NPC sprite manager is a singleton that handles the resolution of character names 
     /// into their appropriate sprites on dialogue box views
     /// </summary>
     public class NPCSpriteManager : MonoBehaviour

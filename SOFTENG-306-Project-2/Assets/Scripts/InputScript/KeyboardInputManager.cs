@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Derived from tutorial found on Board To Bits Games
+/// <summary>
+/// The KeyboardInput is responsible for mapping keyboard inputs to movements of the camera.
+/// Functionality includes panning, rotating and zooming.
+/// </summary>
 public class KeyboardInputManager : InputManager
 {
     // Events that use delegates

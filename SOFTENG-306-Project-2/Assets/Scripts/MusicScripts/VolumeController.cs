@@ -19,6 +19,9 @@ namespace SunnyTown
         public Slider SFXslider;
         public Slider MusicSlider;
 
+		/// <summary>
+    	/// Set volume levels depending on existing Playerprefs or assign default values
+    	/// </summary>
         void Start()
         {
 			if (!PlayerPrefs.HasKey("SFXVolume")) 

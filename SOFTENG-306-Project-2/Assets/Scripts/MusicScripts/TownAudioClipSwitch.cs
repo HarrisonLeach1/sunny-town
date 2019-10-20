@@ -5,7 +5,8 @@ namespace SunnyTown
 {
     /// <summary>
     /// The TownAudioClipSwitch is responsible for playing music in the World Scene. It is responsible
-    /// for playing different music for each of the game's 3 levels.
+    /// for playing different music for each of the game's 3 levels. It is also responsible for playing
+	/// music during the cutscenes leading to the final scene, depending on the game outcome.
     /// </summary>
     public class TownAudioClipSwitch : MonoBehaviour
     {

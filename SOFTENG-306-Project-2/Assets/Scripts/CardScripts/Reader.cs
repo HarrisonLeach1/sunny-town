@@ -8,7 +8,7 @@ namespace SunnyTown
 {
     /// <summary>
     /// A Reader is repsonsible for reading json files and converting them into 
-    /// Card and SimpleDialogue objects at runtime.
+    /// Card, SimpleDialogue and Achievement objects at runtime.
     /// </summary>
     public class Reader
     {
@@ -164,7 +164,12 @@ namespace SunnyTown
 
             return result;
         }
-
+        
+        /// <summary>
+        /// Method to map achievements from a json file into a list of Achievement objects
+        /// </summary>
+        /// <param name="json">Filepath of json file</param>
+        /// <returns>List of achievements parsed from the json file</returns>
         private List<Achievement> ParseAchievementsJson(string json)
         {
             List<Achievement> result = new List<Achievement>();
