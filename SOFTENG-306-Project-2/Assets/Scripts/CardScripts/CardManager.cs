@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
@@ -196,24 +195,15 @@ namespace SunnyTown
         private void EndGame()
         {
             var endGameImage = GameObject.Find("EndGameImage").GetComponent<Image>();
+            endGameImage.color = Color.white;
             GameObject.Find("MetricPanel").SetActive(false);
             GameObject.Find("LevelProgressPanel").SetActive(false);
             GameObject.Find("PauseButton").SetActive(false);
             if (GameWon)
             {
                 SimpleDialogue endGameDialogue = LastCardDialogue.createFinalDialogue(PastTokens);
-                Sprite sprite;
-                if (MetricManager.Instance.ScoreLow())
-                {
-                    sprite = Resources.Load<Sprite>("Sprites/BadWinCutscene");
-                }
-                else
-                {
-                    //TODO: change to new image when finished art
-                    sprite = Resources.Load<Sprite>("Sprites/BadWinCutscene");
-                }
+                Sprite sprite = Resources.Load<Sprite>("Sprites/BadWinCutscene");
                 endGameImage.sprite = sprite;
-                StartCoroutine(FadeInCutScene(endGameImage));
                 this.endGameDialogue = endGameDialogue;
                 dialogueManager.StartCutsceneDialogue(
                     this.endGameDialogue.Statements,
@@ -222,24 +212,9 @@ namespace SunnyTown
             else if (GameLost)
             {
                 Sprite sprite = Resources.Load<Sprite>("Sprites/LoseCutscene");
-                endGameImage.sprite = sprite;
-                StartCoroutine(FadeInCutScene(endGameImage));
                 dialogueManager.StartCutsceneDialogue(
-                                    this.endGameDialogue.Statements,
-                                    () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
-            }
-        }
-
-        private static IEnumerator FadeInCutScene(Image image)
-        {
-            float elapsedTime = 0.0f;
-            Color c = image.color;
-            while (elapsedTime < 1)
-            {
-                yield return null;
-                elapsedTime += Time.deltaTime;
-                c.a = Mathf.Clamp01(elapsedTime / 1);
-                image.color = c;
+                    this.endGameDialogue.Statements,
+                    () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
             }
         }
 
@@ -252,7 +227,7 @@ namespace SunnyTown
         {
             GameLost = true;
             waitingForEventsDuration = 0f;
-
+            
             this.endGameDialogue = endGameDialogue;
         }
 
@@ -415,6 +390,10 @@ namespace SunnyTown
             return false;
         }
 
+        /// <summary>
+        /// Called when in WeatherEvent state, it displays a weather card to the player and makes a call to 
+        /// decrease player health after player clicks continue;
+        /// </summary>
         private void DisplayWeatherCard()
         {
             String weatherEvent = "";
@@ -452,7 +431,7 @@ namespace SunnyTown
             };
 
             // minor card should be displayed upon the callback to the mail message
-            dialogueManager.StartExplanatoryDialogue(new SimpleDialogue(statements, weatherEvent), displayWeatherInfo);
+            dialogueManager.StartExplanatoryDialogue(new SimpleDialogue(statements,weatherEvent ), displayWeatherInfo);
 
         }
 

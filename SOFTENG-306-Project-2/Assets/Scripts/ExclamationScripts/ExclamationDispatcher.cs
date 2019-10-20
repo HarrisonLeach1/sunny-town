@@ -52,13 +52,14 @@ namespace SunnyTown
             // wait while a card or an exclamation mark is already showing 
             while (cardManager.CurrentGameState != CardManager.GameState.WaitingForEvents || markSpawned)
             {
+                Debug.Log("ex waiting");
                 yield return new WaitForSeconds(1);
             }
             float randomTime = (float)Random.Range(2f, 4f);
             //dont show exclamation mark while card showing 
             Debug.Log("creating mark " + randomTime);
             //spawn card exclamation mark half the time
-            if (randomTime >= 3f)
+            if (randomTime <= 3f)
             {
                 foreach (Renderer r in GetComponentsInChildren<Renderer>())
                     r.enabled = true;
@@ -99,7 +100,7 @@ namespace SunnyTown
         }
 
          /// <summary>
-         /// At the end of animation, set the animator to default invisible state
+         /// At the end of animation, set the animator to default invisible state and decrease happiness metric
          /// </summary>
         void OnEndOfAnimation()
         {
@@ -107,6 +108,9 @@ namespace SunnyTown
                 r.enabled = false;
             animator.SetBool("isShow", false);
             markSpawned = false;
+            MetricsModifier modifier = new MetricsModifier(-5, 0, 0);
+            modifier.Modify();
+            MetricManager.Instance.RenderMetrics();
         }
     }
 }
