@@ -1,4 +1,4 @@
-﻿using SunnyTown;
+﻿﻿using SunnyTown;
 using System;
 using System.Text.RegularExpressions;
 using TMPro;
@@ -18,6 +18,7 @@ public class LevelProgressScript : MonoBehaviour
 
     private void Start()
     {
+        //levelController = levelController.Instance;
         levelController = GameObject.Find("LevelManager").GetComponent<LevelControl>();
     }
 

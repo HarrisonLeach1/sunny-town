@@ -6,12 +6,29 @@ using UnityEngine;
 
 public class LevelControl : MonoBehaviour
 {
+    //public static LevelControl Instance { get; set; }
+
     public GameObject[] levels;
     public GameObject[] levelUpTransition;
     public bool levelUp;
     public float cloudFadeDuration = 1.0f; 
 
     private int currentLevel;
+    private Dictionary<int, int> metricMultiplierDictionary;
+    public int Multiplier { get; set; }
+    
+//    private void Awake()
+//    {
+//        if (Instance == null)
+//        {
+//            Instance = this;
+//        }
+//        else
+//        {
+//            Destroy(gameObject);
+//        }
+//    }
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +52,12 @@ public class LevelControl : MonoBehaviour
                 level.SetActive(false);
             }
         }
+
+        metricMultiplierDictionary = new Dictionary<int, int>();
+        metricMultiplierDictionary.Add(1, 1);
+        metricMultiplierDictionary.Add(2, 2);
+        metricMultiplierDictionary.Add(3, 4);
+        Multiplier = 1;
     }
 
     private void Update()
@@ -56,6 +79,13 @@ public class LevelControl : MonoBehaviour
         {
             // Setting the next level to be active
             currentLevel++;
+            
+            // update multiplier 
+            if (metricMultiplierDictionary.TryGetValue(currentLevel, out int value))
+            {
+                Multiplier = value;
+            }
+            
             foreach (GameObject level in levels)
             {
                 
