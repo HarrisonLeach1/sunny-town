@@ -11,7 +11,7 @@ namespace SunnyTown
     public class PlotCard : Card
     {
         public string Id { get; set; }
-        public string NextStateId { get; private set; }
+        public string NextStateId { get; set; }
         
 
         public PlotCard(string id, string[] precedingDialogue, string name, string question, List<Transition> options)

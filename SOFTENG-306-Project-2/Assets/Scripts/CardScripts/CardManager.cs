@@ -472,13 +472,15 @@ namespace SunnyTown
 
         public Card SetLevelTwo()
         {
-            var card = cardFactory.GetLevelTwoCard();
+            var card = (PlotCard) cardFactory.GetLevelTwoCard();
+            card.NextStateId = "s5";
             return card;
         }
 
         public Card SetLevelThree()
         {
-            var card = cardFactory.GetLevelThreeCard();
+            var card = (PlotCard) cardFactory.GetLevelThreeCard();
+            card.NextStateId = "s10EV";
             return card;
         }
 

@@ -15,7 +15,7 @@ namespace SunnyTown
         private List<Card> minorCards;
         
         private const string LEVEL_TWO_STATE_ID = "s4";
-        private const string LEVEL_THREE_STATE_ID = "s10EV";
+        private const string LEVEL_THREE_STATE_ID = "s9";
 
         public CardFactory()
         {
