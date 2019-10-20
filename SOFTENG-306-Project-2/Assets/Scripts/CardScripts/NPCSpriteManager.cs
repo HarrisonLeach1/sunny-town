@@ -39,6 +39,10 @@ namespace SunnyTown
             spriteDictionary.Add("You have mail", Resources.Load<Texture2D>("Sprites/mail"));
             spriteDictionary.Add("Advisory Board", Resources.Load<Texture2D>("Sprites/Board"));
             spriteDictionary.Add("Weather event", Resources.Load<Texture2D>("Sprites/weather"));
+            spriteDictionary.Add("First Plebeian", Resources.Load<Texture2D>("Sprites/Pleb1"));
+            spriteDictionary.Add("Second Plebeian", Resources.Load<Texture2D>("Sprites/Pleb2"));
+            spriteDictionary.Add("Third Plebeian", Resources.Load<Texture2D>("Sprites/Pleb3"));
+            spriteDictionary.Add("Forth Plebeian", Resources.Load<Texture2D>("Sprites/Pleb4"));
         }
 
         private Texture2D GetSpriteTexture(string name)

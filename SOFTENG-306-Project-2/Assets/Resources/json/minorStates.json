@@ -282,5 +282,45 @@
         "feedback": "The plebeian understands.  "
       }
     ]
+  },
+  {
+    "name": "Third Plebeian",
+    "question": "Mrs Gatburg, I think our streets are a bit dirty lately, could we hire some more cleaners?",
+    "options": [
+      {
+        "label": "Yes of course. ",
+        "happiness": 5,
+        "money": -5,
+        "environment": 5,
+        "npcName": "Third Plebeian",
+        "feedback": "The plebeian is happy! "
+      },
+      {
+        "label": "Sorry the budget is too tight. ",
+        "happiness": -5,
+        "environment": -5,
+        "npcName": "Third Plebeian",
+        "feedback": "The plebeian is upset.  "
+      }
+    ]
+  },
+  {
+    "name": "Forth Plebeian",
+    "question": "Mrs Mayor, could I have a dollar for the bus? ",
+    "options": [
+      {
+        "label": "Yes here you go. ",
+        "happiness": 1,
+        "money": -1,
+        "npcName": "Forth Plebeian",
+        "feedback": "The plebeian takes his bus! "
+      },
+      {
+        "label": "Sorry, no change on me. ",
+        "happiness": -1,
+        "npcName": "Forth Plebeian",
+        "feedback": "The plebeian walks home.  "
+      }
+    ]
   }
 ]
