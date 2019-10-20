@@ -199,7 +199,16 @@ namespace SunnyTown
             GameObject.Find("LevelProgressPanel").SetActive(false);
             if (GameWon)
             {
-                Sprite sprite = Resources.Load<Sprite>("Sprites/BadWinCutscene");
+                Sprite sprite;
+                if (MetricManager.Instance.ScoreLow())
+                {
+                    sprite = Resources.Load<Sprite>("Sprites/BadWinCutscene");
+                }
+                else
+                {
+                    //TODO: change to new image when finished art
+                    sprite = Resources.Load<Sprite>("Sprites/Allena");
+                }
                 endGameImage.sprite = sprite;
                 StartCoroutine(FadeInCutScene(endGameImage));
                 SimpleDialogue endGameDialogue = new SimpleDialogue(new string[1]

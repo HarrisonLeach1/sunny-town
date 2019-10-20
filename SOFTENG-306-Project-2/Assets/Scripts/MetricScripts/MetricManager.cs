@@ -91,6 +91,24 @@ namespace SunnyTown
             }
         }
 
+        /// <summary>
+        /// This method checks which end game is displayed when the game is won
+        /// If any of the scores are less than 35, then display the bad ending
+        /// </summary>
+        /// <returns></returns>
+        public bool ScoreLow()
+        {
+            //TODO: change numbers for playtesting
+            if (EnvHealth < 45 || Gold < 45 || PopHappiness < 45)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         IEnumerator AnimateMetric(Slider metricBar, int oldValue, int newValue)
         {
             Image metricBarFill = metricBar.transform.GetChild(2).GetChild(0).GetComponent<Image>();
@@ -133,9 +151,6 @@ namespace SunnyTown
             if (this.PopHappiness < MIN_VALUE)
             {
                 this.PopHappiness = MIN_VALUE;
-
-                //TODO: Probably will change later, this changes scenes to end game screen upon losing mats
-
                 SimpleDialogue endGameDialogue = new SimpleDialogue(new string[2]
                 {
                     "Oh no, the people in our town became " +
@@ -160,7 +175,6 @@ namespace SunnyTown
             {
                 this.Gold = MIN_VALUE;
 
-                //TODO: Probably will change later, this changes scenes to end game screen upon losing mats
                 SimpleDialogue endGameDialogue = new SimpleDialogue(
                     new string[2]
                     {
@@ -185,7 +199,6 @@ namespace SunnyTown
             {
                 this.EnvHealth = MIN_VALUE;
 
-                //TODO: Probably will change later, this changes scenes to end game screen upon losing mats
                 SimpleDialogue endGameDialogue = new SimpleDialogue(new string[2]
                 {
                     "Your decisions have led to a lot of damage to the environment." +
