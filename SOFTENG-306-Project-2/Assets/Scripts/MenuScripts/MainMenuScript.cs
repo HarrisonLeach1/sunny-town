@@ -17,7 +17,15 @@ namespace SunnyTown
         {
             Time.timeScale = 1f;
             Debug.Log("Start game");
-            AchievementsManager.playerName = PlayerInput.GetComponent<TMP_InputField>().text;
+            string playerName = PlayerInput.GetComponent<TMP_InputField>().text;
+            if (playerName == "")
+            {
+                AchievementsManager.playerName = "Player";
+            }
+            else
+            {
+                AchievementsManager.playerName = playerName;
+            }
             Debug.Log("Player name: " + AchievementsManager.playerName);
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
