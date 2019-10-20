@@ -45,9 +45,8 @@ namespace SunnyTown
         {
             if (buildSomeThing)
             {
-                //Random random = new Random();  
-                //buildings[random.Next(0, 8)].SetActive(true);
-                buildings[8].SetActive(true);
+                Random random = new Random();  
+                buildings[random.Next(0, 8)].SetActive(true);
                 buildSomeThing = false;
             }
         }
