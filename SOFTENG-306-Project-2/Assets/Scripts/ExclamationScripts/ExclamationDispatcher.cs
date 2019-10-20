@@ -55,12 +55,10 @@ namespace SunnyTown
             // wait while a card or an exclamation mark is already showing 
             while (cardManager.CurrentGameState != CardManager.GameState.WaitingForEvents || markSpawned)
             {
-                Debug.Log("ex waiting");
                 yield return new WaitForSeconds(1);
             }
             float randomTime = (float)Random.Range(2f, 4f);
             //dont show exclamation mark while card showing 
-            Debug.Log("creating mark " + randomTime);
             //spawn card exclamation mark half the time
             if (randomTime <= 3f)
             {
@@ -73,7 +71,6 @@ namespace SunnyTown
             }
             else
             {
-                Debug.Log("waiting");
                 yield return new WaitForSeconds(randomTime);
             }
             StartCoroutine("CreateExclamationMark", randomTime);
