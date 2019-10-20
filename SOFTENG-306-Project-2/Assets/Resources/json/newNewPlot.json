@@ -3,7 +3,7 @@
     "id": "s1",
     "name": "Jimmy Cash",
     "precedingDialogue": [
-      "Mrs mayor, we have quite a bit of excess cash for city development, it is usually a good idea to invest these into something that can be useful down the road. ",
+      "Mayor Gatburg, we have some excess cash for city development - it's usually a good idea to invest this into something that can be useful down the road. ",
       "We have a few proposals from both small businesses and our local university asking us to support their projects, they all seem very interesting. "
     ],
     "question": "What would you like to fund?",
@@ -45,10 +45,10 @@
     "precedingDialogue": [
       "Greetings! My name is Arvio, but people call me Arvio The Wealthy",
       "Why? I'm the proprietor of MineCroft Coal Mines and the wealthiest coal baron on the seven mountains",
-      "My team of Geo ...erm ...geolis ...scientists, say that this town's neighbouring mountains promises bounds of wealth'",
-      "I have a proposition for you, allow me to inspect those lands and I may consider helping out this dump *erherm* town!"
+      "My team of Geo ...erm ...geolis ...scientists, say that this town's neighbouring mountains promise mounds of wealth'",
+      "I have a proposition for you! Allow me to inspect those lands and I may consider helping out this dump *erherm* town!"
     ],
-    "question": "So what do you say friend? Do we have a deal?",
+    "question": "So, friend, what do you say? Do we have a deal?",
     "transitions": [
       {
         "label": "There's a lot of money in coal. Go ahead!",
@@ -60,7 +60,7 @@
         "state": "s3"
       },
       {
-        "label": "No deal, mining for coal will ruin the natural landscape!",
+        "label": "No deal, coal mining will ruin the natural landscape!",
         "environment": 10,
         "npcName": "Advisory Board",
         "token": "arvio",
@@ -75,12 +75,12 @@
     "name": "Hunter Gatberg",
     "precedingDialogue": [
       "[Ring Ring... Ring Ring...]",
-      "Hey Mum! We learnt about polar bears today, they look so cute. I would love to be able to see them one day."
+      "Hey Mum! We learnt about polar bears today, they look soooooo cute. I would love to visit them someday."
     ],
-    "question": "Could you take me on a trip someday?",
+    "question": "Could you take me on a trip sometime?",
     "transitions": [
       {
-        "label": "Of course, my dear. ",
+        "label": "Of course, dear. ",
         "happiness": 5,
         "state": "s4"
       }
@@ -89,7 +89,7 @@
   {
     "id": "s4",
     "name": "Advisory Board",
-    "question": "Your town has grown",
+    "question": "Your town has grown!",
     "transitions": [
       {
         "label": "Continue",
@@ -102,7 +102,7 @@
     "name": "Advisory Board",
     "precedingDialogue": [
       "The scientists have said that the world is getting warmer because of all the things we're building, ",
-      "Cars and factories can make it worse, protecting the environment and planting trees help make it better"
+      "Cars and factories can make it worse but protecting the environment and planting trees help make it better"
     ],
     "question": "If we don't make it better, it can cause bad weather events, even floods! ",
     "transitions": [
@@ -117,8 +117,8 @@
     "id": "s6energy",
     "name": "James the Dog",
     "precedingDialogue": [
-      "Woof! [Mrs. Gatburg, your town is growing fast. however, this means that our power station is chocking]",
-      "Woof! [The citizens are not happy with the high electricity prices, we should consider building a bigger power station.]"
+      "Woof! [Mayor Gatburg, your town is growing fast. However, this means that our power station is choking.]",
+      "Woof woof! [The citizens are not happy with the high electricity prices. We should consider building a bigger power station.]"
     ],
     "question": "Woof! [What kind of power plant should we build?]",
     "transitions": [
@@ -127,7 +127,7 @@
         "npcName": "James the Dog",
         "hasAnimation": true,
         "buildingName": "WindFarm",
-        "feedback": "Woof! [Wind turbines are great for the environment, and with the efforts of the research group prices has been lowered significantly.]",
+        "feedback": "Yip! [Wind turbines are great for the environment, and with the efforts of the research group prices have been lowered significantly!]",
         "money": -5,
         "happiness": 15,
         "environment": 15,
@@ -138,7 +138,7 @@
         "hasAnimation": true,
         "buildingName": "PowerPlant",
         "npcName": "James the Dog",
-        "feedback": "Woof! [It's a shame that you invested in green energy but never used it :( plus coal is bad for the environment.]",
+        "feedback": "Grrrrrr... [It's a shame that you invested in green energy but never used it :( plus coal is bad for the environment.]",
         "money": -5,
         "environment": -15,
         "additionalState": "arvio",
@@ -150,8 +150,8 @@
     "id": "s6EV",
     "name": "James the Dog",
     "precedingDialogue": [
-      "Woof! [Mrs. Gatburg, your town is growing fast. however, this means that our power station is chocking]",
-      "Woof! [The citizens are not happy with the high electricity prices, we should consider building a bigger power station.]"
+      "Woof! [Mayor Gatburg, your town is growing fast. However, this means that our power station is choking.]",
+      "Woof woof! [The citizens are not happy with the high electricity prices. We should consider building a new power station.]"
     ],
     "question": "Woof! [What kind of power plant should we build?]",
     "transitions": [
@@ -183,8 +183,8 @@
     "id": "s6material",
     "name": "James the Dog",
     "precedingDialogue": [
-      "Woof! [Mrs. Gatburg, your town is growing fast. however, this means that our power station is chocking]",
-      "Woof! [The citizens are not happy with the high electricity prices, we should consider building a bigger power station.]"
+      "Woof! [Mayor Gatburg, your town is growing fast. However, this means that our power station is choking.]",
+      "Woof woof! [The citizens are not happy with the high electricity prices. We should consider building a new power station.]"
     ],
     "question": "Woof! [What kind of power plant should we build?]",
     "transitions": [
@@ -216,12 +216,12 @@
     "id": "s7yes",
     "name": "Arvio",
     "precedingDialogue": [
-      "Mrs. Gatberg, our prediction was dead-on! Your land is rich with coal! "
+      "Mayor Gatberg, our prediction was dead-on! Your land is rich with coal! "
     ],
     "question": "Will you let us set up an coal mine? We'll make the town richer than your dreams!",
     "transitions": [
       {
-        "label": "Yes go ahead!",
+        "label": "Yes, go ahead!",
         "hasAnimation": true,
         "buildingName": "CoalMine",
         "token": "arvio2",
@@ -249,7 +249,7 @@
       "We inspected the land anyways, that's why they also call me Arvio the Sneaky",
       "You know why we did that? Cause' our prediction was dead-on! Your land is rich with coal! "
     ],
-    "question": "Will you let us set up an coal mine? We'll make the town richer than your dreams!",
+    "question": "Will you let us set up a coal mine? We'll make the town richer than your dreams!",
     "transitions": [
       {
         "label": "Yes go ahead!",
@@ -260,7 +260,7 @@
         "arvio2": "yes",
         "environment": -20,
         "money": 20,
-        "feedback": "Arvio begins constructing an coal mine. We're getting paid a great amount of money, but this is releasing a lot of CO2.",
+        "feedback": "Arvio begins constructing an coal mine. We're getting paid a lot of money, but this is releasing lots of CO2.",
         "state": "s8a"
       },
       {
@@ -280,10 +280,10 @@
       "[Ring Ring... Ring Ring...]",
       "Mom! Mom! Remember when you promised me we would go on a trip to see the polar bears?"
     ],
-    "question": "Next week is school holidays, would we please go?",
+    "question": "Next week is school holidays, could we please go?",
     "transitions": [
       {
-        "label": "Sorry Hunter, climate change has melted the ice bergs. ",
+        "label": "Sorry Hunter, climate change has melted the icebergs. ",
         "happiness": -10,
         "state": "s9"
       }
@@ -308,7 +308,7 @@
   {
     "id": "s9",
     "name": "Advisory Board",
-    "question": "Your town has grown",
+    "question": "Your town has grown!",
     "transitions": [
       {
         "label": "Continue",
@@ -321,7 +321,7 @@
     "id": "s10energy",
     "name": "Allena",
     "precedingDialogue": [
-      "Peter the mayor from our neighbouring city sent you a letter asking for your advice",
+      "Peter, the mayor from our neighbouring city, sent you a letter asking for your advice",
       "They want to scale their city, and they're wondering if they should build up or out"
     ],
     "question": "How would you advise them?",
@@ -341,7 +341,7 @@
         "environment": -5,
         "token": "scale",
         "scale": "out",
-        "feedback": "Building out is cheaper, but people drive more harms the environment. Peter takes your advice anyhow. ",
+        "feedback": "Building out is cheaper, but people drive more and harm the environment. Peter takes your advice anyhow. ",
         "state": "s11"
       }
     ]
@@ -350,7 +350,7 @@
     "id": "s10EV",
     "name": "Allena",
     "precedingDialogue": [
-      "Peter the mayor from our neighbouring city sent you a letter asking for your advice",
+      "Peter, the mayor from our neighbouring city, sent you a letter asking for your advice",
       "They want to scale their city, and they're wondering if they should build up or out"
     ],
     "question": "How would you advise them?",
@@ -379,7 +379,7 @@
     "id": "s10material",
     "name": "Allena",
     "precedingDialogue": [
-      "Peter the mayor from our neighbouring city sent you a letter asking for your advice",
+      "Peter, the mayor from our neighbouring city, sent you a letter asking for your advice",
       "They want to scale their city, and they're wondering if they should build up or out"
     ],
     "question": "How would you advise them?",
@@ -399,7 +399,7 @@
         "environment": -5,
         "token": "scale",
         "scale": "out",
-        "feedback": "Building out is cheaper, but people drive more harms the environment. Peter takes your advice anyhow. ",
+        "feedback": "Building out is cheaper, but people drive more and harm the environment. Peter takes your advice anyhow. ",
         "state": "s11"
       }
     ]
@@ -419,7 +419,7 @@
         "additionalState": "scale",
         "money": -20,
         "happiness": 15,
-        "feedback": "Woof! [Buying food is expensive, even though it doesn't increase our city's pollutions.]",
+        "feedback": "Woof! [Buying food is expensive, even though it doesn't increase our city's pollution.]",
         "state": "s12"
       },
       {
@@ -449,7 +449,7 @@
         "farming": "dairy",
         "happiness": 10,
         "environment": -10,
-        "feedback": "Woof! [People like dairy, that's for sure! But dairy farming is real bad for the environment.]",
+        "feedback": "Woof! [People like dairy, that's for sure! But dairy farming is really bad for the environment.]",
         "state": "s13"
       },
       {
@@ -502,7 +502,7 @@
     "id": "s12out",
     "name": "Allena",
     "precedingDialogue": [
-      "Your neighbouring city is having a bad drought from damaging the environment too much"
+      "Your neighbouring city is having a bad drought - do you think it could be related to their damaging the environment?"
     ],
     "question": "Should we give them a hand?",
     "transitions": [
