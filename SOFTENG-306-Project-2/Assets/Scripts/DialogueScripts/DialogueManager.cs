@@ -56,7 +56,7 @@ namespace SunnyTown
             }
             animationProgressAnimator.SetBool("IsVisible", true);
             // need offset here otherwise the progress bar will stay visible
-            float offset = 0.1f;
+            float offset = 0.2f;
             progressAnimationCoroutine = StartCoroutine(AnimationWait(seconds - offset));
         }
 
