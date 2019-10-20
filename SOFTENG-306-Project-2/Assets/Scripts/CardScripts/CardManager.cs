@@ -18,7 +18,7 @@ namespace SunnyTown
         private static float WAITING_FOR_FEEDBACK_DURATION = 0.1f;
 
         // TODO: will need to change this later depending on playtesting
-        private float waitingForEventsDuration = 4f;
+        private float waitingForEventsDuration = 2.5f;
         private const int MINOR_CARDS_PER_PLOT_CARD = 1;
         private int START_CAMPAIGN_CARD_NUMBER = 6;
         private float waitingForFeedbackDuration = WAITING_FOR_FEEDBACK_DURATION;

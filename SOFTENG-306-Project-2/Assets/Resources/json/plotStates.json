@@ -13,8 +13,8 @@
         "state": "s2",
         "npcName": "Jimmy Cash",
         "feedback": "Electric cars are all the rage these days, and they save the environment, two for one!",
-        "money": -10,
-        "environment": 10,
+        "money": -100,
+        "environment": 8,
         "token": "investment",
         "investment": "EV"
       },
@@ -33,7 +33,7 @@
         "npcName": "Jimmy Cash",
         "feedback": "Clean energy is popular umong the people cause it saves our future, but it costs an arm and a leg!",
         "money": -15,
-        "environment": 10,
+        "environment": 8,
         "token": "investment",
         "investment": "energy"
       }
@@ -61,7 +61,6 @@
       },
       {
         "label": "No deal, coal mining will ruin the natural landscape!",
-        "environment": 10,
         "npcName": "Advisory Board",
         "token": "arvio",
         "arvio": "no",
@@ -140,7 +139,7 @@
         "npcName": "James the Dog",
         "feedback": "Grrrrrr... [It's a shame that you invested in green energy but never used it :( plus coal is bad for the environment.]",
         "money": -5,
-        "environment": -10,
+        "environment": -12,
         "additionalState": "arvio",
         "state": "s7"
       }
@@ -173,7 +172,7 @@
         "buildingName": "PowerPlant",
         "feedback": "Woof! [Coal power is really bad for the environment.]",
         "money": -5,
-        "environment": -10,
+        "environment": -12,
         "additionalState": "arvio",
         "state": "s7"
       }
@@ -206,7 +205,7 @@
         "buildingName": "PowerPlant",
         "feedback": "Woof! [Coal power is really bad for the environment.]",
         "money": -5,
-        "environment": -10,
+        "environment": -12,
         "additionalState": "arvio",
         "state": "s7"
       }
@@ -226,7 +225,7 @@
         "buildingName": "CoalMine",
         "token": "arvio2",
         "arvio2": "yes",
-        "environment": -10,
+        "environment": -12,
         "money": 10,
         "npcName": "Advisory Board",
         "feedback": "Arvio begins constructing an coal mine. We're getting paid a great amount of money, but this is releasing a lot of CO2.",
@@ -258,7 +257,7 @@
         "npcName": "Advisory Board",
         "token": "arvio2",
         "arvio2": "yes",
-        "environment": -10,
+        "environment": -12,
         "money": 10,
         "feedback": "Arvio begins constructing an coal mine. We're getting paid a lot of money, but this is releasing lots of CO2.",
         "state": "s8a"
@@ -329,7 +328,6 @@
       {
         "label": "They should build up",
         "npcName": "Allena",
-        "money": -3,
         "token": "scale",
         "scale": "up",
         "feedback": "Building up can be expensive, but makes it easier to have sustainable transport. Peter thanks you for your advice. ",
@@ -338,7 +336,6 @@
       {
         "label": "They should build out",
         "npcName": "Allena",
-        "environment": -4,
         "token": "scale",
         "scale": "out",
         "feedback": "Building out is cheaper, but people drive more and harm the environment. Peter takes your advice anyhow. ",
@@ -358,7 +355,6 @@
       {
         "label": "They should build up",
         "npcName": "Allena",
-        "money": -3,
         "token": "scale",
         "scale": "up",
         "feedback": "Building up can be expensive, but makes it easier to have sustainable transport. Peter thanks you for your advice. ",
@@ -368,7 +364,6 @@
         "label": "They should build out",
         "npcName": "Allena",
         "money": 5,
-        "environment": -3,
         "token": "scale",
         "scale": "out",
         "feedback": "People need to travel further and since we invested in electric cars earlier our exports are increasing. ",
@@ -388,7 +383,6 @@
       {
         "label": "They should build up",
         "npcName": "Allena",
-        "money": -3,
         "token": "scale",
         "scale": "up",
         "feedback": "Building up can be expensive, but makes it easier to have sustainable transport. Peter thanks you for your advice. ",
@@ -397,7 +391,6 @@
       {
         "label": "They should build out",
         "npcName": "Allena",
-        "environment": -3,
         "token": "scale",
         "scale": "out",
         "feedback": "Building out is cheaper, but people drive more and harm the environment. Peter takes your advice anyhow. ",
@@ -426,7 +419,7 @@
       {
         "label": "We should have more farms in the city. ",
         "npcName": "James the Dog",
-        "environment": -6,
+        "environment": -7,
         "happiness": 5,
         "feedback": "Woof! [Farming is important, but it does a lot of damage to the environment, be careful!]",
         "state": "s12"
@@ -449,7 +442,7 @@
         "token": "farming",
         "farming": "dairy",
         "happiness": 4,
-        "environment": -4,
+        "environment": -7,
         "feedback": "Woof! [People like dairy, that's for sure! But dairy farming is really bad for the environment.]",
         "state": "s13"
       },
@@ -482,7 +475,7 @@
         "token": "farming",
         "farming": "dairy",
         "happiness": 4,
-        "environment": -4,
+        "environment": -7,
         "feedback": "Woof! [People like dairy, that's for sure! But dairy farming is real bad for the environment.]",
         "state": "s12out"
       },
@@ -538,7 +531,7 @@
     "question": "Please take more care with our environment in the future! ",
     "transitions": [
       {
-        "environment": -8,
+        "environment": -11,
         "money": -4,
         "happiness": -4,
         "label": "Continue",
@@ -576,7 +569,7 @@
         "buildingName": "Bus",
         "transport": "public",
         "feedback": "Public transport is a lot greener, but they sure are pricey. ",
-        "state": "s15"
+        "state": "s18"
       },
       {
         "label": "Let's keep letting people drive what they wish. ",

@@ -12,8 +12,8 @@
     "options": [
       {
         "threshold": 50,
-        "money": -5,
-        "environment": 8,
+        "money": -6,
+        "environment": 6,
         "happiness": 5,
         "hasAnimation": true,
         "buildingName": "Trees",
@@ -22,9 +22,9 @@
       },
       {
         "threshold": 25,
-        "money": -3,
+        "money": -4,
         "happiness": 3,
-        "environment": 5,
+        "environment": 4,
         "hasAnimation": true,
         "buildingName": "Trees",
         "feedback": "The environmentalists are thankful for your funding, but more funding could've made more of a difference",
@@ -33,8 +33,8 @@
       {
         "threshold": 0,
         "label": "No",
-        "environment": -8,
-        "happiness": -3,
+        "environment": -10,
+        "happiness": -4,
         "feedback": "The environmentalists are very upset, as the pollutions were not helped",
         "npcName": "Allena"
       }
@@ -46,8 +46,8 @@
     "options": [
       {
         "label": "Build another landfill",
-        "happiness": -5,
-        "environment": -8,
+        "happiness": -6,
+        "environment": -10,
         "npcName": "Allena",
         "hasAnimation": true,
         "buildingName": "LandFill",
@@ -56,7 +56,7 @@
       {
         "label": "Recycle the rubbish",
         "environment": 6,
-        "money": -6,
+        "money": -7,
         "happiness": 5,
         "npcName": "Allena",
         "feedback": "Even though recycling rubbish is expensive, it is very good for the environment. "
@@ -69,7 +69,7 @@
     "options": [
       {
         "label": "Yes",
-        "environment": -7,
+        "environment": -8,
         "money": 8,
         "npcName": "Jimmy Cash",
         "hasAnimation": true,
@@ -93,14 +93,14 @@
     "options": [
       {
         "label": "Yes, I think we should send the world a message",
-        "happiness": -5,
-        "environment": 6,
+        "happiness": -7,
+        "environment": 5,
         "npcName": "Allena",
         "feedback": "The town is not happy. On the flip side, the air has become cleaner."
       },
       {
         "label": "No this is too drastic, lets just do one day",
-        "happiness": -2,
+        "happiness": -4,
         "environment": 4,
         "npcName": "Allena",
         "feedback": "The town is not happy. On the flip side, the air has become cleaner."
@@ -121,11 +121,11 @@
     "options": [
       {
         "label": "Yes",
-        "happiness": -5
+        "happiness": -7
       },
       {
         "label": "No",
-        "money": -5
+        "money": -7
       }
     ]
   },
@@ -135,7 +135,7 @@
     "options": [
       {
         "label": "Yes",
-        "money": -7,
+        "money": -9,
         "happiness": 6,
         "environment": 5,
         "npcName": "James the Dog",
@@ -143,8 +143,8 @@
       },
       {
         "label": "No",
-        "happiness": -3,
-        "environment": -6,
+        "happiness": -4,
+        "environment": -8,
         "npcName": "James the Dog",
         "feedback": "The people are not too happy with you for not supporting their holidays. "
       }
@@ -156,14 +156,14 @@
     "options": [
       {
         "label": "Yes",
-        "money": -4,
+        "money": -5,
         "environment": 5,
         "npcName": "Advisory Board",
         "feedback": "The children are more aware of climate change now, they've made an effort to protect the environment. "
       },
       {
         "label": "No",
-        "happiness": -4,
+        "happiness": -5,
         "npcName": "Advisory Board",
         "feedback": "Even though educating children can be expensive, it's definitely a worthy investment. "
       }
@@ -175,14 +175,14 @@
     "options": [
       {
         "label": "Ignore",
-        "happiness": -4,
-        "environment": -8,
+        "happiness": -6,
+        "environment": -9,
         "npcName": "Allena",
         "feedback": "The rumour spread wide and loud, townspeople began not treating climate change seriously. It took a while before they found out it was not true. "
       },
       {
         "label": "Educate the townspeople",
-        "money": -5,
+        "money": -6,
         "happiness": 5,
         "environment": 7,
         "npcName": "Allena",
@@ -196,8 +196,8 @@
     "options": [
       {
         "label": "Yes",
-        "happiness": -3,
-        "environment": -7,
+        "happiness": -4,
+        "environment": -8,
         "money": 5,
         "npcName": "Advisory Board",
         "feedback": "Selling timber is a good short term financial decision, but cutting down trees harms the environment. "
@@ -222,7 +222,7 @@
       },
       {
         "label": "No",
-        "happiness": -5,
+        "happiness": -6,
         "npcName": "James the Dog",
         "feedback": "It's sometimes hard to balance what to do isn't it"
       }
@@ -234,7 +234,7 @@
     "options": [
       {
         "label": "Yes",
-        "happiness": -5,
+        "happiness": -6,
         "environment": 3,
         "money": 3,
         "npcName": "Jimmy Cash",
@@ -242,7 +242,7 @@
       },
       {
         "label": "No",
-        "environment": -7,
+        "environment": -8,
         "npcName": "Jimmy Cash",
         "feedback": "Emissions kept going up, polluting the city air"
       }
@@ -254,14 +254,14 @@
     "options": [
       {
         "label": "Lend them a hand. ",
-        "money": -5,
+        "money": -6,
         "happiness": 5,
         "npcName": "First Plebeian",
         "feedback": "The plebeian thanks you! "
       },
       {
         "label": "That's the insurance company's job. ",
-        "happiness": -5,
+        "happiness": -6,
         "npcName": "First Plebeian",
         "feedback": "The plebeian resents you "
       }
@@ -273,13 +273,13 @@
     "options": [
       {
         "label": "It would be my pleasure",
-        "happiness": 3,
+        "happiness": 4,
         "npcName": "Second Plebeian",
         "feedback": "The plebeian and his daughter thanks you! "
       },
       {
         "label": "Sorry I'm too busy.  ",
-        "happiness": -3,
+        "happiness": -5,
         "npcName": "Second Plebeian",
         "feedback": "The plebeian understands.  "
       }
@@ -293,14 +293,14 @@
         "label": "Yes of course. ",
         "happiness": 5,
         "money": -5,
-        "environment": 5,
+        "environment": 6,
         "npcName": "Third Plebeian",
         "feedback": "The plebeian is happy! "
       },
       {
         "label": "Sorry the budget is too tight. ",
-        "happiness": -5,
-        "environment": -6,
+        "happiness": -6,
+        "environment": -8,
         "npcName": "Third Plebeian",
         "feedback": "The plebeian is upset.  "
       }
@@ -313,13 +313,13 @@
       {
         "label": "Yes here you go. ",
         "happiness": 1,
-        "money": -1,
+        "money": -2,
         "npcName": "Fourth Plebeian",
         "feedback": "The plebeian takes his bus! "
       },
       {
         "label": "Sorry, no change on me. ",
-        "happiness": -1,
+        "happiness": -2,
         "npcName": "Fourth Plebeian",
         "feedback": "The plebeian walks home.  "
       }
