@@ -8,7 +8,9 @@
         "options": [
             {
                 "label": "Meat, because it tastes better",
-                "environment": -10,
+                "environment": 90,
+                "happiness" : 90,
+                "money" : 90,
                 "hasAnimation": true,
                 "buildingName": "Farm",
                 "npcName": "Allena",
@@ -16,7 +18,7 @@
             },
             {
                 "label": "Vegetables",
-                "environment": 10,
+                "environment": 100,
                 "hasAnimation": true,
                 "buildingName": "Farm",
                 "npcName": "Allena",

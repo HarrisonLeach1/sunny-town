@@ -10,5 +10,35 @@
         "name": "Tree Hugger",
         "description": "Do not lose any environmental health for 5 turns in a row",
         "imageUrl": "Allena"
+    },
+    {
+        "id": "a3",
+        "name" : "Happy Town",
+        "description": "Max out the population happiness metric",
+        "imageUrl": "CowboyWilly"
+    },
+    {
+        "id": "a4",
+        "name" : "Gold Digger",
+        "description": "Max out the gold metric",
+        "imageUrl" : "JimmyCash"
+    },
+    {
+        "id": "a5",
+        "name" : "Captain Planet",
+        "description" : "Max out the environment health metric",
+        "imageUrl": "Allena"
+    },
+    {
+        "id": "a6",
+        "name": "All Rounder",
+        "description" : "Reach X in all 3 metrics at any one time",
+        "imageUrl": "HunterGatberg"
+    },
+    {
+        "id": "a7",
+        "name": "Clutch Gamer",
+        "description" : "Beat the game with a dangerously low score",
+        "imageUrl" : "Arvio"
     }
 ]

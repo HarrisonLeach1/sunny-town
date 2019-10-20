@@ -28,10 +28,11 @@ public class AchievementsManager : MonoBehaviour
     private const string HIGH_SCORE = "HighScore";
     private const string PLAYER_NAME = "PlayerName";
     private const string ACHIEVEMENT_DATE = "AchievementDate";
-    private const float POPUP_ANIMATION_TIME = 3f;
+    private const float POPUP_ANIMATION_TIME = 5f;
     private const int HIGH_SCORE_SIZE = 5;
 
     private int envInARow;
+    //private MetricManager metricManager;
 
     private AchievementsManager()
     {
@@ -42,6 +43,10 @@ public class AchievementsManager : MonoBehaviour
     {
         HandleWinnerAchievement();
         HandleTreeHuggerAchievement();
+		HandleHappyTownAchievement();
+		HandleGoldDiggerAchievement();
+		HandleCaptainPlanetAchievement();
+		HandleAllRounderAchievement();
     }
 
     private void HandleTreeHuggerAchievement()
@@ -77,6 +82,61 @@ public class AchievementsManager : MonoBehaviour
             PlayerPrefs.SetString(ACHIEVEMENT_DATE + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), DateTime.Today.ToShortDateString());
             PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
             DisplayAchievementNotification("Winner");
+
+            if (MetricManager.Instance.PopHappiness < 30 && MetricManager.Instance.Gold < 30 &&
+                MetricManager.Instance.EnvHealth < 30 && !IsAchievementAlreadyEarned("Clutch Gamer"))
+            {
+                PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "Clutch Gamer");
+                PlayerPrefs.SetString(ACHIEVEMENT_DATE + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), DateTime.Today.ToShortDateString());
+                PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
+                DisplayAchievementNotification("Clutch Gamer");
+            }
+        }
+    }
+
+	private void HandleHappyTownAchievement()
+	{
+        if (MetricManager.Instance.PopHappiness == 100 && !IsAchievementAlreadyEarned("Happy Town"))
+        {
+            PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "Happy Town");
+            PlayerPrefs.SetString(ACHIEVEMENT_DATE + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), DateTime.Today.ToShortDateString());
+            PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
+            DisplayAchievementNotification("Happy Town");
+        }
+	}
+
+    private void HandleGoldDiggerAchievement()
+    {
+        if (MetricManager.Instance.Gold == 100 && !IsAchievementAlreadyEarned("Gold Digger"))
+        {
+            PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "Gold Digger");
+            PlayerPrefs.SetString(ACHIEVEMENT_DATE + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), DateTime.Today.ToShortDateString());
+            PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
+            DisplayAchievementNotification("Gold Digger");
+        }
+    }
+
+    private void HandleCaptainPlanetAchievement()
+    {
+        if (MetricManager.Instance.EnvHealth == 100 && !IsAchievementAlreadyEarned("Captain Planet"))
+        {
+            Debug.Log("CAPTAIN PLANET");
+            PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "Captain Planet");
+            PlayerPrefs.SetString(ACHIEVEMENT_DATE + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), DateTime.Today.ToShortDateString());
+            PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
+            DisplayAchievementNotification("Captain Planet");
+        }
+    }
+
+    private void HandleAllRounderAchievement()
+    {
+        if (MetricManager.Instance.EnvHealth >= 80 && MetricManager.Instance.Gold >= 80 && MetricManager.Instance.PopHappiness >= 80 &&
+            !IsAchievementAlreadyEarned("All Rounder"))
+        {
+            PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "All Rounder");
+            PlayerPrefs.SetString(ACHIEVEMENT_DATE + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), DateTime.Today.ToShortDateString());
+            PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
+            DisplayAchievementNotification("All Rounder");
         }
     }
 
@@ -90,6 +150,8 @@ public class AchievementsManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
+//        MetricManager metricManager = MetricManager.Instance;
         achievementsView = Instantiate(achievementsPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         var parentObject = GameObject.Find("AchievementsMenu");
         if (parentObject != null)
