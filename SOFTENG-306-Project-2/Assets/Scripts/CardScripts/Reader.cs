@@ -180,5 +180,11 @@ namespace SunnyTown
 
             return result;
         }
+
+        public static Reader Reset()
+        {
+            instance = new Reader();
+            return instance;
+        }
     }
 }

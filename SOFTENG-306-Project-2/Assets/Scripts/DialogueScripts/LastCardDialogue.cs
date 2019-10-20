@@ -20,7 +20,7 @@ namespace SunnyTown
             List<string> goodDeeds = new List<string>();
             List<string> badDeeds = new List<string>();
             
-            finalDialogue.Add("Mrs. Gatburg, it's your last day as Mayor! ");
+            finalDialogue.Add("Mrs. Gatburg, it's your last day as Mayor!");
             string accomplishments = "You've done plenty in your time, and we're honoured to have helped you along the way. ";
             goodDeeds.Add("You've made plenty of swell decisions that did wonders for the townspeople. ");
             badDeeds.Add("You've made some not so swell decisions that on hindsight could've been done better. ");

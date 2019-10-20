@@ -16,7 +16,7 @@ namespace SunnyTown
 
         public CardFactory()
         {
-            reader = Reader.Instance;
+            reader = Reader.Reset();
             CurrentPlotCard = reader.RootState;
             minorCards = new List<Card>(reader.AllMinorStates);
 
