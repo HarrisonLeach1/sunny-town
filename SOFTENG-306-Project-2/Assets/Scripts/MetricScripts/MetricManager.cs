@@ -81,7 +81,7 @@ namespace SunnyTown
 
         public int GetScore()
         {
-            if (CardManager.Instance.LevelWon)
+            if (CardManager.Instance.GameWon)
             {
                 return (int) (0.5 * EnvHealth + 0.25 * Gold + 0.25 * PopHappiness) + 100;
             }

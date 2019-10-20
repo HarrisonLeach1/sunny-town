@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SunnyTown;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,11 @@ public class AchievementsManager : MonoBehaviour
 {
     public static AchievementsManager Instance { get; private set; }
 
-    public GameObject AchievementsPrefab;
+    public GameObject achievementsPrefab;
+    public Animator achievementNotificationAnimator;
+    public GameObject achievementNotification;
+    public Image achievementNotificationImage;
+    public TextMeshProUGUI achievementNotificationText;
     private Transform highScoreContainer;
     private Transform achievementsContainer;
     private Transform achievementsTemplate;
@@ -22,6 +27,8 @@ public class AchievementsManager : MonoBehaviour
     private const string NUMBER_OF_ACHIEVEMENTS = "NumberOfAchievements";
     private const string HIGH_SCORE = "HighScore";
     private const string PLAYER_NAME = "PlayerName";
+    private const string ACHIEVEMENT_DATE = "AchievementDate";
+    private const float POPUP_ANIMATION_TIME = 3f;
     private const int HIGH_SCORE_SIZE = 5;
 
     private int envInARow;
@@ -30,7 +37,7 @@ public class AchievementsManager : MonoBehaviour
     {
         envInARow = 0;
     }
-    
+
     public void IsAchievementMade()
     {
         HandleWinnerAchievement();
@@ -50,9 +57,12 @@ public class AchievementsManager : MonoBehaviour
 
         if (envInARow == 5)
         {
+            Debug.Log("got into thing");
             if (!IsAchievementAlreadyEarned("Tree Hugger"))
             {
+                Debug.Log("Achieved achievement tree hugger");
                 PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "Tree Hugger");
+                PlayerPrefs.SetString(ACHIEVEMENT_DATE + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), DateTime.Today.ToShortDateString());
                 PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
                 DisplayAchievementNotification("Tree Hugger");
             }
@@ -61,9 +71,10 @@ public class AchievementsManager : MonoBehaviour
 
     private void HandleWinnerAchievement()
     {
-        if (CardManager.Instance.LevelWon && !IsAchievementAlreadyEarned("Winner"))
+        if (CardManager.Instance.GameWon && !IsAchievementAlreadyEarned("Winner"))
         {
             PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "Winner");
+            PlayerPrefs.SetString(ACHIEVEMENT_DATE + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), DateTime.Today.ToShortDateString());
             PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
             DisplayAchievementNotification("Winner");
         }
@@ -79,13 +90,16 @@ public class AchievementsManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        achievementsView = Instantiate(AchievementsPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        achievementsView = Instantiate(achievementsPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         var parentObject = GameObject.Find("AchievementsMenu");
-        achievementsView.transform.SetParent(parentObject.transform, false);
+        if (parentObject != null)
+        {
+            achievementsView.transform.SetParent(parentObject.transform, false);
+        }
         DisplayHighScores();
         DisplayAchievementsMenu();
     }
-    
+
 
     /// <summary>
     /// Checks if the new score is within the high score list, if it is, then add it to the list.
@@ -121,7 +135,7 @@ public class AchievementsManager : MonoBehaviour
             PlayerPrefs.SetInt(HIGH_SCORE + (i + 1), PlayerPrefs.GetInt(HIGH_SCORE + i));
             PlayerPrefs.SetString(PLAYER_NAME + (i + 1), PlayerPrefs.GetString(PLAYER_NAME + i));
         }
-        
+
         //add in the new score in the indexed position
         PlayerPrefs.SetInt(HIGH_SCORE + index, newScore);
         PlayerPrefs.SetString(PLAYER_NAME + index, "bob");
@@ -142,7 +156,7 @@ public class AchievementsManager : MonoBehaviour
         for (var i = 1; i <= PlayerPrefs.GetInt(NUMBER_OF_SCORES); i++)
         {
             var hse = new HighScoreEntry(
-                PlayerPrefs.GetInt(HIGH_SCORE + i), 
+                PlayerPrefs.GetInt(HIGH_SCORE + i),
                 PlayerPrefs.GetString(PLAYER_NAME + i),
                 i);
             highScores.Add(hse);
@@ -159,7 +173,7 @@ public class AchievementsManager : MonoBehaviour
 
         float templateHeight = 23f;
         var highScoreList = GetHighScores();
-        for (int i = 0; i < highScoreList.Count; i++) 
+        for (int i = 0; i < highScoreList.Count; i++)
         {
             var entryTransform = Instantiate(highScoreTemplate, highScoreContainer);
             var entryRectTransform = entryTransform.GetComponent<RectTransform>();
@@ -192,15 +206,35 @@ public class AchievementsManager : MonoBehaviour
     {
         var achievementName = PlayerPrefs.GetString("achievement" + i);
         Debug.Log("saved achievement name: " + achievementName);
-        foreach (Achievement achievement in new Reader().AllAchievements)
+        foreach (Achievement achievement in Reader.Instance.AllAchievements)
         {
-            Debug.Log("all achievement names: " + achievement.name);
             if (achievement.name.Equals(achievementName))
             {
+                achievement.dateEarned = PlayerPrefs.GetString(ACHIEVEMENT_DATE + i);
                 return achievement;
             }
         }
         return null;
+    }
+
+    public void DisplayAchievementNotification(string achievementName)
+    {
+        foreach (Achievement a in Reader.Instance.AllAchievements)
+        {
+            if (a.name.Equals(achievementName))
+            {
+                achievementNotificationText.text = a.name;
+                achievementNotificationImage.sprite = Resources.Load<Sprite>("Sprites/" + a.imageUrl);
+                achievementNotificationAnimator.SetBool("IsVisible", true);
+                StartCoroutine(WaitForDownAnimation());
+            }
+        }
+    }
+    
+    private IEnumerator WaitForDownAnimation()
+    {
+        yield return new WaitForSeconds(POPUP_ANIMATION_TIME);
+        achievementNotificationAnimator.SetBool("IsVisible", false);
     }
 
     private void DisplayAchievementsMenu()
@@ -208,8 +242,8 @@ public class AchievementsManager : MonoBehaviour
         achievementsContainer = achievementsView.transform.GetChild(2).GetChild(2).GetChild(0).GetChild(0).GetComponent<Transform>();
         var achievementsCompleted = achievementsView.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>();
         achievementsCompleted.SetText("Achievements Unlocked: " + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + "/" +
-                                      new Reader().AllAchievements.Count);
-        
+                                      Reader.Instance.AllAchievements.Count);
+
         achievementsTemplate = achievementsContainer.Find("AchievementsTemplate");
         achievementsTemplate.gameObject.SetActive(false);
         float templateHeight = 34f;
@@ -220,22 +254,12 @@ public class AchievementsManager : MonoBehaviour
             var badge = entryRectTransform.GetChild(0).GetComponent<Image>();
             var description = entryRectTransform.GetChild(1).GetComponent<TextMeshProUGUI>();
             var date = entryRectTransform.GetChild(2).GetComponent<TextMeshProUGUI>();
-            Achievement achievement = GetAchievementByIndex(i); 
+            Achievement achievement = GetAchievementByIndex(i);
             description.SetText(achievement.name + " - " + achievement.description);
-            date.SetText("asdfasdfasf");
+            date.SetText("Date achieved: " + achievement.dateEarned);
+            badge.sprite = Resources.Load<Sprite>("Sprites/" + achievement.imageUrl);
             entryRectTransform.anchoredPosition = new Vector2(0, -templateHeight * i);
             entryTransform.gameObject.SetActive(true);
-        }
-    }
-
-    public void DisplayAchievementNotification(string achievementName)
-    {
-        foreach (Achievement a in new Reader().AllAchievements)
-        {
-            if (a.name.Equals(achievementName))
-            {
-                Debug.Log("Show achievement badge and notification for: " + achievementName);
-            }
         }
     }
 
@@ -247,7 +271,7 @@ public class AchievementsManager : MonoBehaviour
             this.playername = playername;
             this.rank = rank;
         }
-        
+
         private int highScore;
         private string playername;
         private int rank;

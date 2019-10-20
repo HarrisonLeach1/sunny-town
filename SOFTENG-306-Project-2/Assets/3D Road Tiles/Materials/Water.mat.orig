@@ -1,8 +1,0 @@
-version https://git-lfs.github.com/spec/v1
-<<<<<<< HEAD
-oid sha256:b90cbdd0725874ac9ea9f755d840bbdd254b57ad1cbe7f6ae518bc828be132da
-size 2134
-=======
-oid sha256:65ba143bf4e280aad9187550bef2d1c2dc35400d8e448c489c896581861b8cdd
-size 255
->>>>>>> feature/settings-pause-menu
