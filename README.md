@@ -35,7 +35,7 @@
 
 ## Setting up
 
-### Setup Untiy file merging
+### Setup Unity file merging
 
 1. Add the following text to your `~/.gitconfig` file.
 
