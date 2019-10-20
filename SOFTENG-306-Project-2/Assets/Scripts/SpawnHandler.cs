@@ -11,7 +11,7 @@ namespace SunnyTown
     {
         private float instantiationTimer = 3f;
         public GameObject[] buildings;
-        public bool buildSomeThing;
+        public bool buildSomeThing = false;
         private Dictionary<GameObject, bool> visibilityMap = new Dictionary<GameObject, bool>();
 
 

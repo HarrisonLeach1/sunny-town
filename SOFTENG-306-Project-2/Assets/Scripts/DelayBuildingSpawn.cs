@@ -6,22 +6,17 @@ public class DelayBuildingSpawn : MonoBehaviour
 {
     public GameObject building;
     float TmStart;
-    float TmLen=3f;
+
  
-    // Use this for initialization
-    void Start () {
-        TmStart=Time.time;
-        building.SetActive(false);
-    }
-     
-    // Update is called once per frame
-    void Update()
+    void OnEnable()
     {
-        if (Time.time > TmStart + TmLen)
-        {
+        building.SetActive(false);
+        StartCoroutine (Delay());
+    }
 
-            building.SetActive(true);
-        }
-
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds (2);
+        building.SetActive(true);
     }
 }
