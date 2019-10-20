@@ -16,11 +16,11 @@ public class KeyboardInputManager : InputManager
         // Movement control transforming
         if (Input.GetKey(KeyCode.W))
         {
-            OnMoveInput?.Invoke(Vector3.forward);
+            OnMoveInput?.Invoke(Vector3.forward * 2);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            OnMoveInput?.Invoke(-Vector3.forward);
+            OnMoveInput?.Invoke(-Vector3.forward * 2);
         }
         if (Input.GetKey(KeyCode.A))
         {
@@ -34,11 +34,11 @@ public class KeyboardInputManager : InputManager
         // Rotation input
         if (Input.GetKey(KeyCode.E))
         {
-            OnRotateInput?.Invoke(1f);
+            OnRotateInput?.Invoke(-1f);
         }
         if (Input.GetKey(KeyCode.Q))
         {
-            OnRotateInput?.Invoke(-1f);
+            OnRotateInput?.Invoke(1f);
         }
         
         // Zoom input
