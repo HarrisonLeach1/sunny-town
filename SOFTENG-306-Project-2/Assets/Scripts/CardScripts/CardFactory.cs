@@ -13,7 +13,7 @@ namespace SunnyTown
         private Reader reader;
         public PlotCard CurrentPlotCard { get; private set; }
         private List<Card> minorCards;
-        
+
         private const string LEVEL_TWO_STATE_ID = "s4";
         private const string LEVEL_THREE_STATE_ID = "s9";
 
@@ -23,7 +23,7 @@ namespace SunnyTown
             CurrentPlotCard = reader.RootState;
             minorCards = new List<Card>(reader.AllMinorStates);
 
-            //minorCards.Randomize();
+            minorCards.Randomize();
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace SunnyTown
             CurrentPlotCard = card;
             return card;
         }
-        
+
         /// <summary>
         /// Updates the current card to the first card of the third level of the game. Used by CheatsManager.
         /// </summary>
