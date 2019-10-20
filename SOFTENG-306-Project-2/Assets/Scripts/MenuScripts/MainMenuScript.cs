@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace SunnyTown
 {
@@ -10,12 +12,14 @@ namespace SunnyTown
     /// </summary>
     public class MainMenuScript : MonoBehaviour
     {
+        public GameObject PlayerInput;
         public void PlayGame()
         {
             Time.timeScale = 1f;
             Debug.Log("Start game");
+            AchievementsManager.playerName = PlayerInput.GetComponent<TMP_InputField>().text;
+            Debug.Log("Player name: " + AchievementsManager.playerName);
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 4);
         }
 
         public void QuitGame()
