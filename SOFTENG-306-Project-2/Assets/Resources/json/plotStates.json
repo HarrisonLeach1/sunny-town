@@ -32,8 +32,8 @@
         "state": "s2",
         "npcName": "Jimmy Cash",
         "feedback": "Clean energy is popular umong the people cause it saves our future, but it costs an arm and a leg!",
-        "money": -20,
-        "environment": 15,
+        "money": -15,
+        "environment": 10,
         "token": "investment",
         "investment": "energy"
       }
@@ -128,9 +128,9 @@
         "hasAnimation": true,
         "buildingName": "WindFarm",
         "feedback": "Yip! [Wind turbines are great for the environment, and with the efforts of the research group prices have been lowered significantly!]",
-        "money": -5,
-        "happiness": 15,
-        "environment": 15,
+        "money": -7,
+        "happiness": 7,
+        "environment": 7,
         "state": "s8b"
       },
       {
@@ -140,7 +140,7 @@
         "npcName": "James the Dog",
         "feedback": "Grrrrrr... [It's a shame that you invested in green energy but never used it :( plus coal is bad for the environment.]",
         "money": -5,
-        "environment": -15,
+        "environment": -10,
         "additionalState": "arvio",
         "state": "s7"
       }
@@ -161,9 +161,9 @@
         "hasAnimation": true,
         "buildingName": "WindFarm",
         "feedback": "Woof! [Wind turbines are great for the environment, but it's expensive if you haven't invested much into research]",
-        "money": -15,
-        "happiness": 15,
-        "environment": 15,
+        "money": -8,
+        "happiness": 7,
+        "environment": 7,
         "state": "s8b"
       },
       {
@@ -173,7 +173,7 @@
         "buildingName": "PowerPlant",
         "feedback": "Woof! [Coal power is really bad for the environment.]",
         "money": -5,
-        "environment": -15,
+        "environment": -10,
         "additionalState": "arvio",
         "state": "s7"
       }
@@ -194,9 +194,9 @@
         "buildingName": "WindFarm",
         "npcName": "James the Dog",
         "feedback": "Woof! [Wind turbines are great for the environment, but it's expensive if you haven't invested much into research] ",
-        "money": -15,
-        "happiness": 15,
-        "environment": 15,
+        "money": -8,
+        "happiness": 7,
+        "environment": 7,
         "state": "s8b"
       },
       {
@@ -206,7 +206,7 @@
         "buildingName": "PowerPlant",
         "feedback": "Woof! [Coal power is really bad for the environment.]",
         "money": -5,
-        "environment": -15,
+        "environment": -10,
         "additionalState": "arvio",
         "state": "s7"
       }
@@ -226,8 +226,8 @@
         "buildingName": "CoalMine",
         "token": "arvio2",
         "arvio2": "yes",
-        "environment": -20,
-        "money": 20,
+        "environment": -10,
+        "money": 10,
         "npcName": "Advisory Board",
         "feedback": "Arvio begins constructing an coal mine. We're getting paid a great amount of money, but this is releasing a lot of CO2.",
         "state": "s8a"
@@ -258,8 +258,8 @@
         "npcName": "Advisory Board",
         "token": "arvio2",
         "arvio2": "yes",
-        "environment": -20,
-        "money": 20,
+        "environment": -10,
+        "money": 10,
         "feedback": "Arvio begins constructing an coal mine. We're getting paid a lot of money, but this is releasing lots of CO2.",
         "state": "s8a"
       },
@@ -284,7 +284,7 @@
     "transitions": [
       {
         "label": "Sorry Hunter, the icebergs are melting and it's too dangerous to go there. ",
-        "happiness": -10,
+        "happiness": -5,
         "state": "s9"
       }
     ]
@@ -300,7 +300,7 @@
     "transitions": [
       {
         "label": "Of course, we'll have a great trip!",
-        "happiness": 10,
+        "happiness": 5,
         "state": "s9"
       }
     ]
@@ -329,7 +329,7 @@
       {
         "label": "They should build up",
         "npcName": "Allena",
-        "money": -5,
+        "money": -3,
         "token": "scale",
         "scale": "up",
         "feedback": "Building up can be expensive, but makes it easier to have sustainable transport. Peter thanks you for your advice. ",
@@ -338,7 +338,7 @@
       {
         "label": "They should build out",
         "npcName": "Allena",
-        "environment": -5,
+        "environment": -4,
         "token": "scale",
         "scale": "out",
         "feedback": "Building out is cheaper, but people drive more and harm the environment. Peter takes your advice anyhow. ",
@@ -358,7 +358,7 @@
       {
         "label": "They should build up",
         "npcName": "Allena",
-        "money": -5,
+        "money": -3,
         "token": "scale",
         "scale": "up",
         "feedback": "Building up can be expensive, but makes it easier to have sustainable transport. Peter thanks you for your advice. ",
@@ -367,7 +367,8 @@
       {
         "label": "They should build out",
         "npcName": "Allena",
-        "money": 15,
+        "money": 5,
+        "environment": -3,
         "token": "scale",
         "scale": "out",
         "feedback": "People need to travel further and since we invested in electric cars earlier our exports are increasing. ",
@@ -387,7 +388,7 @@
       {
         "label": "They should build up",
         "npcName": "Allena",
-        "money": -5,
+        "money": -3,
         "token": "scale",
         "scale": "up",
         "feedback": "Building up can be expensive, but makes it easier to have sustainable transport. Peter thanks you for your advice. ",
@@ -396,7 +397,7 @@
       {
         "label": "They should build out",
         "npcName": "Allena",
-        "environment": -5,
+        "environment": -3,
         "token": "scale",
         "scale": "out",
         "feedback": "Building out is cheaper, but people drive more and harm the environment. Peter takes your advice anyhow. ",
@@ -417,16 +418,16 @@
         "label": "Import some from neighbouring cities. ",
         "npcName": "James the Dog",
         "additionalState": "scale",
-        "money": -20,
-        "happiness": 15,
+        "money": -5,
+        "happiness": 5,
         "feedback": "Woof! [Buying food is expensive, even though it doesn't increase our city's pollution.]",
         "state": "s12"
       },
       {
         "label": "We should have more farms in the city. ",
         "npcName": "James the Dog",
-        "environment": -10,
-        "happiness": 15,
+        "environment": -6,
+        "happiness": 5,
         "feedback": "Woof! [Farming is important, but it does a lot of damage to the environment, be careful!]",
         "state": "s12"
       }
@@ -447,8 +448,8 @@
         "buildingName": "Farm",
         "token": "farming",
         "farming": "dairy",
-        "happiness": 10,
-        "environment": -10,
+        "happiness": 4,
+        "environment": -4,
         "feedback": "Woof! [People like dairy, that's for sure! But dairy farming is really bad for the environment.]",
         "state": "s13"
       },
@@ -459,8 +460,8 @@
         "hasAnimation": true,
         "buildingName": "Farm",
         "npcName": "James the Dog",
-        "happiness": 5,
-        "environment": 10,
+        "happiness": 3,
+        "environment": 4,
         "feedback": "Woof! [You made happy both the environment and lactose intolerant people]",
         "additionalState": "investment",
         "state": "s14"
@@ -480,8 +481,8 @@
         "npcName": "James the Dog",
         "token": "farming",
         "farming": "dairy",
-        "happiness": 10,
-        "environment": -10,
+        "happiness": 4,
+        "environment": -4,
         "feedback": "Woof! [People like dairy, that's for sure! But dairy farming is real bad for the environment.]",
         "state": "s12out"
       },
@@ -490,8 +491,8 @@
         "npcName": "James the Dog",
         "token": "farming",
         "farming": "vege",
-        "happiness": 5,
-        "environment": 10,
+        "happiness": 3,
+        "environment": 4,
         "feedback": "Woof! [You made happy both the environment and lactose intolerant people]",
         "state": "s14",
         "additionalState": "investment"
@@ -512,8 +513,8 @@
         "feedback": "That was really kind of you!",
         "token": "refugee",
         "refugee": "yes",
-        "happiness": 20,
-        "money": -20,
+        "happiness": 6,
+        "money": -6,
         "state": "s14",
         "additionalState": "investment"
       },
@@ -537,9 +538,9 @@
     "question": "Please take more care with our environment in the future! ",
     "transitions": [
       {
-        "environment": -20,
-        "money": -10,
-        "happiness": -10,
+        "environment": -8,
+        "money": -4,
+        "happiness": -4,
         "label": "Continue",
         "state": "s14",
         "additionalState": "investment"
@@ -557,9 +558,9 @@
       {
         "label": "Promote electric vehicles! ",
         "npcName": "Jimmy Cash",
-        "environment": 20,
-        "money": -5,
-        "happiness": 10,
+        "environment": 6,
+        "money": -3,
+        "happiness": 4,
         "token": "transport",
         "transport": "ev",
         "feedback": "Electric cars are much greener, plus our earlier investment made them cheap too. What a deal!",
@@ -568,8 +569,8 @@
       {
         "label": "Lets beef up our public transport! ",
         "npcName": "Jimmy Cash",
-        "money": -20,
-        "environment": 20,
+        "money": -6,
+        "environment": 6,
         "token": "transport",
         "hasAnimation": true,
         "buildingName": "Bus",
@@ -580,8 +581,8 @@
       {
         "label": "Let's keep letting people drive what they wish. ",
         "npcName": "Jimmy Cash",
-        "environment": -30,
-        "happiness": 10,
+        "environment": -10,
+        "happiness": 5,
         "token": "transport",
         "transport": "gas",
         "feedback": "What a brilliant plan! Saving humanity from extinction never made much economic sense to me and this way, we'll save loads of cash! ",
@@ -600,9 +601,9 @@
       {
         "label": "Promote electric vehicles! ",
         "npcName": "Jimmy Cash",
-        "environment": 20,
-        "money": -20,
-        "happiness": 10,
+        "environment": 6,
+        "money": -5,
+        "happiness": 4,
         "token": "transport",
         "transport": "ev",
         "feedback": "Electric cars are much greener, but they're still pretty expensive since we didn't invest in them earlier. ",
@@ -611,8 +612,8 @@
       {
         "label": "Lets beef up our public transport! ",
         "npcName": "Jimmy Cash",
-        "money": -20,
-        "environment": 20,
+        "money": -6,
+        "environment": 6,
         "token": "transport",
         "hasAnimation": true,
         "buildingName": "Bus",
@@ -623,8 +624,8 @@
       {
         "label": "Let's keep letting people drive what they wish. ",
         "npcName": "Jimmy Cash",
-        "environment": -30,
-        "happiness": 10,
+        "environment": -10,
+        "happiness": 5,
         "token": "transport",
         "transport": "gas",
         "feedback": "What a brilliant plan! Saving humanity from extinction never made much economic sense to me and this way, we'll save loads of cash! ",
@@ -643,9 +644,9 @@
       {
         "label": "Promote electric vehicles! ",
         "npcName": "Jimmy Cash",
-        "environment": 20,
-        "money": -20,
-        "happiness": 10,
+        "environment": 6,
+        "money": -5,
+        "happiness": 4,
         "token": "transport",
         "transport": "ev",
         "feedback": "Electric cars are much greener, but they're still pretty expensive since we didn't invest in them earlier. ",
@@ -654,8 +655,8 @@
       {
         "label": "Lets beef up our public transport! ",
         "npcName": "Jimmy Cash",
-        "money": -20,
-        "environment": 20,
+        "money": -6,
+        "environment": 6,
         "hasAnimation": true,
         "buildingName": "Bus",
         "token": "transport",
@@ -666,8 +667,8 @@
       {
         "label": "Let's keep letting people drive what they wish. ",
         "npcName": "Jimmy Cash",
-        "environment": -30,
-        "happiness": 10,
+        "environment": -10,
+        "happiness": 5,
         "token": "transport",
         "transport": "gas",
         "feedback": "What a brilliant plan! Saving humanity from extinction never made much economic sense to me and this way, we'll save loads of cash! ",

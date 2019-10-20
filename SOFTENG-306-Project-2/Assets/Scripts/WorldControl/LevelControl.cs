@@ -50,7 +50,7 @@ namespace SunnyTown
             metricMultiplierDictionary = new Dictionary<int, int>();
             metricMultiplierDictionary.Add(1, 1);
             metricMultiplierDictionary.Add(2, 2);
-            metricMultiplierDictionary.Add(3, 4);
+            metricMultiplierDictionary.Add(3, 3);
             Multiplier = 1;
         }
 
