@@ -13,7 +13,7 @@ namespace SunnyTown
     public class MainMenuScript : MonoBehaviour
     {
         public GameObject PlayerInput;
-        public void PlayGame()
+        public void LoadPlayerName()
         {
             Time.timeScale = 1f;
             Debug.Log("Start game");
@@ -27,7 +27,7 @@ namespace SunnyTown
                 AchievementsManager.playerName = playerName;
             }
             Debug.Log("Player name: " + AchievementsManager.playerName);
-			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+			//SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
         public void QuitGame()

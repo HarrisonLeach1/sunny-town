@@ -6,10 +6,15 @@ namespace SunnyTown
 {
     public class CheatsManager : MonoBehaviour
     {
+
+        private LevelControl levelController;
+        private LevelProgressScript levelProgressScript;
+        
         // Start is called before the first frame update
         void Start()
         {
-        
+            levelProgressScript = GameObject.Find("LevelProgress").GetComponent<LevelProgressScript>();
+            levelController = GameObject.Find("LevelManager").GetComponent<LevelControl>();
         }
 
         // Update is called once per frame
@@ -18,17 +23,22 @@ namespace SunnyTown
             //cheatcode of leveling up
             if (Input.GetKey(KeyCode.L))
             {
+                if (levelController.CurrentLevel == 1)
+                {
+                    var card
+                    levelController
+                }
                 Debug.Log("Level up cheatcode entered");
-                //LevelControl.Instance.NextLevel();
+
+                
             }
             
             //cheatcode for maxing out metrics
             if (Input.GetKey(KeyCode.M))
             {
                 Debug.Log("Metrics boost cheatcode entered");
-                MetricManager.Instance.UpdateGold(95);
-                MetricManager.Instance.UpdateEnvHealth(95);
-                MetricManager.Instance.UpdatePopHappiness(95);
+                new MetricsModifier(95, 95, 95).Modify();
+                MetricManager.Instance.RenderMetrics();
             }
         }
     }    
