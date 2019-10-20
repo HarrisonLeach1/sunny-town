@@ -12,6 +12,7 @@ namespace SunnyTown
     {
         public void PlayGame()
         {
+            Time.timeScale = 1f;
             Debug.Log("Start game");
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 4);

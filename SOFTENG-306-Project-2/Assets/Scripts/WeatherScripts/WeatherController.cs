@@ -1,27 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 namespace SunnyTown
 {
     /// <summary> 
     /// Singleton controller class that manages the execution of random weather events
     /// Weather events are triggered based on a probability calculated from the environment health metric
-    /// <summary>
+    /// </summary>
     public class WeatherController : MonoBehaviour
     {
 
-        private enum ClimateEvent 
+        public enum ClimateEvent 
         {
+            NoEvent,
             AcidRain,
             WildFire,
             Hurricane,
             Smog
         }
-        public static WeatherController Instance { get; private set; }
 
-        //private WeatherEvent[] events;
+        public ClimateEvent currentEvent;
+        public static WeatherController Instance { get; private set; }
 
         [SerializeField]
         private AcidRain rain;
@@ -77,15 +77,17 @@ namespace SunnyTown
             weatherEvents.Add(2,ClimateEvent.Hurricane);
             weatherEvents.Add(3,ClimateEvent.Smog);
             turnCounter = TURN_COUNTER;
+            currentEvent = ClimateEvent.NoEvent;
 
-            eventIndex = UnityEngine.Random.Range(0,4);
+            eventIndex = Random.Range(0,4);
 
             //y = ((5/((x+15)/100))-4)/30 function to map score to probability          
         }        
 
-        /* Function is called whenever environment health is changed, it updates the probability of 
-         * of a weather event occurring 
-         */
+        /// <summary> 
+        ///Function is called whenever environment health is changed, it updates the probability of a weather event occurring 
+        /// </summary>
+        /// <param name="newHealth"> new envrionment health value </param>
         public void UpdateWeatherProbabilities(float newHealth)
         {
             this.envHealth = newHealth;
@@ -99,11 +101,13 @@ namespace SunnyTown
             Debug.Log("new probability is "+probability+" new health is "+this.envHealth);
         }
 
+        /// <summary>
+        /// Function is called Whenever game state changes in the CardManager class
+        /// it will attempt to trigger weather event if in the right state and turn
+        /// </summary>
         public void CheckGameStatus()
         {
             CardManager.GameState state = cardManager.CurrentGameState;
-            
-            Debug.Log("chjecking the state "+state.ToString()+" "+turnCounter);
             //if waiting for event then free to fire weather event   
             if (state.Equals(CardManager.GameState.WaitingForEvents))
             {
@@ -115,30 +119,33 @@ namespace SunnyTown
             }
         }
 
-
-        // TODO: need to reset the probability some how so weather events arent chained back to back
-        //       need to change other effects into animations like the hurricane 
-        //       need to create weather event card, right now is using minor decision place holder
+        /// <summary>
+        /// Function tries to trigger a weather event given the current probability by generating a random 
+        /// number and seeing if its less than or equal to the probability
+        /// </summary>
         private void AttemptWeatherEvent()
         {
-            float randomTime = (float)UnityEngine.Random.Range(0f, 1f);
+            float randomTime = (float)Random.Range(0f, 1f);
             Debug.Log("Random number is "+randomTime+" prob is "+probability);
             if (randomTime <= this.probability)
             {
-                //if random number is lower than probability then fire event
                 StartCoroutine("TriggerWeatherEvent");
             }
         }
 
+        /// <summary>
+        /// Coroutine that handles execution of weather event, it finds the current weather event to execute
+        /// and makes a call to display the weather card
+        /// </summary>
         IEnumerator TriggerWeatherEvent() 
         {
             // eventindex is randomised at start, order of weather events is cyclic
-            cardManager.SetState(CardManager.GameState.WeatherEvent);
             //reset turn counter
             turnCounter = TURN_COUNTER;
             Debug.Log("triggering weather "+eventIndex);
             if (weatherEvents.TryGetValue(eventIndex, out ClimateEvent value))
             {
+                currentEvent = value;
                 switch(value)
                 {
                     case ClimateEvent.AcidRain:
@@ -161,10 +168,15 @@ namespace SunnyTown
                     Debug.Log("smogging");
                     break;
                 }
+                cardManager.SetState(CardManager.GameState.WeatherEvent);
             }
             yield return null;
         }
 
+        /// <summary>
+        /// Callback function executed when player clicks continue on a weather card, it handles
+        /// incrementing the current weather event and stopping the animation of the weather event
+        /// </summary>
         public void StopAnim()
         {
             Debug.Log(eventIndex);

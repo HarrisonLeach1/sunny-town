@@ -12,13 +12,25 @@ namespace SunnyTown
     /// </summary>
     public class Reader
     {
+        private static Reader instance = null;
         public PlotCard RootState { get; private set; }
         public List<SimpleDialogue> AllExpositionDialogues { get; private set; }
         public List<PlotCard> AllStoryStates { get; private set; }
         public List<Card> AllMinorStates { get; private set; }
         public List<Achievement> AllAchievements { get; private set; }
+        public static Reader Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Reader();
+                }
+                return instance;
+            }
+        }
 
-        public Reader()
+        private Reader()
         {
             AllExpositionDialogues =
                 this.ParseExpositionJson(Resources.Load<TextAsset>("json/expositionStates").text);
