@@ -16,6 +16,7 @@ namespace SunnyTown
         private int currentLevel;
         private Dictionary<int, int> metricMultiplierDictionary;
         public int Multiplier { get; set; }
+        public int CurrentLevel  => currentLevel;
 
         private TownAudioClipSwitch townAudioClipSwitch;
 

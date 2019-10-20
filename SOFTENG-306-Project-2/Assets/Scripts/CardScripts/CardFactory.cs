@@ -14,7 +14,7 @@ namespace SunnyTown
         public PlotCard CurrentPlotCard { get; private set; }
         private List<Card> minorCards;
         
-        private const string LEVEL_TWO_STATE_ID = "s5";
+        private const string LEVEL_TWO_STATE_ID = "s4";
         private const string LEVEL_THREE_STATE_ID = "s10EV";
 
         public CardFactory()
@@ -57,14 +57,18 @@ namespace SunnyTown
             }
         }
 
-        public Card getLevelTwoCard()
+        public Card GetLevelTwoCard()
         {
-            return reader.AllStoryStates.Single(s => s.Id.Equals(LEVEL_TWO_STATE_ID));
+            var card = reader.AllStoryStates.Single(s => s.Id.Equals(LEVEL_TWO_STATE_ID));
+            CurrentPlotCard = card;
+            return card;
         }
         
-        public Card getLevelThreeCard()
+        public Card GetLevelThreeCard()
         {
-            return reader.AllStoryStates.Single(s => s.Id.Equals(LEVEL_THREE_STATE_ID));
+            var card = reader.AllStoryStates.Single(s => s.Id.Equals(LEVEL_THREE_STATE_ID));
+            CurrentPlotCard = card;
+            return card;
         }
     }
 }

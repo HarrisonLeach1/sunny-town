@@ -301,7 +301,6 @@ namespace SunnyTown
         /// <param name="decisionValue">The value chosen by the user</param>
         private void HandleOptionPressed(int decisionValue)
         {
-            // TODO: Handle this more elegantly, maybe move into different methods
             if (!(currentCard is SliderCard) && PastTokens.ContainsKey(currentCard.Options[decisionValue].AdditionalState))
             {
                 Debug.Log("addition state added: " + PastTokens[currentCard.Options[decisionValue].AdditionalState]);
@@ -469,6 +468,18 @@ namespace SunnyTown
             // minor card should be displayed upon the callback to the mail message
             dialogueManager.StartExplanatoryDialogue(new SimpleDialogue(statements, weatherEvent), displayWeatherInfo);
 
+        }
+
+        public Card SetLevelTwo()
+        {
+            var card = cardFactory.GetLevelTwoCard();
+            return card;
+        }
+
+        public Card SetLevelThree()
+        {
+            var card = cardFactory.GetLevelThreeCard();
+            return card;
         }
 
     }
