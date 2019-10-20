@@ -19,13 +19,13 @@ namespace SunnyTown
             List<string> finalDialogue = new List<string>();
             List<string> goodDeeds = new List<string>();
             List<string> badDeeds = new List<string>();
-            
+
             finalDialogue.Add("Mrs. Gatburg, it's your last day as Mayor!");
             string accomplishments = "You've done plenty in your time, and we're honoured to have helped you along the way. ";
             goodDeeds.Add("You've made plenty of swell decisions that did wonders for the townspeople. ");
             badDeeds.Add("You've made some not so swell decisions that on hindsight could've been done better. ");
 
-            foreach(KeyValuePair<string, string> entry in PastTokens)
+            foreach (KeyValuePair<string, string> entry in PastTokens)
             {
                 if (entry.Key.Equals("investment"))
                 {
@@ -93,7 +93,6 @@ namespace SunnyTown
 
             }
             finalDialogue.Add("It was a lot of fun working with you, and we hoped you learn't a lot through your time as mayor!");
-            finalDialogue.Add("Goodbye~~");
             SimpleDialogue output = new SimpleDialogue(finalDialogue.ToArray(), "Advisory Board");
             return output;
         }
