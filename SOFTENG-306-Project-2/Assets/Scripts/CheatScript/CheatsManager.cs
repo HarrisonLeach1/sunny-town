@@ -6,10 +6,13 @@ namespace SunnyTown
 {
     public class CheatsManager : MonoBehaviour
     {
+
+        private LevelControl levelController;
+        
         // Start is called before the first frame update
         void Start()
         {
-        
+            levelController = GameObject.Find("LevelManager").GetComponent<LevelControl>();
         }
 
         // Update is called once per frame
@@ -20,6 +23,8 @@ namespace SunnyTown
             {
                 Debug.Log("Level up cheatcode entered");
                 //LevelControl.Instance.NextLevel();
+                levelController.NextLevel();
+                
             }
             
             //cheatcode for maxing out metrics

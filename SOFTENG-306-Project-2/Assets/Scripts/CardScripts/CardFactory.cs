@@ -13,6 +13,9 @@ namespace SunnyTown
         private Reader reader;
         public PlotCard CurrentPlotCard { get; private set; }
         private List<Card> minorCards;
+        
+        private const string LEVEL_TWO_STATE_ID = "s5";
+        private const string LEVEL_THREE_STATE_ID = "s10EV";
 
         public CardFactory()
         {
@@ -52,6 +55,16 @@ namespace SunnyTown
                 default:
                     throw new System.ArgumentException("Argument invalid for CardFactory");
             }
+        }
+
+        public Card getLevelTwoCard()
+        {
+            return reader.AllStoryStates.Single(s => s.Id.Equals(LEVEL_TWO_STATE_ID));
+        }
+        
+        public Card getLevelThreeCard()
+        {
+            return reader.AllStoryStates.Single(s => s.Id.Equals(LEVEL_THREE_STATE_ID));
         }
     }
 }
