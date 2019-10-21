@@ -21,7 +21,9 @@ namespace SunnyTown
         public float initialMusicValue;
         public float initialSFXValue;
 
-
+		/// <summary>
+    	/// Set volume levels depending on existing Playerprefs or assign default values
+    	/// </summary>
         void Start()
         {
 			if (!PlayerPrefs.HasKey("SFXVolume")) 
