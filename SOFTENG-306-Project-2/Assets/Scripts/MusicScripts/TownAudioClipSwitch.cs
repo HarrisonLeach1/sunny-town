@@ -15,6 +15,7 @@ namespace SunnyTown
         public AudioClip levelTwoTownClip;
         public AudioClip levelThreeTownClip;
         public AudioClip loseScreenClip;
+		public AudioClip winScreenClip;
 
 
         void Start()
@@ -38,6 +39,12 @@ namespace SunnyTown
         public void UpdateLevelThreeClip()
         {
             _AudioSource.clip = levelThreeTownClip;
+            _AudioSource.Play();
+        }
+
+		public void PlayWinScreenMusic()
+        {
+            _AudioSource.clip = winScreenClip;
             _AudioSource.Play();
         }
 
