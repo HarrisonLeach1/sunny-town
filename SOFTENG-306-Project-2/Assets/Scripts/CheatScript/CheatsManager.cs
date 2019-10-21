@@ -23,11 +23,11 @@ namespace SunnyTown
             //cheatcode of leveling up
             if (Input.GetKey(KeyCode.L))
             {
-                if (levelController.CurrentLevel == 1)
-                {
-                    var card
-                    levelController
-                }
+//                if (levelController.CurrentLevel == 1)
+//                {
+////                    var card
+////                    levelController
+//                }
                 Debug.Log("Level up cheatcode entered");
 
                 
