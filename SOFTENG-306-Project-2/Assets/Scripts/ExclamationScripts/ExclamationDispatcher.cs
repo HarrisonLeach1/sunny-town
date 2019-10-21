@@ -52,9 +52,20 @@ namespace SunnyTown
         /// </summary>
         IEnumerator CreateExclamationMark()
         {
-            // wait while a card or an exclamation mark is already showing 
+  
+            // wait while a card or an exclamation mark is already showing, persist mark if spawned
             while (cardManager.CurrentGameState != CardManager.GameState.WaitingForEvents || markSpawned)
-            {
+            {             
+                if (markSpawned)
+                {
+                    //pause animation
+                    animator.speed = 0;
+                }
+                if (cardManager.CurrentGameState == CardManager.GameState.WaitingForEvents)
+                {
+                    //resume animation
+                    animator.speed =1;
+                }
                 yield return new WaitForSeconds(1);
             }
             float randomTime = (float)Random.Range(2f, 4f);
@@ -91,6 +102,11 @@ namespace SunnyTown
                 cardManager.QueueMinorCard();
                 foreach (Renderer r in GetComponentsInChildren<Renderer>())
                     r.enabled = false;
+
+                // give player money for accepting request
+                MetricsModifier modifier = new MetricsModifier(0, 5, 0);
+                modifier.Modify();
+                MetricManager.Instance.RenderMetrics();
             }
             else
             {
@@ -108,7 +124,7 @@ namespace SunnyTown
                 r.enabled = false;
             animator.SetBool("isShow", false);
             markSpawned = false;
-            MetricsModifier modifier = new MetricsModifier(-5, 0, 0);
+            MetricsModifier modifier = new MetricsModifier(-2, 0, 0);
             modifier.Modify();
             MetricManager.Instance.RenderMetrics();
         }
