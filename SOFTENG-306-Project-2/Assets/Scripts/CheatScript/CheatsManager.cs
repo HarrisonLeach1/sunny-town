@@ -27,8 +27,13 @@ namespace SunnyTown
             {
                 Debug.Log("Metrics boost cheatcode entered");
                 
-                MetricsModifier metricsModifier = new MetricsModifier(95, 95, 95);
-                metricsModifier.Modify();
+//                MetricsModifier metricsModifier = new MetricsModifier(95, 95, 95);
+//                metricsModifier.Modify();
+                
+                MetricManager.Instance.UpdateGold(95);
+                MetricManager.Instance.UpdateEnvHealth(95);
+                MetricManager.Instance.UpdatePopHappiness(95);
+                MetricManager.Instance.RenderMetrics();
             }
         }
     }    
