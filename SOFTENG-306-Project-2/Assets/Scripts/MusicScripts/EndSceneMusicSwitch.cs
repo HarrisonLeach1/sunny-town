@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// The EndSceneMusicSwitch is responsible for playing music in the final scene, depending on the game outcome.
+/// </summary>
 public class EndSceneMusicSwitch : MonoBehaviour
 {
     
@@ -9,12 +11,6 @@ public class EndSceneMusicSwitch : MonoBehaviour
 
     public AudioClip winClip;
     public AudioClip loseClip;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     public void PlayWinClip()
     {
