@@ -6,6 +6,10 @@ using UnityEngine;
 
 namespace SunnyTown
 {
+    /// <summary>
+    /// The LevelControl script is responsible for handling transitions between levels, including playing an animation and
+    /// updating the world's music.
+    /// </summary>
     public class LevelControl : MonoBehaviour
     {
         public GameObject[] levels;
@@ -126,6 +130,9 @@ namespace SunnyTown
             
         }
 
+        /// <summary>
+        /// Updates the music depending on the current level
+        /// </summary>
         private void progressMusic()
         {
             if (currentLevel == 1)
