@@ -57,6 +57,10 @@ namespace SunnyTown
             }
         }
 
+        /// <summary>
+        /// Updates the current card to the first card of the second level of the game. Used by CheatsManager.
+        /// </summary>
+        /// <returns>First card in second level of the game</returns>
         public Card GetLevelTwoCard()
         {
             var card = reader.AllStoryStates.Single(s => s.Id.Equals(LEVEL_TWO_STATE_ID));
@@ -64,6 +68,10 @@ namespace SunnyTown
             return card;
         }
         
+        /// <summary>
+        /// Updates the current card to the first card of the third level of the game. Used by CheatsManager.
+        /// </summary>
+        /// <returns>First card in third level of the game</returns>
         public Card GetLevelThreeCard()
         {
             var card = reader.AllStoryStates.Single(s => s.Id.Equals(LEVEL_THREE_STATE_ID));
