@@ -33,7 +33,7 @@
         "npcName": "Jimmy Cash",
         "feedback": "Clean energy is popular umong the people cause it saves our future, but it costs an arm and a leg!",
         "money": -15,
-        "environment": 15,
+        "environment": 10,
         "token": "investment",
         "investment": "energy"
       }
@@ -129,8 +129,8 @@
         "buildingName": "WindFarm",
         "feedback": "Yip! [Wind turbines are great for the environment, and with the efforts of the research group prices have been lowered significantly!]",
         "money": -7,
-        "happiness": 10,
-        "environment": 10,
+        "happiness": 7,
+        "environment": 7,
         "state": "s8b"
       },
       {
@@ -161,9 +161,9 @@
         "hasAnimation": true,
         "buildingName": "WindFarm",
         "feedback": "Woof! [Wind turbines are great for the environment, but it's expensive if you haven't invested much into research]",
-        "money": -10,
-        "happiness": 10,
-        "environment": 10,
+        "money": -8,
+        "happiness": 7,
+        "environment": 7,
         "state": "s8b"
       },
       {
@@ -194,9 +194,9 @@
         "buildingName": "WindFarm",
         "npcName": "James the Dog",
         "feedback": "Woof! [Wind turbines are great for the environment, but it's expensive if you haven't invested much into research] ",
-        "money": -10,
-        "happiness": 10,
-        "environment": 10,
+        "money": -8,
+        "happiness": 7,
+        "environment": 7,
         "state": "s8b"
       },
       {
@@ -368,6 +368,7 @@
         "label": "They should build out",
         "npcName": "Allena",
         "money": 5,
+        "environment": -3,
         "token": "scale",
         "scale": "out",
         "feedback": "People need to travel further and since we invested in electric cars earlier our exports are increasing. ",
@@ -417,7 +418,7 @@
         "label": "Import some from neighbouring cities. ",
         "npcName": "James the Dog",
         "additionalState": "scale",
-        "money": -6,
+        "money": -5,
         "happiness": 5,
         "feedback": "Woof! [Buying food is expensive, even though it doesn't increase our city's pollution.]",
         "state": "s12"
@@ -425,7 +426,7 @@
       {
         "label": "We should have more farms in the city. ",
         "npcName": "James the Dog",
-        "environment": -5,
+        "environment": -6,
         "happiness": 5,
         "feedback": "Woof! [Farming is important, but it does a lot of damage to the environment, be careful!]",
         "state": "s12"
@@ -513,7 +514,7 @@
         "token": "refugee",
         "refugee": "yes",
         "happiness": 6,
-        "money": -7,
+        "money": -6,
         "state": "s14",
         "additionalState": "investment"
       },
