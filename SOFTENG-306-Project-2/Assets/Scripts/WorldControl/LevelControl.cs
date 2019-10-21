@@ -37,13 +37,11 @@ namespace SunnyTown
                 // Making level 1 active when the game starts
                 if (level.name.Contains("1"))
                 {
-                    print(level.name);
                     currentLevel = 1;
                     level.SetActive(true);
                 }
                 else
                 {
-                    print("This happens too");
                     level.SetActive(false);
                 }
                 
@@ -75,7 +73,6 @@ namespace SunnyTown
         {
             // Checking if the current level is below 3
             if (currentLevel < 3)
-                Debug.Log("current level: " +currentLevel);
             {
                 // Setting the next level to be active
                 currentLevel++;
@@ -116,7 +113,6 @@ namespace SunnyTown
 
             if (currentLevel < 5)
             {
-                Debug.Log("setting active level: " + currentLevel);
                 levels[currentLevel - 1].SetActive(true);
                 //Making previous level inactive
                 levels[currentLevel - 2].SetActive(false);

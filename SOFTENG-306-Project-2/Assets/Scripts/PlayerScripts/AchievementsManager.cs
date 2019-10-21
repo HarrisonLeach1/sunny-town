@@ -4,24 +4,22 @@ using System.Collections.Generic;
 using System.Linq;
 using SunnyTown;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// An AchievementsManager is responsible for listening to achievement events and notifying 
+/// the appropriate views of these events. 
+/// </summary>
 public class AchievementsManager : MonoBehaviour
 {
     public static AchievementsManager Instance { get; private set; }
 
-    public GameObject achievementsPrefab;
-    public Animator achievementNotificationAnimator;
-    public GameObject achievementNotification;
-    public Image achievementNotificationImage;
-    public TextMeshProUGUI achievementNotificationText;
+    private Animator achievementNotificationAnimator;
     private Transform highScoreContainer;
     private Transform achievementsContainer;
     private Transform achievementsTemplate;
     private Transform highScoreTemplate;
-    private GameObject achievementsView;
 
     private const string NUMBER_OF_SCORES = "NumberOfScores";
     private const string NUMBER_OF_ACHIEVEMENTS = "NumberOfAchievements";
@@ -40,6 +38,11 @@ public class AchievementsManager : MonoBehaviour
         envInARow = 0;
     }
 
+    /// <summary>
+    /// Should be called to determine if the game is in an appropriate state to gain a new 
+    /// achievement for the player. This will also update the views if an achievement has 
+    /// been achieved. 
+    /// </summary>
     public void IsAchievementMade()
     {
         HandleWinnerAchievement();
@@ -64,10 +67,8 @@ public class AchievementsManager : MonoBehaviour
 
         if (envInARow == 5)
         {
-            Debug.Log("got into thing");
             if (!IsAchievementAlreadyEarned("Tree Hugger"))
             {
-                Debug.Log("Achieved achievement tree hugger");
                 PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "Tree Hugger");
                 PlayerPrefs.SetString(ACHIEVEMENT_DATE + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), DateTime.Today.ToShortDateString());
                 PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
@@ -148,7 +149,6 @@ public class AchievementsManager : MonoBehaviour
     {
         if (MetricManager.Instance.EnvHealth == 100 && !IsAchievementAlreadyEarned("Captain Planet"))
         {
-            Debug.Log("CAPTAIN PLANET");
             PlayerPrefs.SetString("achievement" + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), "Captain Planet");
             PlayerPrefs.SetString(ACHIEVEMENT_DATE + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS), DateTime.Today.ToShortDateString());
             PlayerPrefs.SetInt(NUMBER_OF_ACHIEVEMENTS, PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + 1);
@@ -173,23 +173,13 @@ public class AchievementsManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
-        
-//        MetricManager metricManager = MetricManager.Instance;
-        achievementsView = Instantiate(achievementsPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        var parentObject = GameObject.Find("AchievementsMenu");
-        if (parentObject != null)
-        {
-            achievementsView.transform.SetParent(parentObject.transform, false);
-        }
-        DisplayHighScores();
-        DisplayAchievementsMenu();
     }
-
 
     /// <summary>
     /// Checks if the new score is within the high score list, if it is, then add it to the list.
@@ -240,6 +230,10 @@ public class AchievementsManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Returns a list of highscore entry to be displayed or inspected.
+    /// </summary>
+    /// <returns>The list of saved HighScoreEntry objects</returns>
     public List<HighScoreEntry> GetHighScores()
     {
         var highScores = new List<HighScoreEntry>();
@@ -255,8 +249,14 @@ public class AchievementsManager : MonoBehaviour
         return highScores;
     }
 
-    private void DisplayHighScores()
+    /// <summary>
+    /// Updates the AchievementsMenu view to display all high scores for this players instance.
+    /// This should only be called from the MainMenuScene or a scene with an AchievementsMenu.
+    /// High Scores are stored in player prefs.
+    /// </summary>
+    public void DisplayHighScores()
     {
+        var achievementsView = GameObject.Find("AchievementsMenu");
         highScoreContainer = achievementsView.transform.GetChild(1).GetChild(4).GetComponent<Transform>();
         highScoreTemplate = highScoreContainer.Find("HighScoreTemplate");
         highScoreTemplate.gameObject.SetActive(false);
@@ -295,7 +295,6 @@ public class AchievementsManager : MonoBehaviour
     private Achievement GetAchievementByIndex(int i)
     {
         var achievementName = PlayerPrefs.GetString("achievement" + i);
-        Debug.Log("saved achievement name: " + achievementName);
         foreach (Achievement achievement in Reader.Instance.AllAchievements)
         {
             if (achievement.name.Equals(achievementName))
@@ -307,17 +306,28 @@ public class AchievementsManager : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// Displays an achievement popup notification with sound. The name and sprite displayed
+    /// corresponds to the given achievement name.
+    /// </summary>
+    /// <param name="achievementName">The achievement to display</param>
     public void DisplayAchievementNotification(string achievementName)
     {
         foreach (Achievement a in Reader.Instance.AllAchievements)
         {
             if (a.name.Equals(achievementName))
             {
-                achievementNotificationText.text = a.name;
-                achievementNotificationImage.sprite = Resources.Load<Sprite>("Sprites/" + a.imageUrl);
-                achievementNotificationAnimator.SetBool("IsVisible", true);
-                SFXAudioManager.Instance.PlayAchievementSound();
-                StartCoroutine(WaitForDownAnimation());
+                var achievementNotificationView = GameObject.Find("AchievementNotification");
+                if (achievementNotificationView != null)
+                {
+                    achievementNotificationView.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = a.name;
+                    achievementNotificationView.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + a.imageUrl);
+                    achievementNotificationAnimator = achievementNotificationView.GetComponent<Animator>();
+                    achievementNotificationAnimator.SetBool("IsVisible", true);
+                    SFXAudioManager.Instance.PlayAchievementSound();
+                    StartCoroutine(WaitForDownAnimation());
+                }
+
             }
         }
     }
@@ -328,8 +338,14 @@ public class AchievementsManager : MonoBehaviour
         achievementNotificationAnimator.SetBool("IsVisible", false);
     }
 
-    private void DisplayAchievementsMenu()
+    /// <summary>
+    /// Displays the list of achievements achieved by the player in the achievements menu. 
+    /// This should be used in classes with an AchivementsMenu.
+    /// The achievements retrieved are from playerprefs.
+    /// </summary>
+    public void DisplayAchievementsMenu()
     {
+        var achievementsView = GameObject.Find("AchievementsMenu");
         achievementsContainer = achievementsView.transform.GetChild(2).GetChild(2).GetChild(0).GetChild(0).GetComponent<Transform>();
         var achievementsCompleted = achievementsView.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>();
         achievementsCompleted.SetText("Achievements Unlocked: " + PlayerPrefs.GetInt(NUMBER_OF_ACHIEVEMENTS) + "/" +

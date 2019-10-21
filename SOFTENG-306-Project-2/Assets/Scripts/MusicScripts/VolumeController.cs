@@ -18,8 +18,6 @@ namespace SunnyTown
         public AudioMixer MusicMixer;
         public Slider SFXslider;
         public Slider MusicSlider;
-        public float initialMusicValue;
-        public float initialSFXValue;
 
 		/// <summary>
     	/// Set volume levels depending on existing Playerprefs or assign default values
