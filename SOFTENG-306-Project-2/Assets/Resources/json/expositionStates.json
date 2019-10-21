@@ -44,5 +44,27 @@
         "dialogue": [
             "This pops up from time to time, clicking on it gives you side quests you can complete along the way. Ignoring them decreases your towns happiness."
         ]
-    }
+    },
+    {
+        "id": "e6",
+        "name": "Population Happiness",
+        "dialogue": [
+            "This metric represents your town's population happiness."
+        ]
+    },
+    {
+        "id": "e7",
+        "name": "Money",
+        "dialogue": [
+            "This metric represents your town's money."
+        ]
+    },
+  {
+    "id": "e8",
+    "name": "Environment Health",
+    "dialogue": [
+      "This metric represents your town's environmental health.",
+        "Do not let any of the metrics drop down to zero!"
+    ]
+  }
 ]

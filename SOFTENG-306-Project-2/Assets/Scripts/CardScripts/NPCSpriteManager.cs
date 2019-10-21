@@ -48,6 +48,9 @@ namespace SunnyTown
             spriteDictionary.Add("Third Plebeian", Resources.Load<Texture2D>("Sprites/Pleb3"));
             spriteDictionary.Add("Forth Plebeian", Resources.Load<Texture2D>("Sprites/Pleb4"));
             spriteDictionary.Add("exclamation", Resources.Load<Texture2D>("Sprites/exclamation"));
+            spriteDictionary.Add("Population Happiness", Resources.Load<Texture2D>("Sprites/happiness-sprite"));
+            spriteDictionary.Add("Money", Resources.Load<Texture2D>("Sprites/money-sprite"));
+            spriteDictionary.Add("Environment Health", Resources.Load<Texture2D>("Sprites/environment-sprite"));
         }
 
         private Texture2D GetSpriteTexture(string name)
@@ -79,7 +82,8 @@ namespace SunnyTown
 
             Texture2D texture = this.GetSpriteTexture(name);
             texture.filterMode = FilterMode.Trilinear;
-            Sprite sprite = Sprite.Create(texture, new Rect(0, 0, width, height), new Vector2(0.5f, 0.0f), 1.0f);
+            Debug.Log(name);
+            var sprite = Sprite.Create(texture, new Rect(0, 0, width, height), new Vector2(0.5f, 0.0f), 1.0f);
             return sprite;
         }
     }
