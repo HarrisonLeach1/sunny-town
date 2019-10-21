@@ -47,7 +47,7 @@ namespace SunnyTown
             spriteDictionary.Add("Second Plebeian", Resources.Load<Texture2D>("Sprites/Pleb2"));
             spriteDictionary.Add("Third Plebeian", Resources.Load<Texture2D>("Sprites/Pleb3"));
             spriteDictionary.Add("Forth Plebeian", Resources.Load<Texture2D>("Sprites/Pleb4"));
-            spriteDictionary.Add("exclamation", Resources.Load<Texture2D>("Sprites/exclamation"));
+            spriteDictionary.Add("Town Requests", Resources.Load<Texture2D>("Sprites/exclamation"));
             spriteDictionary.Add("Population Happiness", Resources.Load<Texture2D>("Sprites/happiness-sprite"));
             spriteDictionary.Add("Money", Resources.Load<Texture2D>("Sprites/money-sprite"));
             spriteDictionary.Add("Environment Health", Resources.Load<Texture2D>("Sprites/environment-sprite"));

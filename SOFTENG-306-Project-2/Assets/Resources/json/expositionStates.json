@@ -11,6 +11,13 @@
     },
     {
         "id": "e2",
+        "name": "Money",
+        "dialogue": [
+            "This metric represents your town's money."
+        ]
+    },
+    {
+        "id": "e3",
         "name": "Allena",
         "dialogue": [
             "Hey there, I'm the people's representative at the Ministry for the Environment",
@@ -19,30 +26,19 @@
         ]
     },
     {
-        "id": "e3",
-        "name": "James the Dog",
-        "dialogue": [
-            "Woof! [My name is James, miraculously you can understand me ¯\\_(ツ)_/¯]",
-            "Woof! Woof! [Decisions you make will also impact citizens' happiness]",
-            "Woof! Woof! [If they are very unhappy, you could be voted out of office]",
-            "Woof! [Good luck!]"
-        ]
-    },
-    {
         "id": "e4",
-        "name": "Advisory Board",
+        "name": "Environment Health",
         "dialogue": [
-            "To help you navigate the world, here are some tricks: ",
-            "Press W, A, S, D help you look at different parts of your town",
-            "Press Z to get a more close up look at the town, X  for the opposite",
-            "To gain a new perspective, try Q and E!"
+            "This metric represents your town's environmental health.",
         ]
     },
     {
         "id": "e5",
-        "name": "exclamation",
+        "name": "James the Dog",
         "dialogue": [
-            "This pops up from time to time, clicking on it gives you side quests you can complete along the way. Ignoring them decreases your towns happiness."
+            "Woof! [My name is James, miraculously you can understand me]",
+            "Woof! Woof! [Decisions you make will also impact citizens' happiness]",
+            "Woof! Woof! [If they are very unhappy, you could be voted out of office]"
         ]
     },
     {
@@ -54,17 +50,18 @@
     },
     {
         "id": "e7",
-        "name": "Money",
+        "name": "Town Requests",
         "dialogue": [
-            "This metric represents your town's money."
+            "This pops up from time to time, clicking on it gives you side quests you can complete along the way",
+            "Accepting these will increase your town's money. But ignoring them will decrease your town's happiness."
         ]
     },
-  {
-    "id": "e8",
-    "name": "Environment Health",
-    "dialogue": [
-      "This metric represents your town's environmental health.",
-        "Do not let any of the metrics drop down to zero!"
-    ]
-  }
+    {
+        "id": "e8",
+        "name": "Advisory Board",
+        "dialogue": [
+            "By the way, you can move the camera with W, A, S, D, zoom with Z and X and rotate with Q and E!",
+            "Good luck!"
+        ]
+    }
 ]
