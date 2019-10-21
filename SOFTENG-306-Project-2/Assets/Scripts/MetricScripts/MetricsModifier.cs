@@ -22,6 +22,10 @@ namespace SunnyTown
 
         }
 
+        /// <summary>
+        /// Modify() changes the values of the World's metrics depending the MetricModifier object's fields. The modification
+        /// is multiplied depending on the current level.
+        /// </summary>
         public void Modify()
         {
             Debug.Log("Modifying metrics: pop: " + PopHappinessModifier + " gold: " + GoldModifier + " envHealth: " + EnvHealthModifier);
