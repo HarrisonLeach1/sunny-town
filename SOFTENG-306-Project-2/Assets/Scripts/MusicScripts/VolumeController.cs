@@ -24,6 +24,16 @@ namespace SunnyTown
 
         void Start()
         {
+			if (!PlayerPrefs.HasKey("SFXVolume")) 
+			{
+				PlayerPrefs.SetFloat("SFXVolume",0.5f);
+			}	
+
+			if (!PlayerPrefs.HasKey("MusicVolume"))
+			{
+				PlayerPrefs.SetFloat("MusicVolume", 0.5f);
+			}
+
             SFXslider.value = PlayerPrefs.GetFloat("SFXVolume");
             Debug.Log("Getting sfx old val: " + SFXslider.value);
             MusicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
