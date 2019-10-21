@@ -1,5 +1,11 @@
 # Global Warning Studios: Sunny Town
 
+## Overview
+
+Sunny Town is a web-based serious game on Climate Change. Designed for children in intermediate school years (aged 12-13). It is a story-driven decision-based game aimed to teach children the importance of maintaining the environments health and the trade-offs that come with this. See Gameplay section for more.
+
+![menu-demo](https://user-images.githubusercontent.com/44953072/67239631-17103080-f4ac-11e9-9e88-98b57daf3b83.png)
+
 ## Team Members
 
 | Name           | GitHub Username  | UoA UPI |
