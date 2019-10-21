@@ -23,7 +23,7 @@ namespace SunnyTown
             CurrentPlotCard = reader.RootState;
             minorCards = new List<Card>(reader.AllMinorStates);
 
-            minorCards.Randomize();
+            //minorCards.Randomize();
         }
 
         /// <summary>

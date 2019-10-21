@@ -79,7 +79,8 @@ namespace SunnyTown
             turnCounter = TURN_COUNTER;
             currentEvent = ClimateEvent.NoEvent;
 
-            eventIndex = Random.Range(0,4);
+            //eventIndex = Random.Range(0,4);
+            eventIndex = 2;
 
             //y = ((5/((x+15)/100))-4)/30 function to map score to probability          
         }        
