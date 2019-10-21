@@ -104,7 +104,7 @@ namespace SunnyTown
                     r.enabled = false;
 
                 // give player money for accepting request
-                MetricsModifier modifier = new MetricsModifier(0, 5, 0);
+                MetricsModifier modifier = new MetricsModifier(0, 3, 0);
                 modifier.Modify();
                 MetricManager.Instance.RenderMetrics();
             }
