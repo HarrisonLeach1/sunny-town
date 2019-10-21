@@ -16,11 +16,11 @@ public class KeyboardInputManager : InputManager
         // Movement control transforming
         if (Input.GetKey(KeyCode.W))
         {
-            OnMoveInput?.Invoke(Vector3.forward * 4);
+            OnMoveInput?.Invoke(Vector3.forward * 2);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            OnMoveInput?.Invoke(-Vector3.forward* 4);
+            OnMoveInput?.Invoke(-Vector3.forward * 2);
         }
         if (Input.GetKey(KeyCode.A))
         {
