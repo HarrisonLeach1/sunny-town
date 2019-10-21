@@ -39,11 +39,15 @@ Sunny Town is a web-based serious game on Climate Change. Designed for children 
 
 ## Execution Instructions
 
-### Use the WebGL Build
+### Option 1: Use the WebGL Build
 
 -   Can be found [here](https://global-warning.s3-ap-southeast-2.amazonaws.com/index.html)
 
-### Through Unity (Version 2018.4.9f1)
+### Option 2: Download the single `SOFTENG-306-Project-2.exe` from the Final release
+
+-   Can be found [here](https://github.com/HarrisonLeach1/SOFTENG-306-Project-2-Group-11/releases/tag/v1.0)
+
+### Option 3: Through Unity (Version 2018.4.9f1)
 
 1. Checkout the "Final" branch from the repository.
 2. Navigate to `Assets/Scenes/MenuScene.unity` and open the file with Unity.
