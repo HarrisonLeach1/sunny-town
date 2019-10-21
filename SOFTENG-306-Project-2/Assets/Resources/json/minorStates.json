@@ -1,274 +1,328 @@
 ﻿[
-    {
-        "name": "Cowboy Willy",
-        "precedingDialogue": [
-            "Howdy thur partner! I'm starting up a farm and I'm wondering whether I should farm me some meat or vegetables?"
-        ],
-        "question": "Meat or vegetables?",
-        "options": [
-            {
-                "label": "Meat, because it tastes better",
-                "environment": -10,
-                "hasAnimation": true,
-                "buildingName": "Farm",
-                "npcName": "Allena",
-                "feedback": "While it is true meat tastes better. It is a less environmentally efficient food source."
-            },
-            {
-                "label": "Vegetables",
-                "environment": 10,
-                "hasAnimation": true,
-                "buildingName": "Farm",
-                "npcName": "Allena",
-                "feedback": "Well done! Vegetables are a more environmentally efficient food source!"
-            }
-        ]
-    },
-    {
-        "name": "Jimmy Cash",
-        "precedingDialogue": [
-            "The town's population has grown more than our power station could handle",
-            "Power bills have reached record high, the people are demanding cheaper electricity"
-        ],
-        "question": "Would you like to invest in a bigger, more powerful power plant?",
-        "options": [
-            {
-                "label": "Yes",
-                "hasAnimation": true,
-                "buildingName": "PowerPlant",
-                "happiness": 20,
-                "environment": -20,
-                "money": -5,
-                "npcName": "Jimmy Cash",
-                "feedback": "The people are happy, but the environment suffers from increased consumerism"
-            },
-            {
-                "label": "No",
-                "happiness": -15,
-                "environment": -20,
-                "npcName": "Jimmy Cash",
-                "feedback": "The towns people are unhappy, but it is better for the environment"
-            }
-        ]
-    },
-    {
-        "name": "Allena",
-        "precedingDialogue": [
-            "Many world leaders are demanding more radical climate change initiatives",
-            "In response, the council wants to ban all vehicles for 1 week."
-        ],
-        "question": "Do you allow this to happen?",
-        "options": [
-            {
-                "label": "Yes, I think we should the world a message",
-                "happiness": -15,
-                "environment": 10,
-                "npcName": "Allena",
-                "feedback": "The town is not happy. On the flip side, the air has become cleaner."
-            },
-            {
-                "label": "No this is a drastic, lets just do one day",
-                "happiness": -5,
-                "environment": 3,
-                "npcName": "Allena",
-                "feedback": "The town is not happy. On the flip side, the air has become cleaner."
-            },
-            {
-                "label": "Not at all, this would be terrible for the economy",
-                "money": 3,
-                "happiness": 4,
-                "environment": -5,
-                "npcName": "Allena",
-                "feedback": "The townspeople's daily routines were not disrupted, but emissions kept going up. "
-            }
-        ]
-    },
-    {
-        "name": "Allena",
-        "sliderType": true,
-        "precedingDialogue": [
-            "The increasing population of our town has increased our CO2 emission levels",
-            "The local environmentalists wishes for funding to plant trees to counteract the effects."
-        ],
-        "question": "How much money do you provide to the tree planting initiative?",
-        "maxValue": 100,
-        "minValue": 0,
-        "options": [
-            {
-                "threshold": 50,
-                "money": -20,
-                "environment": 25,
-                "feedback": "The environmentalists are very grateful for your support, it's made a marked improvement on the environment",
-                "npcName": "Allena"
-            },
-            {
-                "threshold": 25,
-                "money": -10,
-                "happiness": 5,
-                "environment": 5,
-                "feedback": "The environmentalists are thankful for your funding, but more funding could've made more of a difference",
-                "npcName": "Allena"
-            },
-            {
-                "threshold": 0,
-                "label": "No",
-                "environment": -25,
-                "happiness": -10,
-                "feedback": "The environmentalists are very upset, as the pollutions were not helped",
-                "npcName": "Allena"
-            }
-        ]
-    },
-    {
-        "name": "Jimmy Cash",
-        "question": "We are spending more fossil fuels than we import. Do we restrict the number of cars on the road?",
-        "options": [
-            {
-                "label": "Yes",
-                "happiness": -10
-            },
-            {
-                "label": "No",
-                "money": -15
-            }
-        ]
-    },
-    {
-        "name": "James the Dog",
-        "question": "People want public transport to be free for the upcoming holiday. Do you allow this to happen?",
-        "options": [
-            {
-                "label": "Yes",
-                "money": -15,
-                "happiness": 10,
-                "environment": 5,
-                "npcName": "James the Dog",
-                "feedback": "The people are happy and there were less cars on the road too."
-            },
-            {
-                "label": "No",
-                "happiness": -5,
-                "environment": -5,
-                "npcName": "James the Dog",
-                "feedback": "The people are not too happy with you for not supporting their holidays. "
-            }
-        ]
-    },
-    {
-        "name": "Advisory Board",
-        "question": "The council wants to train teachers to educate children about climate change. Do you allow this to happen?",
-        "options": [
-            {
-                "label": "Yes",
-                "money": -10,
-                "environment": 5,
-                "npcName": "Advisory Board",
-                "feedback": "The children are more aware of climate change now, they've made an effort to protect the environment. "
-            },
-            {
-                "label": "No",
-                "npcName": "Advisory Board",
-                "feedback": "Even though educating children can be expensive, it's definitely a worthy investment. "
-            }
-        ]
-    },
-    {
-        "name": "Allena",
-        "question": "A local merchant Bob K. has spread rumour around the town that climate change is fake. What do you do?",
-        "options": [
-            {
-                "label": "Ignore",
-                "happiness": -10,
-                "environment": -15,
-                "npcName": "Allena",
-                "feedback": "The rumour spread wide and loud, townspeople began not treating climate change seriously. It took a while before they found out it was not true. "
-            },
-            {
-                "label": "Educate the townspeople",
-                "money": -15,
-                "happiness": 5,
-                "environment": 10,
-                "npcName": "Allena",
-                "feedback": "It took a small educational campaign, but the townspeople are thankful for the clarification. "
-            }
-        ]
-    },
-    {
-        "name": "Advisory Board",
-        "question": "The neighbouring town has a shortage of timber. Do you want to sell your trees to them?",
-        "options": [
-            {
-                "label": "Yes",
-                "happiness": -5,
-                "environment": -10,
-                "money": 10,
-                "npcName": "Advisory Board",
-                "feedback": "Selling timber is a good short term financial decision, but cutting down trees harms the environment. "
-            },
-            {
-                "label": "No",
-                "npcName": "Advisory Board",
-                "feedback": "That was a very neutral decision. "
-            }
-        ]
-    },
-    {
-        "name": "James the Dog",
-        "question": "The townspeople want to have a bonfire for an all night out doors music festive. Do you allow this?",
-        "options": [
-            {
-                "label": "Yes",
-                "happiness": 10,
-                "environment": -10,
-                "npcName": "James the Dog",
-                "feedback": "It's sometimes hard to balance what to do isn't it"
-            },
-            {
-                "label": "No",
-                "happiness": -10,
-                "npcName": "James the Dog",
-                "feedback": "It's sometimes hard to balance what to do isn't it"
-            }
-        ]
-    },
-    {
-        "name": "Jimmy Cash",
-        "question": "There are still too many cars on the road. Do you want to increase the petrol tax?",
-        "options": [
-            {
-                "label": "Yes",
-                "happiness": -10,
-                "environment": 5,
-                "money": 10,
-                "npcName": "Jimmy Cash",
-                "feedback": "People aren't very happy with the new rule, but it has helped reduce emissions"
-            },
-            {
-                "label": "No",
-                "environment": -10,
-                "npcName": "Jimmy Cash",
-                "feedback": "Emissions kept going up, polluting the city air"
-            }
-        ]
-    },
-    {
-        "name": "Advisory Board",
-        "question": "The town is using more energy than we produce. What do you do?",
-        "options": [
-            {
-                "label": "Invest in wind turbines",
-                "money": -20,
-                "environment": 5,
-                "npcName": "Advisory Board",
-                "feedback": "You made a smart long term decision, even though research costs much, they often result in much bigger pay offs"
-            },
-            {
-                "label": "Dig for more fossil fuels",
-                "happiness": -5,
-                "environment": -10,
-                "npcName": "Advisory Board",
-                "feedback": "Using more depletable resources may be easy, but it just delays the problem doesnt it. "
-            }
-        ]
-    }
+  {
+    "name": "Allena",
+    "sliderType": true,
+    "precedingDialogue": [
+      "The increasing population of our town has increased our CO2 emission levels",
+      "The local environmentalists wishes for funding to plant trees to counteract the effects."
+    ],
+    "question": "How much money do you provide to the tree planting initiative?",
+    "maxValue": 100,
+    "minValue": 0,
+    "options": [
+      {
+        "threshold": 50,
+        "money": -6,
+        "environment": 6,
+        "happiness": 5,
+        "hasAnimation": true,
+        "buildingName": "Trees",
+        "feedback": "The environmentalists are very grateful for your support, it's made a marked improvement on the environment",
+        "npcName": "Allena"
+      },
+      {
+        "threshold": 25,
+        "money": -4,
+        "happiness": 3,
+        "environment": 4,
+        "hasAnimation": true,
+        "buildingName": "Trees",
+        "feedback": "The environmentalists are thankful for your funding, but more funding could've made more of a difference",
+        "npcName": "Allena"
+      },
+      {
+        "threshold": 0,
+        "label": "No",
+        "environment": -10,
+        "happiness": -4,
+        "feedback": "The environmentalists are very upset, as the pollutions were not helped",
+        "npcName": "Allena"
+      }
+    ]
+  },
+  {
+    "name": "Allena",
+    "question": "The city is generating a lot of rubbish, how should we treat them?",
+    "options": [
+      {
+        "label": "Build another landfill",
+        "happiness": -6,
+        "environment": -10,
+        "npcName": "Allena",
+        "hasAnimation": true,
+        "buildingName": "LandFill",
+        "feedback": "Landfills release a lot of bad gas into the environment, and it's making the local people unhappy. "
+      },
+      {
+        "label": "Recycle the rubbish",
+        "environment": 6,
+        "money": -7,
+        "happiness": 5,
+        "npcName": "Allena",
+        "feedback": "Even though recycling rubbish is expensive, it is very good for the environment. "
+      }
+    ]
+  },
+  {
+    "name": "Jimmy Cash",
+    "question": "An international corporation is wanting to setup a chemical factory in the city, should we let them??",
+    "options": [
+      {
+        "label": "Yes",
+        "environment": -8,
+        "money": 8,
+        "npcName": "Jimmy Cash",
+        "hasAnimation": true,
+        "buildingName": "ChemicalFactory",
+        "feedback": "The city gets a lot more tax from the factory, but also taking a lot of pollution from them. "
+      },
+      {
+        "label": "No",
+        "npcName": "Jimmy Cash",
+        "feedback": "The company leaves you alone. "
+      }
+    ]
+  },
+  {
+    "name": "Allena",
+    "precedingDialogue": [
+      "Many world leaders are demanding more radical climate change initiatives",
+      "In response, the council wants to ban all vehicles for 1 week."
+    ],
+    "question": "Do you allow this to happen?",
+    "options": [
+      {
+        "label": "Yes, I think we should send the world a message",
+        "happiness": -7,
+        "environment": 5,
+        "npcName": "Allena",
+        "feedback": "The town is not happy. On the flip side, the air has become cleaner."
+      },
+      {
+        "label": "No this is too drastic, lets just do one day",
+        "happiness": -4,
+        "environment": 4,
+        "npcName": "Allena",
+        "feedback": "The town is not happy. On the flip side, the air has become cleaner."
+      },
+      {
+        "label": "Not at all, this would be terrible for the economy",
+        "money": 3,
+        "happiness": 3,
+        "environment": -8,
+        "npcName": "Allena",
+        "feedback": "The townspeople's daily routines were not disrupted, but emissions kept going up. "
+      }
+    ]
+  },
+  {
+    "name": "Jimmy Cash",
+    "question": "We are spending more on fossil fuels than we import. Do we restrict the number of cars on the road?",
+    "options": [
+      {
+        "label": "Yes",
+        "happiness": -7
+      },
+      {
+        "label": "No",
+        "money": -7
+      }
+    ]
+  },
+  {
+    "name": "James the Dog",
+    "question": "People want public transport to be free for the upcoming holiday. Do you allow this to happen?",
+    "options": [
+      {
+        "label": "Yes",
+        "money": -9,
+        "happiness": 6,
+        "environment": 5,
+        "npcName": "James the Dog",
+        "feedback": "The people are happy and there were less cars on the road too."
+      },
+      {
+        "label": "No",
+        "happiness": -4,
+        "environment": -8,
+        "npcName": "James the Dog",
+        "feedback": "The people are not too happy with you for not supporting their holidays. "
+      }
+    ]
+  },
+  {
+    "name": "Advisory Board",
+    "question": "The council wants to train teachers to educate children about climate change. Do you allow this to happen?",
+    "options": [
+      {
+        "label": "Yes",
+        "money": -5,
+        "environment": 5,
+        "npcName": "Advisory Board",
+        "feedback": "The children are more aware of climate change now, they've made an effort to protect the environment. "
+      },
+      {
+        "label": "No",
+        "happiness": -5,
+        "npcName": "Advisory Board",
+        "feedback": "Even though educating children can be expensive, it's definitely a worthy investment. "
+      }
+    ]
+  },
+  {
+    "name": "Allena",
+    "question": "A local merchant Bob K. has spread rumour around the town that climate change is fake. What do you do?",
+    "options": [
+      {
+        "label": "Ignore",
+        "happiness": -6,
+        "environment": -9,
+        "npcName": "Allena",
+        "feedback": "The rumour spread wide and loud, townspeople began not treating climate change seriously. It took a while before they found out it was not true. "
+      },
+      {
+        "label": "Educate the townspeople",
+        "money": -6,
+        "happiness": 5,
+        "environment": 7,
+        "npcName": "Allena",
+        "feedback": "It took a small educational campaign, but the townspeople are thankful for the clarification. "
+      }
+    ]
+  },
+  {
+    "name": "Advisory Board",
+    "question": "The neighbouring town has a shortage of timber. Do you want to sell your trees to them?",
+    "options": [
+      {
+        "label": "Yes",
+        "happiness": -4,
+        "environment": -8,
+        "money": 5,
+        "npcName": "Advisory Board",
+        "feedback": "Selling timber is a good short term financial decision, but cutting down trees harms the environment. "
+      },
+      {
+        "label": "No",
+        "npcName": "Advisory Board",
+        "feedback": "That was a very neutral decision. "
+      }
+    ]
+  },
+  {
+    "name": "James the Dog",
+    "question": "The townspeople want to have a bonfire for an all night out doors music festive. Do you allow this?",
+    "options": [
+      {
+        "label": "Yes",
+        "happiness": 5,
+        "environment": -7,
+        "npcName": "James the Dog",
+        "feedback": "It's sometimes hard to balance what to do isn't it"
+      },
+      {
+        "label": "No",
+        "happiness": -6,
+        "npcName": "James the Dog",
+        "feedback": "It's sometimes hard to balance what to do isn't it"
+      }
+    ]
+  },
+  {
+    "name": "Jimmy Cash",
+    "question": "There are still too many cars on the road. Do you want to increase the petrol tax?",
+    "options": [
+      {
+        "label": "Yes",
+        "happiness": -6,
+        "environment": 3,
+        "money": 3,
+        "npcName": "Jimmy Cash",
+        "feedback": "People aren't very happy with the new rule, but it has helped reduce emissions"
+      },
+      {
+        "label": "No",
+        "environment": -8,
+        "npcName": "Jimmy Cash",
+        "feedback": "Emissions kept going up, polluting the city air"
+      }
+    ]
+  },
+  {
+    "name": "First Plebeian",
+    "question": "Help! Our house got burnt down in a fire, we have nowhere to live now. ",
+    "options": [
+      {
+        "label": "Lend them a hand. ",
+        "money": -6,
+        "happiness": 5,
+        "npcName": "First Plebeian",
+        "feedback": "The plebeian thanks you! "
+      },
+      {
+        "label": "That's the insurance company's job. ",
+        "happiness": -6,
+        "npcName": "First Plebeian",
+        "feedback": "The plebeian resents you "
+      }
+    ]
+  },
+  {
+    "name": "Second Plebeian",
+    "question": "Mayor, can you come give a speech at my daughter's high school's graduation? ",
+    "options": [
+      {
+        "label": "It would be my pleasure",
+        "happiness": 4,
+        "npcName": "Second Plebeian",
+        "feedback": "The plebeian and his daughter thanks you! "
+      },
+      {
+        "label": "Sorry I'm too busy.  ",
+        "happiness": -5,
+        "npcName": "Second Plebeian",
+        "feedback": "The plebeian understands.  "
+      }
+    ]
+  },
+  {
+    "name": "Third Plebeian",
+    "question": "Mrs Gatburg, I think our streets are a bit dirty lately, could we hire some more cleaners?",
+    "options": [
+      {
+        "label": "Yes of course. ",
+        "happiness": 5,
+        "money": -5,
+        "environment": 6,
+        "npcName": "Third Plebeian",
+        "feedback": "The plebeian is happy! "
+      },
+      {
+        "label": "Sorry the budget is too tight. ",
+        "happiness": -6,
+        "environment": -8,
+        "npcName": "Third Plebeian",
+        "feedback": "The plebeian is upset.  "
+      }
+    ]
+  },
+  {
+    "name": "Fourth Plebeian",
+    "question": "Mrs Mayor, could I have a dollar for the bus? ",
+    "options": [
+      {
+        "label": "Yes here you go. ",
+        "happiness": 1,
+        "money": -2,
+        "npcName": "Fourth Plebeian",
+        "feedback": "The plebeian takes his bus! "
+      },
+      {
+        "label": "Sorry, no change on me. ",
+        "happiness": -2,
+        "npcName": "Fourth Plebeian",
+        "feedback": "The plebeian walks home.  "
+      }
+    ]
+  }
 ]

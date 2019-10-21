@@ -4,7 +4,7 @@ namespace SunnyTown
 {
     /// <summary>
     /// A Card represents a interactable decision in the game associated with
-    /// dialogue, and a character
+    /// dialogue, and a character.
     /// </summary>
     public abstract class Card
     {

@@ -5,7 +5,7 @@ namespace SunnyTown
 {
     /// <summary>
     /// The SFXAudioManager is a singleton class that is used to play different AudioClips for
-    /// button presses, construction animations, and in-game notifications.
+    /// button presses, construction animations, in-game notifications and for when achievements are unlocked.
     /// </summary>
     public class SFXAudioManager : MonoBehaviour
     {
@@ -15,6 +15,7 @@ namespace SunnyTown
         public AudioClip buttonClip;
         public AudioClip constructionClip;
         public AudioClip notificationClip;
+        public AudioClip achievementClip;
 
         private SFXAudioManager()
         {
@@ -46,6 +47,11 @@ namespace SunnyTown
         public void PlayNotificationSound()
         {
             source.PlayOneShot(notificationClip);
+        }
+        
+        public void PlayAchievementSound()
+        {
+            source.PlayOneShot(achievementClip);
         }
         
         

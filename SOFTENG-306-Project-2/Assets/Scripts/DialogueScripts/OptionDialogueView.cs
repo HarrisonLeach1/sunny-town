@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace SunnyTown
 {
     /// <summary>
-    /// A BinaryOptionDialogueView represents the view on which a binary
+    /// A OptionDialogueView represents the view on which a multiple choice
     /// decision is displayed to the user
     /// </summary>
     [System.Serializable]
@@ -20,6 +20,7 @@ namespace SunnyTown
         public TextMeshProUGUI npcDialogueText;
         public Button[] optionButtons;
         public TextMeshProUGUI[] optionTexts;
+        public TextMeshProUGUI cardTypeText;
 
 
 
@@ -53,6 +54,16 @@ namespace SunnyTown
                 buttonToDisplay.gameObject.SetActive(true);
                 optionTexts[buttonIndex].text = optionText;
                 buttonToDisplay.onClick.AddListener(() => onOptionPressed(item.index));
+            }
+
+            if (dialogue.Options.Count() > 1)
+            {
+                cardTypeText.text = dialogue.CardType + " Decision";
+                cardTypeText.color = dialogue.CardType == "Story" ? new Color32(168, 24, 36, 255) : new Color32(219, 164, 44, 255);
+            } 
+            else
+            {
+                cardTypeText.text = "";
             }
         }
 

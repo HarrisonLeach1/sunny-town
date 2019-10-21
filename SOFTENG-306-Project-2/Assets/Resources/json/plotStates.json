@@ -1,0 +1,682 @@
+[
+  {
+    "id": "s1",
+    "name": "Jimmy Cash",
+    "precedingDialogue": [
+      "Mayor Gatburg, we have some excess cash for city development - it's usually a good idea to invest this into something that can be useful down the road.",
+      "There are research groups and businesses bidding for our cash, of course, we want good stuff in return too!"
+    ],
+    "question": "What would you like to fund?",
+    "transitions": [
+      {
+        "label": "An electric car company",
+        "state": "s2",
+        "npcName": "Jimmy Cash",
+        "feedback": "Electric cars are all the rage these days, and they save the environment, two for one!",
+        "money": -10,
+        "environment": 8,
+        "token": "investment",
+        "investment": "EV"
+      },
+      {
+        "label": "A material science research group",
+        "state": "s2",
+        "npcName": "Jimmy Cash",
+        "feedback": "Material science helps with industry, and that's money!",
+        "money": 10,
+        "token": "investment",
+        "investment": "material"
+      },
+      {
+        "label": "A clean energy research group",
+        "state": "s2",
+        "npcName": "Jimmy Cash",
+        "feedback": "Clean energy is popular umong the people cause it saves our future, but it costs an arm and a leg!",
+        "money": -15,
+        "environment": 8,
+        "token": "investment",
+        "investment": "energy"
+      }
+    ]
+  },
+  {
+    "id": "s2",
+    "name": "Arvio",
+    "precedingDialogue": [
+      "Greetings! My name is Arvio, but people call me Arvio The Wealthy",
+      "Why? I'm the proprietor of MineCroft Coal Mines and the wealthiest coal baron on the seven mountains",
+      "My team of Geo ...erm ...geolis ...scientists, say that this town's neighbouring mountains promise mounds of wealth'",
+      "I have a proposition for you! Allow me to inspect those lands and I may consider helping out this dump *erherm* town!"
+    ],
+    "question": "So, friend, what do you say? Do we have a deal?",
+    "transitions": [
+      {
+        "label": "There's a lot of money in coal. Go ahead!",
+        "money": 10,
+        "npcName": "Advisory Board",
+        "feedback": "Arvio brings his crew and begins inspecting your land. ",
+        "token": "arvio",
+        "arvio": "yes",
+        "state": "s3"
+      },
+      {
+        "label": "No deal, coal mining will ruin the natural landscape!",
+        "npcName": "Advisory Board",
+        "token": "arvio",
+        "arvio": "no",
+        "feedback": "Arvio leaves with a mischievous look on his face. ",
+        "state": "s3"
+      }
+    ]
+  },
+  {
+    "id": "s3",
+    "name": "Hunter Gatberg",
+    "precedingDialogue": [
+      "[Ring Ring... Ring Ring...]",
+      "Hey Mum! We learnt about polar bears today, they look soooooo cute. I would love to visit them someday."
+    ],
+    "question": "Could you take me on a trip sometime?",
+    "transitions": [
+      {
+        "label": "Of course, dear. ",
+        "happiness": 5,
+        "state": "s4"
+      }
+    ]
+  },
+  {
+    "id": "s4",
+    "name": "Advisory Board",
+    "question": "Your town has grown!",
+    "transitions": [
+      {
+        "label": "Continue",
+        "state": "s5"
+      }
+    ]
+  },
+  {
+    "id": "s5",
+    "name": "Advisory Board",
+    "precedingDialogue": [
+      "The scientists have said that the world is getting warmer because of all the things we're building, ",
+      "Cars and factories can make it worse but protecting the environment and planting trees help make it better"
+    ],
+    "question": "If we don't make it better, it can cause bad weather events, even floods! ",
+    "transitions": [
+      {
+        "label": "continue",
+        "state": "s6",
+        "additionalState": "investment"
+      }
+    ]
+  },
+  {
+    "id": "s6energy",
+    "name": "James the Dog",
+    "precedingDialogue": [
+      "Woof! [Mayor Gatburg, your town is growing fast. However, this means that our power station is choking.]",
+      "Woof woof! [The citizens are not happy with the high electricity prices. We should consider building a bigger power station.]"
+    ],
+    "question": "Woof! [What kind of power plant should we build?]",
+    "transitions": [
+      {
+        "label": "Let's build a wind farm",
+        "npcName": "James the Dog",
+        "hasAnimation": true,
+        "buildingName": "WindFarm",
+        "feedback": "Yip! [Wind turbines are great for the environment, and with the efforts of the research group prices have been lowered significantly!]",
+        "money": -7,
+        "happiness": 7,
+        "environment": 7,
+        "state": "s8b"
+      },
+      {
+        "label": "Let's expand the coal plant",
+        "hasAnimation": true,
+        "buildingName": "PowerPlant",
+        "npcName": "James the Dog",
+        "feedback": "Grrrrrr... [It's a shame that you invested in green energy but never used it :( plus coal is bad for the environment.]",
+        "money": -5,
+        "environment": -12,
+        "additionalState": "arvio",
+        "state": "s7"
+      }
+    ]
+  },
+  {
+    "id": "s6EV",
+    "name": "James the Dog",
+    "precedingDialogue": [
+      "Woof! [Mayor Gatburg, your town is growing fast. However, this means that our power station is choking.]",
+      "Woof woof! [The citizens are not happy with the high electricity prices. We should consider building a new power station.]"
+    ],
+    "question": "Woof! [What kind of power plant should we build?]",
+    "transitions": [
+      {
+        "label": "Let's build a wind farm",
+        "npcName": "James the Dog",
+        "hasAnimation": true,
+        "buildingName": "WindFarm",
+        "feedback": "Woof! [Wind turbines are great for the environment, but it's expensive if you haven't invested much into research]",
+        "money": -8,
+        "happiness": 7,
+        "environment": 7,
+        "state": "s8b"
+      },
+      {
+        "label": "Let's expand the coal plant",
+        "npcName": "James the Dog",
+        "hasAnimation": true,
+        "buildingName": "PowerPlant",
+        "feedback": "Woof! [Coal power is really bad for the environment.]",
+        "money": -5,
+        "environment": -12,
+        "additionalState": "arvio",
+        "state": "s7"
+      }
+    ]
+  },
+  {
+    "id": "s6material",
+    "name": "James the Dog",
+    "precedingDialogue": [
+      "Woof! [Mayor Gatburg, your town is growing fast. However, this means that our power station is choking.]",
+      "Woof woof! [The citizens are not happy with the high electricity prices. We should consider building a new power station.]"
+    ],
+    "question": "Woof! [What kind of power plant should we build?]",
+    "transitions": [
+      {
+        "label": "Let's build a wind farm",
+        "hasAnimation": true,
+        "buildingName": "WindFarm",
+        "npcName": "James the Dog",
+        "feedback": "Woof! [Wind turbines are great for the environment, but it's expensive if you haven't invested much into research] ",
+        "money": -8,
+        "happiness": 7,
+        "environment": 7,
+        "state": "s8b"
+      },
+      {
+        "label": "Let's expand the coal plant",
+        "npcName": "James the Dog",
+        "hasAnimation": true,
+        "buildingName": "PowerPlant",
+        "feedback": "Woof! [Coal power is really bad for the environment.]",
+        "money": -5,
+        "environment": -12,
+        "additionalState": "arvio",
+        "state": "s7"
+      }
+    ]
+  },
+  {
+    "id": "s7yes",
+    "name": "Arvio",
+    "precedingDialogue": [
+      "Mayor Gatberg, our prediction was dead-on! Your land is rich with coal! "
+    ],
+    "question": "Will you let us set up an coal mine? We'll make the town richer than your dreams!",
+    "transitions": [
+      {
+        "label": "Yes, go ahead!",
+        "hasAnimation": true,
+        "buildingName": "CoalMine",
+        "token": "arvio2",
+        "arvio2": "yes",
+        "environment": -12,
+        "money": 10,
+        "npcName": "Advisory Board",
+        "feedback": "Arvio begins constructing an coal mine. We're getting paid a great amount of money, but this is releasing a lot of CO2.",
+        "state": "s8a"
+      },
+      {
+        "label": "No, go away Arvio.",
+        "token": "arvio2",
+        "arvio2": "no",
+        "npcName": "Advisory Board",
+        "feedback": "Arvio leaves you alone",
+        "state": "s8b"
+      }
+    ]
+  },
+  {
+    "id": "s7no",
+    "name": "Arvio",
+    "precedingDialogue": [
+      "We inspected the land anyways, that's why they also call me Arvio the Sneaky",
+      "You know why we did that? Cause' our prediction was dead-on! Your land is rich with coal! "
+    ],
+    "question": "Will you let us set up a coal mine? We'll make the town richer than your dreams!",
+    "transitions": [
+      {
+        "label": "Yes go ahead!",
+        "hasAnimation": true,
+        "buildingName": "CoalMine",
+        "npcName": "Advisory Board",
+        "token": "arvio2",
+        "arvio2": "yes",
+        "environment": -12,
+        "money": 10,
+        "feedback": "Arvio begins constructing an coal mine. We're getting paid a lot of money, but this is releasing lots of CO2.",
+        "state": "s8a"
+      },
+      {
+        "label": "No, go away Arvio.",
+        "token": "arvio2",
+        "arvio2": "no",
+        "npcName": "Advisory Board",
+        "feedback": "Arvio leaves you alone",
+        "state": "s8b"
+      }
+    ]
+  },
+  {
+    "id": "s8a",
+    "name": "Hunter Gatberg",
+    "precedingDialogue": [
+      "[Ring Ring... Ring Ring...]",
+      "Mom! Mom! Remember when you promised me we would go on a trip to see the polar bears?"
+    ],
+    "question": "Next week is school holidays, could we please go?",
+    "transitions": [
+      {
+        "label": "Sorry Hunter, the icebergs are melting and it's too dangerous to go there. ",
+        "happiness": -5,
+        "state": "s9"
+      }
+    ]
+  },
+  {
+    "id": "s8b",
+    "name": "Hunter Gatberg",
+    "precedingDialogue": [
+      "[Ring Ring... Ring Ring...]",
+      "Mom! Mom! Remember when you promised me we would go on a trip to see the polar bears?"
+    ],
+    "question": "Next week is school holidays, could we please go?",
+    "transitions": [
+      {
+        "label": "Of course, we'll have a great trip!",
+        "happiness": 5,
+        "state": "s9"
+      }
+    ]
+  },
+  {
+    "id": "s9",
+    "name": "Advisory Board",
+    "question": "Your town has grown!",
+    "transitions": [
+      {
+        "label": "Continue",
+        "state": "s10",
+        "additionalState": "investment"
+      }
+    ]
+  },
+  {
+    "id": "s10energy",
+    "name": "Allena",
+    "precedingDialogue": [
+      "Peter, the mayor from our neighbouring city, sent you a letter asking for your advice",
+      "They want to scale their city, and they're wondering if they should build up or out"
+    ],
+    "question": "How would you advise them?",
+    "transitions": [
+      {
+        "label": "They should build up",
+        "npcName": "Allena",
+        "token": "scale",
+        "scale": "up",
+        "feedback": "Building up can be expensive, but makes it easier to have sustainable transport. Peter thanks you for your advice. ",
+        "state": "s11"
+      },
+      {
+        "label": "They should build out",
+        "npcName": "Allena",
+        "token": "scale",
+        "scale": "out",
+        "feedback": "Building out is cheaper, but people drive more and harm the environment. Peter takes your advice anyhow. ",
+        "state": "s11"
+      }
+    ]
+  },
+  {
+    "id": "s10EV",
+    "name": "Allena",
+    "precedingDialogue": [
+      "Peter, the mayor from our neighbouring city, sent you a letter asking for your advice",
+      "They want to scale their city, and they're wondering if they should build up or out"
+    ],
+    "question": "How would you advise them?",
+    "transitions": [
+      {
+        "label": "They should build up",
+        "npcName": "Allena",
+        "token": "scale",
+        "scale": "up",
+        "feedback": "Building up can be expensive, but makes it easier to have sustainable transport. Peter thanks you for your advice. ",
+        "state": "s11"
+      },
+      {
+        "label": "They should build out",
+        "npcName": "Allena",
+        "money": 5,
+        "token": "scale",
+        "scale": "out",
+        "feedback": "People need to travel further and since we invested in electric cars earlier our exports are increasing. ",
+        "state": "s11"
+      }
+    ]
+  },
+  {
+    "id": "s10material",
+    "name": "Allena",
+    "precedingDialogue": [
+      "Peter, the mayor from our neighbouring city, sent you a letter asking for your advice",
+      "They want to scale their city, and they're wondering if they should build up or out"
+    ],
+    "question": "How would you advise them?",
+    "transitions": [
+      {
+        "label": "They should build up",
+        "npcName": "Allena",
+        "token": "scale",
+        "scale": "up",
+        "feedback": "Building up can be expensive, but makes it easier to have sustainable transport. Peter thanks you for your advice. ",
+        "state": "s11"
+      },
+      {
+        "label": "They should build out",
+        "npcName": "Allena",
+        "token": "scale",
+        "scale": "out",
+        "feedback": "Building out is cheaper, but people drive more and harm the environment. Peter takes your advice anyhow. ",
+        "state": "s11"
+      }
+    ]
+  },
+  {
+    "id": "s11",
+    "name": "James the Dog",
+    "precedingDialogue": [
+      "Woof! [Our city is getting so big that we're struggling to provide enough food!]",
+      "Woof! [It's the duty of the Mayor to ensure people can afford to eat!!]"
+    ],
+    "question": "Woof! [Should we increase our farming efforts or import more food?]",
+    "transitions": [
+      {
+        "label": "Import some from neighbouring cities. ",
+        "npcName": "James the Dog",
+        "additionalState": "scale",
+        "money": -5,
+        "happiness": 5,
+        "feedback": "Woof! [Buying food is expensive, even though it doesn't increase our city's pollution.]",
+        "state": "s12"
+      },
+      {
+        "label": "We should have more farms in the city. ",
+        "npcName": "James the Dog",
+        "environment": -7,
+        "happiness": 5,
+        "feedback": "Woof! [Farming is important, but it does a lot of damage to the environment, be careful!]",
+        "state": "s12"
+      }
+    ]
+  },
+  {
+    "id": "s12",
+    "name": "James the Dog",
+    "precedingDialogue": [
+      "Woof! [There's farming and there's farming, humans are omnivores and we have choices to make]"
+    ],
+    "question": "Woof! [Should we encourage dairy farming or vegetable farming?]",
+    "transitions": [
+      {
+        "label": "Dairy",
+        "npcName": "James the Dog",
+        "hasAnimation": true,
+        "buildingName": "Farm",
+        "token": "farming",
+        "farming": "dairy",
+        "happiness": 4,
+        "environment": -7,
+        "feedback": "Woof! [People like dairy, that's for sure! But dairy farming is really bad for the environment.]",
+        "state": "s13"
+      },
+      {
+        "label": "Vegetable",
+        "token": "farming",
+        "farming": "vege",
+        "hasAnimation": true,
+        "buildingName": "Farm",
+        "npcName": "James the Dog",
+        "happiness": 3,
+        "environment": 4,
+        "feedback": "Woof! [You made happy both the environment and lactose intolerant people]",
+        "additionalState": "investment",
+        "state": "s14"
+      }
+    ]
+  },
+  {
+    "id": "s12up",
+    "name": "James the Dog",
+    "precedingDialogue": [
+      "Woof! [There's farming and there's farming, humans are omnivores and we have choices to make]"
+    ],
+    "question": "Woof! [Should we import more dairy products or fruits and vegetable?]",
+    "transitions": [
+      {
+        "label": "Dairy",
+        "npcName": "James the Dog",
+        "token": "farming",
+        "farming": "dairy",
+        "happiness": 4,
+        "environment": -7,
+        "feedback": "Woof! [People like dairy, that's for sure! But dairy farming is real bad for the environment.]",
+        "state": "s12out"
+      },
+      {
+        "label": "Fruits and Veges",
+        "npcName": "James the Dog",
+        "token": "farming",
+        "farming": "vege",
+        "happiness": 3,
+        "environment": 4,
+        "feedback": "Woof! [You made happy both the environment and lactose intolerant people]",
+        "state": "s14",
+        "additionalState": "investment"
+      }
+    ]
+  },
+  {
+    "id": "s12out",
+    "name": "Allena",
+    "precedingDialogue": [
+      "Your neighbouring city is having a bad drought - it seems related to their damaging the environment."
+    ],
+    "question": "Should we give them a hand?",
+    "transitions": [
+      {
+        "label": "Yes definitely!",
+        "npcName": "Allena",
+        "feedback": "That was really kind of you!",
+        "token": "refugee",
+        "refugee": "yes",
+        "happiness": 6,
+        "money": -6,
+        "state": "s14",
+        "additionalState": "investment"
+      },
+      {
+        "label": "No, we can't afford that!",
+        "npcName": "James the Dog",
+        "feedback": "It's understandable, that was a tough ask. ",
+        "token": "refugee",
+        "refugee": "no",
+        "state": "s14",
+        "additionalState": "investment"
+      }
+    ]
+  },
+  {
+    "id": "s13",
+    "name": "Allena",
+    "precedingDialogue": [
+      "Our city is having a bad drought, we really shouldn't have allowed so much dairy farming"
+    ],
+    "question": "Please take more care with our environment in the future! ",
+    "transitions": [
+      {
+        "environment": -11,
+        "money": -4,
+        "happiness": -4,
+        "label": "Continue",
+        "state": "s14",
+        "additionalState": "investment"
+      }
+    ]
+  },
+  {
+    "id": "s14EV",
+    "name": "Jimmy Cash",
+    "precedingDialogue": [
+      "People love living in the city, but they drive everywhere, and that's pretty bad for our environment"
+    ],
+    "question": "How should we make transport better?",
+    "transitions": [
+      {
+        "label": "Promote electric vehicles! ",
+        "npcName": "Jimmy Cash",
+        "environment": 6,
+        "money": -3,
+        "happiness": 4,
+        "token": "transport",
+        "transport": "ev",
+        "feedback": "Electric cars are much greener, plus our earlier investment made them cheap too. What a deal!",
+        "state": "s15"
+      },
+      {
+        "label": "Lets beef up our public transport! ",
+        "npcName": "Jimmy Cash",
+        "money": -6,
+        "environment": 6,
+        "token": "transport",
+        "hasAnimation": true,
+        "buildingName": "Bus",
+        "transport": "public",
+        "feedback": "Public transport is a lot greener, but they sure are pricey. ",
+        "state": "s15"
+      },
+      {
+        "label": "Let's keep letting people drive what they wish. ",
+        "npcName": "Jimmy Cash",
+        "environment": -10,
+        "happiness": 5,
+        "token": "transport",
+        "transport": "gas",
+        "feedback": "What a brilliant plan! Saving humanity from extinction never made much economic sense to me and this way, we'll save loads of cash! ",
+        "state": "s15"
+      }
+    ]
+  },
+  {
+    "id": "s14material",
+    "name": "Jimmy Cash",
+    "precedingDialogue": [
+      "People love living in the city, but they drive everywhere, that's pretty bad for our environment"
+    ],
+    "question": "How should we make transport better?",
+    "transitions": [
+      {
+        "label": "Promote electric vehicles! ",
+        "npcName": "Jimmy Cash",
+        "environment": 6,
+        "money": -5,
+        "happiness": 4,
+        "token": "transport",
+        "transport": "ev",
+        "feedback": "Electric cars are much greener, but they're still pretty expensive since we didn't invest in them earlier. ",
+        "state": "s15"
+      },
+      {
+        "label": "Lets beef up our public transport! ",
+        "npcName": "Jimmy Cash",
+        "money": -6,
+        "environment": 6,
+        "token": "transport",
+        "hasAnimation": true,
+        "buildingName": "Bus",
+        "transport": "public",
+        "feedback": "Public transport is a lot greener, but they sure are pricey. ",
+        "state": "s15"
+      },
+      {
+        "label": "Let's keep letting people drive what they wish. ",
+        "npcName": "Jimmy Cash",
+        "environment": -10,
+        "happiness": 5,
+        "token": "transport",
+        "transport": "gas",
+        "feedback": "What a brilliant plan! Saving humanity from extinction never made much economic sense to me and this way, we'll save loads of cash! ",
+        "state": "s15"
+      }
+    ]
+  },
+  {
+    "id": "s14energy",
+    "name": "Jimmy Cash",
+    "precedingDialogue": [
+      "People love living in the city, but they drive everywhere, that's pretty bad for our environment"
+    ],
+    "question": "How should we make transport better?",
+    "transitions": [
+      {
+        "label": "Promote electric vehicles! ",
+        "npcName": "Jimmy Cash",
+        "environment": 6,
+        "money": -5,
+        "happiness": 4,
+        "token": "transport",
+        "transport": "ev",
+        "feedback": "Electric cars are much greener, but they're still pretty expensive since we didn't invest in them earlier. ",
+        "state": "s15"
+      },
+      {
+        "label": "Lets beef up our public transport! ",
+        "npcName": "Jimmy Cash",
+        "money": -6,
+        "environment": 6,
+        "hasAnimation": true,
+        "buildingName": "Bus",
+        "token": "transport",
+        "transport": "public",
+        "feedback": "Public transport is a lot greener, but they sure are pricey. ",
+        "state": "s15"
+      },
+      {
+        "label": "Let's keep letting people drive what they wish. ",
+        "npcName": "Jimmy Cash",
+        "environment": -10,
+        "happiness": 5,
+        "token": "transport",
+        "transport": "gas",
+        "feedback": "What a brilliant plan! Saving humanity from extinction never made much economic sense to me and this way, we'll save loads of cash! ",
+        "state": "s15"
+      }
+    ]
+  },
+  {
+    "id": "s15",
+    "name": "Hunter Gatberg",
+    "question": "Mom, I'm about to graduate, I'm so excited at what's to come!",
+    "transitions": [
+      {
+        "label": "I'm proud of you dear. "
+      }
+    ]
+  }
+]

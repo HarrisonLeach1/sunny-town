@@ -10,8 +10,6 @@ namespace SunnyTown
     /// The DialogueManager is a singleton that handles displaying views of Dialogue 
     /// objects to the user. 
     /// </summary>
-    // Initial Dialogue implementation based on code from: 
-    // https://github.com/Brackeys/Dialogue-System
     public class DialogueManager : MonoBehaviour
     {
         public Animator simpleDialogueViewAnimator;
@@ -27,6 +25,7 @@ namespace SunnyTown
         private Queue<string> statements = new Queue<string>();
         private Action onEndOfStatements;
         private Coroutine progressAnimationCoroutine;
+        public GameObject cutsceneView;
 
         public static DialogueManager Instance { get; private set; }
 
@@ -55,7 +54,7 @@ namespace SunnyTown
             }
             animationProgressAnimator.SetBool("IsVisible", true);
             // need offset here otherwise the progress bar will stay visible
-            float offset = 0.1f;
+            float offset = 0.2f;
             progressAnimationCoroutine = StartCoroutine(AnimationWait(seconds - offset));
         }
 
@@ -192,6 +191,18 @@ namespace SunnyTown
             }
 
             DisplayNextStatement();
+        }
+
+        public void StartCutsceneDialogue(string[] sentences, Action onEndOfStatements)
+        {
+            Action onClose = () =>
+            {
+                cutsceneView.gameObject.SetActive(false);
+                onEndOfStatements();
+            };
+            cutsceneView.gameObject.SetActive(true);
+            var dialogueScript = cutsceneView.GetComponent<CutsceneDialogueScript>();
+            dialogueScript.StartCutsceneDialogue(sentences, onClose);
         }
     }
 }

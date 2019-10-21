@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace SunnyTown
 {
     /// <summary>
-    /// An NPC sprite manager handles the resolution of character names 
+    /// The NPC sprite manager is a singleton that handles the resolution of character names 
     /// into their appropriate sprites on dialogue box views
     /// </summary>
     public class NPCSpriteManager : MonoBehaviour
@@ -38,7 +38,19 @@ namespace SunnyTown
             spriteDictionary.Add("Cowboy Willy", Resources.Load<Texture2D>("Sprites/CowboyWilly"));
             spriteDictionary.Add("You have mail", Resources.Load<Texture2D>("Sprites/mail"));
             spriteDictionary.Add("Advisory Board", Resources.Load<Texture2D>("Sprites/Board"));
+            spriteDictionary.Add("acid rain", Resources.Load<Texture2D>("Sprites/WeatherSprites/acid-rain"));
+            spriteDictionary.Add("hurricane", Resources.Load<Texture2D>("Sprites/WeatherSprites/tornado"));
+            spriteDictionary.Add("smog", Resources.Load<Texture2D>("Sprites/WeatherSprites/smog"));
+            spriteDictionary.Add("wildfire", Resources.Load<Texture2D>("Sprites/WeatherSprites/wildfire"));
             spriteDictionary.Add("Weather event", Resources.Load<Texture2D>("Sprites/weather"));
+            spriteDictionary.Add("First Plebeian", Resources.Load<Texture2D>("Sprites/Pleb1"));
+            spriteDictionary.Add("Second Plebeian", Resources.Load<Texture2D>("Sprites/Pleb2"));
+            spriteDictionary.Add("Third Plebeian", Resources.Load<Texture2D>("Sprites/Pleb3"));
+            spriteDictionary.Add("Forth Plebeian", Resources.Load<Texture2D>("Sprites/Pleb4"));
+            spriteDictionary.Add("Town Requests", Resources.Load<Texture2D>("Sprites/exclamation"));
+            spriteDictionary.Add("Population Happiness", Resources.Load<Texture2D>("Sprites/happiness-sprite"));
+            spriteDictionary.Add("Money", Resources.Load<Texture2D>("Sprites/money-sprite"));
+            spriteDictionary.Add("Environment Health", Resources.Load<Texture2D>("Sprites/environment-sprite"));
         }
 
         private Texture2D GetSpriteTexture(string name)
@@ -70,7 +82,8 @@ namespace SunnyTown
 
             Texture2D texture = this.GetSpriteTexture(name);
             texture.filterMode = FilterMode.Trilinear;
-            Sprite sprite = Sprite.Create(texture, new Rect(0, 0, width, height), new Vector2(0.5f, 0.0f), 1.0f);
+            Debug.Log(name);
+            var sprite = Sprite.Create(texture, new Rect(0, 0, width, height), new Vector2(0.5f, 0.0f), 1.0f);
             return sprite;
         }
     }

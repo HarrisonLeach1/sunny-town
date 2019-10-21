@@ -15,12 +15,10 @@ namespace SunnyTown
     public class EndGameMenuScript : MonoBehaviour
     {
 
-        private GameObject endGameView;
-        public GameObject endGamePrefab;
+        public GameObject endGameView;
 
         void Awake()
         {
-            endGameView = Instantiate(endGamePrefab, new Vector3(0, 0, 0), Quaternion.identity);
             var gameScore = endGameView.transform.GetChild(0).GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>();
             var gameOutcome = endGameView.transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
             var gameBackground = endGameView.transform.GetChild(0).GetChild(0).GetComponent<Image>();
@@ -49,6 +47,9 @@ namespace SunnyTown
             }
         }
 
+        /// <summary>
+        /// Sets the currently displayed screen to be the main menu
+        /// </summary>
         public void NavigateToMainMenu()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
@@ -59,6 +60,9 @@ namespace SunnyTown
             Application.Quit();
         }
 
+        /// <summary>
+        /// Starts the game again from the beginning of the WorldScene.
+        /// </summary>
         public void ReplayGame()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);

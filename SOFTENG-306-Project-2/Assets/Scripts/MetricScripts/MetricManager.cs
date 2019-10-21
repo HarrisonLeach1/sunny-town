@@ -62,6 +62,9 @@ namespace SunnyTown
             RenderMetrics();
         }
 
+        /// <summary>
+        /// RenderMetrics() renders the town's metrics on the World's UI.
+        /// </summary>
         public void RenderMetrics()
         {
             var money = metricsView.transform.GetChild(0).GetComponent<Slider>();
@@ -91,6 +94,32 @@ namespace SunnyTown
             }
         }
 
+        /// <summary>
+        /// This method checks which end game is displayed when the game is won
+        /// If any of the scores are less than 35, then display the bad ending
+        /// </summary>
+        /// <returns></returns>
+        public bool ScoreLow()
+        {
+            //TODO: change numbers for playtesting
+            if (EnvHealth < 45 || Gold < 45 || PopHappiness < 45)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Used to smoothly transition between metrics. In other words, when a metric changes, the corresponding
+        /// metric bar smoothly increases or decreases depending on the values.
+        /// </summary>
+        /// <param name="metricBar">Corresponding Metric slider</param>
+        /// <param name="oldValue">Previous metric value</param>
+        /// <param name="newValue">New metric value</param>
+        /// <returns></returns>
         IEnumerator AnimateMetric(Slider metricBar, int oldValue, int newValue)
         {
             Image metricBarFill = metricBar.transform.GetChild(2).GetChild(0).GetComponent<Image>();
@@ -121,6 +150,11 @@ namespace SunnyTown
             metricBar.value = (float) newValue / MAX_VALUE;
         }
 
+        /// <summary>
+        /// Changes the population happiness metric by the given value. Note that the min
+        /// value of the metric is 0 and the max is 100.
+        /// </summary>
+        /// <param name="value">The value by which to modify population happiness</param>
         public void UpdatePopHappiness(int value)
         {
             this.PopHappiness += value;
@@ -133,19 +167,21 @@ namespace SunnyTown
             if (this.PopHappiness < MIN_VALUE)
             {
                 this.PopHappiness = MIN_VALUE;
-
-                //TODO: Probably will change later, this changes scenes to end game screen upon losing mats
-
                 SimpleDialogue endGameDialogue = new SimpleDialogue(new string[2]
                 {
                     "Oh no, the people in our town became " +
                     "very upset with your decisions. They have voted you out of power.",
                     " Try keeping them happier next time. "
-                }, "");
+                }, "Advisory Board");
                 CardManager.Instance.QueueGameLost(endGameDialogue);
             }
         }
 
+        /// <summary>
+        /// Changes the gold metric by the given value. Note that the min
+        /// value of the metric is 0 and the max is 100.
+        /// </summary>
+        /// <param name="value">The value by which to modify gold</param>
         public void UpdateGold(int value)
         {
             this.Gold += value;
@@ -160,17 +196,21 @@ namespace SunnyTown
             {
                 this.Gold = MIN_VALUE;
 
-                //TODO: Probably will change later, this changes scenes to end game screen upon losing mats
                 SimpleDialogue endGameDialogue = new SimpleDialogue(
                     new string[2]
                     {
                         "You have lost all your town's money. Now you cannot build the town.",
                         "Be careful when making decisions that involve spending money next time."
-                    }, "");
+                    }, "Advisory Board");
                 CardManager.Instance.QueueGameLost(endGameDialogue);
             }
         }
 
+        /// <summary>
+        /// Changes the environmental health metric by the given value. Note that the min
+        /// value of the metric is 0 and the max is 100.
+        /// </summary>
+        /// <param name="value">The value by which to modify environmental health</param>
         public void UpdateEnvHealth(int value)
         {
             this.EnvHealth += value;
@@ -185,13 +225,12 @@ namespace SunnyTown
             {
                 this.EnvHealth = MIN_VALUE;
 
-                //TODO: Probably will change later, this changes scenes to end game screen upon losing mats
                 SimpleDialogue endGameDialogue = new SimpleDialogue(new string[2]
                 {
                     "Your decisions have led to a lot of damage to the environment." +
                     "Natural disasters have ravaged the city.",
                     " Take better care of your environment next time"
-                }, "");
+                }, "Advisory Board");
 
 
                 CardManager.Instance.QueueGameLost(endGameDialogue);

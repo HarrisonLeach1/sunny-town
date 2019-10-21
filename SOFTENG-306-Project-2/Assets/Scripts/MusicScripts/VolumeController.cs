@@ -18,12 +18,22 @@ namespace SunnyTown
         public AudioMixer MusicMixer;
         public Slider SFXslider;
         public Slider MusicSlider;
-        public float initialMusicValue;
-        public float initialSFXValue;
 
-
+		/// <summary>
+    	/// Set volume levels depending on existing Playerprefs or assign default values
+    	/// </summary>
         void Start()
         {
+			if (!PlayerPrefs.HasKey("SFXVolume")) 
+			{
+				PlayerPrefs.SetFloat("SFXVolume",0.5f);
+			}	
+
+			if (!PlayerPrefs.HasKey("MusicVolume"))
+			{
+				PlayerPrefs.SetFloat("MusicVolume", 0.5f);
+			}
+
             SFXslider.value = PlayerPrefs.GetFloat("SFXVolume");
             Debug.Log("Getting sfx old val: " + SFXslider.value);
             MusicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
@@ -51,7 +61,7 @@ namespace SunnyTown
             //using logarithmic conversion
             //takes 0.001 and 1 value into a value between -80 and 0 on a log scale
             MusicMixer.SetFloat("MusicVolume", Mathf.Log10(MusicSliderValue) * 20);
-            SFXMixer.SetFloat("SFXVolume", Mathf.Log10(SFXsliderValue) * 20);
+            SFXMixer.SetFloat("MusicVolume", Mathf.Log10(SFXsliderValue) * 20);
 
             PlayerPrefs.SetFloat("SFXVolume", SFXsliderValue);
             PlayerPrefs.SetFloat("MusicVolume", MusicSliderValue);

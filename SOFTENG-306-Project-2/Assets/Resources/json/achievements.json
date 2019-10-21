@@ -1,14 +1,62 @@
 ﻿[
-  {
-    "id": "a1",
-    "name": "Winner",
-    "description": "Win the game for the first time",
-    "imageUrl": "asdfasdfasdf.jpg"
-  },
-  {
-    "id": "a2",
-    "name": "Tree Hugger",
-    "description": "Do not lose any environmental health for 5 turns in a row",
-    "imageUrl": "asdfasdfasdf.jpg"
-  }
+    {
+        "id": "a1",
+        "name": "Winner",
+        "description": "Win the game for the first time",
+        "imageUrl": "Medals/Winner"
+    },
+    {
+        "id": "a2",
+        "name": "Tree Hugger",
+        "description": "Do not lose any environmental health for 5 turns in a row",
+        "imageUrl": "Medals/Tree Hugger"
+    },
+    {
+        "id": "a3",
+        "name" : "Happy Town",
+        "description": "Max out the population happiness metric",
+        "imageUrl": "Medals/Happy Town"
+    },
+    {
+        "id": "a4",
+        "name" : "Gold Digger",
+        "description": "Max out the gold metric",
+        "imageUrl" : "Medals/Gold Digger"
+    },
+    {
+        "id": "a5",
+        "name" : "Captain Planet",
+        "description" : "Max out the environment health metric",
+        "imageUrl": "Medals/Captain Planet"
+    },
+    {
+        "id": "a6",
+        "name": "All Rounder",
+        "description" : "Reach 75 in all 3 metrics at any one time",
+        "imageUrl": "Medals/All Rounder"
+    },
+    {
+        "id": "a7",
+        "name": "Clutch Gamer",
+        "description" : "Beat the game with a dangerously low score",
+        "imageUrl" : "Medals/Clutch Gamer"
+    },
+    {
+        "id": "a8",
+        "name": "Crowd Pleaser 1",
+        "description" : "Dealt with town's request 5 times",
+        "imageUrl" : "Medals/Crowd Pleaser 1"
+    },
+    {
+        "id": "a9",
+        "name": "Crowd Pleaser 2",
+        "description" : "Dealt with town's request 10 times",
+        "imageUrl" : "Medals/Crowd Pleaser 2"
+    },
+    {
+        "id": "a10",
+        "name": "Crowd Pleaser 3",
+        "description" : "Dealt with town's request 15 times",
+        "imageUrl" : "Medals/Crowd Pleaser 3"
+    }
 ]

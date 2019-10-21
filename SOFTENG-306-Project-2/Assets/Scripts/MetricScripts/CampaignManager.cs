@@ -7,6 +7,11 @@ using UnityEngine.UI;
 
 namespace SunnyTown
 {
+    /// <summary>
+    /// A CampaignMaanger is responsible for managing the interactions that can be made on 
+    /// a campaign panel. It takes the inputs from the campaign panel and adds CampaignWeightings
+    /// to the MetricManager.
+    /// </summary>
     public class CampaignManager : MonoBehaviour
     {
         [SerializeField]
@@ -33,6 +38,7 @@ namespace SunnyTown
         /// </summary>
         public void OnSubmit()
         {
+            MetricManager.Instance.RenderMetrics();
             campaignPanel.gameObject.SetActive(false);
             // Reset the weightings on every campaign
             popHappinessScore = 0;
@@ -59,26 +65,19 @@ namespace SunnyTown
         /// Opens the campaign panel if the game is in the correct state to do so. Additionally, provides a
         /// small explanatory dialogue of the campaign mechanic. Also, oves the game into a paused state.
         /// </summary>
-        public void OnOpen()
+        public void StartCampaignDialogue()
         {
-            if (CardManager.Instance.CurrentGameState == CardManager.GameState.WaitingForEvents)
+            CardManager.Instance.SetState(CardManager.GameState.GamePaused);
+            Action onClosed = () =>
             {
-                CardManager.Instance.SetState(CardManager.GameState.GamePaused);
-                Action onClosed = () =>
-                {
-                    campaignPanel.gameObject.SetActive(true);
-                };
-                SimpleDialogue dialogue = new SimpleDialogue(new string[2] {
-                    "Hello Mrs. Gatberg, we see you have decided to launch a new campaign. This will involve giving guidance for your campaign poster.",
+                campaignPanel.gameObject.SetActive(true);
+            };
+            SimpleDialogue dialogue = new SimpleDialogue(new string[2] {
+                    "Hello Mrs. Gatberg, to keep your position as mayor we must launch a new campaign. We need your guidance in designing the new campaign poster.",
                     "Be careful what you choose, as it will shape the public's opinion on your future decisions." },
-                    "Advisory Board");
-                DialogueManager.Instance.StartExplanatoryDialogue(dialogue, onClosed);
-                Debug.Log("Successfully opened campaign");
-            }
-            else
-            {
-                Debug.Log("Cannot open campaign, not in appropriate game state");
-            }
+                "Advisory Board");
+            DialogueManager.Instance.StartExplanatoryDialogue(dialogue, onClosed);
+            Debug.Log("Successfully opened campaign");
         }
 
         /// <summary>
@@ -162,15 +161,15 @@ namespace SunnyTown
             string[] statements;
             if (currentWeightings.Happiness > 0)
             {
-                statements = new string[2] { "Your campaign has convinced the citisens that you are a woman of the people", "They will now react more strongly to decisions that affect them" };
+                statements = new string[2] { "Your campaign has convinced the citizens that you are a woman of the people", "Population happiness increases more" };
             }
             else if (currentWeightings.Gold > 0)
             {
-                statements = new string[2] { "Your campaign has convinced the citisens that you will create a thriving economy in Sunnytown", "They will now react to decisions that impact the economy" };
+                statements = new string[2] { "Your campaign has convinced the citizens that you will create a thriving economy in Sunnytown", "Population happiness will now change a little with decisions that affect money" };
             }
             else if (currentWeightings.EnvHealth > 0)
             {
-                statements = new string[2] { "Your campaign has convinced the citisens that environmental health is of utmost importance", "They will now react to decisions that impact the environment" };
+                statements = new string[2] { "Your campaign has convinced the citizens that environmental health is of utmost importance", "Population happiness will now change a little with decisions that affect environmental health" };
             }
             else
             {

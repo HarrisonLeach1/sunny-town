@@ -13,6 +13,11 @@ namespace SunnyTown
         public GameObject viewObject;
         public Slider slider;
 
+        /// <summary>
+        /// Sets the max value of the progress bar. This should match the 
+        /// wait/animation time this dialogue is displayed for. 
+        /// </summary>
+        /// <param name="waitSeconds">The max value of the slider, used to indicate wait time</param>
         public void SetupProgressbar(float waitSeconds)
         {
             slider.minValue = 0;

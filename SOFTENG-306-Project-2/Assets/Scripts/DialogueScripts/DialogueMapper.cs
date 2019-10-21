@@ -17,12 +17,14 @@ namespace SunnyTown
         /// <returns>The OptionDialogue that can be used by the DialogueManager</returns>
         public OptionDialogue CardToOptionDialogue(Card card)
         {
+            var cardType = card is PlotCard ? "Story" : card is MinorCard ? "Minor" : "";
             string[] optionDialogues = card.Options.Select(o => o.Dialogue).ToArray();
             return new OptionDialogue(card.Question,
                 optionDialogues,
                 new SimpleDialogue(
                     card.PrecedingDialogue,
-                    card.NPCName));
+                    card.NPCName), cardType
+);
         }
 
         /// <summary>
@@ -49,13 +51,14 @@ namespace SunnyTown
         /// <returns>The SliderOptionDialogue that can be used by the DialogueManager </returns>
         public SliderOptionDialogue SliderCardToSliderOptionDialogue(SliderCard currentCard)
         {
+            var cardType = "Minor";
             return new SliderOptionDialogue(
                 currentCard.Question,
                 currentCard.MaxValue,
                 currentCard.MinValue,
                 new SimpleDialogue(
                     currentCard.PrecedingDialogue,
-                    currentCard.NPCName));
+                    currentCard.NPCName), cardType);
         }
     }
 }

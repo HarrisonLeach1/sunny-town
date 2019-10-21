@@ -3,15 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Timers;
 using UnityEngine;
+using Random = System.Random;
 
 namespace SunnyTown
 {
     public class SpawnHandler : MonoBehaviour
     {
-        public GameObject[] buildings;
-        private Dictionary<GameObject, bool> visibilityMap = new Dictionary<GameObject, bool>();
-        private GameObject buildingCloud;
         private float instantiationTimer = 3f;
+        public GameObject[] buildings;
+        public int buildSomeThing = 10;
+        private Dictionary<GameObject, bool> visibilityMap = new Dictionary<GameObject, bool>();
+
 
         // Start is called before the first frame update
         void Start()
@@ -20,14 +22,9 @@ namespace SunnyTown
             foreach (GameObject building in buildings)
             {
                 visibilityMap.Add(building, false);
+                building.SetActive(false);
             }
 
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            StopBuildingCloud();
         }
 
         public void PlayAnimation(string buildingName, float animationTime)
@@ -37,11 +34,20 @@ namespace SunnyTown
             {
                 Build((Building)Enum.Parse(typeof(Building), buildingName));
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 Debug.Log("Building animation was not found");
             }
             // if no building name is found it will simply play the progress bar only
+        }
+
+        private void Update()
+        {
+            if (buildSomeThing < 9)
+            {
+                buildings[buildSomeThing].SetActive(true);
+                buildSomeThing = 10;
+            }
         }
 
         // Method called to set building to appear
@@ -50,36 +56,12 @@ namespace SunnyTown
             foreach (var building in visibilityMap.Keys)
             {
                 // Setting visibility for the building to true
-                if (building.name.Contains(buildingName.ToString()))
+                if (building.name.Equals(buildingName.ToString()))
                 {
                     building.SetActive(true);
-
-                    foreach (var b in visibilityMap.Keys)
-                    {
-                        // Getting the visibility of the cloud
-                        if (b.name.Equals("Cloud" + building.name.ToString()
-                                              .Substring(building.name.ToString().Length - 1)))
-                        {
-                            b.SetActive(true);
-
-                            // Setting cloud for it to get disabled
-                            buildingCloud = b;
-                        }
-                    }
                 }
 
             }
-        }
-
-        private void StopBuildingCloud()
-        {
-            instantiationTimer -= Time.deltaTime;
-            if (instantiationTimer <= 0 && buildingCloud != null)
-            {
-                buildingCloud.SetActive(false);
-                instantiationTimer = 2f;
-            }
-
         }
     }
 }

@@ -14,14 +14,16 @@ namespace SunnyTown
         public PlotCard CurrentPlotCard { get; private set; }
         private List<Card> minorCards;
 
-        // TODO: Change so this does not have to be hard-coded
+        private const string LEVEL_TWO_STATE_ID = "s4";
+        private const string LEVEL_THREE_STATE_ID = "s9";
+
         public CardFactory()
         {
-            reader = new Reader();
+            reader = Reader.Reset();
             CurrentPlotCard = reader.RootState;
             minorCards = new List<Card>(reader.AllMinorStates);
 
-            //minorCards.Randomize();
+            minorCards.Randomize();
         }
 
         /// <summary>
@@ -53,6 +55,28 @@ namespace SunnyTown
                 default:
                     throw new System.ArgumentException("Argument invalid for CardFactory");
             }
+        }
+
+        /// <summary>
+        /// Updates the current card to the first card of the second level of the game. Used by CheatsManager.
+        /// </summary>
+        /// <returns>First card in second level of the game</returns>
+        public Card GetLevelTwoCard()
+        {
+            var card = reader.AllStoryStates.Single(s => s.Id.Equals(LEVEL_TWO_STATE_ID));
+            CurrentPlotCard = card;
+            return card;
+        }
+
+        /// <summary>
+        /// Updates the current card to the first card of the third level of the game. Used by CheatsManager.
+        /// </summary>
+        /// <returns>First card in third level of the game</returns>
+        public Card GetLevelThreeCard()
+        {
+            var card = reader.AllStoryStates.Single(s => s.Id.Equals(LEVEL_THREE_STATE_ID));
+            CurrentPlotCard = card;
+            return card;
         }
     }
 }

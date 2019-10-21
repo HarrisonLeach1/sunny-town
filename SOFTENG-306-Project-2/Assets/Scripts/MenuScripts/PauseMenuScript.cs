@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// A PauseMenuScript is responsible for handling the interaction with the 
+/// pause menu buttons.
+/// </summary>
 public class PauseMenuScript : MonoBehaviour
 {
 	public GameObject PauseMenu;
@@ -43,12 +47,18 @@ public class PauseMenuScript : MonoBehaviour
         Application.Quit();
     }
 
+    /// <summary>
+    /// Switches the actively displayed panel from the pause menu to the settings panel.
+    /// </summary>
 	public void OpenSettings() 
 	{
 		PauseMenu.gameObject.SetActive(false);
 		SettingsMenuPrefab.gameObject.SetActive(true);
 	}
 
+    /// <summary>
+    /// Switches the actively displayed panel from settings panel to the the pause menu.
+    /// </summary>
 	public void CloseSettings()
 	{
 		Debug.Log("Close settings");

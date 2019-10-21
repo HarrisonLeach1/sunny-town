@@ -19,6 +19,7 @@ namespace SunnyTown
         public TextMeshProUGUI npcDialogueText;
         public TextMeshProUGUI sliderValueText;
         public Button confirmButton;
+        public TextMeshProUGUI cardTypeText;
 
         /// <summary>
         /// Sets the content of the dialogue to be displayed to the user
@@ -42,7 +43,9 @@ namespace SunnyTown
             {
                 handleButtonPressed((int)Math.Round(slider.value));
             });
-        }
 
+            cardTypeText.text = dialogue.CardType + " Decision";
+            cardTypeText.color = dialogue.CardType == "Story" ? new Color32(168, 24, 36, 255) : new Color32(219, 164, 44, 255);
+        }
     }
 }

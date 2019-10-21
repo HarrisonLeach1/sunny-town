@@ -1,11 +1,11 @@
-# SOFTENG306 Project 2 Group 11
+# Global Warning Studios: Sunny Town
 
 ## Team Members
 
 | Name           | GitHub Username  | UoA UPI |
 | -------------- | ---------------- | ------- |
 | Harrison Leach | HarrisonLeach1   | hlea849 |
-| Willian Li     | TwelveHertz      | zli667  |
+| William Li     | TwelveHertz      | zli667  |
 | Nidhinesh Nand | nidhineshnand    | nnan773 |
 | Allen Nian     | anian100         | ania716 |
 | William Shin   | william-shin-387 | wshi593 |
@@ -24,18 +24,29 @@
 -   The objective of the game is to make appropriate tradeoffs to ensure no metric in the town drops too low.
     This should teach the player the tradeoffs that are necessary in maintaining the environments health.
 
+## Cheat codes (For testing purposes)
+
+-   Pressing key "M" will boost all metrics to 100 - useful for testing achievements and winning
+-   Pressing key "N" will lower all metrics to 30 - useful for testing natural disasters
+-   Pressing key "K" will lower all metrics to 0 - useful for testing the lose scene
+-   Pressing key "L" will advance you to the next level - with a default decision tree being used (investing in EVs, and saying no to arvio) - useful for testing one of the win endings
+
 ## Execution Instructions
+
+### Use the WebGL Build
+
+-   Can be found [here](https://global-warning.s3-ap-southeast-2.amazonaws.com/index.html)
 
 ### Through Unity (Version 2018.4.9f1)
 
-1. Checkout the "Prototype" branch from the repository.
+1. Checkout the "Final" branch from the repository.
 2. Navigate to `Assets/Scenes/MenuScene.unity` and open the file with Unity.
 3. Press the play button in Unity.
 4. You will begin on the start screen where you will be able to select "Play" to begin.
 
 ## Setting up
 
-### Setup Untiy file merging
+### Setup Unity file merging
 
 1. Add the following text to your `~/.gitconfig` file.
 

@@ -7,22 +7,34 @@ using System.Linq;
 namespace SunnyTown
 {
     /// <summary>
-    /// A Reader is repsonsible for reading json files and converting it into 
-    /// Card and SimpleDialogue objects at runtime
+    /// A Reader is repsonsible for reading json files and converting them into 
+    /// Card, SimpleDialogue and Achievement objects at runtime.
     /// </summary>
     public class Reader
     {
+        private static Reader instance = null;
         public PlotCard RootState { get; private set; }
         public List<SimpleDialogue> AllExpositionDialogues { get; private set; }
         public List<PlotCard> AllStoryStates { get; private set; }
         public List<Card> AllMinorStates { get; private set; }
         public List<Achievement> AllAchievements { get; private set; }
+        public static Reader Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Reader();
+                }
+                return instance;
+            }
+        }
 
-        public Reader()
+        private Reader()
         {
             AllExpositionDialogues =
                 this.ParseExpositionJson(Resources.Load<TextAsset>("json/expositionStates").text);
-            AllStoryStates = this.ParseJson(Resources.Load<TextAsset>("json/newNewPlot").text, true)
+            AllStoryStates = this.ParseJson(Resources.Load<TextAsset>("json/plotStates").text, true)
                 .Cast<PlotCard>().ToList();
             AllMinorStates = this.ParseJson(Resources.Load<TextAsset>("json/minorStates").text, false);
             AllAchievements =
@@ -152,7 +164,12 @@ namespace SunnyTown
 
             return result;
         }
-
+        
+        /// <summary>
+        /// Method to map achievements from a json file into a list of Achievement objects
+        /// </summary>
+        /// <param name="json">Filepath of json file</param>
+        /// <returns>List of achievements parsed from the json file</returns>
         private List<Achievement> ParseAchievementsJson(string json)
         {
             List<Achievement> result = new List<Achievement>();
@@ -167,6 +184,12 @@ namespace SunnyTown
             }
 
             return result;
+        }
+
+        public static Reader Reset()
+        {
+            instance = new Reader();
+            return instance;
         }
     }
 }
