@@ -62,6 +62,9 @@ namespace SunnyTown
             RenderMetrics();
         }
 
+        /// <summary>
+        /// RenderMetrics() renders the town's metrics on the World's UI.
+        /// </summary>
         public void RenderMetrics()
         {
             var money = metricsView.transform.GetChild(0).GetComponent<Slider>();
@@ -109,6 +112,14 @@ namespace SunnyTown
             }
         }
 
+        /// <summary>
+        /// Used to smoothly transition between metrics. In other words, when a metric changes, the corresponding
+        /// metric bar smoothly increases or decreases depending on the values.
+        /// </summary>
+        /// <param name="metricBar">Corresponding Metric slider</param>
+        /// <param name="oldValue">Previous metric value</param>
+        /// <param name="newValue">New metric value</param>
+        /// <returns></returns>
         IEnumerator AnimateMetric(Slider metricBar, int oldValue, int newValue)
         {
             Image metricBarFill = metricBar.transform.GetChild(2).GetChild(0).GetComponent<Image>();
